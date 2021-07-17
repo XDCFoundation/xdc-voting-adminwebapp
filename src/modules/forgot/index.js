@@ -1,9 +1,9 @@
 import React from "react";
-import BaseComponent from '../baseComponent'
-import SignUpComponent from './signUpComponent'
+import BaseComponent from '../baseComponent';
+import ForgotForm from './forgotComponent';
 import Utils from "../../utility";
 
-class Register extends BaseComponent {
+export default class Forgot extends BaseComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -51,7 +51,7 @@ class Register extends BaseComponent {
 
     render() {
         return (
-            <SignUpComponent state={this.state}
+            <ForgotForm state={this.state}
                              onChangeEvent={this.onChangeEvent}
                              togglePassword={this.togglePassword}
                              onLoginClicked={this.onLoginClicked}/>
@@ -59,4 +59,4 @@ class Register extends BaseComponent {
     }
 }
 
-export default Register;
+// export default Forgot;
