@@ -14,6 +14,13 @@ html, body {
     height: 100%;
     display: block;
 }
+input, select, textarea{
+  
+  font-size: 38px;
+  font-weight:bolder;
+  padding-bottom: 10px;
+
+}
 .login-div {
     margin-top: 15vh;
     margin-left: 34vw;
@@ -26,6 +33,20 @@ html, body {
     border-radius: 12px;
     opacity: 1;
 }
+.change-div{
+    margin-top: 2vh;
+    padding-top: 15px;
+    margin-left: 34vw;
+    width: 460px;
+    justify-content: center;
+    height: 350px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 15px #0000001A;
+    border: 1px solid #E3E7EB;
+    border-radius: 12px;
+    opacity: 1;
+}
+
 .forgot-div {
     margin-top: 15vh;
     margin-left: 34vw;
@@ -73,6 +94,29 @@ font-family: unset;
   font-style: normal;
   line-height: normal;
 }
+.change-password{
+    margin-top: 50px;
+    /* margin-bottom: 10px; */
+/* margin-left: 555px; */
+margin-left: 44vw;
+width: 480px;
+height: 35px;
+/* display: flex; */
+/* text-align: center; */
+float: unset;
+font: normal normal bold 28px/39px Inter;
+letter-spacing: 1.23px;
+/* text-align: center; */
+align-items: center;
+color: #2A2A2A;
+/* opacity: 1; */
+font-family: unset;
+  font-size: 20px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+}
 .sign-in {
    margin-top: 27px;
 margin-left: 195px;
@@ -102,6 +146,17 @@ opacity: 1;
     margin-top: 7px;
 margin-left: 20px;
 width: 38px;
+height: 16px;
+text-align: left;
+letter-spacing: 0.54px;
+color: #2A2A2A;
+opacity: 1;
+font-weight: 500;
+}
+.heading-change p{
+    margin-top: 7px;
+margin-left: 20px;
+width: 150px;
 height: 16px;
 text-align: left;
 letter-spacing: 0.54px;
@@ -144,7 +199,7 @@ opacity: 1;
 font-size: 13px;
 font-weight: 450;
 }
-.input{
+.input {
     margin-top: -10px;
     margin-bottom: 10px;
 margin-left: 20px;
@@ -156,6 +211,11 @@ border: 1px solid #9FA9BA;
 border-radius: 8px;
 opacity: 1;
 outline: none;
+/* font: small-caption;
+  font-size: 16px; */
+}
+.heading-change p input{
+    font: bold 100% "Lucida Sans Unicode",sans-serif;
 }
 .sign-btn{
     margin-top: 20px;
@@ -320,6 +380,28 @@ opacity: 1;
 margin-left: 44vw !important;
 position:relative;
 display:flex;
+}
+
+#simple-menu-item{
+    margin-top: 4%;
+    border-color:  #e3e7eb;
+    /* background: #FFFFFF 0% 0% no-repeat padding-box; */
+/* box-shadow: 0px 2px 15px #0000001A;
+border: 1px solid #E3E7EB; */
+border-radius: 6px;
+opacity: 1;
+padding: 0px 0px 0px 0px;
+}
+.menu-line{
+    border-color:  #e3e7eb;
+    margin: 5px;
+    padding: 0px;
+}
+.menu1:focus{
+    background-color: white;
+}
+#simple-menu-item:focus :hover{
+    background-color: white;
 }
 
 /* .address p{
