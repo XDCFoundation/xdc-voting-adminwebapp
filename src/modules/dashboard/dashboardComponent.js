@@ -15,6 +15,20 @@ import TableRow from '@material-ui/core/TableRow';
 // import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import color from '@material-ui/core/colors/amber';
+import addDialogComponent from '../Dialog/addDialog';
+
+// const useStyles = makeStyles((theme) => ({
+//     style:{
+//         focus:{
+//             backgroundColor:"white"
+//         },
+//         onmouseover:{
+//             backgroundColor:"white"
+
+//         }
+//     }
+// }));
 
  export default function DashboardComponent(props) {
 
@@ -31,6 +45,9 @@ import MenuItem from '@material-ui/core/MenuItem';
     const handleLogout =()=>{
         history.push('/');
     }
+    const handleChangePassword =()=>{
+        history.push('/change-password');
+    }
 
     function shorten(b, amountL = 10, amountR = 3, stars = 3) {
         return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
@@ -38,6 +55,7 @@ import MenuItem from '@material-ui/core/MenuItem';
             b.length
         )}`;
     }
+    
     
     const [address, setAddress] = React.useState([]);
 
@@ -120,14 +138,16 @@ import MenuItem from '@material-ui/core/MenuItem';
         {/* Open Menu */}
       </Button>
       <Menu
-        id="simple-menu"
+        id="simple-menu-item"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        
       >
         {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-        <MenuItem onClick={handleClose}>Change Password</MenuItem>
+        <MenuItem onClick={handleChangePassword} >Change Password </MenuItem>
+        <hr className="menu-line"/>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </div>
@@ -152,8 +172,11 @@ import MenuItem from '@material-ui/core/MenuItem';
            
            <div id="containerIntro">
     <h1>Whitelisted Addresses</h1>
-    <button className="add-btn">Add</button>
+    <addDialogComponent/>
+    <button className="add-btn"  >Add </button>
 </div>
+{/* <div><addDialogComponent/></div> */}
+
             <div className="griddiv">
             
 
@@ -164,7 +187,8 @@ import MenuItem from '@material-ui/core/MenuItem';
         <Table className="table" aria-label="Whitelisted Addresses" style={{ boxShadow: "0px 0px 0px 0px" }}>
             <TableHead>
                 <TableRow>
-                    <TableCell style={{ border: "none",paddingLeft: "4%" }} align="left">
+                    <TableCell style={{ border: "none",paddingLeft: "4%", fontWeight: "bold",fontSize: "15px",
+    fontFamily: "unset" }} align="left">
 
                         <span className={"tableheaders"}>Address</span>
                     </TableCell>
@@ -182,13 +206,15 @@ import MenuItem from '@material-ui/core/MenuItem';
                         
                     </TableCell> */}
                     <TableCell
-                        style={{ border: "none", paddingLeft: "0%" }}
+                        style={{ border: "none", paddingLeft: "0%", fontWeight: "bold",fontSize: "15px",
+                        fontFamily: "unset" }}
                         align="left"
                     >
                         <span className={"tableheaders"}>AddedOn</span>
                     </TableCell>
                     <TableCell
-                        style={{ border: "none", paddingLeft: "1%" }}
+                        style={{ border: "none", paddingLeft: "1%", fontWeight: "bold",fontSize: "15px",
+                        fontFamily: "unset" }}
                         align="left"
                     >
                         <span className={"tableheaders"}>Votes</span>
