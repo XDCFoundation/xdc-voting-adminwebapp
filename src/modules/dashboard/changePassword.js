@@ -16,9 +16,36 @@ export default function LoginForm() {
 
     }
     const handleClickUpdate = ()=>{
-        history.push('/forgot-password');
+        history.push('/');
         
     }
+   const handleChange=(e)=> {
+        var pass = e.target.value;
+        var reg = /^[A-Z]*$/;
+        var test = reg.test(pass);
+        // if (test) {
+        //    alert('pass');
+        //    this.setState({value: pass});
+        // }else{
+        //   alert('fail');
+        // }        
+   }
+
+// const isValid=true;
+//    if (typeof input["password1"] !== "undefined" && typeof input["password2"] !== "undefined") {
+
+          
+
+//     if (input["password1"] != input["password2"]) {
+
+//       isValid = false;
+
+//       errors["password1"] = "Passwords don't match.";
+
+//     }
+
+// }
+
     // let {state, togglePassword, onChangeEvent, onLoginClicked} = props;
     return (
 
@@ -55,16 +82,24 @@ export default function LoginForm() {
                 <div className="heading-change">
                 
                 <p>Current Password</p>
-                    <input className="input" type="password"/>
+                    <input className="input"  type="password"style={{fontSize: "38px",
+  fontWeight:"bolder",
+  paddingBottom: "10px"}}
+//   onChange={handleChange}
+  />
                 </div>
                 <div className="heading-change">
                     <p>New Password</p>
-                    <input className="input" type="password"/>
+                    <input className="input"  type="password"style={{fontSize: "38px",
+  fontWeight:"bolder",
+  paddingBottom: "10px"}}/>
 
                 </div>
                 <div className="heading-change">
                     <p>Confirm Password</p>
-                    <input className="input" type="password" />
+                    <input className="input" type="password"style={{fontSize: "38px",
+  fontWeight:"bolder",
+  paddingBottom: "10px"}} />
                    
 
                 </div>

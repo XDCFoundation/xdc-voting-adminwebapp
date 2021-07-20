@@ -11,13 +11,17 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-
+import FormDialog from '../Dialog/addDialog';
 // import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import color from '@material-ui/core/colors/amber';
-import addDialogComponent from '../Dialog/addDialog';
+import { Tooltip } from '@material-ui/core';
+// import PaginationRounded from './pagination';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Pagination from '@material-ui/lab/Pagination';
 
+// import utils from '@material-ui/core/utils';
 // const useStyles = makeStyles((theme) => ({
 //     style:{
 //         focus:{
@@ -29,15 +33,28 @@ import addDialogComponent from '../Dialog/addDialog';
 //         }
 //     }
 // }));
-
+// const useStyles = makeStyles((theme) => ({
+//     root: {
+//       '& > *': {
+//         marginTop: theme.spacing(2),
+//       },
+//     },
+//   }));
  export default function DashboardComponent(props) {
 
-
+    // const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    const [open, setOpen] = React.useState(false);
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
+    const handleClick1 = (event) => {
+        setAnchorEl(event.target.value);
+      };
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
   
     const handleClose = () => {
       setAnchorEl(null);
@@ -135,7 +152,7 @@ import addDialogComponent from '../Dialog/addDialog';
                     <div>
       <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
       <img className="profile-logo" src={require("../../assets/styles/images/Profile.png")} ></img>
-        {/* Open Menu */}
+      
       </Button>
       <Menu
         id="simple-menu-item"
@@ -145,10 +162,10 @@ import addDialogComponent from '../Dialog/addDialog';
         onClose={handleClose}
         
       >
-        {/* <MenuItem onClick={handleClose}>Profile</MenuItem> */}
-        <MenuItem onClick={handleChangePassword} >Change Password </MenuItem>
+        
+        <MenuItem onClick={handleChangePassword} style={{backgroundColor:"white"}} >Change Password </MenuItem>
         <hr className="menu-line"/>
-        <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem onClick={handleLogout}style={{backgroundColor:"white"}} >Logout</MenuItem>
       </Menu>
     </div>
                     </span>
@@ -170,13 +187,16 @@ import addDialogComponent from '../Dialog/addDialog';
             <span ><button type="button" >Add</button>
             </span> */}
            
-           <div id="containerIntro">
+           {/* <div id="containerIntro">
     <h1>Whitelisted Addresses</h1>
-    <addDialogComponent/>
-    <button className="add-btn"  >Add </button>
-</div>
+    
+    <button className="add-btn" onClick={handleClickOpen} ><FormDialog/> Add </button>
+</div> */}
 {/* <div><addDialogComponent/></div> */}
 
+
+
+<FormDialog/>
             <div className="griddiv">
             
 
@@ -248,11 +268,11 @@ import addDialogComponent from '../Dialog/addDialog';
                             <TableCell style={{ border: "none",paddingLeft: "4%" }} margin-left="5px">
                              
                                 <a className="linkTable" href="/">
-                                {/* <Tooltip placement="top" title={row.Adress}> */}
+                                <Tooltip placement="top" title={row.Adress}>
                                     <span className="tabledata">
                                         {(row.Adress)}{" "}
                                     </span>
-                                    {/* </Tooltip> */}
+                                    </Tooltip>
                                 </a>
                             </TableCell>
                             {/* <TableCell style={{ border: "none" }} align="left">
@@ -273,9 +293,9 @@ import addDialogComponent from '../Dialog/addDialog';
                                 <span className="tabledata">{row.Votes}</span>
                                 {/* </a> */}
                             </TableCell>
-                            <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
+                            <TableCell style={{ border: "none", paddingLeft: "7%" }} align="left">
                                 <a className="linkTable" href="/">
-                                    <span className="tabledata">Delete</span>
+                                    <span className="tabledata" > Delete</span>
                                 </a>
                             </TableCell>
                             {/* <TableCell style={{ border: "none" }} align="right"><span className="tabledata">0.00000000005 XDC</span></TableCell> */}
@@ -288,6 +308,13 @@ import addDialogComponent from '../Dialog/addDialog';
     </Grid>
 </Grid>
 </div>
+
+{/* <div><PaginationRounded/></div> */}
+{/* <div className={classes.root}>
+      <Pagination count={10} shape="rounded" />
+      <Pagination count={10} variant="outlined" shape="rounded" />
+    </div> */}
+
 
         </div>
 
