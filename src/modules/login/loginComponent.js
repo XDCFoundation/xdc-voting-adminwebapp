@@ -33,7 +33,10 @@ export default function LoginForm() {
                 </div>
                 <div className="heading">
                     <p>Password</p>
-                    <input className="input" type="password" />
+                    <input className="input" type="password" style={{fontSize: "38px",
+  fontWeight:"bolder",
+  paddingBottom: "10px"}} 
+  />
                    
 
                 </div>

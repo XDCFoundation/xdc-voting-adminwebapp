@@ -1,14 +1,9 @@
 import React from 'react';
 import {Router, Route} from 'react-router-dom';
 import {Redirect, Switch} from "react-router";
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-// import { MuiThemeProvider } from '@material-ui/core';
-// import getMuiTheme from '@material-ui/core/styles';
 import {connect} from "react-redux";
-// import {Forgot} from "./modules";
-
 import {Login} from "./modules";
 import Forgot from './modules/forgot';
 import Email from './modules/forgot/emailComponent';
