@@ -17,15 +17,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PositionedSnackbar from './confirmDialog';
 import utility from "../../utility";
+import { Checkbox } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
 
-    // root: {
-    //     width: '100%',
-    //     '& > * + *': {
-    //       marginTop: theme.spacing(2),
-    //     },
-    //   },
+
   add: {
     // marginLeft: "80%",
     // backgroundColor: "#f5f8fa",
@@ -35,13 +31,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "90px"
   },
   btn: {
-    // border: "none !important",
-    // color: "black",
-    // textTransform: "unset",
-    // backgroundColor: "#f5f8fa",
-    // marginLeft: "-60px",
-    // "&:hover":{backgroundColor: "#f5f8fa"}
-    // marginLeft: "90px"
+
   },
   value: {
     width: "400px !important",
@@ -60,60 +50,44 @@ const useStyles = makeStyles((theme) => ({
   },
   buttons: {
     padding: "1px 35px 10px 0px",
-    marginTop:"20px",
-      },
+    marginTop: "20px",
+  },
   input: {
     width: "400px",
     height: "5vh",
     border: "solid 1px #c6c8ce",
     backgroundColor: "#ffffff",
     borderRadius: "7px",
-    outline:"none"
+    outline: "none"
     // padding: "15px",
   },
 
   addbtn: {
     width: "110px",
-  height: "34px",
-  // margin: "33px 0 0 21px",
-  // padding: "8px 30px 7px 32px",
-  margin: "14px -8px 15px 2px",
-    padding: "5px 19px 3px 20px",
-  borderRadius: "4px",
-  backgroundColor: "#3763dd",
-  color: "white",
-  border:"none",
+    height: "34px",
+    // margin: "33px 0 0 21px",
+    // padding: "8px 30px 7px 32px",
+    margin: "14px -8px 15px 2px",
+    padding: "3px 19px 3px 20px",
+    borderRadius: "4px",
+    backgroundColor: "#3763dd",
+    color: "white",
+    border: "none",
   },
-  // addbtn: {
-  //   width: "110px",
-  // height: "34px",
-  // margin: "33px 0 0 21px",
-  // padding: "8px 30px 7px 32px",
-  // borderRadius: "4px",
-  // backgroundColor: "#3763dd",
-  // },
-  // cnlbtn: {
-  //   width: "94px",
-  // height: "34px",
-  // margin: "33px 21px 0 87px",
-  // padding: "8px 19px 7px 21px",
-  // borderRadius: "4px",
-  // backgroundColor: "#9fa9ba",
 
-  // },
   cnlbtn: {
     width: "94px",
-  height: "34px",
-  // margin: "33px 21px 0 87px",
-  // padding: "8px 19px 7px 21px",
-  borderRadius: "4px",
-  backgroundColor: "#9fa9ba",
-  color: "white",
-  border:"none",
-  
-    
+    height: "34px",
+    // margin: "33px 21px 0 87px",
+    // padding: "8px 19px 7px 21px",
+    borderRadius: "4px",
+    backgroundColor: "#9fa9ba",
+    color: "white",
+    border: "none",
+
+
     margin: "14px 8px 15px 2px",
-    padding: "6px 19px 3px 20px",
+    padding: "3px 19px 3px 20px",
 
   },
   subCategory: {
@@ -126,28 +100,28 @@ const useStyles = makeStyles((theme) => ({
     border: "none !important"
   },
   forgotpass: {
-      color: "#2149b9",
-      marginLeft: "123px"
+    color: "#2149b9",
+    marginLeft: "123px"
   },
   createaccount: {
     color: "#2149b9",
     marginLeft: "32px",
     fontfamily: "Inter",
-  fontsize: "14px",
+    fontsize: "14px",
   },
   icon: {
-      marginLeft: "-30px"
+    marginLeft: "-30px"
   },
   xdc: {
     color: "#2a2a2a",
     marginLeft: "30px",
     fontfamily: "Inter",
-  fontsize: "5px",
+    fontsize: "5px",
   },
   heading: {
-      marginLeft: "5px",
-      fontfamily: "Inter",
-      fontweight: "600"
+    marginLeft: "5px",
+    fontfamily: "Inter",
+    fontweight: "600"
   }
 }));
 
@@ -161,6 +135,26 @@ export default function FormDialog() {
 
   };
 
+
+  const [isDisabled, setDisabled] = React.useState(true);
+  const [emailError, setEmailError] = React.useState('')
+  const validateInputField = (e) => {
+    var text = e.target.value
+   var checkbox = e.target.value
+
+    if (text.length>=5)  {
+        setDisabled(false)
+
+        setEmailError('')
+
+    }
+    else {
+
+        setEmailError('')
+    }
+}
+
+  
   const classes = useStyles();
 
   const handleClickOpen = () => {
@@ -168,163 +162,145 @@ export default function FormDialog() {
   };
 
   function handleClose() {
-    
+
     setOpen(false);
-    toast.dark(<Msg/>)
+    toast.dark(<Msg />)
   };
 
 
-  const handleLogin =() => {
+  const handleLogin = () => {
     //   history.push("/loginprofile")
-      
+
   }
-const handleAlert =()=>{
-    
-    
-}
+  const handleAlert = () => {
 
 
- 
-
-const Msg = ({ closeToast, toastProps }) => (
-    
+  }
 
 
-    <div style={{display:"flex"}}>
-        <span> <img  className="done-logo" style={{height:"30px",width:"30px",marginTop:"10px"}} src={require("../../assets/styles/images/DONE.svg")} ></img>
-     </span>
-     <span>
 
-     
-    <div style={{width:"350px",color:"#FFFFFF",padding:"0px"}}>
-     
-      You have successfully added address 
-    </div>
-    <div>
-    0x9b20bd863e1cf226b98…6b10
+
+  const Msg = ({ closeToast, toastProps }) => (
+
+
+
+    <div style={{ display: "flex" }}>
+      <span> <img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img>
+      </span>
+      <span>
+
+
+        <div style={{ width: "350px", color: "#FFFFFF", padding: "0px" }}>
+
+          You have successfully added address
         </div>
-        </span>
-        
+        <div>
+          0x9b20bd863e1cf226b98…6b10
+        </div>
+      </span>
+
     </div>
-    
+
   )
-//   .Toastify__toast--success {
-//     background: #212529;
-// }
 
 
 
 
- async function notify(){
- await handleClose()
- console.log("toats")
-    // if(notify=== toast.dark(<Msg/>))
-    // {
-    // toast.dark(<Msg/> ?handleClose(): '' && <Msg/>? <Msg/> :"");
-    // console.log("hi")
-    // }
-  await  toast.dark(<Msg/>)
 
-    
-   // toast.dark(<Msg  />?<Msg/>:""&& <Msg  />? setOpen(false):"no");
-    // handleClose();
-    }
-   
-    // const notify = () => {
-    //     toast("The close button change when Chuck Norris display a toast");
-    // }
-    // function apiSuccessToast(msg) {
-    //     toast.success (msg ? msg : "apiConstant.API_SUCCESS",
-    //     {position: "top-center"}
-    //     );
-    // }
+  function notify() {
+    handleClose()
+    // console.log("toats")
+
+    toast.dark(<Msg />)
 
 
-    function handleALertOpen(){
-        notify();
-        handleClose();
-    }
-// ,{
-//     backgroundColor:"#00144D"
-// }
-    
-    
 
-  const  wrapperFunction=()=>{
-      notify()
-      handleClose()
-
-    }
-
-//   const [state, setState] = React.useState({
-//     open1: false,
-//     vertical: 'top',
-//     horizontal: 'center',
-//   });
-
-//   const { vertical, horizontal, open1, buttons } = state;
-
-//   const handleClick = (newState,buttons) => () => {
-   
-//     const buttons = (
-//         <React.Fragment>
-//           <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>Top-Center</Button>
-//           <Button onClick={handleClick({ vertical: 'top', horizontal: 'right' })}>Top-Right</Button>
-//           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'right' })}>
-//             Bottom-Right
-//           </Button>
-//           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'center' })}>
-//             Bottom-Center
-//           </Button>
-//           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}>Bottom-Left</Button>
-//           <Button onClick={handleClick({ vertical: 'top', horizontal: 'left' })}>Top-Left</Button>
-//         </React.Fragment>
-//       );
-    
-//   };
-
-//   const handleClose1 = () => {
-//     setState({ ...state, open1: false });
-//   };
+  }
 
 
-  
+
+  function handleALertOpen() {
+    notify();
+    handleClose();
+  }
 
 
-//   const buttons = (
-//     <React.Fragment>
-//       {/* <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>Top-Center</Button> */}
-//       </React.Fragment>
-//       );
+
+  const wrapperFunction = () => {
+    notify()
+    handleClose()
+
+  }
+
+  //   const [state, setState] = React.useState({
+  //     open1: false,
+  //     vertical: 'top',
+  //     horizontal: 'center',
+  //   });
+
+  //   const { vertical, horizontal, open1, buttons } = state;
+
+  //   const handleClick = (newState,buttons) => () => {
+
+  //     const buttons = (
+  //         <React.Fragment>
+  //           <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>Top-Center</Button>
+  //           <Button onClick={handleClick({ vertical: 'top', horizontal: 'right' })}>Top-Right</Button>
+  //           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'right' })}>
+  //             Bottom-Right
+  //           </Button>
+  //           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'center' })}>
+  //             Bottom-Center
+  //           </Button>
+  //           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}>Bottom-Left</Button>
+  //           <Button onClick={handleClick({ vertical: 'top', horizontal: 'left' })}>Top-Left</Button>
+  //         </React.Fragment>
+  //       );
+
+  //   };
+
+  //   const handleClose1 = () => {
+  //     setState({ ...state, open1: false });
+  //   };
+
+
+
+
+
 
 
 
   return (
     <div >
-{/* <div className={classes.root}>
-      <Alert severity="success" color="info">
-        This is a success alert — check it out!
+      {/* <div >
+      <Alert severity="success" color="" >
+      <div style={{ display: "flex" }}>
+      <span> <img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img>
+      </span>
+      <span>
+
+
+        <div style={{ width: "350px", color: "#FFFFFF", padding: "0px" }}>
+
+          You have successfully added address
+        </div>
+        <div>
+          0x9b20bd863e1cf226b98…6b10
+        </div>
+      </span>
+
+    </div>
       </Alert>
     </div> */}
 
 
-{/* <div>
-      {buttons}
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        open1={open1}
-        onClose={handleClose1}
-        message="I love snacks"
-        key={vertical + horizontal}
-      />
-    </div> */}
 
 
-<div id="containerIntro">
-    <h1>Whitelisted Addresses</h1>
-    
-    <button className="add-btn" onClick={handleClickOpen} > Add </button>
-</div>
+      <div id="containerIntro">
+        <h1>Whitelisted Addresses</h1>
+
+        <button className="add-btn" onClick={handleClickOpen} > Add </button>
+      </div>
 
       {/* <Button
         className={classes.btn}
@@ -344,134 +320,99 @@ const Msg = ({ closeToast, toastProps }) => (
         >
           <Row>
             <DialogTitle className={classes.heading} id="form-dialog-title">Add a new Address</DialogTitle>
-            {/* <span onClick={handleClose} className={classes.cross}>
-              {" "}
-              X{" "}
-            </span> */}
+
           </Row>
           <DialogContent>
             <DialogContentText className={classes.subCategory}>
               <b>Address</b>
             </DialogContentText>
-            <input className={classes.input}></input>
+            <input className={classes.input}  type="text" required="true"
+             onChange={(e) => validateInputField(e)}
+            ></input>
           </DialogContent>
-         {/* <DialogContent> */}
-          {/* <DialogContentText className={classes.subCategory}>
-              <b>Name Tag</b>
-              {/* <span  className={classes.forgotpass}>
-              Forgot Password?
-            </span> */}
-            {/* </DialogContentText>  */}
-            
-            {/* <input type="password" type={passwordShown ? "text" : "password"}  className={classes.input}></input> */}
-            {/* <span>
-                {passwordShown?<VisibilityIcon className={classes.icon} fontSize="small" style={{ color: "#b9b9b9" }} onClick={togglePasswordVisiblity}/>:<VisibilityOff className={classes.icon} fontSize="small" style={{ color: "#b9b9b9" }} onClick={togglePasswordVisiblity}/>}
-             {/* <RemoveRedEyeIcon className={classes.icon} onClick={togglePasswordVisiblity} 
-            {...passwordShown==false?<VisibilityIcon/>:<VisibilityOff/>}
 
-            {...passwordShown==="password"?<VisibilityIcon/>:<VisibilityOff/>} 
-            fontSize="small" style={{ color: "#b9b9b9" }} /> */}
-            {/* </span> */} 
-          
-          <div style={{display:"inline", marginTop:"10px"}}>
-          <input
-                                                            onChange={(event) => {
-                                                                
-                                                                let checked = event.target.checked.id;
-                                                                // exportAddress(event.row);
-                                                                handleToggle(checked);
-                                                            }}
-                                                            type="checkbox"
-                                                            checked={toggle}
-                                                            style={{ 
-                                                                marginLeft: "28px", 
-                                                                backgroundColor:"none",
-                                                                marginTop:"-25px",
-                                                                marginRight:"10px",
-                                                            }}
-                                                        
-                                                        />
-                                                        <span className="tabledata">
-                                                                Allow Voting
-                                                            </span>
-                                                            </div>  
+
+          <div style={{ display: "inline", marginTop: "10px" }}>
+            <input
+              onChange={(e) => {
+                // validateInputField(e)
+                let checked = e.target.checked.id;
+                // exportAddress(event.row);
+                handleToggle(checked)
+                
+              }}
+              type="checkbox"
+              checked={toggle}
+              style={{
+                marginLeft: "28px",
+                backgroundColor: "none",
+                marginTop: "-25px",
+                marginRight: "10px",
+              }}
+
+            />
+            <span className="tabledata">
+              Allow Voting
+            </span>
+          </div>
 
 
 
 
 
-                                                            <div style={{display:"inline"}}>
-          <input
-                                                            onChange={(event) => {
-                                                                
-                                                                let checked = event.target.checked.id;
-                                                                // exportAddress(event.row);
-                                                                handleToggle(checked);
-                                                            }}
-                                                            type="checkbox"
-                                                            checked={toggle}
-                                                            style={{ 
-                                                                marginLeft: "28px", 
-                                                                backgroundColor:"none",
-                                                                marginTop:"-25px",
-                                                                marginRight:"10px", 
-                                                            }}
-                                                        />
-                                                        <span className="tabledata">
-                                                                Allow Proposal Creation
-                                                            </span>
-                                                            </div>
-                                                            {/* </DialogContent> */}
+          <div style={{ display: "inline" }}>
+            <input
+              onChange={(event) => {
+
+                let checked = event.target.checked.id;
+                // exportAddress(event.row);
+                handleToggle(checked);
+              }}
+              type="checkbox"
+              checked={toggle}
+              style={{
+                marginLeft: "28px",
+                backgroundColor: "none",
+                marginTop: "-25px",
+                marginRight: "10px",
+              }}
+            />
+            <span className="tabledata">
+              Allow Proposal Creation
+            </span>
+          </div>
+          {/* </DialogContent> */}
           <DialogActions className={classes.buttons}>
-          <span><button className={classes.cnlbtn} onClick={handleClose} >Cancel</button></span>
-          {/* const buttons = ( */}
-    {/* <React.Fragment> */}
-             <span>
-             <div>
-        <button className={classes.addbtn}
-        // onClick={handleClose}
-        // onClick={handleClose}
-         onClick={()=>{utility.apiSuccessToast("You have successfully added addres");handleClose()}} 
-        >Add</button>
-        <ToastContainer 
-    
-        position="top-center"
-        color="black"
-        hideProgressBar={false}
-        autoClose={null}
-        // hideProgressBar={false}
-        // newestOnTop={false}
-        // closeOnClick
-        // rtl={false}
-        // pauseOnFocusLoss
-        draggable
-        
-        />
-      </div>
-                {/* <button className={classes.addbtn}  >  Add </button> */}
-                </span>
-          {/* ) */}
-            {/* </React.Fragment> */}
-            {/* return ( */}
-    {/* <div> */}
-    {/* <span>
-                <button className={classes.addbtn}  onClick={handleClick({ vertical: 'top', horizontal: 'center' })} >Add</button></span> */}
-      {/* {buttons}
-      <Snackbar
-        anchorOrigin={{ vertical, horizontal }}
-        open={open}
-        onClose={handleClose}
-        message="You have successfully added address 0x9b20bd863e1cf226b98…6b10"
-        key={vertical + horizontal}
-      />
-    </div> */}
-  {/* ); */}
+            <span><button className={classes.cnlbtn} onClick={handleClose} >Cancel</button></span>
+            {/* const buttons = ( */}
+            {/* <React.Fragment> */}
+            <span>
+              <div>
+                <button className={classes.addbtn} disabled={isDisabled}
+                  // onClick={handleClose}
+                  // onClick={handleClose}
+                  onClick={() => { utility.apiSuccessToast("You have successfully added addres"); handleClose() }}
+                >Add</button>
+                <ToastContainer
+
+                  position="top-center"
+                  color="black"
+                  hideProgressBar={false}
+                  autoClose={null}
+                  // hideProgressBar={false}
+                  // newestOnTop={false}
+                  // closeOnClick
+                  // rtl={false}
+                  // pauseOnFocusLoss
+                  draggable
+
+                />
+              </div>
+              {/* <button className={classes.addbtn}  >  Add </button> */}
+            </span>
+
           </DialogActions>
-      
-          {/* <div className={classes.value}></div>
-          <DialogContentText className={classes.xdc}>
-              New to XDC Xplorer? <span className={classes.createaccount}> Create an account</span> 
-            </DialogContentText> */}
+
         </Dialog>
       </div>
     </div>
