@@ -165,7 +165,7 @@ function apiFailureToast(message) {
 
 function apiSuccessToast(msg) {
     toast.success (msg ? msg : "apiConstant.API_SUCCESS",
-    {position: "top-center"}
+    // {position: "top-center"}
 
     );
 }

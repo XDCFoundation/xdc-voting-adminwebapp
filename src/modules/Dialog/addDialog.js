@@ -208,12 +208,12 @@ export default function FormDialog() {
 
 
   function notify() {
-    handleClose()
+    // handleClose()
     // console.log("toats")
 
-    toast.dark(<Msg />)
-
-
+    
+//  setOpen(false)
+ toast.dark(<Msg />)
 
   }
 
@@ -389,9 +389,9 @@ export default function FormDialog() {
             <span>
               <div>
                 <button className={classes.addbtn} disabled={isDisabled}
+                  onClick={notify}
                   // onClick={handleClose}
-                  // onClick={handleClose}
-                  onClick={() => { utility.apiSuccessToast("You have successfully added addres"); handleClose() }}
+                  // onClick={() => { utility.apiSuccessToast("You have successfully added addres"); handleClose() }}
                 >Add</button>
                 <ToastContainer
 

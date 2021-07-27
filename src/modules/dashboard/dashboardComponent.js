@@ -152,6 +152,7 @@ export default function DashboardComponent(props) {
 
   const handleClose2 = () => {
     setOpen1(false);
+    setCount(1);
   };
 
   function handleDelete() {
@@ -210,31 +211,20 @@ export default function DashboardComponent(props) {
     let address = [
       {
         Adress: "0x9b20bd863e1cf226b98…5a30",
-
-        // Description: "My wallet",
-        // Balance: "800 XDC ($38.56)",
         AddedOn: "30 June 2021",
         Votes: "100",
-        // Value: "45000.00XDC",
         id: 1,
       },
       {
         Adress: "xdcc4e699581116412965b…5e7c",
-        // xdcc4e699581116412965b…5e7c
-        // Description: "My wallet",
-        // Balance: "800 XDC ($38.56)",
         AddedOn: "21 June 2021",
         Votes: "200",
-        // Value: "45000.00XDC",
         id: 2,
       },
       {
         Adress: "5e7c71b8e2dd50ac8d30x…5b9c",
-        // Description: "My wallet",
-        // Balance: "800 XDC ($38.56)",
         AddedOn: "1 June 2021",
         Votes: "170",
-        // Value: "45000.00XDC",
         id: 3,
       },
     ]
@@ -245,11 +235,9 @@ export default function DashboardComponent(props) {
         return {
           select: false,
           Adress: d.Adress,
-          // Description: d.Description,
-          // Balance: d.Balance,
           AddedOn: d.AddedOn,
           Votes: d.Votes,
-          // Value: d.Value,
+
           id: d.id,
         };
       })
@@ -272,7 +260,7 @@ export default function DashboardComponent(props) {
 
   const [buttonText, setButtonText] = useState("Edit");
 
- 
+
 
 
   return (
@@ -532,8 +520,10 @@ export default function DashboardComponent(props) {
           <DialogActions className={classes.buttons1}>
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
-              <button className={classes.addbtn} onClick={() => (setCount(1), setButtonText("Cancel"))}  >{buttonText}</button>
-              {[...Array(count)].map((_, i) => <AddedElement key={i} />)}
+              <button  onClick={() => (setCount(1), setButtonText("Cancel"))} 
+              className ={ count === 1 ? classes.cnlbtn : classes.addbtn}
+              >{buttonText}</button>
+              {[...Array(count)].map((_, i) => <AddedElement  key={i} />)}
             </Fragment>
 
             {/* <span><button className={classes.addbtn} onClick={handleClickDelete}  >  Edit <EditDialog/> </button></span> */}
