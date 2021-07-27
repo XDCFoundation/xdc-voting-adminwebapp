@@ -8,14 +8,24 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles, mergeClasses } from "@material-ui/styles";
 import { Row } from "simple-flexbox";
-// import VisibilityIcon from '@material-ui/icons/Visibility';
-// import VisibilityOff from "@material-ui/icons/VisibilityOff";
-// import IconButton from "@material-ui/core/IconButton";
+import Alert from '@material-ui/lab/Alert';
+// import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+// import Pagination from "@material-ui/lab/Pagination";
+import ColorAlerts from "./confirmDialog";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import PositionedSnackbar from './confirmDialog';
+import utility from "../../utility";
 
-// import AccountProfile from "./accountProfile";
-// import { NavLink } from "react-router-dom";
-// import { history } from "../../managers/history";
 const useStyles = makeStyles((theme) => ({
+
+    // root: {
+    //     width: '100%',
+    //     '& > * + *': {
+    //       marginTop: theme.spacing(2),
+    //     },
+    //   },
   add: {
     // marginLeft: "80%",
     // backgroundColor: "#f5f8fa",
@@ -68,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   // margin: "33px 0 0 21px",
   // padding: "8px 30px 7px 32px",
   margin: "14px -8px 15px 2px",
-    padding: "6px 19px 3px 20px",
+    padding: "5px 19px 3px 20px",
   borderRadius: "4px",
   backgroundColor: "#3763dd",
   color: "white",
@@ -157,8 +167,10 @@ export default function FormDialog() {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  function handleClose() {
+    
     setOpen(false);
+    toast.dark(<Msg/>)
   };
 
 
@@ -166,9 +178,146 @@ export default function FormDialog() {
     //   history.push("/loginprofile")
       
   }
+const handleAlert =()=>{
+    
+    
+}
+
+
+ 
+
+const Msg = ({ closeToast, toastProps }) => (
+    
+
+
+    <div style={{display:"flex"}}>
+        <span> <img  className="done-logo" style={{height:"30px",width:"30px",marginTop:"10px"}} src={require("../../assets/styles/images/DONE.svg")} ></img>
+     </span>
+     <span>
+
+     
+    <div style={{width:"350px",color:"#FFFFFF",padding:"0px"}}>
+     
+      You have successfully added address 
+    </div>
+    <div>
+    0x9b20bd863e1cf226b98…6b10
+        </div>
+        </span>
+        
+    </div>
+    
+  )
+//   .Toastify__toast--success {
+//     background: #212529;
+// }
+
+
+
+
+ async function notify(){
+ await handleClose()
+ console.log("toats")
+    // if(notify=== toast.dark(<Msg/>))
+    // {
+    // toast.dark(<Msg/> ?handleClose(): '' && <Msg/>? <Msg/> :"");
+    // console.log("hi")
+    // }
+  await  toast.dark(<Msg/>)
+
+    
+   // toast.dark(<Msg  />?<Msg/>:""&& <Msg  />? setOpen(false):"no");
+    // handleClose();
+    }
+   
+    // const notify = () => {
+    //     toast("The close button change when Chuck Norris display a toast");
+    // }
+    // function apiSuccessToast(msg) {
+    //     toast.success (msg ? msg : "apiConstant.API_SUCCESS",
+    //     {position: "top-center"}
+    //     );
+    // }
+
+
+    function handleALertOpen(){
+        notify();
+        handleClose();
+    }
+// ,{
+//     backgroundColor:"#00144D"
+// }
+    
+    
+
+  const  wrapperFunction=()=>{
+      notify()
+      handleClose()
+
+    }
+
+//   const [state, setState] = React.useState({
+//     open1: false,
+//     vertical: 'top',
+//     horizontal: 'center',
+//   });
+
+//   const { vertical, horizontal, open1, buttons } = state;
+
+//   const handleClick = (newState,buttons) => () => {
+   
+//     const buttons = (
+//         <React.Fragment>
+//           <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>Top-Center</Button>
+//           <Button onClick={handleClick({ vertical: 'top', horizontal: 'right' })}>Top-Right</Button>
+//           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'right' })}>
+//             Bottom-Right
+//           </Button>
+//           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'center' })}>
+//             Bottom-Center
+//           </Button>
+//           <Button onClick={handleClick({ vertical: 'bottom', horizontal: 'left' })}>Bottom-Left</Button>
+//           <Button onClick={handleClick({ vertical: 'top', horizontal: 'left' })}>Top-Left</Button>
+//         </React.Fragment>
+//       );
+    
+//   };
+
+//   const handleClose1 = () => {
+//     setState({ ...state, open1: false });
+//   };
+
+
+  
+
+
+//   const buttons = (
+//     <React.Fragment>
+//       {/* <Button onClick={handleClick({ vertical: 'top', horizontal: 'center' })}>Top-Center</Button> */}
+//       </React.Fragment>
+//       );
+
+
 
   return (
     <div >
+{/* <div className={classes.root}>
+      <Alert severity="success" color="info">
+        This is a success alert — check it out!
+      </Alert>
+    </div> */}
+
+
+{/* <div>
+      {buttons}
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open1={open1}
+        onClose={handleClose1}
+        message="I love snacks"
+        key={vertical + horizontal}
+      />
+    </div> */}
 
 
 <div id="containerIntro">
@@ -224,7 +373,7 @@ export default function FormDialog() {
             fontSize="small" style={{ color: "#b9b9b9" }} /> */}
             {/* </span> */} 
           
-          <div style={{display:"inline", marginTop:"-10px"}}>
+          <div style={{display:"inline", marginTop:"10px"}}>
           <input
                                                             onChange={(event) => {
                                                                 
@@ -275,8 +424,50 @@ export default function FormDialog() {
                                                             {/* </DialogContent> */}
           <DialogActions className={classes.buttons}>
           <span><button className={classes.cnlbtn} onClick={handleClose} >Cancel</button></span>
-            <span><button className={classes.addbtn} onClick={handleLogin} >Add</button></span>
+          {/* const buttons = ( */}
+    {/* <React.Fragment> */}
+             <span>
+             <div>
+        <button className={classes.addbtn}
+        // onClick={handleClose}
+        // onClick={handleClose}
+         onClick={()=>{utility.apiSuccessToast("You have successfully added addres");handleClose()}} 
+        >Add</button>
+        <ToastContainer 
+    
+        position="top-center"
+        color="black"
+        hideProgressBar={false}
+        autoClose={null}
+        // hideProgressBar={false}
+        // newestOnTop={false}
+        // closeOnClick
+        // rtl={false}
+        // pauseOnFocusLoss
+        draggable
+        
+        />
+      </div>
+                {/* <button className={classes.addbtn}  >  Add </button> */}
+                </span>
+          {/* ) */}
+            {/* </React.Fragment> */}
+            {/* return ( */}
+    {/* <div> */}
+    {/* <span>
+                <button className={classes.addbtn}  onClick={handleClick({ vertical: 'top', horizontal: 'center' })} >Add</button></span> */}
+      {/* {buttons}
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="You have successfully added address 0x9b20bd863e1cf226b98…6b10"
+        key={vertical + horizontal}
+      />
+    </div> */}
+  {/* ); */}
           </DialogActions>
+      
           {/* <div className={classes.value}></div>
           <DialogContentText className={classes.xdc}>
               New to XDC Xplorer? <span className={classes.createaccount}> Create an account</span> 
