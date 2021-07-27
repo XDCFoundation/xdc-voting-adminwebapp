@@ -18,22 +18,22 @@ export default function LoginForm() {
 
     const [isDisabled, setDisabled] = useState(true);
 
-    const isButton=false;
+    const isButton = false;
     const checkValidationPassword = (e) => {
-     const confirmpassword=e.target.value
+        const confirmpassword = e.target.value
         setconfirmPassword(confirmpassword)
-        if ((password != confirmpassword) | ((password.length<=8) | (currentpassword.length<=8))) {
+        if ((password != confirmpassword) | ((password.length <= 8) | (currentpassword.length <= 8))) {
             setIsError("Password should match and have minimum 8 characters");
         } else {
-          setDisabled(false)
+            setDisabled(false)
             setIsError("");
         }
-        
+
     }
 
 
     const handlePassword = () => {
-         
+
         history.push('/forgot-password');
     }
     const handleDashboard = () => {
@@ -45,7 +45,7 @@ export default function LoginForm() {
         history.push('/');
 
     }
-    
+
 
 
     return (
@@ -87,13 +87,13 @@ export default function LoginForm() {
 
                     <p>Current Password</p>
                     <input className="input" type="password" required="true" value={currentpassword}
-                    onChange={(e) => { setcurrentPassword(e.target.value) }}
-                
-                     style={{
-                        fontSize: "38px",
-                        fontWeight: "bolder",
-                        paddingBottom: "10px"
-                    }}
+                        onChange={(e) => { setcurrentPassword(e.target.value) }}
+
+                        style={{
+                            fontSize: "38px",
+                            fontWeight: "bolder",
+                            paddingBottom: "10px"
+                        }}
 
                     />
                 </div>
@@ -114,7 +114,7 @@ export default function LoginForm() {
                     <p>Confirm Password</p>
                     <input className="input" type="password" value={confirmpassword} required="true"
                         onChange={checkValidationPassword}
-                        
+
                         style={{
                             fontSize: "38px",
                             fontWeight: "bolder",
@@ -125,12 +125,12 @@ export default function LoginForm() {
 
                 </div>
 
-                <div style={{marginLeft:"17px",color:"red"}}> {isError}</div>
+                <div style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
                 <div>
                     <button className="sign-btn"
                         //  onClick={utility.isPasswordValid}
                         disabled={isDisabled}
-                   
+
                         onClick={handleClickUpdate}
                         type="button"> Update Password</button>
                 </div>

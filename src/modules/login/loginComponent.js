@@ -20,6 +20,7 @@ export default function LoginForm() {
     }
 
     const [emailError, setEmailError] = useState('')
+    const [emailError1, setEmailError1] = useState('')
     const [password, setPassword] = React.useState("");
 
     const [isDisabled, setDisabled] = useState(true);
@@ -28,8 +29,8 @@ export default function LoginForm() {
         var email = e.target.value
        
 
-        if ((validator.isEmail(email)) | (password.length>=8)) {
-            setDisabled(false)
+        if (validator.isEmail(email)) {
+            // setDisabled(false)
 
             setEmailError('')
 
@@ -42,6 +43,22 @@ export default function LoginForm() {
         else {
 
             setEmailError('Please enter a valid email address')
+        }
+    }
+
+    const validatePasword = (e) => {
+        var password = e.target.value
+       
+
+        if (password.length>=8) {
+            setDisabled(false)
+
+            setEmailError1('')
+
+        }
+        else {
+
+            setEmailError1('')
         }
     }
 
@@ -66,8 +83,9 @@ export default function LoginForm() {
                 <div style={{ marginLeft: "20px", color: "red" }}>{emailError}</div>
                 <div className="heading">
                     <p>Password</p>
-                    <input className="input" type="password" value={password} required="true"
-                        onChange={(e) => { setPassword(e.target.value) }}
+                    <input className="input" type="password"  required="true"
+                      onChange={(e) => validatePasword(e)}
+                        // onChange={(e) => { setPassword(e.target.value) }}
                         style={{
                             fontSize: "38px",
                             fontWeight: "bolder",
@@ -77,6 +95,7 @@ export default function LoginForm() {
 
 
                 </div>
+                <div style={{ marginLeft: "20px", color: "red" }}>{emailError1}</div>
                 <p className="forgot" onClick={handlePassword} >Forgot Password?</p>
                 <div>
                     <button className="sign-btn" disabled={isDisabled} onClick={handleDashboard} type="button"> Sign in</button>
