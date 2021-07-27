@@ -4,12 +4,34 @@ import {Button} from "@material-ui/core";
 import CustomInput from "../../common/components/CustomInput";
 import {history} from "../../managers/history";
 import Divider from "@material-ui/core/Divider/Divider";
-
+import validator from 'validator';
   
  export default function ForgotForm() {
      const handlePasswprdSent = () =>{
+        setDisabled(false)
         history.push('/email-sent');
      }
+
+
+     const [emailError, setEmailError] = React.useState('')
+     const [password, setPassword] = React.useState("");
+     
+     const [isDisabled, setDisabled] = React.useState(true);
+     
+       const validateEmail = (e) => {
+         var email = e.target.value
+       
+         if (validator.isEmail(email)) {
+          
+             setDisabled(false)
+           setEmailError('')
+             
+         } 
+         else {
+            setEmailError('Please enter a valid email address')
+          }
+       }
+
     return (
         <div className="main-div">
         <div className="voting">
@@ -29,13 +51,16 @@ import Divider from "@material-ui/core/Divider/Divider";
             </div>
             <div className="heading-password">
                 <p>Email</p>
-                <input className="input" type="email" />
+                <input className="input" type="email" required="true"
+                onChange={(e) => validateEmail(e)}
+                />
                
 
             </div>
+            <div style={{marginLeft:"20px",marginTop:"-7px", color:"red"}}>{emailError}</div>
             {/* <p className="forgot"  >Forgot Password?</p> */}
             <div>
-                <button className="sign-btn1" onClick={handlePasswprdSent} type="button"> Submit</button>
+                <button className="sign-btn1" disabled={isDisabled} onClick={handlePasswprdSent} type="button"> Submit</button>
             </div>
             <p className="login-account"  >Log in to your account</p>
 

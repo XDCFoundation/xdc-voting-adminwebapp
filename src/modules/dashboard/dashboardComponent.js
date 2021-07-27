@@ -12,11 +12,25 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import FormDialog from '../Dialog/addDialog';
+import Pagination from '@material-ui/lab/Pagination';
+import PaginationRounded from './pagination';
 // import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import color from '@material-ui/core/colors/amber';
 import { Tooltip } from '@material-ui/core';
+import EditDialog from '../Dialog/confirmDialog';
+import utility from '../../utility';
+
+
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import { makeStyles, mergeClasses } from "@material-ui/styles";
+
+
 // import PaginationRounded from './pagination';
 // import { makeStyles } from '@material-ui/core/styles';
 // import Pagination from '@material-ui/lab/Pagination';
@@ -40,20 +54,186 @@ import { Tooltip } from '@material-ui/core';
 //       },
 //     },
 //   }));
+
+
+const useStyles = makeStyles((theme) => ({
+
+    dialog: {
+        marginLeft: "26%",
+        marginTop: "38px",
+        width: "55% !important",
+        height: "50% !important",
+        borderRadius: "80px !important"
+      },
+      buttons: {
+        padding: "0px 35px 0px 0px",
+        marginTop:"1px",
+        marginBottom:"6px"
+          },
+          buttons1:{
+            padding: "0px 35px 0px 0px",
+            marginTop:"-10px",
+            marginBottom:"6px"
+          },
+      input: {
+        width: "400px",
+        height: "5vh",
+        border: "solid 1px #c6c8ce",
+        backgroundColor: "#ffffff",
+        borderRadius: "7px",
+        outline:"none",
+        marginTop:"-15px"
+        // padding: "15px",
+      },
+    
+      addbtn: {
+        width: "110px",
+      height: "34px",
+      // margin: "33px 0 0 21px",
+      // padding: "8px 30px 7px 32px",
+      margin: "14px -8px 15px 2px",
+        padding: "5px 19px 3px 20px",
+      borderRadius: "4px",
+      backgroundColor: "#3763dd",
+      color: "white",
+      border:"none",
+      },
+      // addbtn: {
+      //   width: "110px",
+      // height: "34px",
+      // margin: "33px 0 0 21px",
+      // padding: "8px 30px 7px 32px",
+      // borderRadius: "4px",
+      // backgroundColor: "#3763dd",
+      // },
+      // cnlbtn: {
+      //   width: "94px",
+      // height: "34px",
+      // margin: "33px 21px 0 87px",
+      // padding: "8px 19px 7px 21px",
+      // borderRadius: "4px",
+      // backgroundColor: "#9fa9ba",
+    
+      // },
+      cnlbtn: {
+        width: "94px",
+      height: "34px",
+      // margin: "33px 21px 0 87px",
+      // padding: "8px 19px 7px 21px",
+      borderRadius: "4px",
+      backgroundColor: "#9fa9ba",
+      color: "white",
+      border:"none",
+      
+        
+        margin: "14px 8px 15px 2px",
+        padding: "6px 19px 3px 20px",
+    
+      },
+      subCategory: {
+        marginTop: "5px",
+        marginBottom: "0px",
+        // fontWeight: "50px",
+        // fontfamily: "Inter",
+        // fontsize: "12px",
+        // fontweight: "bold",
+        border: "none !important",
+        color: "#9FA9BA",
+        letterSpacing: "0.54px",
+
+        fontWeight: "600",fontSize: "13px",
+                        fontFamily: "unset"
+      },
+      deleteaddress: {
+        color: "#3763DD",
+      },
+      forgotpass: {
+          color: "#2149b9",
+          marginLeft: "123px"
+      },
+      createaccount: {
+        color: "#2149b9",
+        marginLeft: "32px",
+        fontfamily: "Inter",
+      fontsize: "14px",
+      },
+      icon: {
+          marginLeft: "-30px"
+      },
+      xdc: {
+        color: "#2a2a2a",
+        marginLeft: "30px",
+        fontfamily: "Inter",
+      fontsize: "5px",
+      },
+      heading: {
+          marginLeft: "2px",
+          fontfamily: "Inter",
+          fontweight: "600"
+      }
+    }));
  export default function DashboardComponent(props) {
+
+
+
+    const classes = useStyles();
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+
+      const handleClose1 = () => {
+        setOpen(false);
+      };
+
+    const handleClickOpen1 = () => {
+      setOpen1(true);
+    };
+  
+    const handleClose2 = () => {
+      setOpen1(false);
+    };
+
+   function handleDelete(){
+        return(
+            <div><button>Add</button></div>
+            
+        )
+
+    }
+
+     const handleClickDelete=()=>{
+        
+             handleDelete()
+         
+
+    }
+      
+  
+    // const handleClickOpen2 = () => {
+    //     setOpen1(true);
+    //   };
+    
+    //   const handleClose2 = () => {
+    //     setOpen1(false);
+    //   };
+
+     
 
     // const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = React.useState(false);
+    const [open1, setOpen1] = React.useState(false);
+    const [open2, setOpen2] = React.useState(false);
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
     const handleClick1 = (event) => {
         setAnchorEl(event.target.value);
       };
-    const handleClickOpen = () => {
-        setOpen(true);
-      };
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    //   };
     
   
     const handleClose = () => {
@@ -73,7 +253,7 @@ import { Tooltip } from '@material-ui/core';
         )}`;
     }
     
-    
+    const [toggle, handleToggle] = React.useState(false);
     const [address, setAddress] = React.useState([]);
 
     React.useEffect(() => {
@@ -127,6 +307,26 @@ import { Tooltip } from '@material-ui/core';
     }, []);
     
     const { state } = props;
+
+
+
+
+    const {useState, Fragment} = React
+
+// The added element component
+const AddedElement = () => <button style={{marginLeft:"12px"}}  className={classes.addbtn} type="button">Done</button>
+
+// The parent component
+
+  const [count, setCount] = React.useState(0) // Name it however you wish
+
+  const [buttonText, setButtonText] = useState("Edit");
+ 
+  
+// const handeCloseText=()=>{
+//   buttonText(null)
+// }
+  // const handleChangeButton=()=> <button>Cancel</button>
     //  const handlePasswprdSent = () =>{
     //     history.push('/email-sent');
     //  }
@@ -207,7 +407,7 @@ import { Tooltip } from '@material-ui/core';
         <Table className="table" aria-label="Whitelisted Addresses" style={{ boxShadow: "0px 0px 0px 0px" }}>
             <TableHead>
                 <TableRow>
-                    <TableCell style={{ border: "none",paddingLeft: "4%", fontWeight: "bold",fontSize: "15px",
+                    <TableCell style={{ border: "none",paddingLeft: "4%", fontWeight: "500",fontSize: "15px",
     fontFamily: "unset" }} align="left">
 
                         <span className={"tableheaders"}>Address</span>
@@ -226,14 +426,14 @@ import { Tooltip } from '@material-ui/core';
                         
                     </TableCell> */}
                     <TableCell
-                        style={{ border: "none", paddingLeft: "0%", fontWeight: "bold",fontSize: "15px",
+                        style={{ border: "none", paddingLeft: "0%", fontWeight: "500",fontSize: "15px",
                         fontFamily: "unset" }}
                         align="left"
                     >
-                        <span className={"tableheaders"}>AddedOn</span>
+                        <span className={"tableheaders"}>Added On</span>
                     </TableCell>
                     <TableCell
-                        style={{ border: "none", paddingLeft: "1%", fontWeight: "bold",fontSize: "15px",
+                        style={{ border: "none", paddingLeft: "1%", fontWeight: "500",fontSize: "15px",
                         fontFamily: "unset" }}
                         align="left"
                     >
@@ -257,20 +457,36 @@ import { Tooltip } from '@material-ui/core';
             
                    
                     return (
+
+
+
+
+
+
+
+
+
+
+
+                        
                         // address={filteredData && filteredData.length ? filteredData : address}
                         <TableRow
+                       
                             style={
                                 index % 2 !== 1
                                     ? { background: "#f9f9f9" }
                                     : { background: "white" }
                             }
                         >
-                            <TableCell style={{ border: "none",paddingLeft: "4%" }} margin-left="5px">
+                            
+                            <TableCell style={{ border: "none",paddingLeft: "4%" }} margin-left="5px"  onClick={handleClickOpen1}>
                              
-                                <a className="linkTable" href="/">
+                                <a className="linkTable" >
                                 <Tooltip placement="top" title={row.Adress}>
-                                    <span className="tabledata">
+                                    
+                                    <span className="tabledata"  >
                                         {(row.Adress)}{" "}
+                                        
                                     </span>
                                     </Tooltip>
                                 </a>
@@ -283,19 +499,19 @@ import { Tooltip } from '@material-ui/core';
                                 <span className="tabledata">{row.Balance}</span>
                                 
                             </TableCell> */}
-                            <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left">
+                            <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left"  onClick={handleClickOpen1}>
                                 {/* <a className="linkTable" href="/"> */}
                                 <span className="tabledata"> {row.AddedOn}</span>
                                 {/* </a> */}
                             </TableCell>
-                            <TableCell style={{ border: "none" }} align="left">
+                            <TableCell style={{ border: "none" }} align="left"  onClick={handleClickOpen1}>
                                 {/* <a className="linkTable" href="/"> */}
                                 <span className="tabledata">{row.Votes}</span>
                                 {/* </a> */}
                             </TableCell>
-                            <TableCell style={{ border: "none", paddingLeft: "7%" }} align="left">
-                                <a className="linkTable" href="/">
-                                    <span className="tabledata" > Delete</span>
+                            <TableCell style={{ border: "none", paddingLeft: "6%" }} align="left">
+                                <a className="linkTable" >
+                                    <span className="tabledata" onClick={handleClickOpen} >  Delete</span>
                                 </a>
                             </TableCell>
                             {/* <TableCell style={{ border: "none" }} align="right"><span className="tabledata">0.00000000005 XDC</span></TableCell> */}
@@ -309,7 +525,129 @@ import { Tooltip } from '@material-ui/core';
 </Grid>
 </div>
 
-{/* <div><PaginationRounded/></div> */}
+
+<div>
+        <Dialog
+          className={classes.dialog}
+          open={open}
+          onClose={handleClose1}
+          aria-labelledby="form-dialog-title"
+        >
+          <Row>
+            <DialogTitle className={classes.heading} id="form-dialog-title">Delete Address</DialogTitle>
+           
+          </Row>
+          <DialogContent>
+            <DialogContentText className={classes.subCategory}>
+              Do you want to delete this address <span className={classes.deleteaddress}>0x9b20bd863e1cf226b98…5a30</span>
+            </DialogContentText>
+            
+          </DialogContent>
+          
+          <DialogActions className={classes.buttons}>
+          <span><button className={classes.cnlbtn} onClick={handleClose1} >Cancel</button></span>
+         
+             <span>
+                <button className={classes.addbtn} 
+                onClick={()=>{utility.apiSuccessToast("You have succesfully deleted addres");handleClose1()}} 
+                //  onClick={handleClose1} 
+                  >  Delete </button></span>
+                </DialogActions>
+         
+     
+      
+        
+        </Dialog>
+      </div>
+
+
+
+      <div>
+        <Dialog
+          className={classes.dialog}
+          open={open1}
+          onClose={handleClose2}
+          aria-labelledby="form-dialog-title"
+        >
+          <Row>
+            <DialogTitle className={classes.heading} id="form-dialog-title">Address</DialogTitle>
+           
+          </Row>
+          <DialogContent>
+            
+            <input className={classes.input}></input>
+            <DialogContentText className={classes.subCategory}>
+             <span >Added on: 30 June 2021</span>
+            </DialogContentText>
+          </DialogContent>
+
+          <div style={{display:"inline", marginTop:"5px"}}>
+          <input
+                                                            onChange={(event) => {
+                                                                
+                                                                let checked = event.target.checked.id;
+                                                                // exportAddress(event.row);
+                                                                handleToggle(checked);
+                                                            }}
+                                                            type="checkbox"
+                                                            checked={toggle}
+                                                            style={{ 
+                                                                marginLeft: "28px", 
+                                                                backgroundColor:"none",
+                                                                marginTop:"-25px",
+                                                                marginRight:"10px",
+                                                            }}
+                                                        
+                                                        />
+                                                        <span className="tabledata">
+                                                                Allow Voting
+                                                            </span>
+                                                            </div>  
+
+
+
+
+
+                                                            <div style={{display:"inline"}}>
+          <input
+                                                            onChange={(event) => {
+                                                                
+                                                                let checked = event.target.checked.id;
+                                                                // exportAddress(event.row);
+                                                                handleToggle(checked);
+                                                            }}
+                                                            type="checkbox"
+                                                            checked={toggle}
+                                                            style={{ 
+                                                                marginLeft: "28px", 
+                                                                backgroundColor:"none",
+                                                                marginTop:"-25px",
+                                                                marginRight:"10px", 
+                                                            }}
+                                                        />
+                                                        <span className="tabledata">
+                                                                Allow Proposal Creation
+                                                            </span>
+                                                            </div>
+          
+          <DialogActions className={classes.buttons1}>
+          {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
+          <Fragment>
+    <button  className={classes.addbtn}  onClick={() => (setCount( 1),setButtonText("Cancel"))}  >{buttonText}</button>
+    { [...Array(count)].map((_, i) => <AddedElement key={i} />) }
+  </Fragment>
+            
+      {/* <span><button className={classes.addbtn} onClick={handleClickDelete}  >  Edit <EditDialog/> </button></span> */}
+                </DialogActions>
+         
+     
+      
+        
+        </Dialog>
+      </div>
+
+<div><PaginationRounded/></div>
+<div style={{height:"50px"}}></div>
 {/* <div className={classes.root}>
       <Pagination count={10} shape="rounded" />
       <Pagination count={10} variant="outlined" shape="rounded" />

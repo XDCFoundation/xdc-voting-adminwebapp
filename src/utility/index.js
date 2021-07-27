@@ -5,6 +5,7 @@ import Cookies from "universal-cookie";
 import React from "react";
 import ToastService from 'react-material-toast';
 import aws from "aws-sdk";
+import { Divider } from "@material-ui/core";
 
 const toast = ToastService.new({
     place: 'topRight',
@@ -163,7 +164,10 @@ function apiFailureToast(message) {
 }
 
 function apiSuccessToast(msg) {
-    toast.success(msg ? msg : "apiConstant.API_SUCCESS");
+    toast.success (msg ? msg : "apiConstant.API_SUCCESS",
+    {position: "top-center"}
+
+    );
 }
 
 function generateGUID() {
