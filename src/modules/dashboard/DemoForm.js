@@ -186,7 +186,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Alert: {
-    backgroundColor: "black"
+    backgroundColor: "#00144D"
   },
   btn: {
 
@@ -373,12 +373,18 @@ export default function CustomizedSnackbars() {
 
       <Snackbar
         open={open}
-        autoHideDuration={600}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose}
       >
-        <Alert onClose={handleClose} severity="success" className={classes.Alert}>
-          This is a success message!
+        <Alert  severity="" className={classes.Alert}>
+          <div style={{display:"flex"}}>
+          <span style={{marginRight:"10px",marginTop:"-5px",marginLeft:"-8px"}}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+          <span>
+        <div className="toast-message">You have successfully added address</div>
+        <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+        </span>
+        </div>
         </Alert>
       </Snackbar>
     </div>
