@@ -21,7 +21,7 @@ import color from '@material-ui/core/colors/amber';
 import { Tooltip } from '@material-ui/core';
 import EditDialog from '../Dialog/confirmDialog';
 import utility from '../../utility';
-
+// import DemoForm from './DemoForm'
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -152,7 +152,8 @@ export default function DashboardComponent(props) {
 
   const handleClose2 = () => {
     setOpen1(false);
-    setCount(1);
+    setCount(0);
+    setButtonText("Edit")
   };
 
   function handleDelete() {
@@ -266,6 +267,8 @@ export default function DashboardComponent(props) {
   return (
 
     <div>
+
+{/* <div><DemoForm/></div> */}
       <div className="header">
         <div className="div1">
           <span>

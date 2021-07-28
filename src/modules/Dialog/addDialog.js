@@ -8,20 +8,29 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles, mergeClasses } from "@material-ui/styles";
 import { Row } from "simple-flexbox";
-import Alert from '@material-ui/lab/Alert';
+// import Alert from '@material-ui/lab/Alert';
 // import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 // import Pagination from "@material-ui/lab/Pagination";
 import ColorAlerts from "./confirmDialog";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PositionedSnackbar from './confirmDialog';
+// import PositionedSnackbar from './confirmDialog';
 import utility from "../../utility";
 import { Checkbox } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 const useStyles = makeStyles((theme) => ({
 
-
+  Alert: {
+    backgroundColor: "black"
+  },
   add: {
     // marginLeft: "80%",
     // backgroundColor: "#f5f8fa",
@@ -126,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
   const [toggle, handleToggle] = React.useState(false);
   const [passwordShown, setPasswordShown] = React.useState(false);
   const togglePasswordVisiblity = () => {
@@ -157,25 +166,64 @@ export default function FormDialog() {
   
   const classes = useStyles();
 
+
+
+
+  const [open, setOpen] = React.useState(false);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [error , setError] = React.useState(false);
+  const handleClick = () => {
+    setOpen(true);
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+  const handleDialog = () => {
+    setDialogOpen(true);
+  };
+  const handleCloseDailog = () => {
+   
+    setDialogOpen(false);
+    setOpen(true);
+
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
 
-  function handleClose() {
+  // function handleClose() {
 
-    setOpen(false);
-    toast.dark(<Msg />)
-  };
-
-
-  const handleLogin = () => {
-    //   history.push("/loginprofile")
-
-  }
-  const handleAlert = () => {
+  //   setOpen(false);
+  //   toast.dark(<Msg />)
+  // };
 
 
-  }
+  // const handleLogin = () => {
+  //   //   history.push("/loginprofile")
+
+  // }
+  // const handleAlert = () => {
+
+
+  // }
 
 
 
@@ -207,30 +255,30 @@ export default function FormDialog() {
 
 
 
-  function notify() {
-    // handleClose()
-    // console.log("toats")
+//   function notify() {
+//     // handleClose()
+//     // console.log("toats")
 
     
-//  setOpen(false)
- toast.dark(<Msg />)
+// //  setOpen(false)
+//  toast.dark(<Msg />)
 
-  }
-
-
-
-  function handleALertOpen() {
-    notify();
-    handleClose();
-  }
+//   }
 
 
 
-  const wrapperFunction = () => {
-    notify()
-    handleClose()
+  // function handleALertOpen() {
+  //   notify();
+  //   handleClose();
+  // }
 
-  }
+
+
+  // const wrapperFunction = () => {
+  //   notify()
+  //   handleClose()
+
+  // }
 
   //   const [state, setState] = React.useState({
   //     open1: false,
@@ -298,8 +346,14 @@ export default function FormDialog() {
 
       <div id="containerIntro">
         <h1>Whitelisted Addresses</h1>
+        <Button variant="outlined" onClick={handleDialog}>
+        Open success snackbar
+      </Button>
 
-        <button className="add-btn" onClick={handleClickOpen} > Add </button>
+        {/* <button className="add-btn" 
+onClick={handleDialog}
+        // onClick={handleClickOpen}
+         > Add </button> */}
       </div>
 
       {/* <Button
@@ -314,8 +368,8 @@ export default function FormDialog() {
       <div>
         <Dialog
           className={classes.dialog}
-          open={open}
-          onClose={handleClose}
+          open={{dialogOpen}}
+          // onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
           <Row>
@@ -383,17 +437,21 @@ export default function FormDialog() {
           </div>
           {/* </DialogContent> */}
           <DialogActions className={classes.buttons}>
-            <span><button className={classes.cnlbtn} onClick={handleClose} >Cancel</button></span>
+            <span><button className={classes.cnlbtn} 
+            // onClick={handleClose} 
+            >Cancel</button></span>
             {/* const buttons = ( */}
             {/* <React.Fragment> */}
             <span>
               <div>
                 <button className={classes.addbtn} disabled={isDisabled}
-                  onClick={notify}
+                onClick={handleCloseDailog}
+                  // onClick={notify}
+                  // onClick={handleDialog}
                   // onClick={handleClose}
                   // onClick={() => { utility.apiSuccessToast("You have successfully added addres"); handleClose() }}
                 >Add</button>
-                <ToastContainer
+                {/* <ToastContainer
 
                   position="top-center"
                   color="black"
@@ -406,7 +464,7 @@ export default function FormDialog() {
                   // pauseOnFocusLoss
                   draggable
 
-                />
+                /> */}
               </div>
               {/* <button className={classes.addbtn}  >  Add </button> */}
             </span>
@@ -414,6 +472,17 @@ export default function FormDialog() {
           </DialogActions>
 
         </Dialog>
+
+        <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose}
+      >
+        <Alert onClose={handleClose} severity="error" className={classes.Alert}>
+          This is a success message!
+        </Alert>
+      </Snackbar>
       </div>
     </div>
   );
