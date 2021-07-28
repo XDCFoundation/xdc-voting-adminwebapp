@@ -21,7 +21,7 @@ import color from '@material-ui/core/colors/amber';
 import { Tooltip } from '@material-ui/core';
 import EditDialog from '../Dialog/confirmDialog';
 import utility from '../../utility';
-// import DemoForm from './DemoForm'
+import CustomizedSnackbars from './DemoForm'
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -268,7 +268,7 @@ export default function DashboardComponent(props) {
 
     <div>
 
-{/* <div><DemoForm/></div> */}
+{/* <div><CustomizedSnackbars/></div> */}
       <div className="header">
         <div className="div1">
           <span>
@@ -316,7 +316,7 @@ export default function DashboardComponent(props) {
 
 
 
-      <FormDialog />
+      <CustomizedSnackbars/>
       <div className="griddiv">
 
 
@@ -399,7 +399,7 @@ export default function DashboardComponent(props) {
                         <span className="tabledata">{row.Votes}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none", paddingLeft: "6%" }} align="left">
+                      <TableCell style={{ border: "none", paddingLeft: "5%" }} align="left">
                         <a className="linkTable" >
                           <span className="tabledata" onClick={handleClickOpen} >  Delete</span>
                         </a>
