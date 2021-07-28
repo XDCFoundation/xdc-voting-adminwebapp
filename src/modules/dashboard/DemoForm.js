@@ -170,7 +170,9 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import { Dialog, DialogActions, DialogContent } from "@material-ui/core";
+import { Dialog, DialogActions, DialogContent,DialogContentText,DialogTitle } from "@material-ui/core";
+import "../../assets/styles/custom.css";
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -185,6 +187,80 @@ const useStyles = makeStyles((theme) => ({
 
   Alert: {
     backgroundColor: "black"
+  },
+  btn: {
+
+  },
+  value: {
+    width: "400px !important",
+  },
+  cross: {
+    marginTop: "25px",
+    marginLeft: "40px",
+    fontWeight: "500",
+  },
+  dialog: {
+    marginLeft: "26%",
+    marginTop: "38px",
+    width: "55% !important",
+    height: "60% !important",
+    borderRadius: "80px !important"
+  },
+  buttons: {
+    padding: "1px 35px 10px 0px",
+    marginTop: "20px",
+  },
+  input: {
+    width: "400px",
+    height: "5vh",
+    border: "solid 1px #c6c8ce",
+    backgroundColor: "#ffffff",
+    borderRadius: "7px",
+    outline: "none"
+    // padding: "15px",
+  },
+
+  addbtn: {
+    width: "110px",
+    height: "34px",
+    // margin: "33px 0 0 21px",
+    // padding: "8px 30px 7px 32px",
+    margin: "14px -8px 15px 2px",
+    padding: "3px 19px 3px 20px",
+    borderRadius: "4px",
+    backgroundColor: "#3763dd",
+    color: "white",
+    border: "none",
+  },
+
+  cnlbtn: {
+    width: "94px",
+    height: "34px",
+    // margin: "33px 21px 0 87px",
+    // padding: "8px 19px 7px 21px",
+    borderRadius: "4px",
+    backgroundColor: "#9fa9ba",
+    color: "white",
+    border: "none",
+
+
+    margin: "14px 8px 15px 2px",
+    padding: "3px 19px 3px 20px",
+
+  },
+  subCategory: {
+    marginTop: "3px",
+    marginBottom: "-2px",
+    // fontWeight: "50px",
+    fontfamily: "Inter",
+    fontsize: "12px",
+    fontweight: "500",
+    border: "none !important"
+  },
+  heading: {
+    marginLeft: "5px",
+    fontfamily: "Inter",
+    fontweight: "600"
   }
 }));
 
@@ -217,29 +293,91 @@ export default function CustomizedSnackbars() {
 
   return (
     <div className={classes.root}>
-      <Button variant="outlined" onClick={handleDialog}>
-        Open success snackbar
-      </Button>
-      <Dialog open={dialogOpen} divide>
-        <DialogContent>hello</DialogContent>
-        <DialogActions>
-          <Button
+      <div style={{display:"flex",justifyContent:"space-between",marginTop:"40px",width:"60vw",marginLeft:"20vw"}}>
+        <div className="whitelisted-heading">Whitelisted Addresses</div>
+      <button variant="outlined" onClick={handleDialog} className="add-btn1" >
+        Add
+      </button>
+      </div>
+      <Dialog className={classes.dialog} open={dialogOpen} divide>
+      <DialogTitle className={classes.heading} id="form-dialog-title">Add a new Address</DialogTitle>
+      <DialogContent>
+            <DialogContentText className={classes.subCategory}>
+              <b>Address</b>
+            </DialogContentText>
+            <input className={classes.input}  type="text" required="true"
+            //  onChange={(e) => validateInputField(e)}
+            ></input>
+          </DialogContent>
+          <div style={{ display: "inline", marginTop: "10px" }}>
+            <input
+              onChange={(e) => {
+                // validateInputField(e)
+                let checked = e.target.checked.id;
+                // exportAddress(event.row);
+                // handleToggle(checked)
+                
+              }}
+              type="checkbox"
+              // checked={toggle}
+              style={{
+                marginLeft: "28px",
+                backgroundColor: "none",
+                marginTop: "-25px",
+                marginRight: "10px",
+              }}
+
+            />
+            <span className="tabledata">
+              Allow Voting
+            </span>
+          </div>
+          <div style={{ display: "inline" }}>
+            <input
+              onChange={(event) => {
+
+                let checked = event.target.checked.id;
+                // exportAddress(event.row);
+                // handleToggle(checked);
+              }}
+              type="checkbox"
+              // checked={toggle}
+              style={{
+                marginLeft: "28px",
+                backgroundColor: "none",
+                marginTop: "-25px",
+                marginRight: "10px",
+              }}
+            />
+            <span className="tabledata">
+              Allow Proposal Creation
+            </span>
+          </div>
+       
+        <DialogActions className={classes.buttons}>
+        <span><button className={classes.cnlbtn} 
+            >Cancel</button></span>
+            <span>
+              <div>
+          <button className={classes.addbtn}
             variant="contained"
             color="primary"
             onClick={handleCloseDailog}
           >
-            close
-          </Button>
+            Add
+          </button>
+          </div>
+          </span>
         </DialogActions>
       </Dialog>
 
       <Snackbar
         open={open}
-        autoHideDuration={6000}
+        autoHideDuration={600}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose}
       >
-        <Alert onClose={handleClose} severity="error" className={classes.Alert}>
+        <Alert onClose={handleClose} severity="success" className={classes.Alert}>
           This is a success message!
         </Alert>
       </Snackbar>

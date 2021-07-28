@@ -368,7 +368,7 @@ onClick={handleDialog}
       <div>
         <Dialog
           className={classes.dialog}
-          open={{dialogOpen}}
+          // open={{dialogOpen}}
           // onClose={handleClose}
           aria-labelledby="form-dialog-title"
         >
