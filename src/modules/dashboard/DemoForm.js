@@ -102,7 +102,7 @@ export default function CustomizedSnackbars() {
   const classes = useStyles();
 
   const [isDisabled, setDisabled] = React.useState(true);
-
+const [check, setCheck] = React.useState(false)
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [error, setError] = React.useState(false);
@@ -123,21 +123,22 @@ export default function CustomizedSnackbars() {
 
   const handleDialog = () => {
     setDialogOpen(true);
+    // setOpen(true)
   };
   const handleCloseDailog = () => {
 
     setDialogOpen(false);
     setOpen(true);
-
+    // setDialogOpen(true);
   };
 
 
   const validateInputField = (e) => {
     var text = e.target.value
-   var checkbox = e.target.value
+  //  var check= e.target.checked.id;
 
     if (text.length>=5)  {
-        setDisabled(false)
+        // setDisabled(false)
 
         // setEmailError('')
 
@@ -148,6 +149,21 @@ export default function CustomizedSnackbars() {
     }
 }
 
+const validateCheckbox = (e) => {
+  var check = e.target.value;
+ 
+
+  if (check) {
+      setDisabled(false)
+
+      // setEmailError1('')
+
+  }
+  else {
+
+      // setEmailError1('')
+  }
+}
 
   return (
     <div className={classes.root}>
@@ -170,15 +186,19 @@ export default function CustomizedSnackbars() {
         <div style={{ display: "inline", marginTop: "10px" }}>
           <input
             onChange={(e) => {
-              // validateInputField(e)
-              let checked = e.target.checked.id;
+              validateCheckbox(e)
+            // validateCheckbox(e.target.checked.id)
+              // setCheck(e.target.checked.id);
+              
+              // {checked?isDisabled(false):isDisabled(true)}
               // exportAddress(event.row);
               // handleToggle(checked)
 
             }}
+           
             type="checkbox"
             className="checked-btn"
-           
+           value={check}
 
           />
           <span className="tabledata">
@@ -187,9 +207,9 @@ export default function CustomizedSnackbars() {
         </div>
         <div style={{ display: "inline" }}>
           <input
-            onChange={(event) => {
-
-              let checked = event.target.checked.id;
+            onChange={(e) => {
+              validateCheckbox(e)
+              // let checked = event.target.checked.id;
               // exportAddress(event.row);
               // handleToggle(checked);
             }}
