@@ -100,16 +100,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedSnackbars() {
   const classes = useStyles();
-
-  const [isDisabled, setDisabled] = React.useState(true);
-const [check, setCheck] = React.useState(false)
+  const [allowVoting, setallowVoting] = React.useState(false);
+  const [proposal, setProposal] = React.useState(false);
+  const [addressInput, setAddressInput] = React.useState("");
+  // const [isDisabled, setDisabled] = React.useState(true);
+  const [check, setCheck] = React.useState(false)
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [error, setError] = React.useState(false);
   const handleClick = () => {
     setOpen(true);
   };
-  const handleCancelClose = () =>{
+  const handleCancelClose = () => {
     setDialogOpen(false);
   }
 
@@ -133,37 +135,37 @@ const [check, setCheck] = React.useState(false)
   };
 
 
-  const validateInputField = (e) => {
-    var text = e.target.value
-  //  var check= e.target.checked.id;
+  // const validateInputField = (e) => {
+  //   var text = e.target.value
+  //   //  var check= e.target.checked.id;
 
-    if (text.length>=5)  {
-        // setDisabled(false)
+  //   if (text.length >= 5) {
+  //     // setDisabled(false)
 
-        // setEmailError('')
+  //     // setEmailError('')
 
-    }
-    else {
+  //   }
+  //   else {
 
-        // setEmailError('')
-    }
-}
+  //     // setEmailError('')
+  //   }
+  // }
 
-const validateCheckbox = (e) => {
-  var check = e.target.value;
- 
+  // const validateCheckbox = (e) => {
+  //   var check = e.target.value;
 
-  if (check) {
-      setDisabled(false)
 
-      // setEmailError1('')
+  //   if (check) {
+  //     setDisabled(false)
 
-  }
-  else {
+  //     // setEmailError1('')
 
-      // setEmailError1('')
-  }
-}
+  //   }
+  //   else {
+
+  //     // setEmailError1('')
+  //   }
+  // }
 
   return (
     <div className={classes.root}>
@@ -180,25 +182,29 @@ const validateCheckbox = (e) => {
             <b>Address</b>
           </DialogContentText>
           <input className={classes.input} type="text" required="true"
-           onChange={(e) => validateInputField(e)}
+            value={addressInput}
+            onChange={(e) =>
+              setAddressInput(e.target.value)}
           ></input>
         </DialogContent>
         <div style={{ display: "inline", marginTop: "10px" }}>
           <input
             onChange={(e) => {
-              validateCheckbox(e)
-            // validateCheckbox(e.target.checked.id)
+              setallowVoting(!allowVoting)
+
+              // validateCheckbox(e)
+              // validateCheckbox(e.target.checked.id)
               // setCheck(e.target.checked.id);
-              
+
               // {checked?isDisabled(false):isDisabled(true)}
               // exportAddress(event.row);
               // handleToggle(checked)
 
             }}
-           
+
             type="checkbox"
             className="checked-btn"
-           value={check}
+            checked={allowVoting}
 
           />
           <span className="tabledata">
@@ -208,14 +214,15 @@ const validateCheckbox = (e) => {
         <div style={{ display: "inline" }}>
           <input
             onChange={(e) => {
-              validateCheckbox(e)
+              setProposal(!proposal)
+              // validateCheckbox(e)
               // let checked = event.target.checked.id;
               // exportAddress(event.row);
               // handleToggle(checked);
             }}
             type="checkbox"
             className="checked-btn"
-           
+            checked={proposal}
           />
           <span className="tabledata">
             Allow Proposal Creation
@@ -224,15 +231,21 @@ const validateCheckbox = (e) => {
 
         <DialogActions className={classes.buttons}>
           <span><button className={classes.cnlbtn}
-          onClick={handleCancelClose}
+            onClick={handleCancelClose}
           >Cancel</button></span>
           <span>
             <div>
               <button className={classes.addbtn}
                 variant="contained"
                 color="primary"
-                onClick={handleCloseDailog}
-                disabled={isDisabled}
+                onClick={() => { 
+                  setallowVoting(false);
+                  setAddressInput("");
+                  setProposal(false);
+                  handleCloseDailog();
+                
+                }}
+                disabled={(!allowVoting && !proposal) || !addressInput}
 
               >
                 Add

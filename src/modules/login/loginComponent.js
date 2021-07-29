@@ -19,6 +19,9 @@ export default function LoginForm() {
         history.push('/dashboard');
     }
 
+    const [proposal, setProposal] = React.useState("");
+    const [addressInput, setAddressInput] = React.useState("");
+
     const [emailError, setEmailError] = useState('')
     const [emailError1, setEmailError1] = useState('')
     const [password, setPassword] = React.useState("");
@@ -26,13 +29,14 @@ export default function LoginForm() {
     const [isDisabled, setDisabled] = useState(true);
 
     const validateEmail = (e) => {
-        var email = e.target.value
+       
        
 
-        if (validator.isEmail(email)) {
+        if (validator.isEmail(addressInput)) {
             // setDisabled(false)
 
-            setEmailError('')
+            // setEmailError('valid')
+            history.push('/dashboard')
 
         }
         //    else if (password.length>=8)
@@ -43,24 +47,25 @@ export default function LoginForm() {
         else {
 
             setEmailError('Please enter a valid email address')
+            // setEmailError("")
         }
     }
 
-    const validatePasword = (e) => {
-        var password = e.target.value
+    // const validatePasword = (e) => {
+    //     var password = e.target.value
        
 
-        if (password.length>=8) {
-            setDisabled(false)
+    //     if (password.length>=8) {
+    //         setDisabled(false)
 
-            setEmailError1('')
+    //         setEmailError1('')
 
-        }
-        else {
+    //     }
+    //     else {
 
-            setEmailError1('')
-        }
-    }
+    //         setEmailError1('')
+    //     }
+    // }
 
     return (
         <div className="main-div">
@@ -76,7 +81,13 @@ export default function LoginForm() {
                 <div className="heading">
                     <p>Email</p>
                     <input className="input" type="text" id="userEmail" required="true" 
-                        onChange={(e) => validateEmail(e)}
+                     value={addressInput}
+                        onChange={(e) => 
+                            setAddressInput(e.target.value)
+                           
+                            // validateEmail(e)
+                        }
+
                     />
 
                 </div>
@@ -84,7 +95,12 @@ export default function LoginForm() {
                 <div className="heading">
                     <p>Password</p>
                     <input className="input" type="password"  required="true"
-                      onChange={(e) => validatePasword(e)}
+                    value={proposal}
+                      onChange={(e) => 
+                        // validatePasword(e)
+                        setProposal(e.target.value)
+                        
+                    }
                         // onChange={(e) => { setPassword(e.target.value) }}
                         style={{
                             fontSize: "38px",
@@ -98,7 +114,19 @@ export default function LoginForm() {
                 <div style={{ marginLeft: "20px", color: "red" }}>{emailError1}</div>
                 <p className="forgot" onClick={handlePassword} >Forgot Password?</p>
                 <div>
-                    <button className="sign-btn" disabled={isDisabled} onClick={handleDashboard} type="button"> Sign in</button>
+                    <button className="sign-btn"
+onClick={() => { 
+    
+    setAddressInput("");
+    setProposal("");
+    validateEmail();
+    // setEmailError("")
+    // handleDashboard();
+  
+  }}
+  disabled={(!proposal) || !addressInput}
+                    //  disabled={isDisabled} onClick={handleDashboard} 
+                     type="button"> Sign in</button>
                 </div>
 
 
