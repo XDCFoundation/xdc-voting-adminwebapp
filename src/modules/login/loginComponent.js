@@ -29,8 +29,8 @@ export default function LoginForm() {
     const [isDisabled, setDisabled] = useState(true);
 
     const validateEmail = (e) => {
-       
-       
+
+
 
         if (validator.isEmail(addressInput)) {
             // setDisabled(false)
@@ -53,7 +53,7 @@ export default function LoginForm() {
 
     // const validatePasword = (e) => {
     //     var password = e.target.value
-       
+
 
     //     if (password.length>=8) {
     //         setDisabled(false)
@@ -80,27 +80,27 @@ export default function LoginForm() {
                 </div>
                 <div className="heading">
                     <p>Email</p>
-                    <input className="input" type="text" id="userEmail" required="true" 
-                     value={addressInput}
-                        onChange={(e) => 
+                    <input className="input" type="text" id="userEmail" required="true"
+                        value={addressInput}
+                        onChange={(e) =>
                             setAddressInput(e.target.value)
-                           
+
                             // validateEmail(e)
                         }
 
                     />
 
                 </div>
-                <div style={{ marginLeft: "20px", color: "red" }}>{emailError}</div>
+                <div style={{ marginLeft: "20px", color: "red", marginTop: "-7px" }}>{emailError}</div>
                 <div className="heading">
                     <p>Password</p>
-                    <input className="input" type="password"  required="true"
-                    value={proposal}
-                      onChange={(e) => 
-                        // validatePasword(e)
-                        setProposal(e.target.value)
-                        
-                    }
+                    <input className="input" type="password" required="true"
+                        value={proposal}
+                        onChange={(e) =>
+                            // validatePasword(e)
+                            setProposal(e.target.value)
+
+                        }
                         // onChange={(e) => { setPassword(e.target.value) }}
                         style={{
                             fontSize: "38px",
@@ -115,18 +115,18 @@ export default function LoginForm() {
                 <p className="forgot" onClick={handlePassword} >Forgot Password?</p>
                 <div>
                     <button className="sign-btn"
-onClick={() => { 
-    
-    setAddressInput("");
-    setProposal("");
-    validateEmail();
-    // setEmailError("")
-    // handleDashboard();
-  
-  }}
-  disabled={(!proposal) || !addressInput}
-                    //  disabled={isDisabled} onClick={handleDashboard} 
-                     type="button"> Sign in</button>
+                        onClick={() => {
+
+                            setAddressInput("");
+                            setProposal("");
+                            validateEmail();
+                            // setEmailError("")
+                            // handleDashboard();
+
+                        }}
+                        disabled={(!proposal) || !addressInput}
+                        //  disabled={isDisabled} onClick={handleDashboard} 
+                        type="button"> Sign in</button>
                 </div>
 
 

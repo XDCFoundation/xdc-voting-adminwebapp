@@ -11,6 +11,11 @@ import utility from '../../utility';
 
 export default function LoginForm() {
 
+
+    const [allowVoting, setallowVoting] = React.useState("");
+    const [proposal, setProposal] = React.useState("");
+    const [addressInput, setAddressInput] = React.useState("");
+
     const [currentpassword, setcurrentPassword] = React.useState("");
     const [password, setPassword] = React.useState("");
     const [confirmpassword, setconfirmPassword] = React.useState("");
@@ -20,13 +25,14 @@ export default function LoginForm() {
 
     const isButton = false;
     const checkValidationPassword = (e) => {
-        const confirmpassword = e.target.value
-        setconfirmPassword(confirmpassword)
-        if ((password != confirmpassword) | ((password.length <= 8) | (currentpassword.length <= 8))) {
+        // const confirmpassword = e.target.value
+        // setconfirmPassword(confirmpassword)
+        if ((allowVoting != proposal) | ((allowVoting.length <= 8) | (addressInput.length <= 8))) {
             setIsError("Password should match and have minimum 8 characters");
         } else {
-            setDisabled(false)
-            setIsError("");
+            history.push('/')
+            // setDisabled(false)
+            // setIsError("");
         }
 
     }
@@ -86,8 +92,13 @@ export default function LoginForm() {
                 <div className="heading-change">
 
                     <p>Current Password</p>
-                    <input className="input" type="password" required="true" value={currentpassword}
-                        onChange={(e) => { setcurrentPassword(e.target.value) }}
+                    <input className="input" type="password" required="true"
+                        // value={currentpassword}
+                        value={addressInput}
+                        onChange={(e) => {
+                            setAddressInput(e.target.value)
+                            // setcurrentPassword(e.target.value) 
+                        }}
 
                         style={{
                             fontSize: "38px",
@@ -99,8 +110,15 @@ export default function LoginForm() {
                 </div>
                 <div className="heading-change">
                     <p>New Password</p>
-                    <input className="input" value={password} type="password" required="true"
-                        onChange={(e) => { setPassword(e.target.value) }}
+                    <input className="input"
+                        value={allowVoting}
+
+                        // value={password}
+                        type="password" required="true"
+                        onChange={(e) => {
+                            setallowVoting(e.target.value)
+                            // setPassword(e.target.value) 
+                        }}
                         style={{
                             fontSize: "38px",
                             fontWeight: "bolder",
@@ -112,8 +130,14 @@ export default function LoginForm() {
                 </div>
                 <div className="heading-change">
                     <p>Confirm Password</p>
-                    <input className="input" type="password" value={confirmpassword} required="true"
-                        onChange={checkValidationPassword}
+                    <input className="input" type="password"
+                        value={proposal}
+                        //  value={confirmpassword} 
+                        required="true"
+                        onChange={(e) => {
+                            setProposal(e.target.value)
+                            // checkValidationPassword
+                        }}
 
                         style={{
                             fontSize: "38px",
@@ -129,9 +153,18 @@ export default function LoginForm() {
                 <div>
                     <button className="sign-btn"
                         //  onClick={utility.isPasswordValid}
-                        disabled={isDisabled}
+                        onClick={() => {
+                            setallowVoting("");
+                            setAddressInput("");
+                            setProposal("");
+                            checkValidationPassword();
+                            // handleCloseDailog();
 
-                        onClick={handleClickUpdate}
+                        }}
+                        disabled={!allowVoting || !proposal || !addressInput}
+                        // disabled={isDisabled}
+
+                        // onClick={handleClickUpdate}
                         type="button"> Update Password</button>
                 </div>
 
