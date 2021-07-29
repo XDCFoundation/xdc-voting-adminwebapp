@@ -19,17 +19,22 @@ export default function ForgotForm() {
     const [isDisabled, setDisabled] = React.useState(true);
 
     const validateEmail = (e) => {
-        //  var email = e.target.value
+
 
         if (validator.isEmail(addressInput)) {
 
-            //      setDisabled(false)
-            //    setEmailError('')
+
             history.push('/email-sent')
 
         }
         else {
-            setEmailError('Please enter a valid email address')
+            
+            
+
+            // setInterval(() => setEmailError("bnghgvg"), 1000);
+            // clearTimeout(1000)
+            setEmailError('Please enter a valid email address');
+            // setTimeout(1000);
         }
     }
 
@@ -45,8 +50,7 @@ export default function ForgotForm() {
                     Forgot Password
                 </div>
                 <div className="para">
-                    {/* <p>Email</p>
-                <input className="input" type="text"/> */}
+
                     <p>Enter your registered email to receive password reset link</p>
 
                 </div>
@@ -61,21 +65,21 @@ export default function ForgotForm() {
 
 
                 </div>
-                <div style={{ marginLeft: "20px", marginTop: "-7px", color: "red" }}>{emailError}</div>
-                {/* <p className="forgot"  >Forgot Password?</p> */}
+                 <div style={{ marginLeft: "20px", marginTop: "-7px", color: "red", }}
+                // delay={5000}
+                >{emailError}</div>
+
                 <div>
                     <button className="sign-btn1"
                         onClick={() => {
 
                             setAddressInput("");
-                            // setProposal("");
+
                             validateEmail();
-                            // setEmailError("")
-                            // handleDashboard();
 
                         }}
                         disabled={!addressInput}
-                        //  disabled={isDisabled} onClick={handlePasswprdSent}
+
                         type="button"> Submit</button>
                 </div>
                 <p className="login-account"  >Log in to your account</p>
