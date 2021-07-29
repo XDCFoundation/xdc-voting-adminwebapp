@@ -417,6 +417,19 @@ font-weight: 300;
 letter-spacing: 0px;
 color: #FFFFFF;
 }
+.checked-btn{
+    margin-left: 28px;
+                background-color: none;
+                margin-top: -25px;
+                margin-right: 10px;
+}
+.checked-upper{
+    display: inline;
+     margin-top: 5px;
+}
+.checked-down{
+    display: inline;
+}
 .has-data-css{
     background-color: red;
 }
