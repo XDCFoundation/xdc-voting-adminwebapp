@@ -100,12 +100,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedSnackbars() {
   const classes = useStyles();
+
+  const [isDisabled, setDisabled] = React.useState(true);
+
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [error, setError] = React.useState(false);
   const handleClick = () => {
     setOpen(true);
   };
+  const handleCancelClose = () =>{
+    setDialogOpen(false);
+  }
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -125,6 +131,24 @@ export default function CustomizedSnackbars() {
 
   };
 
+
+  const validateInputField = (e) => {
+    var text = e.target.value
+   var checkbox = e.target.value
+
+    if (text.length>=5)  {
+        setDisabled(false)
+
+        // setEmailError('')
+
+    }
+    else {
+
+        // setEmailError('')
+    }
+}
+
+
   return (
     <div className={classes.root}>
       <div style={{ display: "flex", justifyContent: "space-between", marginTop: "40px", width: "60vw", marginLeft: "20vw" }}>
@@ -140,7 +164,7 @@ export default function CustomizedSnackbars() {
             <b>Address</b>
           </DialogContentText>
           <input className={classes.input} type="text" required="true"
-          //  onChange={(e) => validateInputField(e)}
+           onChange={(e) => validateInputField(e)}
           ></input>
         </DialogContent>
         <div style={{ display: "inline", marginTop: "10px" }}>
@@ -153,13 +177,8 @@ export default function CustomizedSnackbars() {
 
             }}
             type="checkbox"
-            // checked={toggle}
-            style={{
-              marginLeft: "28px",
-              backgroundColor: "none",
-              marginTop: "-25px",
-              marginRight: "10px",
-            }}
+            className="checked-btn"
+           
 
           />
           <span className="tabledata">
@@ -175,13 +194,8 @@ export default function CustomizedSnackbars() {
               // handleToggle(checked);
             }}
             type="checkbox"
-            // checked={toggle}
-            style={{
-              marginLeft: "28px",
-              backgroundColor: "none",
-              marginTop: "-25px",
-              marginRight: "10px",
-            }}
+            className="checked-btn"
+           
           />
           <span className="tabledata">
             Allow Proposal Creation
@@ -190,6 +204,7 @@ export default function CustomizedSnackbars() {
 
         <DialogActions className={classes.buttons}>
           <span><button className={classes.cnlbtn}
+          onClick={handleCancelClose}
           >Cancel</button></span>
           <span>
             <div>
@@ -197,6 +212,8 @@ export default function CustomizedSnackbars() {
                 variant="contained"
                 color="primary"
                 onClick={handleCloseDailog}
+                disabled={isDisabled}
+
               >
                 Add
               </button>

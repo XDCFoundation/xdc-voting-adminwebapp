@@ -262,7 +262,7 @@ export default function DashboardComponent(props) {
   const { useState, Fragment } = React
 
   // The added element component
-  const AddedElement = () => <button onClick={handleCloseDailog1}  style={{ marginLeft: "12px" }} className={classes.addbtn} type="button">Done</button>
+  const AddedElement = () => <button onClick={handleCloseDailog1} style={{ marginLeft: "12px" }} className={classes.addbtn} type="button">Done</button>
 
   // The parent component
 
@@ -277,9 +277,15 @@ export default function DashboardComponent(props) {
   const handleDialog = () => {
     setDialogOpen(true);
   };
+  const handleCancelClose = () =>{
+    setDialogOpen(false);
+  }
   const handleDialog1 = () => {
     setDialogOpen1(true);
   };
+  const handleCancelClose1 = () =>{
+    setDialogOpen1(false);
+  }
   const handleCloseDailog = () => {
 
     setDialogOpen(false);
@@ -292,7 +298,7 @@ export default function DashboardComponent(props) {
     setOpen4(true);
 
   };
-  
+
 
   const handleClose3 = (event, reason) => {
     if (reason === "clickaway") {
@@ -313,7 +319,7 @@ export default function DashboardComponent(props) {
 
     <div>
 
-{/* <div><CustomizedSnackbars/></div> */}
+      {/* <div><CustomizedSnackbars/></div> */}
       <div className="header">
         <div className="div1">
           <span>
@@ -361,7 +367,7 @@ export default function DashboardComponent(props) {
 
 
 
-      <CustomizedSnackbars/>
+      <CustomizedSnackbars />
       <div className="griddiv">
 
 
@@ -480,49 +486,48 @@ export default function DashboardComponent(props) {
           </DialogContent>
 
           <DialogActions className={classes.buttons}>
-            <span><button className={classes.cnlbtn} onClick={handleClose1} >Cancel</button></span>
+            <span><button className={classes.cnlbtn} onClick={handleCancelClose} >Cancel</button></span>
 
             <span>
               <button className={classes.addbtn}
-              onClick={handleCloseDailog}
-                // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
-              //  onClick={handleClose1} 
+                onClick={handleCloseDailog}
+              // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
               >  Delete </button></span>
           </DialogActions>
 
         </Dialog>
         <Snackbar
-        open={open3}
-        autoHideDuration={3000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={handleClose3}
-      >
-        <Alert severity="" className={classes.Alert}>
-          <div style={{ display: "flex" }}>
-            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
-            <span>
-              <div className="toast-message">You have successfully deleted address</div>
-              <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
-            </span>
-          </div>
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={open4}
-        autoHideDuration={3000}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        onClose={handleClose4}
-      >
-        <Alert severity="" className={classes.Alert}>
-          <div style={{ display: "flex" }}>
-            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
-            <span>
-              <div className="toast-message">You have successfully edited address</div>
-              <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
-            </span>
-          </div>
-        </Alert>
-      </Snackbar>
+          open={open3}
+          autoHideDuration={3000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={handleClose3}
+        >
+          <Alert severity="" className={classes.Alert}>
+            <div style={{ display: "flex" }}>
+              <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+              <span>
+                <div className="toast-message">You have successfully deleted address</div>
+                <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+              </span>
+            </div>
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={open4}
+          autoHideDuration={3000}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={handleClose4}
+        >
+          <Alert severity="" className={classes.Alert}>
+            <div style={{ display: "flex" }}>
+              <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+              <span>
+                <div className="toast-message">You have successfully edited address</div>
+                <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+              </span>
+            </div>
+          </Alert>
+        </Snackbar>
       </div>
 
 
@@ -530,10 +535,8 @@ export default function DashboardComponent(props) {
       <div>
         <Dialog
           className={classes.dialog}
-          open={dialogOpen1} 
+          open={dialogOpen1}
           divide
-          // open={open1}
-          // onClose={handleClose2}
           aria-labelledby="form-dialog-title"
         >
           <Row>
@@ -548,7 +551,7 @@ export default function DashboardComponent(props) {
             </DialogContentText>
           </DialogContent>
 
-          <div style={{ display: "inline", marginTop: "5px" }}>
+          <div className="checked-upper">
             <input
               onChange={(event) => {
 
@@ -558,12 +561,8 @@ export default function DashboardComponent(props) {
               }}
               type="checkbox"
               checked={toggle}
-              style={{
-                marginLeft: "28px",
-                backgroundColor: "none",
-                marginTop: "-25px",
-                marginRight: "10px",
-              }}
+              className="checked-btn"
+             
 
             />
             <span className="tabledata">
@@ -575,7 +574,7 @@ export default function DashboardComponent(props) {
 
 
 
-          <div style={{ display: "inline" }}>
+          <div className="checked-down">
             <input
               onChange={(event) => {
 
@@ -585,12 +584,8 @@ export default function DashboardComponent(props) {
               }}
               type="checkbox"
               checked={toggle}
-              style={{
-                marginLeft: "28px",
-                backgroundColor: "none",
-                marginTop: "-25px",
-                marginRight: "10px",
-              }}
+              className="checked-btn"
+              
             />
             <span className="tabledata">
               Allow Proposal Creation
@@ -600,30 +595,20 @@ export default function DashboardComponent(props) {
           <DialogActions className={classes.buttons1}>
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
-              <button  onClick={() => (setCount(1), setButtonText("Cancel"))} 
-              className ={ count === 1 ? classes.cnlbtn : classes.addbtn}
+              <button onClick={() => (setCount(1), setButtonText("Cancel"))}
+              // {...buttonText=="cancel"? handleCancelClose1:""}
+                className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
-              {[...Array(count)].map((_, i) => <AddedElement  key={i} />)}
+              {[...Array(count)].map((_, i) => <AddedElement key={i} />)}
             </Fragment>
 
             {/* <span><button className={classes.addbtn} onClick={handleClickDelete}  >  Edit <EditDialog/> </button></span> */}
           </DialogActions>
-
-
-
-
         </Dialog>
       </div>
-
       <div><PaginationRounded /></div>
       <div style={{ height: "50px" }}></div>
-
-
-
     </div>
-
-
-
   )
 }
 
