@@ -262,14 +262,28 @@ export default function DashboardComponent(props) {
   const { useState, Fragment } = React
 
   // The added element component
-  const AddedElement = () => <button onClick={handleCloseDailog1} style={{ marginLeft: "12px" }} className={classes.addbtn} type="button">Done</button>
+  const AddedElement = () => <button 
+  onClick={() => { 
+    setallowVoting(false);
+    setAddressInput("");
+    setProposal(false);
+    handleCloseDailog1();
+  
+  }}
+  disabled={(!allowVoting && !proposal) || !addressInput}
+  // onClick={handleCloseDailog1} 
+  style={{ marginLeft: "12px" }} 
+  className={classes.addbtn} type="button">Done</button>
 
   // The parent component
+  const [allowVoting, setallowVoting] = React.useState(false);
+  const [proposal, setProposal] = React.useState(false);
+  const [addressInput, setAddressInput] = React.useState("");
 
-  const [count, setCount] = React.useState(0) // Name it however you wish
-
+  const [count, setCount] = React.useState(0) 
+  const [check, setCheck] = React.useState(false)
   const [buttonText, setButtonText] = useState("Edit");
-
+  const [isDisabled, setDisabled] = React.useState(true);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogOpen1, setDialogOpen1] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
@@ -277,7 +291,7 @@ export default function DashboardComponent(props) {
   const handleDialog = () => {
     setDialogOpen(true);
   };
-  const handleCancelClose = () =>{
+  const handleCancelClose = () => {
     setDialogOpen(false);
   }
   const handleDialog1 = () => {
@@ -285,7 +299,7 @@ export default function DashboardComponent(props) {
     setCount(0)
     setButtonText("Edit")
   };
-  const handleCancelClose1 = () =>{
+  const handleCancelClose1 = () => {
     setDialogOpen1(false);
   }
   const handleCloseDailog = () => {
@@ -316,6 +330,40 @@ export default function DashboardComponent(props) {
 
     setOpen4(false);
   };
+
+
+
+
+  // const validateInputField = (e) => {
+  //   var text = e.target.value
+
+
+  //   if (text.length >= 5) {
+  //     // setDisabled(false)
+
+  //     // setEmailError('')
+
+  //   }
+  //   else {
+
+  //     // setEmailError('')
+  //   }
+  // }
+  // const validateCheckbox = (e) => {
+  //   var check = e.target.value;
+
+
+  //   if (check) {
+  //     setDisabled(false)
+
+  //     // setEmailError1('')
+
+  //   }
+  //   else {
+
+  //     // setEmailError1('')
+  //   }
+  // }
 
   return (
 
@@ -362,12 +410,6 @@ export default function DashboardComponent(props) {
         </div>
 
       </div>
-
-
-
-
-
-
 
       <CustomizedSnackbars />
       <div className="griddiv">
@@ -548,7 +590,12 @@ export default function DashboardComponent(props) {
           </Row>
           <DialogContent>
 
-            <input className={classes.input}></input>
+            <input className={classes.input}
+           value={addressInput}
+              onChange={(e) => 
+                setAddressInput(e.target.value)}
+                
+            ></input>
             <DialogContentText className={classes.subCategory}>
               <span >Added on: 30 June 2021</span>
             </DialogContentText>
@@ -556,16 +603,19 @@ export default function DashboardComponent(props) {
 
           <div className="checked-upper">
             <input
-              onChange={(event) => {
+              onChange={(e) => {
+                setallowVoting(!allowVoting)
+                // validateCheckbox(e)
+                // let checked = event.target.checked.id;
 
-                let checked = event.target.checked.id;
-
-                handleToggle(checked);
+                // handleToggle(checked);
               }}
               type="checkbox"
-              checked={toggle}
+              // checked={toggle}
+              checked={allowVoting}
+              // value={check}
               className="checked-btn"
-             
+
 
             />
             <span className="tabledata">
@@ -580,15 +630,15 @@ export default function DashboardComponent(props) {
           <div className="checked-down">
             <input
               onChange={(event) => {
+                setProposal(!proposal)
+                // let checked = event.target.checked.id;
 
-                let checked = event.target.checked.id;
-
-                handleToggle(checked);
+                // handleToggle(checked);
               }}
               type="checkbox"
-              checked={toggle}
+              checked={proposal}
               className="checked-btn"
-              
+
             />
             <span className="tabledata">
               Allow Proposal Creation
@@ -599,7 +649,8 @@ export default function DashboardComponent(props) {
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
               <button onClick={() => (setCount(1), setButtonText("Cancel"))}
-              // {...buttonText=="cancel"? handleCancelClose1:""}
+                // {...buttonText=="cancel"? handleCancelClose1:""}
+
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
               {[...Array(count)].map((_, i) => <AddedElement key={i} />)}
