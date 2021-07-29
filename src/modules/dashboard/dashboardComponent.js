@@ -282,6 +282,8 @@ export default function DashboardComponent(props) {
   }
   const handleDialog1 = () => {
     setDialogOpen1(true);
+    setCount(0)
+    setButtonText("Edit")
   };
   const handleCancelClose1 = () =>{
     setDialogOpen1(false);
@@ -537,6 +539,7 @@ export default function DashboardComponent(props) {
           className={classes.dialog}
           open={dialogOpen1}
           divide
+          onClose={handleCancelClose1}
           aria-labelledby="form-dialog-title"
         >
           <Row>
