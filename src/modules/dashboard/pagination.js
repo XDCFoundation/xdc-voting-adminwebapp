@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     //   marginBottom:theme.spacing(45),
     marginLeft:"64vw",
       color:"#2149B9",
-      fontSize:"large"
+      fontSize:"large",
+      
       
     },
     marginBottom:"5%",

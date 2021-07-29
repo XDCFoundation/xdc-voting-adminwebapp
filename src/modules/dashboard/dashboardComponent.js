@@ -22,7 +22,7 @@ import { Tooltip } from '@material-ui/core';
 import EditDialog from '../Dialog/confirmDialog';
 import utility from '../../utility';
 import CustomizedSnackbars from './DemoForm'
-
+import "../../assets/styles/custom.css";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -30,10 +30,19 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles, mergeClasses } from "@material-ui/styles";
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 
 const useStyles = makeStyles((theme) => ({
-
+  Alert: {
+    backgroundColor: "#00144D"
+  },
   dialog: {
     marginLeft: "26%",
     marginTop: "38px",
@@ -147,7 +156,7 @@ export default function DashboardComponent(props) {
   };
 
   const handleClickOpen1 = () => {
-    setOpen1(true);
+    setOpen(true);
   };
 
   const handleClose2 = () => {
@@ -253,7 +262,7 @@ export default function DashboardComponent(props) {
   const { useState, Fragment } = React
 
   // The added element component
-  const AddedElement = () => <button style={{ marginLeft: "12px" }} className={classes.addbtn} type="button">Done</button>
+  const AddedElement = () => <button onClick={handleCloseDailog1}  style={{ marginLeft: "12px" }} className={classes.addbtn} type="button">Done</button>
 
   // The parent component
 
@@ -261,8 +270,44 @@ export default function DashboardComponent(props) {
 
   const [buttonText, setButtonText] = useState("Edit");
 
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [dialogOpen1, setDialogOpen1] = React.useState(false);
+  const [open3, setOpen3] = React.useState(false);
+  const [open4, setOpen4] = React.useState(false);
+  const handleDialog = () => {
+    setDialogOpen(true);
+  };
+  const handleDialog1 = () => {
+    setDialogOpen1(true);
+  };
+  const handleCloseDailog = () => {
 
+    setDialogOpen(false);
+    setOpen3(true);
 
+  };
+  const handleCloseDailog1 = () => {
+
+    setDialogOpen1(false);
+    setOpen4(true);
+
+  };
+  
+
+  const handleClose3 = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen3(false);
+  };
+  const handleClose4 = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen4(false);
+  };
 
   return (
 
@@ -376,7 +421,7 @@ export default function DashboardComponent(props) {
                       }
                     >
 
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={handleClickOpen1}>
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={handleDialog1}>
 
                         <a className="linkTable" >
                           <Tooltip placement="top" title={row.Adress}>
@@ -389,19 +434,19 @@ export default function DashboardComponent(props) {
                         </a>
                       </TableCell>
 
-                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={handleClickOpen1}>
+                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={handleDialog1}>
                         {/* <a className="linkTable" href="/"> */}
                         <span className="tabledata"> {row.AddedOn}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none" }} align="left" onClick={handleClickOpen1}>
+                      <TableCell style={{ border: "none" }} align="left" onClick={handleDialog1}>
                         {/* <a className="linkTable" href="/"> */}
                         <span className="tabledata">{row.Votes}</span>
                         {/* </a> */}
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "5%" }} align="left">
                         <a className="linkTable" >
-                          <span className="tabledata" onClick={handleClickOpen} >  Delete</span>
+                          <span className="tabledata" onClick={handleDialog} >  Delete</span>
                         </a>
                       </TableCell>
 
@@ -419,8 +464,8 @@ export default function DashboardComponent(props) {
       <div>
         <Dialog
           className={classes.dialog}
-          open={open}
-          onClose={handleClose1}
+          open={dialogOpen}
+          divide
           aria-labelledby="form-dialog-title"
         >
           <Row>
@@ -439,15 +484,45 @@ export default function DashboardComponent(props) {
 
             <span>
               <button className={classes.addbtn}
-                onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
+              onClick={handleCloseDailog}
+                // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
               //  onClick={handleClose1} 
               >  Delete </button></span>
           </DialogActions>
 
-
-
-
         </Dialog>
+        <Snackbar
+        open={open3}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose3}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span>
+              <div className="toast-message">You have successfully deleted address</div>
+              <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+            </span>
+          </div>
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={open4}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose4}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span>
+              <div className="toast-message">You have successfully edited address</div>
+              <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+            </span>
+          </div>
+        </Alert>
+      </Snackbar>
       </div>
 
 
@@ -455,8 +530,10 @@ export default function DashboardComponent(props) {
       <div>
         <Dialog
           className={classes.dialog}
-          open={open1}
-          onClose={handleClose2}
+          open={dialogOpen1} 
+          divide
+          // open={open1}
+          // onClose={handleClose2}
           aria-labelledby="form-dialog-title"
         >
           <Row>
