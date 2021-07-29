@@ -551,7 +551,7 @@ export default function DashboardComponent(props) {
               <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
               <span>
                 <div className="toast-message">You have successfully deleted address</div>
-                <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+                <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
               </span>
             </div>
           </Alert>
@@ -567,7 +567,7 @@ export default function DashboardComponent(props) {
               <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
               <span>
                 <div className="toast-message">You have successfully edited address</div>
-                <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+                <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
               </span>
             </div>
           </Alert>
