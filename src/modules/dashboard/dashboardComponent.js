@@ -165,21 +165,7 @@ export default function DashboardComponent(props) {
     setButtonText("Edit")
   };
 
-  function handleDelete() {
-    return (
-      <div><button>Add</button></div>
-
-    )
-
-  }
-
-  const handleClickDelete = () => {
-
-    handleDelete()
-
-
-  }
-
+  
 
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -262,28 +248,28 @@ export default function DashboardComponent(props) {
   const { useState, Fragment } = React
 
   // The added element component
-  const AddedElement = () => <button 
-  onClick={() => { 
-    setallowVoting(false);
-    setAddressInput("");
-    setProposal(false);
-    handleCloseDailog1();
-  
-  }}
-  disabled={(!allowVoting && !proposal) || !addressInput}
-  // onClick={handleCloseDailog1} 
-  style={{ marginLeft: "12px" }} 
-  className={classes.addbtn} type="button">Done</button>
+  const AddedElement = () => <button
+    onClick={() => {
+      setallowVoting(false);
+      setAddressInput("");
+      setProposal(false);
+      handleCloseDailog1();
+
+    }}
+    disabled={(!allowVoting && !proposal) || !addressInput}
+    // onClick={handleCloseDailog1} 
+    style={{ marginLeft: "12px" }}
+    className={classes.addbtn} type="button">Done</button>
 
   // The parent component
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
 
-  const [count, setCount] = React.useState(0) 
-  const [check, setCheck] = React.useState(false)
+  const [count, setCount] = React.useState(0)
+
   const [buttonText, setButtonText] = useState("Edit");
-  const [isDisabled, setDisabled] = React.useState(true);
+
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogOpen1, setDialogOpen1] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
@@ -332,39 +318,6 @@ export default function DashboardComponent(props) {
   };
 
 
-
-
-  // const validateInputField = (e) => {
-  //   var text = e.target.value
-
-
-  //   if (text.length >= 5) {
-  //     // setDisabled(false)
-
-  //     // setEmailError('')
-
-  //   }
-  //   else {
-
-  //     // setEmailError('')
-  //   }
-  // }
-  // const validateCheckbox = (e) => {
-  //   var check = e.target.value;
-
-
-  //   if (check) {
-  //     setDisabled(false)
-
-  //     // setEmailError1('')
-
-  //   }
-  //   else {
-
-  //     // setEmailError1('')
-  //   }
-  // }
-
   return (
 
     <div>
@@ -384,7 +337,7 @@ export default function DashboardComponent(props) {
           </span>
           <span className="profile-icon">
 
-            {/* <img className="profile-logo" src={require("../../assets/styles/images/Profile.png")} ></img> */}
+
 
             <div>
               <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
@@ -591,10 +544,10 @@ export default function DashboardComponent(props) {
           <DialogContent>
 
             <input className={classes.input}
-           value={addressInput}
-              onChange={(e) => 
+              value={addressInput}
+              onChange={(e) =>
                 setAddressInput(e.target.value)}
-                
+
             ></input>
             <DialogContentText className={classes.subCategory}>
               <span >Added on: 30 June 2021</span>
@@ -605,15 +558,12 @@ export default function DashboardComponent(props) {
             <input
               onChange={(e) => {
                 setallowVoting(!allowVoting)
-                // validateCheckbox(e)
-                // let checked = event.target.checked.id;
 
-                // handleToggle(checked);
               }}
               type="checkbox"
-              // checked={toggle}
+
               checked={allowVoting}
-              // value={check}
+
               className="checked-btn"
 
 
@@ -631,9 +581,7 @@ export default function DashboardComponent(props) {
             <input
               onChange={(event) => {
                 setProposal(!proposal)
-                // let checked = event.target.checked.id;
 
-                // handleToggle(checked);
               }}
               type="checkbox"
               checked={proposal}

@@ -16,22 +16,21 @@ export default function LoginForm() {
     const [proposal, setProposal] = React.useState("");
     const [addressInput, setAddressInput] = React.useState("");
 
-    const [currentpassword, setcurrentPassword] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [confirmpassword, setconfirmPassword] = React.useState("");
+    // const [currentpassword, setcurrentPassword] = React.useState("");
+    // const [password, setPassword] = React.useState("");
+    // const [confirmpassword, setconfirmPassword] = React.useState("");
     const [isError, setIsError] = React.useState("");
 
     const [isDisabled, setDisabled] = useState(true);
 
     const isButton = false;
     const checkValidationPassword = (e) => {
-        // const confirmpassword = e.target.value
-        // setconfirmPassword(confirmpassword)
+
         if ((allowVoting != proposal) | ((allowVoting.length <= 8) | (addressInput.length <= 8))) {
             setIsError("Password should match and have minimum 8 characters");
         } else {
             history.push('/')
-            // setDisabled(false)
+
             // setIsError("");
         }
 
@@ -93,11 +92,11 @@ export default function LoginForm() {
 
                     <p>Current Password</p>
                     <input className="input" type="password" required="true"
-                        // value={currentpassword}
+
                         value={addressInput}
                         onChange={(e) => {
                             setAddressInput(e.target.value)
-                            // setcurrentPassword(e.target.value) 
+
                         }}
 
                         style={{
@@ -113,11 +112,11 @@ export default function LoginForm() {
                     <input className="input"
                         value={allowVoting}
 
-                        // value={password}
+
                         type="password" required="true"
                         onChange={(e) => {
                             setallowVoting(e.target.value)
-                            // setPassword(e.target.value) 
+
                         }}
                         style={{
                             fontSize: "38px",
@@ -132,11 +131,11 @@ export default function LoginForm() {
                     <p>Confirm Password</p>
                     <input className="input" type="password"
                         value={proposal}
-                        //  value={confirmpassword} 
+
                         required="true"
                         onChange={(e) => {
                             setProposal(e.target.value)
-                            // checkValidationPassword
+
                         }}
 
                         style={{
@@ -158,13 +157,11 @@ export default function LoginForm() {
                             setAddressInput("");
                             setProposal("");
                             checkValidationPassword();
-                            // handleCloseDailog();
+
 
                         }}
                         disabled={!allowVoting || !proposal || !addressInput}
-                        // disabled={isDisabled}
 
-                        // onClick={handleClickUpdate}
                         type="button"> Update Password</button>
                 </div>
 
