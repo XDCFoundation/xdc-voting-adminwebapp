@@ -16,14 +16,9 @@ export default function LoginForm() {
     const [proposal, setProposal] = React.useState("");
     const [addressInput, setAddressInput] = React.useState("");
 
-    // const [currentpassword, setcurrentPassword] = React.useState("");
-    // const [password, setPassword] = React.useState("");
-    // const [confirmpassword, setconfirmPassword] = React.useState("");
+
     const [isError, setIsError] = React.useState("");
 
-    const [isDisabled, setDisabled] = useState(true);
-
-    const isButton = false;
     const checkValidationPassword = (e) => {
 
         if ((allowVoting != proposal) | ((allowVoting.length <= 8) | (addressInput.length <= 8))) {
@@ -31,33 +26,16 @@ export default function LoginForm() {
         } else {
             history.push('/')
 
-            // setIsError("");
+
         }
 
     }
-
-
-    const handlePassword = () => {
-
-        history.push('/forgot-password');
-    }
-    const handleDashboard = () => {
-        history.push('/dashboard');
-
-    }
-    const handleClickUpdate = () => {
-        setDisabled(false)
-        history.push('/');
-
-    }
-
-
 
     return (
 
         <div>
 
-            {/* <div><DemoForm/></div> */}
+
 
             <div className="header">
                 <div className="div1">
@@ -82,7 +60,7 @@ export default function LoginForm() {
 
             </div>
 
-            {/* <div className="main-div"> */}
+
             <div className="change-password">
                 <p>Change Password</p>
             </div>
@@ -95,7 +73,10 @@ export default function LoginForm() {
 
                         value={addressInput}
                         onChange={(e) => {
-                            setAddressInput(e.target.value)
+                            {
+                                setAddressInput(e.target.value);
+                                setIsError("")
+                            }
 
                         }}
 
@@ -115,7 +96,10 @@ export default function LoginForm() {
 
                         type="password" required="true"
                         onChange={(e) => {
-                            setallowVoting(e.target.value)
+                            {
+                                setallowVoting(e.target.value);
+                                setIsError("")
+                            }
 
                         }}
                         style={{
@@ -134,7 +118,11 @@ export default function LoginForm() {
 
                         required="true"
                         onChange={(e) => {
-                            setProposal(e.target.value)
+                            {
+                                setProposal(e.target.value);
+                                setIsError("")
+                            }
+
 
                         }}
 

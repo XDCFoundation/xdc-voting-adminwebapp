@@ -147,42 +147,9 @@ export default function DashboardComponent(props) {
 
   const classes = useStyles();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose1 = () => {
-    setOpen(false);
-  };
-
-  const handleClickOpen1 = () => {
-    setOpen(true);
-  };
-
-  const handleClose2 = () => {
-    setOpen1(false);
-    setCount(0);
-    setButtonText("Edit")
-  };
-
-  
-
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
-  const [open1, setOpen1] = React.useState(false);
-  const [open2, setOpen2] = React.useState(false);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
-  const handleClick1 = (event) => {
-    setAnchorEl(event.target.value);
-  };
-  // const handleClickOpen = () => {
-  //     setOpen(true);
-  //   };
-
-
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -193,15 +160,15 @@ export default function DashboardComponent(props) {
     history.push('/change-password');
   }
 
-  function shorten(b, amountL = 10, amountR = 3, stars = 3) {
-    return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
-      b.length - 3,
-      b.length
-    )}`;
-  }
+  // function shorten(b, amountL = 10, amountR = 3, stars = 3) {
+  //   return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
+  //     b.length - 3,
+  //     b.length
+  //   )}`;
+  // }
 
-  const [toggle, handleToggle] = React.useState(false);
-  const [address, setAddress] = React.useState([]);
+
+
 
   React.useEffect(() => {
     let address = [
@@ -257,19 +224,18 @@ export default function DashboardComponent(props) {
 
     }}
     disabled={(!allowVoting && !proposal) || !addressInput}
-    // onClick={handleCloseDailog1} 
     style={{ marginLeft: "12px" }}
     className={classes.addbtn} type="button">Done</button>
 
   // The parent component
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [address, setAddress] = React.useState([]);
+
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
-
-  const [count, setCount] = React.useState(0)
-
+  const [count, setCount] = React.useState(0);
   const [buttonText, setButtonText] = useState("Edit");
-
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [dialogOpen1, setDialogOpen1] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
@@ -597,7 +563,7 @@ export default function DashboardComponent(props) {
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
               <button onClick={() => (setCount(1), setButtonText("Cancel"))}
-                // {...buttonText=="cancel"? handleCancelClose1:""}
+
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
