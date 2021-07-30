@@ -33,17 +33,11 @@ export default function LoginForm() {
 
 
         if (validator.isEmail(addressInput)) {
-            // setDisabled(false)
 
-            // setEmailError('valid')
             history.push('/dashboard')
 
         }
-        //    else if (password.length>=8)
-        //     {
-        //         console.log(password.length)
-        //          setDisabled(false)
-        //     }
+
         else {
 
             setEmailError('Please enter a valid email address')
@@ -97,11 +91,11 @@ export default function LoginForm() {
                     <input className="input" type="password" required="true"
                         value={proposal}
                         onChange={(e) =>
-                            // validatePasword(e)
+
                             setProposal(e.target.value)
 
                         }
-                        // onChange={(e) => { setPassword(e.target.value) }}
+
                         style={{
                             fontSize: "38px",
                             fontWeight: "bolder",
@@ -120,12 +114,11 @@ export default function LoginForm() {
                             setAddressInput("");
                             setProposal("");
                             validateEmail();
-                            // setEmailError("")
-                            // handleDashboard();
+
 
                         }}
                         disabled={(!proposal) || !addressInput}
-                        //  disabled={isDisabled} onClick={handleDashboard} 
+
                         type="button"> Sign in</button>
                 </div>
 

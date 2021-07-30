@@ -135,37 +135,7 @@ export default function CustomizedSnackbars() {
   };
 
 
-  // const validateInputField = (e) => {
-  //   var text = e.target.value
-  //   //  var check= e.target.checked.id;
 
-  //   if (text.length >= 5) {
-  //     // setDisabled(false)
-
-  //     // setEmailError('')
-
-  //   }
-  //   else {
-
-  //     // setEmailError('')
-  //   }
-  // }
-
-  // const validateCheckbox = (e) => {
-  //   var check = e.target.value;
-
-
-  //   if (check) {
-  //     setDisabled(false)
-
-  //     // setEmailError1('')
-
-  //   }
-  //   else {
-
-  //     // setEmailError1('')
-  //   }
-  // }
 
   return (
     <div className={classes.root}>
@@ -192,13 +162,7 @@ export default function CustomizedSnackbars() {
             onChange={(e) => {
               setallowVoting(!allowVoting)
 
-              // validateCheckbox(e)
-              // validateCheckbox(e.target.checked.id)
-              // setCheck(e.target.checked.id);
 
-              // {checked?isDisabled(false):isDisabled(true)}
-              // exportAddress(event.row);
-              // handleToggle(checked)
 
             }}
 
@@ -215,10 +179,7 @@ export default function CustomizedSnackbars() {
           <input
             onChange={(e) => {
               setProposal(!proposal)
-              // validateCheckbox(e)
-              // let checked = event.target.checked.id;
-              // exportAddress(event.row);
-              // handleToggle(checked);
+
             }}
             type="checkbox"
             className="checked-btn"
@@ -238,12 +199,12 @@ export default function CustomizedSnackbars() {
               <button className={classes.addbtn}
                 variant="contained"
                 color="primary"
-                onClick={() => { 
+                onClick={() => {
                   setallowVoting(false);
                   setAddressInput("");
                   setProposal(false);
                   handleCloseDailog();
-                
+
                 }}
                 disabled={(!allowVoting && !proposal) || !addressInput}
 

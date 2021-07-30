@@ -28,12 +28,8 @@ export default function ForgotForm() {
 
         }
         else {
-            
-            
-
-            // setInterval(() => setEmailError("bnghgvg"), 1000);
-            // clearTimeout(1000)
             setEmailError('Please enter a valid email address');
+
             // setTimeout(1000);
         }
     }
@@ -61,11 +57,12 @@ export default function ForgotForm() {
 
 
                         onChange={(e) => setAddressInput(e.target.value)}
+
                     />
 
 
                 </div>
-                 <div style={{ marginLeft: "20px", marginTop: "-7px", color: "red", }}
+                <div style={{ marginLeft: "20px", marginTop: "-7px", color: "red", }}
                 // delay={5000}
                 >{emailError}</div>
 
