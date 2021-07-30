@@ -7,22 +7,17 @@ import Divider from "@material-ui/core/Divider/Divider";
 import validator from 'validator';
 
 export default function ForgotForm() {
-    const handlePasswprdSent = () => {
-        setDisabled(false)
-        history.push('/email-sent');
-    }
+
 
 
     const [emailError, setEmailError] = React.useState('')
-    const [password, setPassword] = React.useState("");
-    const [addressInput, setAddressInput] = React.useState("");
-    const [isDisabled, setDisabled] = React.useState(true);
+    const [emailValid, setEmailValid] = React.useState("");
+
 
     const validateEmail = (e) => {
 
 
-        if (validator.isEmail(addressInput)) {
-
+        if (validator.isEmail(emailValid)) {
 
             history.push('/email-sent')
 
@@ -30,7 +25,7 @@ export default function ForgotForm() {
         else {
             setEmailError('Please enter a valid email address');
 
-            // setTimeout(1000);
+
         }
     }
 
@@ -53,29 +48,29 @@ export default function ForgotForm() {
                 <div className="heading-password">
                     <p>Email</p>
                     <input className="input" type="email" required="true"
-                        value={addressInput}
+                        value={emailValid}
 
 
-                        onChange={(e) => setAddressInput(e.target.value)}
+                        onChange={(e) => {
+                            setEmailValid(e.target.value);
+                            setEmailError("")
+                        }}
 
                     />
 
 
                 </div>
                 <div style={{ marginLeft: "20px", marginTop: "-7px", color: "red", }}
-                // delay={5000}
+
                 >{emailError}</div>
 
                 <div>
                     <button className="sign-btn1"
                         onClick={() => {
-
-                            setAddressInput("");
-
                             validateEmail();
 
                         }}
-                        disabled={!addressInput}
+                        disabled={!emailValid}
 
                         type="button"> Submit</button>
                 </div>

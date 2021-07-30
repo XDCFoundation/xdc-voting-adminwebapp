@@ -103,11 +103,10 @@ export default function CustomizedSnackbars() {
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
-  // const [isDisabled, setDisabled] = React.useState(true);
-  const [check, setCheck] = React.useState(false)
+
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [error, setError] = React.useState(false);
+  // const [error, setError] = React.useState(false);
   const handleClick = () => {
     setOpen(true);
   };

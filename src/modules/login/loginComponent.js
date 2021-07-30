@@ -14,25 +14,18 @@ export default function LoginForm() {
     const handlePassword = () => {
         history.push('/forgot-password');
     }
-    const handleDashboard = () => {
-        setDisabled(false)
-        history.push('/dashboard');
-    }
 
-    const [proposal, setProposal] = React.useState("");
-    const [addressInput, setAddressInput] = React.useState("");
 
+    const [passwordValid, setPasswordValid] = React.useState("");
+    const [emailValid, setEmailValid] = React.useState("");
     const [emailError, setEmailError] = useState('')
-    const [emailError1, setEmailError1] = useState('')
-    const [password, setPassword] = React.useState("");
 
-    const [isDisabled, setDisabled] = useState(true);
 
     const validateEmail = (e) => {
 
 
 
-        if (validator.isEmail(addressInput)) {
+        if (validator.isEmail(emailValid)) {
 
             history.push('/dashboard')
 
@@ -41,25 +34,11 @@ export default function LoginForm() {
         else {
 
             setEmailError('Please enter a valid email address')
-            // setEmailError("")
+
         }
     }
 
-    // const validatePasword = (e) => {
-    //     var password = e.target.value
 
-
-    //     if (password.length>=8) {
-    //         setDisabled(false)
-
-    //         setEmailError1('')
-
-    //     }
-    //     else {
-
-    //         setEmailError1('')
-    //     }
-    // }
 
     return (
         <div className="main-div">
@@ -75,11 +54,13 @@ export default function LoginForm() {
                 <div className="heading">
                     <p>Email</p>
                     <input className="input" type="text" id="userEmail" required="true"
-                        value={addressInput}
-                        onChange={(e) =>
-                            setAddressInput(e.target.value)
+                        value={emailValid}
+                        onChange={(e) => {
+                            setEmailValid(e.target.value)
+                            setEmailError("")
+                        }
 
-                            // validateEmail(e)
+
                         }
 
                     />
@@ -89,10 +70,10 @@ export default function LoginForm() {
                 <div className="heading">
                     <p>Password</p>
                     <input className="input" type="password" required="true"
-                        value={proposal}
+                        value={passwordValid}
                         onChange={(e) =>
 
-                            setProposal(e.target.value)
+                            setPasswordValid(e.target.value)
 
                         }
 
@@ -105,19 +86,19 @@ export default function LoginForm() {
 
 
                 </div>
-                <div style={{ marginLeft: "20px", color: "red" }}>{emailError1}</div>
+
                 <p className="forgot" onClick={handlePassword} >Forgot Password?</p>
                 <div>
                     <button className="sign-btn"
                         onClick={() => {
 
-                            setAddressInput("");
-                            setProposal("");
+
+                            setPasswordValid("");
                             validateEmail();
 
 
                         }}
-                        disabled={(!proposal) || !addressInput}
+                        disabled={(!passwordValid) || !emailValid}
 
                         type="button"> Sign in</button>
                 </div>
