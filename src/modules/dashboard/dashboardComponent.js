@@ -360,7 +360,7 @@ export default function DashboardComponent(props) {
                   </TableCell>
                   <TableCell
                     style={{
-                      border: "none", paddingLeft: "1%", fontWeight: "500", fontSize: "15px",
+                      border: "none", fontWeight: "500", fontSize: "15px",
                       fontFamily: "unset"
                     }}
                     align="left"
@@ -413,7 +413,7 @@ export default function DashboardComponent(props) {
                         <span className="tabledata">{row.Votes}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none", paddingLeft: "5%" }} align="left">
+                      <TableCell style={{ border: "none", paddingLeft: "3%" }} align="left">
                         <a className="linkTable" >
                           <span className="tabledata" onClick={handleDialog} >  Delete</span>
                         </a>
@@ -574,7 +574,7 @@ export default function DashboardComponent(props) {
           </DialogActions>
         </Dialog>
       </div>
-      <div><PaginationRounded /></div>
+      <div className="pagination-div"><PaginationRounded /></div>
       <div style={{ height: "50px" }}></div>
     </div>
   )

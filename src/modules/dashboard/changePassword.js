@@ -61,11 +61,11 @@ export default function LoginForm() {
             </div>
 
 
-            <div className="change-password">
-                <p>Change Password</p>
-            </div>
-            <div className="change-div">
 
+            <div className="change-div">
+                <div className="change-password">
+                    <p>Change Password</p>
+                </div>
                 <div className="heading-change">
 
                     <p>Current Password</p>
@@ -154,7 +154,9 @@ export default function LoginForm() {
                 </div>
 
 
+
             </div>
+            <div style={{ height: "50px" }}></div>
         </div>
 
     )

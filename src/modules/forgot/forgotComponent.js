@@ -79,7 +79,7 @@ export default function ForgotForm() {
 
             </div>
 
-
+            <div style={{ height: "50px" }}></div>
         </div>
 
 

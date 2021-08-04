@@ -35,7 +35,7 @@ html, body {
     opacity: 1;
 }
 .change-div{
-    margin-top: 2vh;
+    margin-top: 18vh;
     padding-top: 15px;
     margin-left: 34vw;
     width: 460px;
@@ -96,19 +96,20 @@ font-family: unset;
   line-height: normal;
 }
 .change-password{
-    margin-top: 50px;
+    margin-top: -75px;
+    margin-bottom: 55px;
     /* margin-bottom: 10px; */
 /* margin-left: 555px; */
-margin-left: 44vw;
-width: 480px;
-height: 35px;
+/* margin-left: 44vw; */
+/* width: 480px;
+height: 35px; */
 /* display: flex; */
 /* text-align: center; */
-float: unset;
+/* float: unset; */
 font: normal normal bold 28px/39px Inter;
 letter-spacing: 1.23px;
-/* text-align: center; */
-align-items: center;
+text-align: center;
+/* align-items: center; */
 color: #2A2A2A;
 /* opacity: 1; */
 font-family: unset;
@@ -331,6 +332,10 @@ opacity: 1;
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
   border: solid 1px #e3e7eb;
   background-color: #ffffff;
+}
+.pagination-div{
+    width: 60vw;
+    margin-left: 20vw;
 }
 
 .whitelist{
