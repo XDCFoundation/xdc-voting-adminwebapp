@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { Column, Row } from "simple-flexbox";
 import { Button } from "@material-ui/core";
 import CustomInput from "../../common/components/CustomInput";
@@ -29,9 +29,15 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles, mergeClasses } from "@material-ui/styles";
-
+// import { AccountService } from '../../services';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+
+
+import { AccountService } from '../../services';
+import Utils from '../../utility';
+const cors = require('cors');
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -143,7 +149,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function DashboardComponent(props) {
 
+  const [getListOfAddress, setgetListOfAddress] = React.useState([])
 
+  useEffect(async () => {
+    console.log("------------->>>>>",getListOfAddress);
+    let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
+    if (error || !totalAccounts)
+        return
+    setgetListOfAddress(totalAccounts);
+    const interval = setInterval(async () => {
+        let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
+        setgetListOfAddress(totalAccounts);
+    }, 45000)
+}, []);
+console.log(getListOfAddress,"-------------------");
 
   const classes = useStyles();
 
@@ -193,13 +212,13 @@ export default function DashboardComponent(props) {
     ]
 
       ;
-    setAddress(
-      address.map((d) => {
+    setgetListOfAddress(
+      getListOfAddress.map((d) => {
         return {
           select: false,
-          Adress: d.Adress,
-          AddedOn: d.AddedOn,
-          Votes: d.Votes,
+          address: d.address,
+          createdOn: d.createdOn,
+          TotalVotes: d.TotalVotes,
 
           id: d.id,
         };
@@ -229,7 +248,7 @@ export default function DashboardComponent(props) {
 
   // The parent component
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [address, setAddress] = React.useState([]);
+  // const [address, setAddress] = React.useState([]);
 
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
@@ -375,7 +394,7 @@ export default function DashboardComponent(props) {
 
 
 
-                {address.map((row, index) => {
+                {getListOfAddress.map((row, index) => {
 
 
                   return (
@@ -393,10 +412,10 @@ export default function DashboardComponent(props) {
                       <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={handleDialog1}>
 
                         <a className="linkTable" >
-                          <Tooltip placement="top" title={row.Adress}>
+                          <Tooltip placement="top" title={row.address}>
 
                             <span className="tabledata"  >
-                              {(row.Adress)}{" "}
+                              {(row.address)}{" "}
 
                             </span>
                           </Tooltip>
@@ -405,12 +424,12 @@ export default function DashboardComponent(props) {
 
                       <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={handleDialog1}>
                         {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata"> {row.AddedOn}</span>
+                        <span className="tabledata"> {row.createdOn}</span>
                         {/* </a> */}
                       </TableCell>
                       <TableCell style={{ border: "none" }} align="left" onClick={handleDialog1}>
                         {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata">{row.Votes}</span>
+                        <span className="tabledata">{row.TotalVotes}</span>
                         {/* </a> */}
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "3%" }} align="left">
