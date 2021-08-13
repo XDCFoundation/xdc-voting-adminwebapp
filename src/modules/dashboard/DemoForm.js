@@ -1,11 +1,14 @@
-
-import React from "react";
+import React from 'react';
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import "../../assets/styles/custom.css";
+import { AddService } from '../../services';
+import Utils from '../../utility';
+import { useEffect } from "react";
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -98,7 +101,24 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function CustomizedSnackbars() {
+export default function CustomizedSnackbars(props) {
+
+  console.log("0000000000000000000",props)
+
+
+  const [addAddress, setAddAddress] = React.useState("")
+
+
+  const redirect=()=>{
+    console.log(addAddress,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  
+  }
+
+
+
+
+
+
   const classes = useStyles();
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
@@ -107,6 +127,26 @@ export default function CustomizedSnackbars() {
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
+
+const addWhitelistAddress = async() =>{
+  
+  const reqObj={
+      
+    "address": addAddress,
+  "allowVoting": allowVoting,
+  "allowProposalCreation": proposal
+  }
+  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
+  let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
+  console.log(totalAccounts,"total-accounts");
+  if (error || !totalAccounts)
+      return
+
+      props.getListOffAddress();
+  // setAddAddress(totalAccounts);
+}
+
+
   const handleClick = () => {
     setOpen(true);
   };
@@ -151,9 +191,9 @@ export default function CustomizedSnackbars() {
             <b>Address</b>
           </DialogContentText>
           <input className={classes.input} type="text" required="true"
-            value={addressInput}
+            // value={addAddress}
             onChange={(e) =>
-              setAddressInput(e.target.value)}
+              setAddAddress(e.target.value)}
           ></input>
         </DialogContent>
         <div style={{ display: "inline", marginTop: "10px" }}>
@@ -198,14 +238,17 @@ export default function CustomizedSnackbars() {
               <button className={classes.addbtn}
                 variant="contained"
                 color="primary"
+                // onClick={redirect}
                 onClick={() => {
+                  addWhitelistAddress()
                   setallowVoting(false);
-                  setAddressInput("");
+                  setAddAddress("");
+                
                   setProposal(false);
                   handleCloseDailog();
 
                 }}
-                disabled={(!allowVoting && !proposal) || !addressInput}
+                disabled={(!allowVoting && !proposal) || !addAddress}
 
               >
                 Add

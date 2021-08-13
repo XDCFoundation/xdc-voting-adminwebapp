@@ -48,7 +48,7 @@ export const httpGetService = (method, headers, data, url) => {
         headers: headers || { 'Content-Type': 'application/json' }
     };
 
-    if (method !== httpConstants.METHOD_TYPE.GET)
+    if (method !== httpConstants.METHOD_TYPE.POST)
         requestOptions.body = JSON.stringify(data);
     return fetch(url, requestOptions)
         .then(function handleResponse(response) {

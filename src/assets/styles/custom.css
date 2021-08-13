@@ -325,7 +325,7 @@ opacity: 1;
 
 .griddiv {
     width: 60vw;
-  height: 60vh;
+  height: 100%;
   margin-top: 10px;
   margin-left: 20vw;
   border-radius: 12px;

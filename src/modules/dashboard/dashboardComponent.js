@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Column, Row } from "simple-flexbox";
 import { Button } from "@material-ui/core";
 import CustomInput from "../../common/components/CustomInput";
@@ -150,19 +150,32 @@ const useStyles = makeStyles((theme) => ({
 export default function DashboardComponent(props) {
 
   const [getListOfAddress, setgetListOfAddress] = React.useState([])
-
-  useEffect(async () => {
-    console.log("------------->>>>>",getListOfAddress);
+  const getListOffAddress = async () => {
+    console.log("------------->>>>>", getListOfAddress);
     let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
     if (error || !totalAccounts)
-        return
+      return
     setgetListOfAddress(totalAccounts);
-    const interval = setInterval(async () => {
-        let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
-        setgetListOfAddress(totalAccounts);
-    }, 45000)
-}, []);
-console.log(getListOfAddress,"-------------------");
+  }
+  useEffect(() => {
+    getListOffAddress()
+  },[]);
+ 
+
+
+
+
+  // function shortenBalance(b, amountL = 12, amountR = 3, stars = 3) {
+  //   return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
+  //     b.length - 3,
+
+  //   )}`;
+  // }
+
+
+
+
+
 
   const classes = useStyles();
 
@@ -179,52 +192,17 @@ console.log(getListOfAddress,"-------------------");
     history.push('/change-password');
   }
 
-  // function shorten(b, amountL = 10, amountR = 3, stars = 3) {
-  //   return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
-  //     b.length - 3,
-  //     b.length
-  //   )}`;
-  // }
+  function shorten(b, amountL = 10, amountR = 3, stars = 3) {
+    return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
+      b.length - 3,
+      b.length
+    )}`;
+  }
 
 
 
 
-  React.useEffect(() => {
-    let address = [
-      {
-        Adress: "0x9b20bd863e1cf226b98…5a30",
-        AddedOn: "30 June 2021",
-        Votes: "100",
-        id: 1,
-      },
-      {
-        Adress: "xdcc4e699581116412965b…5e7c",
-        AddedOn: "21 June 2021",
-        Votes: "200",
-        id: 2,
-      },
-      {
-        Adress: "5e7c71b8e2dd50ac8d30x…5b9c",
-        AddedOn: "1 June 2021",
-        Votes: "170",
-        id: 3,
-      },
-    ]
 
-      ;
-    setgetListOfAddress(
-      getListOfAddress.map((d) => {
-        return {
-          select: false,
-          address: d.address,
-          createdOn: d.createdOn,
-          TotalVotes: d.TotalVotes,
-
-          id: d.id,
-        };
-      })
-    );
-  }, []);
 
   const { state } = props;
 
@@ -349,7 +327,7 @@ console.log(getListOfAddress,"-------------------");
 
       </div>
 
-      <CustomizedSnackbars />
+      <CustomizedSnackbars getListOffAddress={() => getListOffAddress()} />
       <div className="griddiv">
 
 
@@ -415,7 +393,7 @@ console.log(getListOfAddress,"-------------------");
                           <Tooltip placement="top" title={row.address}>
 
                             <span className="tabledata"  >
-                              {(row.address)}{" "}
+                              {shorten(row.address)}{" "}
 
                             </span>
                           </Tooltip>
@@ -429,7 +407,7 @@ console.log(getListOfAddress,"-------------------");
                       </TableCell>
                       <TableCell style={{ border: "none" }} align="left" onClick={handleDialog1}>
                         {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata">{row.TotalVotes}</span>
+                        <span className="tabledata">{row.TotalVotes="null"?100:10}</span>
                         {/* </a> */}
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "3%" }} align="left">
@@ -448,8 +426,9 @@ console.log(getListOfAddress,"-------------------");
         </Grid>
       </div>
 
-
+      
       <div>
+     
         <Dialog
           className={classes.dialog}
           open={dialogOpen}
@@ -464,7 +443,6 @@ console.log(getListOfAddress,"-------------------");
             <DialogContentText className={classes.subCategory}>
               Do you want to delete this address <span className={classes.deleteaddress}>0x9b20bd863e1cf226b98…5a30</span>
             </DialogContentText>
-
           </DialogContent>
 
           <DialogActions className={classes.buttons}>
@@ -494,6 +472,10 @@ console.log(getListOfAddress,"-------------------");
             </div>
           </Alert>
         </Snackbar>
+        
+
+{/* <!!!!!!!!!!!!> */}
+
         <Snackbar
           open={open4}
           autoHideDuration={3000}
@@ -510,8 +492,9 @@ console.log(getListOfAddress,"-------------------");
             </div>
           </Alert>
         </Snackbar>
+        
       </div>
-
+       
 
 
       <div>

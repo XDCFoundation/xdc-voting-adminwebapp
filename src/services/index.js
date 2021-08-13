@@ -6,3 +6,4 @@
 // export * from './user'
 
 export { default as AccountService } from "./getListOfAddress"
+export { default as AddService } from "./getListOfAddress"
