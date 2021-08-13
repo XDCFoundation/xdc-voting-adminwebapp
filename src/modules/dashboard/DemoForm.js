@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -123,22 +123,24 @@ export default function CustomizedSnackbars(props) {
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
-
+  const [message, setMessage]=useState("")
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
 
+
 const addWhitelistAddress = async() =>{
-  
+ 
   const reqObj={
       
     "address": addAddress,
   "allowVoting": allowVoting,
   "allowProposalCreation": proposal
   }
-  console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
+  setMessage(reqObj.address)
+  // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
   let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
-  console.log(totalAccounts,"total-accounts");
+  // console.log(totalAccounts,"total-accounts");
   if (error || !totalAccounts)
       return
 
@@ -242,11 +244,9 @@ const addWhitelistAddress = async() =>{
                 onClick={() => {
                   addWhitelistAddress()
                   setallowVoting(false);
-                  setAddAddress("");
-                
+                  setAddAddress("");        
                   setProposal(false);
                   handleCloseDailog();
-
                 }}
                 disabled={(!allowVoting && !proposal) || !addAddress}
 
@@ -269,7 +269,8 @@ const addWhitelistAddress = async() =>{
             <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
             <span>
               <div className="toast-message">You have successfully added address</div>
-              <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+              <div className="toast-address">{message}</div>
+              {/* 0x9b20bd863e1cf226b98…6b10 */}
             </span>
           </div>
         </Alert>

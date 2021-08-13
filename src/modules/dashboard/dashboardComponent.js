@@ -33,7 +33,7 @@ import { makeStyles, mergeClasses } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
-
+import { DeleteService } from '../../services';
 import { AccountService } from '../../services';
 import Utils from '../../utility';
 const cors = require('cors');
@@ -150,8 +150,9 @@ const useStyles = makeStyles((theme) => ({
 export default function DashboardComponent(props) {
 
   const [getListOfAddress, setgetListOfAddress] = React.useState([])
+
   const getListOffAddress = async () => {
-    console.log("------------->>>>>", getListOfAddress);
+    // console.log("------------->>>>>", getListOfAddress);
     let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
     if (error || !totalAccounts)
       return
@@ -159,8 +160,24 @@ export default function DashboardComponent(props) {
   }
   useEffect(() => {
     getListOffAddress()
-  },[]);
- 
+  }, []);
+
+
+  const deleteaddress = async() =>{
+ const id={
+   "address":deleteMessage
+ }
+    
+    // setMessage(reqObj.address)
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",id)
+    let [error, totalAccounts] = await Utils.parseResponse(DeleteService.deleteWhitelistedAddress(id))
+    console.log(totalAccounts,"total-accounts");
+    if (error || !totalAccounts)
+        return
+  
+        getListOffAddress();
+    // setAddAddress(totalAccounts);
+  }
 
 
 
@@ -227,7 +244,7 @@ export default function DashboardComponent(props) {
   // The parent component
   const [anchorEl, setAnchorEl] = React.useState(null);
   // const [address, setAddress] = React.useState([]);
-
+  const [deleteMessage, setDeleteMessage]=useState("")
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
@@ -285,7 +302,7 @@ export default function DashboardComponent(props) {
 
     <div>
 
-      {/* <div><CustomizedSnackbars/></div> */}
+
       <div className="header">
         <div className="div1">
           <span>
@@ -407,12 +424,12 @@ export default function DashboardComponent(props) {
                       </TableCell>
                       <TableCell style={{ border: "none" }} align="left" onClick={handleDialog1}>
                         {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata">{row.TotalVotes="null"?100:10}</span>
+                        <span className="tabledata">{row.TotalVotes = "null" ? 100 : 10}</span>
                         {/* </a> */}
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "3%" }} align="left">
                         <a className="linkTable" >
-                          <span className="tabledata" onClick={handleDialog} >  Delete</span>
+                          <span className="tabledata" onClick={()=>{handleDialog();setDeleteMessage(row.address)}} >  Delete</span>
                         </a>
                       </TableCell>
 
@@ -426,9 +443,10 @@ export default function DashboardComponent(props) {
         </Grid>
       </div>
 
-      
+      {/* ---------Delete Dialog Box----------- */}
+
       <div>
-     
+
         <Dialog
           className={classes.dialog}
           open={dialogOpen}
@@ -441,7 +459,7 @@ export default function DashboardComponent(props) {
           </Row>
           <DialogContent>
             <DialogContentText className={classes.subCategory}>
-              Do you want to delete this address <span className={classes.deleteaddress}>0x9b20bd863e1cf226b98…5a30</span>
+              Do you want to delete this address <span className={classes.deleteaddress}>{deleteMessage}</span>
             </DialogContentText>
           </DialogContent>
 
@@ -450,53 +468,62 @@ export default function DashboardComponent(props) {
 
             <span>
               <button className={classes.addbtn}
-                onClick={handleCloseDailog}
+               onClick={() => {
+               
+                deleteaddress(deleteMessage)
+                handleCloseDailog()
+              }}
+                // onClick={handleCloseDailog}
               // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
               >  Delete </button></span>
           </DialogActions>
 
         </Dialog>
-        <Snackbar
-          open={open3}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          onClose={handleClose3}
-        >
-          <Alert severity="" className={classes.Alert}>
-            <div style={{ display: "flex" }}>
-              <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
-              <span>
-                <div className="toast-message">You have successfully deleted address</div>
-                <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
-              </span>
-            </div>
-          </Alert>
-        </Snackbar>
-        
-
-{/* <!!!!!!!!!!!!> */}
-
-        <Snackbar
-          open={open4}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          onClose={handleClose4}
-        >
-          <Alert severity="" className={classes.Alert}>
-            <div style={{ display: "flex" }}>
-              <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
-              <span>
-                <div className="toast-message">You have successfully edited address</div>
-                <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
-              </span>
-            </div>
-          </Alert>
-        </Snackbar>
-        
       </div>
-       
+
+      {/* ------Delete Toast Message----- */}
+
+      <Snackbar
+        open={open3}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose3}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span>
+              <div className="toast-message">You have successfully deleted address</div>
+              <div className="toast-address">{deleteMessage}</div>
+            </span>
+          </div>
+        </Alert>
+      </Snackbar>
 
 
+      {/* --------Edit Toast Message--------- */}
+
+      <Snackbar
+        open={open4}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose4}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span>
+              <div className="toast-message">You have successfully edited address</div>
+              <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
+            </span>
+          </div>
+        </Alert>
+      </Snackbar>
+
+
+
+
+      {/* -----------Edit Dialog Box------------ */}
       <div>
         <Dialog
           className={classes.dialog}
@@ -576,7 +603,11 @@ export default function DashboardComponent(props) {
           </DialogActions>
         </Dialog>
       </div>
+
+      {/* ---------Pagination--------- */}
+
       <div className="pagination-div"><PaginationRounded /></div>
+
       <div style={{ height: "50px" }}></div>
     </div>
   )
