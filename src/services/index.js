@@ -8,3 +8,4 @@
 export { default as AccountService } from "./getListOfAddress"
 export { default as AddService } from "./getListOfAddress"
 export { default as DeleteService } from "./getListOfAddress"
+export { default as EditService } from "./getListOfAddress"

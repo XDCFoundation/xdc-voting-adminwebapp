@@ -32,7 +32,7 @@ import { makeStyles, mergeClasses } from "@material-ui/styles";
 // import { AccountService } from '../../services';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-
+import { EditService } from '../../services';
 import { DeleteService } from '../../services';
 import { AccountService } from '../../services';
 import Utils from '../../utility';
@@ -163,15 +163,36 @@ export default function DashboardComponent(props) {
   }, []);
 
 
-  const deleteaddress = async() =>{
- const id={
-   "address":deleteMessage
- }
-    
+  const deleteaddress = async () => {
+    const id = {
+      "address": deleteMessage
+    }
+
     // setMessage(reqObj.address)
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",id)
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id)
     let [error, totalAccounts] = await Utils.parseResponse(DeleteService.deleteWhitelistedAddress(id))
-    console.log(totalAccounts,"total-accounts");
+    console.log(totalAccounts, "total-accounts");
+    if (error || !totalAccounts)
+      return
+
+    getListOffAddress();
+    // setAddAddress(totalAccounts);
+  }
+
+  const editWhitelistAddress = async() =>{
+ 
+    const id={
+        
+      "address": deleteMessage,
+      "updateAddress" : addressInput,
+      "allowVoting": allowVoting,
+      "allowProposalCreation": proposal,
+      // "totalVotes" : null
+    }
+    // setMessage(reqObj.address)
+    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
+    let [error, totalAccounts] = await Utils.parseResponse(EditService.editWhitelistedAddress(id))
+    // console.log(totalAccounts,"total-accounts");
     if (error || !totalAccounts)
         return
   
@@ -231,6 +252,7 @@ export default function DashboardComponent(props) {
   // The added element component
   const AddedElement = () => <button
     onClick={() => {
+      editWhitelistAddress()
       setallowVoting(false);
       setAddressInput("");
       setProposal(false);
@@ -244,7 +266,7 @@ export default function DashboardComponent(props) {
   // The parent component
   const [anchorEl, setAnchorEl] = React.useState(null);
   // const [address, setAddress] = React.useState([]);
-  const [deleteMessage, setDeleteMessage]=useState("")
+  const [deleteMessage, setDeleteMessage] = useState("")
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
@@ -264,6 +286,7 @@ export default function DashboardComponent(props) {
     setDialogOpen1(true);
     setCount(0)
     setButtonText("Edit")
+   
   };
   const handleCancelClose1 = () => {
     setDialogOpen1(false);
@@ -404,7 +427,7 @@ export default function DashboardComponent(props) {
                       }
                     >
 
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={handleDialog1}>
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={()=>{handleDialog1();setDeleteMessage(row.address)}}>
 
                         <a className="linkTable" >
                           <Tooltip placement="top" title={row.address}>
@@ -417,19 +440,19 @@ export default function DashboardComponent(props) {
                         </a>
                       </TableCell>
 
-                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={handleDialog1}>
+                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address)}}>
                         {/* <a className="linkTable" href="/"> */}
                         <span className="tabledata"> {row.createdOn}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none" }} align="left" onClick={handleDialog1}>
+                      <TableCell style={{ border: "none" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address)}}>
                         {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata">{row.TotalVotes = "null" ? 100 : 10}</span>
+                        <span className="tabledata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none", paddingLeft: "3%" }} align="left">
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
                         <a className="linkTable" >
-                          <span className="tabledata" onClick={()=>{handleDialog();setDeleteMessage(row.address)}} >  Delete</span>
+                          <span className="tabledata" onClick={() => { handleDialog(); setDeleteMessage(row.address) }} >  Delete</span>
                         </a>
                       </TableCell>
 
@@ -468,12 +491,12 @@ export default function DashboardComponent(props) {
 
             <span>
               <button className={classes.addbtn}
-               onClick={() => {
-               
-                deleteaddress(deleteMessage)
-                handleCloseDailog()
-              }}
-                // onClick={handleCloseDailog}
+                onClick={() => {
+
+                  deleteaddress(deleteMessage)
+                  handleCloseDailog()
+                }}
+              // onClick={handleCloseDailog}
               // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
               >  Delete </button></span>
           </DialogActions>
@@ -541,7 +564,10 @@ export default function DashboardComponent(props) {
             <input className={classes.input}
               value={addressInput}
               onChange={(e) =>
-                setAddressInput(e.target.value)}
+                setAddressInput(e.target.value)
+                
+              }
+                
 
             ></input>
             <DialogContentText className={classes.subCategory}>
@@ -593,6 +619,7 @@ export default function DashboardComponent(props) {
             <Fragment>
               <button onClick={() => (setCount(1), setButtonText("Cancel"))}
 
+                      
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
