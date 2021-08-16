@@ -145,6 +145,7 @@ const addWhitelistAddress = async() =>{
       return
 
       props.getListOffAddress();
+      handleCloseDailog();
   // setAddAddress(totalAccounts);
 }
 
@@ -242,11 +243,11 @@ const addWhitelistAddress = async() =>{
                 color="primary"
                 // onClick={redirect}
                 onClick={() => {
-                  addWhitelistAddress()
-                  setallowVoting(false);
-                  setAddAddress("");        
+                  addWhitelistAddress()      
+                  setallowVoting(false);              
+                  setAddAddress("");     
                   setProposal(false);
-                  handleCloseDailog();
+                  
                 }}
                 disabled={(!allowVoting && !proposal) || !addAddress}
 

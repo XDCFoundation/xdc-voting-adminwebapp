@@ -468,7 +468,14 @@ opacity: 1;
 #simple-menu:focus :hover{
     background-color: white;
 }
-
+ch-1{
+    color: #2149B9;
+    background-color: black;
+}
+ch-2{
+    color: brown;
+    background-color: chartreuse;
+}
 /* .address p{
     margin-top: 56px;
 

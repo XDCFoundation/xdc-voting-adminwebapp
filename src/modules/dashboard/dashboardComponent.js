@@ -36,6 +36,7 @@ import { EditService } from '../../services';
 import { DeleteService } from '../../services';
 import { AccountService } from '../../services';
 import Utils from '../../utility';
+import { number } from 'prop-types';
 const cors = require('cors');
 
 
@@ -165,9 +166,13 @@ export default function DashboardComponent(props) {
 
   const deleteaddress = async () => {
     const id = {
-      "address": deleteMessage
+      "address": deleteMessage,
+      "permission":{
+        "allowVoting":allowVoting,
+        "allowProposalCreation":proposal
+      }
     }
-
+// console.log(permission,"---------------permission")
     // setMessage(reqObj.address)
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id)
     let [error, totalAccounts] = await Utils.parseResponse(DeleteService.deleteWhitelistedAddress(id))
@@ -176,6 +181,7 @@ export default function DashboardComponent(props) {
       return
 
     getListOffAddress();
+    handleCloseDailog()
     // setAddAddress(totalAccounts);
   }
 
@@ -197,6 +203,7 @@ export default function DashboardComponent(props) {
         return
   
         getListOffAddress();
+        handleCloseDailog1();
     // setAddAddress(totalAccounts);
   }
 
@@ -237,7 +244,17 @@ export default function DashboardComponent(props) {
     )}`;
   }
 
-
+const checkShow=()=>{
+  const checkid = {
+    "permission":{
+      "allowVoting":allowVoting,
+      "allowProposalCreation":proposal
+    }
+  }
+  console.log(checkid,"\\\\\\\\\\\\\\\\\\\\")
+  setcheckboxPermission1(checkid.permission.allowVoting);
+  setcheckboxPermission2(checkid.permission.allowProposalCreation);
+}
 
 
 
@@ -256,17 +273,20 @@ export default function DashboardComponent(props) {
       setallowVoting(false);
       setAddressInput("");
       setProposal(false);
-      handleCloseDailog1();
+    
 
     }}
     disabled={(!allowVoting && !proposal) || !addressInput}
+    
     style={{ marginLeft: "12px" }}
     className={classes.addbtn} type="button">Done</button>
 
   // The parent component
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const [address, setAddress] = React.useState([]);
+  const [Date, setDate] = React.useState();
   const [deleteMessage, setDeleteMessage] = useState("")
+  const [checkboxPermission1, setcheckboxPermission1] = useState();
+  const [checkboxPermission2, setcheckboxPermission2] = useState();
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
@@ -286,6 +306,8 @@ export default function DashboardComponent(props) {
     setDialogOpen1(true);
     setCount(0)
     setButtonText("Edit")
+    
+    
    
   };
   const handleCancelClose1 = () => {
@@ -427,7 +449,7 @@ export default function DashboardComponent(props) {
                       }
                     >
 
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={()=>{handleDialog1();setDeleteMessage(row.address)}}>
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={()=>{handleDialog1();setDeleteMessage(row.address);setAddressInput(row.address);setDate(row.createdOn)}}>
 
                         <a className="linkTable" >
                           <Tooltip placement="top" title={row.address}>
@@ -440,19 +462,20 @@ export default function DashboardComponent(props) {
                         </a>
                       </TableCell>
 
-                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address)}}>
+                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address);setAddressInput(row.address);checkShow();setDate(row.createdOn)}}>
                         {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata"> {row.createdOn}</span>
+                        <span className="tabledata" > {row.createdOn}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address)}}>
+                      <TableCell style={{ border: "none" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address);setAddressInput(row.address);setDate(row.createdOn)}}>
                         {/* <a className="linkTable" href="/"> */}
                         <span className="tabledata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
+                        
                         {/* </a> */}
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
                         <a className="linkTable" >
-                          <span className="tabledata" onClick={() => { handleDialog(); setDeleteMessage(row.address) }} >  Delete</span>
+                          <span className="tabledata" onClick={() => { handleDialog(); setDeleteMessage(row.address);setAddressInput(row.address); setDate(row.createdOn) }} >  Delete</span>
                         </a>
                       </TableCell>
 
@@ -494,7 +517,7 @@ export default function DashboardComponent(props) {
                 onClick={() => {
 
                   deleteaddress(deleteMessage)
-                  handleCloseDailog()
+                  
                 }}
               // onClick={handleCloseDailog}
               // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
@@ -537,7 +560,7 @@ export default function DashboardComponent(props) {
             <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
             <span>
               <div className="toast-message">You have successfully edited address</div>
-              <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
+              <div className="toast-address">{deleteMessage}</div>
             </span>
           </div>
         </Alert>
@@ -567,11 +590,13 @@ export default function DashboardComponent(props) {
                 setAddressInput(e.target.value)
                 
               }
+              
+                // disabled={addressInput}
                 
 
             ></input>
             <DialogContentText className={classes.subCategory}>
-              <span >Added on: 30 June 2021</span>
+              <span >Added on: <span>{Date}</span></span>
             </DialogContentText>
           </DialogContent>
 
@@ -584,8 +609,12 @@ export default function DashboardComponent(props) {
               type="checkbox"
 
               checked={allowVoting}
+            //  checked={checkboxPermission.allowVoting}
+            value={checkboxPermission1}
+              
 
               className="checked-btn"
+              
 
 
             />
@@ -606,8 +635,10 @@ export default function DashboardComponent(props) {
               }}
               type="checkbox"
               checked={proposal}
+              value={checkboxPermission2}
+              // checked={checkboxPermission.proposal}
               className="checked-btn"
-
+              
             />
             <span className="tabledata">
               Allow Proposal Creation
@@ -618,8 +649,6 @@ export default function DashboardComponent(props) {
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
               <button onClick={() => (setCount(1), setButtonText("Cancel"))}
-
-                      
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
