@@ -167,12 +167,12 @@ export default function DashboardComponent(props) {
   const deleteaddress = async () => {
     const id = {
       "address": deleteMessage,
-      "permission":{
-        "allowVoting":allowVoting,
-        "allowProposalCreation":proposal
+      "permission": {
+        "allowVoting": allowVoting,
+        "allowProposalCreation": proposal
       }
     }
-// console.log(permission,"---------------permission")
+    // console.log(permission,"---------------permission")
     // setMessage(reqObj.address)
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id)
     let [error, totalAccounts] = await Utils.parseResponse(DeleteService.deleteWhitelistedAddress(id))
@@ -185,12 +185,12 @@ export default function DashboardComponent(props) {
     // setAddAddress(totalAccounts);
   }
 
-  const editWhitelistAddress = async() =>{
- 
-    const id={
-        
+  const editWhitelistAddress = async () => {
+
+    const id = {
+
       "address": deleteMessage,
-      "updateAddress" : addressInput,
+      "updateAddress": addressInput,
       "allowVoting": allowVoting,
       "allowProposalCreation": proposal,
       // "totalVotes" : null
@@ -200,10 +200,10 @@ export default function DashboardComponent(props) {
     let [error, totalAccounts] = await Utils.parseResponse(EditService.editWhitelistedAddress(id))
     // console.log(totalAccounts,"total-accounts");
     if (error || !totalAccounts)
-        return
-  
-        getListOffAddress();
-        handleCloseDailog1();
+      return
+
+    getListOffAddress();
+    handleCloseDailog1();
     // setAddAddress(totalAccounts);
   }
 
@@ -244,19 +244,21 @@ export default function DashboardComponent(props) {
     )}`;
   }
 
-const checkShow=()=>{
-  const checkid = {
-    "permission":{
-      "allowVoting":allowVoting,
-      "allowProposalCreation":proposal
+  const checkShow = () => {
+    const checkid = {
+      "permission": {
+        "allowVoting": allowVoting,
+        "allowProposalCreation": proposal
+      }
     }
+    console.log(checkid, "\\\\\\\\\\\\\\\\\\\\")
+    setcheckboxPermission1(checkid.permission.allowVoting);
+    setcheckboxPermission2(checkid.permission.allowProposalCreation);
   }
-  console.log(checkid,"\\\\\\\\\\\\\\\\\\\\")
-  setcheckboxPermission1(checkid.permission.allowVoting);
-  setcheckboxPermission2(checkid.permission.allowProposalCreation);
+
+const handleEditClick=()=>{
+  setEditClick(!editClick)
 }
-
-
 
 
   const { state } = props;
@@ -273,11 +275,11 @@ const checkShow=()=>{
       setallowVoting(false);
       setAddressInput("");
       setProposal(false);
-    
+
 
     }}
     disabled={(!allowVoting && !proposal) || !addressInput}
-    
+
     style={{ marginLeft: "12px" }}
     className={classes.addbtn} type="button">Done</button>
 
@@ -285,6 +287,7 @@ const checkShow=()=>{
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Date, setDate] = React.useState();
   const [deleteMessage, setDeleteMessage] = useState("")
+  const [editClick, setEditClick] = useState(false)
   const [checkboxPermission1, setcheckboxPermission1] = useState();
   const [checkboxPermission2, setcheckboxPermission2] = useState();
   const [allowVoting, setallowVoting] = React.useState(false);
@@ -306,9 +309,10 @@ const checkShow=()=>{
     setDialogOpen1(true);
     setCount(0)
     setButtonText("Edit")
-    
-    
-   
+    setEditClick(false)
+
+
+
   };
   const handleCancelClose1 = () => {
     setDialogOpen1(false);
@@ -449,7 +453,8 @@ const checkShow=()=>{
                       }
                     >
 
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={()=>{handleDialog1();setDeleteMessage(row.address);setAddressInput(row.address);setDate(row.createdOn)}}>
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={() => { 
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn);setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); }}>
 
                         <a className="linkTable" >
                           <Tooltip placement="top" title={row.address}>
@@ -462,20 +467,23 @@ const checkShow=()=>{
                         </a>
                       </TableCell>
 
-                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address);setAddressInput(row.address);checkShow();setDate(row.createdOn)}}>
+                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={() => { 
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); setDate(row.createdOn) }}>
                         {/* <a className="linkTable" href="/"> */}
                         <span className="tabledata" > {row.createdOn}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none" }} align="left" onClick={()=>{handleDialog1();setDeleteMessage(row.address);setAddressInput(row.address);setDate(row.createdOn)}}>
+                      <TableCell style={{ border: "none" }} align="left" onClick={() => { 
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn);setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); }}>
                         {/* <a className="linkTable" href="/"> */}
                         <span className="tabledata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
-                        
+
                         {/* </a> */}
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
                         <a className="linkTable" >
-                          <span className="tabledata" onClick={() => { handleDialog(); setDeleteMessage(row.address);setAddressInput(row.address); setDate(row.createdOn) }} >  Delete</span>
+                          <span className="tabledata" onClick={() => { 
+                            handleDialog(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn);setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); }} >  Delete</span>
                         </a>
                       </TableCell>
 
@@ -517,7 +525,7 @@ const checkShow=()=>{
                 onClick={() => {
 
                   deleteaddress(deleteMessage)
-                  
+
                 }}
               // onClick={handleCloseDailog}
               // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
@@ -588,11 +596,11 @@ const checkShow=()=>{
               value={addressInput}
               onChange={(e) =>
                 setAddressInput(e.target.value)
-                
+
               }
-              
-                // disabled={addressInput}
-                
+
+            disabled={!editClick}
+
 
             ></input>
             <DialogContentText className={classes.subCategory}>
@@ -609,12 +617,13 @@ const checkShow=()=>{
               type="checkbox"
 
               checked={allowVoting}
-            //  checked={checkboxPermission.allowVoting}
-            value={checkboxPermission1}
-              
+              //  checked={checkboxPermission.allowVoting}
+              value={allowVoting}
+              disabled={!editClick}
+
 
               className="checked-btn"
-              
+
 
 
             />
@@ -635,10 +644,11 @@ const checkShow=()=>{
               }}
               type="checkbox"
               checked={proposal}
-              value={checkboxPermission2}
+              value={proposal}
+              disabled={!editClick}
               // checked={checkboxPermission.proposal}
               className="checked-btn"
-              
+
             />
             <span className="tabledata">
               Allow Proposal Creation
@@ -648,7 +658,7 @@ const checkShow=()=>{
           <DialogActions className={classes.buttons1}>
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
-              <button onClick={() => (setCount(1), setButtonText("Cancel"))}
+              <button onClick={() => (setCount(1), setButtonText("Cancel"),handleEditClick())}
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
