@@ -14,7 +14,6 @@ import TableRow from '@material-ui/core/TableRow';
 import FormDialog from '../Dialog/addDialog';
 import Pagination from '@material-ui/lab/Pagination';
 import PaginationRounded from './pagination';
-// import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import color from '@material-ui/core/colors/amber';
@@ -29,7 +28,6 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles, mergeClasses } from "@material-ui/styles";
-// import { AccountService } from '../../services';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { EditService } from '../../services';
@@ -37,6 +35,7 @@ import { DeleteService } from '../../services';
 import { AccountService } from '../../services';
 import Utils from '../../utility';
 import { number } from 'prop-types';
+import moment from 'moment';
 const cors = require('cors');
 
 
@@ -81,8 +80,6 @@ const useStyles = makeStyles((theme) => ({
   addbtn: {
     width: "110px",
     height: "34px",
-    // margin: "33px 0 0 21px",
-    // padding: "8px 30px 7px 32px",
     margin: "14px -8px 15px 2px",
     padding: "3px 19px 3px 20px",
     borderRadius: "4px",
@@ -94,8 +91,6 @@ const useStyles = makeStyles((theme) => ({
   cnlbtn: {
     width: "94px",
     height: "34px",
-    // margin: "33px 21px 0 87px",
-    // padding: "8px 19px 7px 21px",
     borderRadius: "4px",
     backgroundColor: "#9fa9ba",
     color: "white",
@@ -109,10 +104,6 @@ const useStyles = makeStyles((theme) => ({
   subCategory: {
     marginTop: "5px",
     marginBottom: "0px",
-    // fontWeight: "50px",
-    // fontfamily: "Inter",
-    // fontsize: "12px",
-    // fontweight: "bold",
     border: "none !important",
     color: "#9FA9BA",
     letterSpacing: "0.54px",
@@ -153,7 +144,7 @@ export default function DashboardComponent(props) {
   const [getListOfAddress, setgetListOfAddress] = React.useState([])
 
   const getListOffAddress = async () => {
-    // console.log("------------->>>>>", getListOfAddress);
+
     let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
     if (error || !totalAccounts)
       return
@@ -172,8 +163,7 @@ export default function DashboardComponent(props) {
         "allowProposalCreation": proposal
       }
     }
-    // console.log(permission,"---------------permission")
-    // setMessage(reqObj.address)
+
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id)
     let [error, totalAccounts] = await Utils.parseResponse(DeleteService.deleteWhitelistedAddress(id))
     console.log(totalAccounts, "total-accounts");
@@ -182,7 +172,7 @@ export default function DashboardComponent(props) {
 
     getListOffAddress();
     handleCloseDailog()
-    // setAddAddress(totalAccounts);
+
   }
 
   const editWhitelistAddress = async () => {
@@ -195,16 +185,15 @@ export default function DashboardComponent(props) {
       "allowProposalCreation": proposal,
       // "totalVotes" : null
     }
-    // setMessage(reqObj.address)
-    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
+
     let [error, totalAccounts] = await Utils.parseResponse(EditService.editWhitelistedAddress(id))
-    // console.log(totalAccounts,"total-accounts");
+
     if (error || !totalAccounts)
       return
 
     getListOffAddress();
     handleCloseDailog1();
-    // setAddAddress(totalAccounts);
+
   }
 
 
@@ -244,21 +233,10 @@ export default function DashboardComponent(props) {
     )}`;
   }
 
-  const checkShow = () => {
-    const checkid = {
-      "permission": {
-        "allowVoting": allowVoting,
-        "allowProposalCreation": proposal
-      }
-    }
-    console.log(checkid, "\\\\\\\\\\\\\\\\\\\\")
-    setcheckboxPermission1(checkid.permission.allowVoting);
-    setcheckboxPermission2(checkid.permission.allowProposalCreation);
-  }
 
-const handleEditClick=()=>{
-  setEditClick(!editClick)
-}
+  const handleEditClick = () => {
+    setEditClick(!editClick)
+  }
 
 
   const { state } = props;
@@ -288,8 +266,6 @@ const handleEditClick=()=>{
   const [Date, setDate] = React.useState();
   const [deleteMessage, setDeleteMessage] = useState("")
   const [editClick, setEditClick] = useState(false)
-  const [checkboxPermission1, setcheckboxPermission1] = useState();
-  const [checkboxPermission2, setcheckboxPermission2] = useState();
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
@@ -310,6 +286,9 @@ const handleEditClick=()=>{
     setCount(0)
     setButtonText("Edit")
     setEditClick(false)
+
+
+
 
 
 
@@ -398,7 +377,6 @@ const handleEditClick=()=>{
 
 
         <Grid lg={13} className="tablegrid_address">
-          {/* <Grid class="tabletop-header">Whitelisted Addresses</Grid> */}
           <Grid component={Paper} style={{ boxShadow: "0px 0px 0px 0px" }}>
 
             <Table className="table" aria-label="Whitelisted Addresses" style={{ boxShadow: "0px 0px 0px 0px" }}>
@@ -453,8 +431,9 @@ const handleEditClick=()=>{
                       }
                     >
 
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={() => { 
-                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn);setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); }}>
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={() => {
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
+                      }}>
 
                         <a className="linkTable" >
                           <Tooltip placement="top" title={row.address}>
@@ -467,14 +446,16 @@ const handleEditClick=()=>{
                         </a>
                       </TableCell>
 
-                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={() => { 
-                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); setDate(row.createdOn) }}>
+                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={() => {
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation); setDate(row.createdOn)
+                      }}>
                         {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata" > {row.createdOn}</span>
+                        <span className="tabledata" > {moment(row.createdOn).format('Do MMMM YYYY')}</span>
                         {/* </a> */}
                       </TableCell>
-                      <TableCell style={{ border: "none" }} align="left" onClick={() => { 
-                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn);setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); }}>
+                      <TableCell style={{ border: "none" }} align="left" onClick={() => {
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
+                      }}>
                         {/* <a className="linkTable" href="/"> */}
                         <span className="tabledata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
 
@@ -482,8 +463,9 @@ const handleEditClick=()=>{
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
                         <a className="linkTable" >
-                          <span className="tabledata" onClick={() => { 
-                            handleDialog(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn);setallowVoting(row.permission.allowVoting);setProposal(row.permission.allowProposalCreation); }} >  Delete</span>
+                          <span className="tabledata" onClick={() => {
+                            handleDialog(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
+                          }} >  Delete</span>
                         </a>
                       </TableCell>
 
@@ -599,12 +581,12 @@ const handleEditClick=()=>{
 
               }
 
-            disabled={!editClick}
+              disabled={!editClick}
 
 
             ></input>
             <DialogContentText className={classes.subCategory}>
-              <span >Added on: <span>{Date}</span></span>
+              <span >Added on: <span>{moment(Date).format('Do MMMM YYYY')}</span></span>
             </DialogContentText>
           </DialogContent>
 
@@ -617,7 +599,6 @@ const handleEditClick=()=>{
               type="checkbox"
 
               checked={allowVoting}
-              //  checked={checkboxPermission.allowVoting}
               value={allowVoting}
               disabled={!editClick}
 
@@ -646,7 +627,6 @@ const handleEditClick=()=>{
               checked={proposal}
               value={proposal}
               disabled={!editClick}
-              // checked={checkboxPermission.proposal}
               className="checked-btn"
 
             />
@@ -658,14 +638,15 @@ const handleEditClick=()=>{
           <DialogActions className={classes.buttons1}>
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
-              <button onClick={() => (setCount(1), setButtonText("Cancel"),handleEditClick())}
+              <button onClick={() => (setCount(1), setButtonText("Cancel"), handleEditClick())}
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
               {[...Array(count)].map((_, i) => <AddedElement key={i} />)}
+              {/* {count==1?<button className={classes.cnlbtn} onClick={handleCancelClose1}>Cancel</button>:""} */}
             </Fragment>
 
-            {/* <span><button className={classes.addbtn} onClick={handleClickDelete}  >  Edit <EditDialog/> </button></span> */}
+            {/* <span><button className={classes.addbtn} onClick={handleClickDelete}  >  Edit  </button></span> */}
           </DialogActions>
         </Dialog>
       </div>

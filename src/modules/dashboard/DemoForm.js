@@ -103,15 +103,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedSnackbars(props) {
 
-  console.log("0000000000000000000",props)
+  console.log("0000000000000000000", props)
 
 
   const [addAddress, setAddAddress] = React.useState("")
 
 
-  const redirect=()=>{
-    console.log(addAddress,"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  
+  const redirect = () => {
+    console.log(addAddress, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
   }
 
 
@@ -123,31 +123,31 @@ export default function CustomizedSnackbars(props) {
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
-  const [message, setMessage]=useState("")
+  const [message, setMessage] = useState("")
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
 
 
-const addWhitelistAddress = async() =>{
- 
-  const reqObj={
-      
-    "address": addAddress,
-  "allowVoting": allowVoting,
-  "allowProposalCreation": proposal
-  }
-  setMessage(reqObj.address)
-  // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
-  let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
-  // console.log(totalAccounts,"total-accounts");
-  if (error || !totalAccounts)
+  const addWhitelistAddress = async () => {
+
+    const reqObj = {
+
+      "address": addAddress,
+      "allowVoting": allowVoting,
+      "allowProposalCreation": proposal
+    }
+    setMessage(reqObj.address)
+    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
+    let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
+    // console.log(totalAccounts,"total-accounts");
+    if (error || !totalAccounts)
       return
 
-      props.getListOffAddress();
-      handleCloseDailog();
-  // setAddAddress(totalAccounts);
-}
+    props.getListOffAddress();
+    handleCloseDailog();
+    // setAddAddress(totalAccounts);
+  }
 
 
   const handleClick = () => {
@@ -243,11 +243,11 @@ const addWhitelistAddress = async() =>{
                 color="primary"
                 // onClick={redirect}
                 onClick={() => {
-                  addWhitelistAddress()      
-                  setallowVoting(false);              
-                  setAddAddress("");     
+                  addWhitelistAddress()
+                  setallowVoting(false);
+                  setAddAddress("");
                   setProposal(false);
-                  
+
                 }}
                 disabled={(!allowVoting && !proposal) || !addAddress}
 
