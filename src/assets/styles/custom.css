@@ -373,6 +373,12 @@ opacity: 1;
     
 } */
 
+.linkTable:hover{
+    text-decoration: none;
+    color:#007bff;
+    cursor: pointer;
+
+}
 .whitelisted-heading{
     font-size: 16px;
     font-family: unset;

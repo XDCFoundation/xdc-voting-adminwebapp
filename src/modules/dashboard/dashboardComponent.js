@@ -449,17 +449,17 @@ export default function DashboardComponent(props) {
                       <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={() => {
                         handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation); setDate(row.createdOn)
                       }}>
-                        {/* <a className="linkTable" href="/"> */}
+
                         <span className="tabledata" > {moment(row.createdOn).format('Do MMMM YYYY')}</span>
-                        {/* </a> */}
+
                       </TableCell>
                       <TableCell style={{ border: "none" }} align="left" onClick={() => {
                         handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
                       }}>
-                        {/* <a className="linkTable" href="/"> */}
+
                         <span className="tabledata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
 
-                        {/* </a> */}
+
                       </TableCell>
                       <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
                         <a className="linkTable" >
