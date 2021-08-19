@@ -50,11 +50,11 @@ const useStyles = makeStyles((theme) => ({
   input: {
     width: "400px",
     height: "5vh",
-    border: "solid 1px #c6c8ce",
+    border: "solid 1px #9FA9BA",
     backgroundColor: "#ffffff",
-    borderRadius: "7px",
-    outline: "none"
-    // padding: "15px",
+    borderRadius: "8px",
+    outline: "none",
+    paddingLeft: "10px",
   },
 
   addbtn: {
@@ -86,13 +86,17 @@ const useStyles = makeStyles((theme) => ({
 
   },
   subCategory: {
-    marginTop: "3px",
+    marginTop: "-8px",
     marginBottom: "-2px",
     // fontWeight: "50px",
-    fontfamily: "Inter",
-    fontsize: "12px",
-    fontweight: "500",
-    border: "none !important"
+    fontfamily: "Inter-Medium",
+    fontSize: "15px",
+    fontWeight: "500",
+    border: "none !important",
+    letterSpacing: "0.54px",
+    color: "#2A2A2A",
+    opacity: "1",
+    marginLeft: "3px",
   },
   heading: {
     marginLeft: "5px",
@@ -188,10 +192,10 @@ export default function CustomizedSnackbars(props) {
         </button>
       </div>
       <Dialog className={classes.dialog} open={dialogOpen} divide>
-        <DialogTitle className={classes.heading} id="form-dialog-title">Add a new Address</DialogTitle>
+        <DialogTitle className={classes.heading} id="form-dialog-title">Add a New Address</DialogTitle>
         <DialogContent>
           <DialogContentText className={classes.subCategory}>
-            <b>Address</b>
+            <div>Address</div>
           </DialogContentText>
           <input className={classes.input} type="text" required="true"
             // value={addAddress}
