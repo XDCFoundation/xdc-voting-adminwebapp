@@ -13,6 +13,10 @@ export default function ForgotForm() {
     const [emailError, setEmailError] = React.useState('')
     const [emailValid, setEmailValid] = React.useState("");
 
+    const handleRedirectLogin=()=>{
+        history.push('/');
+    }
+
 
     const validateEmail = (e) => {
 
@@ -74,7 +78,7 @@ export default function ForgotForm() {
 
                         type="button"> Submit</button>
                 </div>
-                <p className="login-account"  >Log in to your account</p>
+                <p className="login-account" onClick={handleRedirectLogin} >Log in to your account</p>
 
 
             </div>

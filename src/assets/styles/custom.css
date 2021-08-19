@@ -279,6 +279,7 @@ letter-spacing: 0.54px;
 color: #2149B9;
 opacity: 1;
 font-weight: 500;
+cursor: pointer;
 }
 .header{
     margin-top: 0.5px;
