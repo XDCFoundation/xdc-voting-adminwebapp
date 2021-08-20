@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "8px",
     outline: "none",
     paddingLeft: "10px",
+    marginLeft: "4px",
   },
 
   addbtn: {
@@ -93,14 +94,27 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "15px",
     fontWeight: "500",
     border: "none !important",
+    
+  },
+  mainheading: {
+    letterSpacing: "0.69px",
+        color:" #2A2A2A",
+        opacity: "1",
+        fontSize: "18px"
+  },
+  subheading: {
     letterSpacing: "0.54px",
     color: "#2A2A2A",
     opacity: "1",
     marginLeft: "3px",
   },
+
   heading: {
-    marginLeft: "5px",
-    fontfamily: "Inter",
+    marginLeft: "3px",
+    letterSpacing: "0.69px",
+    color: "#2A2A2A",
+    opacity: "1",
+    fontFamily: "Inter",
     fontweight: "600"
   }
 }));
@@ -192,10 +206,12 @@ export default function CustomizedSnackbars(props) {
         </button>
       </div>
       <Dialog className={classes.dialog} open={dialogOpen} divide>
-        <DialogTitle className={classes.heading} id="form-dialog-title">Add a New Address</DialogTitle>
+        <DialogTitle 
+        
+        className={classes.heading} id="form-dialog-title"><div className={classes.mainheading}>Add a New Address</div>  </DialogTitle>
         <DialogContent>
           <DialogContentText className={classes.subCategory}>
-            <div>Address</div>
+            <div className={classes.subheading}>Address</div>
           </DialogContentText>
           <input className={classes.input} type="text" required="true"
             // value={addAddress}
@@ -217,7 +233,7 @@ export default function CustomizedSnackbars(props) {
             checked={allowVoting}
 
           />
-          <span className="tabledata">
+          <span className="checkbox-heading">
             Allow Voting
           </span>
         </div>
@@ -231,7 +247,7 @@ export default function CustomizedSnackbars(props) {
             className="checked-btn"
             checked={proposal}
           />
-          <span className="tabledata">
+          <span className="checkbox-heading">
             Allow Proposal Creation
           </span>
         </div>
