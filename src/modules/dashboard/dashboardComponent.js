@@ -112,6 +112,17 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "unset"
     
   },
+  addedon: {
+    color: "#9FA9BA",
+    /* border: none !important; */
+    fontSize: "14px",
+    marginTop: "10px",
+    /* font-family: unset; */
+    /* font-weight: 500; */
+    marginBottom: "0px",
+    letterSpacing: "0.54px",
+    marginLeft: "3px",
+  },
   deleteheading: {
     letterSpacing: "0.69px",
     color: "#2A2A2A",
@@ -587,7 +598,7 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle className={classes.heading} id="form-dialog-title">Address</DialogTitle>
+            <DialogTitle  id="form-dialog-title"><div className="editheading">Address</div></DialogTitle>
 
           </Row>
           <DialogContent>
@@ -603,7 +614,7 @@ export default function DashboardComponent(props) {
 
 
             ></input>
-            <DialogContentText className={classes.subCategory}>
+            <DialogContentText className={classes.addedon}>
               <span >Added on: <span>{moment(Date).format('Do MMMM YYYY')}</span></span>
             </DialogContentText>
           </DialogContent>
@@ -626,7 +637,7 @@ export default function DashboardComponent(props) {
 
 
             />
-            <span className="tabledata">
+            <span className="checkbox-heading">
               Allow Voting
             </span>
           </div>
@@ -648,7 +659,7 @@ export default function DashboardComponent(props) {
               className="checked-btn"
 
             />
-            <span className="tabledata">
+            <span className="checkbox-heading">
               Allow Proposal Creation
             </span>
           </div>

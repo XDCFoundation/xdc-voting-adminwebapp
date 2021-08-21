@@ -205,7 +205,18 @@ font-weight: 500;
     letter-spacing: 0.54px;
 color: #2A2A2A;
 opacity: 1;
-font-size: 15px;
+font-size: 14px;
+}
+.added-on{
+    color: #9FA9BA;
+    /* border: none !important; */
+    font-size: 14px;
+    margin-top: 5px;
+    /* font-family: unset; */
+    /* font-weight: 500; */
+    margin-bottom: 0px;
+    letter-spacing: 0.54px;
+    margin-left: 3px;
 }
 .input {
     margin-top: -10px;
@@ -226,6 +237,13 @@ font-weight: 500;
   color: #2A2A2A;
   opacity: 1;
 }
+.editheading{
+    letter-spacing: 0.69px;
+color: #2A2A2A;
+opacity: 1;
+font-size: 18px;
+margin-left: 3px;
+}
 .editinput{
     width: 400px;
     border: solid 1px #c6c8ce;
@@ -237,6 +255,9 @@ font-weight: 500;
     color: #2149B9;
     padding-left: 10px;
     border-color: #ECF1FF;
+    font-size: 14px;
+    letter-spacing: 0.54px;
+    margin-left: 2px;
 }
 
 .heading-change p input{
