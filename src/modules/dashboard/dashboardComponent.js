@@ -110,9 +110,27 @@ const useStyles = makeStyles((theme) => ({
 
     fontWeight: "600", fontSize: "13px",
     fontFamily: "unset"
+    
+  },
+  deleteheading: {
+    letterSpacing: "0.69px",
+    color: "#2A2A2A",
+    opacity: "1",
+    fontSize: "18px",
+  },
+  deletesubheading: {
+    marginBottom: "0px",
+    letterSpacing: "0.54px",
+    opacity: "1",
+    fontSize: "14px",
+    color: "#2A2A2A",
+    fontWeight: "500",
   },
   deleteaddress: {
     color: "#3763DD",
+    letterSpacing: "0.54px",
+    fontSize: "14px",
+    fontWeight: "500",
   },
   forgotpass: {
     color: "#2149b9",
@@ -490,12 +508,12 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle className={classes.heading} id="form-dialog-title">Delete Address</DialogTitle>
+            <DialogTitle  id="form-dialog-title"><div className={classes.deleteheading}>Delete Address</div></DialogTitle>
 
           </Row>
           <DialogContent>
-            <DialogContentText className={classes.subCategory}>
-              Do you want to delete this address <span className={classes.deleteaddress}>{deleteMessage}</span>
+            <DialogContentText className={classes.deletesubheading}>
+              Do you want to delete this address <span className={classes.deleteaddress}>{shorten(deleteMessage)}</span>
             </DialogContentText>
           </DialogContent>
 
@@ -574,7 +592,7 @@ export default function DashboardComponent(props) {
           </Row>
           <DialogContent>
 
-            <input className={classes.input}
+            <input className="editinput"
               value={addressInput}
               onChange={(e) =>
                 setAddressInput(e.target.value)

@@ -94,13 +94,13 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "15px",
     fontWeight: "500",
     border: "none !important",
-    
+
   },
   mainheading: {
     letterSpacing: "0.69px",
-        color:" #2A2A2A",
-        opacity: "1",
-        fontSize: "18px"
+    color: " #2A2A2A",
+    opacity: "1",
+    fontSize: "18px"
   },
   subheading: {
     letterSpacing: "0.54px",
@@ -206,9 +206,9 @@ export default function CustomizedSnackbars(props) {
         </button>
       </div>
       <Dialog className={classes.dialog} open={dialogOpen} divide>
-        <DialogTitle 
-        
-        className={classes.heading} id="form-dialog-title"><div className={classes.mainheading}>Add a New Address</div>  </DialogTitle>
+        <DialogTitle
+
+          className={classes.heading} id="form-dialog-title"><div className={classes.mainheading}>Add a New Address</div>  </DialogTitle>
         <DialogContent>
           <DialogContentText className={classes.subCategory}>
             <div className={classes.subheading}>Address</div>

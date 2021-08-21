@@ -226,6 +226,18 @@ font-weight: 500;
   color: #2A2A2A;
   opacity: 1;
 }
+.editinput{
+    width: 400px;
+    border: solid 1px #c6c8ce;
+    height: 5vh;
+    outline: none;
+    margin-top: -15px;
+    border-radius: 8px;
+    background-color: #ECF1FF;
+    color: #2149B9;
+    padding-left: 10px;
+    border-color: #ECF1FF;
+}
 
 .heading-change p input{
     font: bold 100% "Lucida Sans Unicode",sans-serif;
