@@ -412,30 +412,27 @@ export default function DashboardComponent(props) {
               <TableHead>
                 <TableRow>
                   <TableCell style={{
-                    border: "none", paddingLeft: "4%", fontWeight: "500", fontSize: "15px",
-                    fontFamily: "unset"
+                    border: "none", paddingLeft: "4%", fontWeight: "500", 
                   }} align="left">
 
-                    <span className={"tableheaders"}>Address</span>
+                    <span className="tableheading">Address</span>
                   </TableCell>
 
                   <TableCell
                     style={{
-                      border: "none", paddingLeft: "0%", fontWeight: "500", fontSize: "15px",
-                      fontFamily: "unset"
+                      border: "none", paddingLeft: "0%", fontWeight: "500", 
                     }}
                     align="left"
                   >
-                    <span className={"tableheaders"}>Added On</span>
+                    <span className="tableheading">Added On</span>
                   </TableCell>
                   <TableCell
                     style={{
-                      border: "none", fontWeight: "500", fontSize: "15px",
-                      fontFamily: "unset"
+                      border: "none", fontWeight: "500",
                     }}
                     align="left"
                   >
-                    <span className={"tableheaders"}>Votes</span>
+                    <span className="tableheading">Votes</span>
                   </TableCell>
 
                 </TableRow>
@@ -479,14 +476,14 @@ export default function DashboardComponent(props) {
                         handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation); setDate(row.createdOn)
                       }}>
 
-                        <span className="tabledata" > {moment(row.createdOn).format('Do MMMM YYYY')}</span>
+                        <span className="tablemiddata" > {moment(row.createdOn).format('DD MMMM YYYY')}</span>
 
                       </TableCell>
                       <TableCell style={{ border: "none" }} align="left" onClick={() => {
                         handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
                       }}>
 
-                        <span className="tabledata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
+                        <span className="tablemiddata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
 
 
                       </TableCell>
@@ -615,7 +612,7 @@ export default function DashboardComponent(props) {
 
             ></input>
             <DialogContentText className={classes.addedon}>
-              <span >Added on: <span>{moment(Date).format('Do MMMM YYYY')}</span></span>
+              <span >Added on: <span>{moment(Date).format('DD MMMM YYYY')}</span></span>
             </DialogContentText>
           </DialogContent>
 
