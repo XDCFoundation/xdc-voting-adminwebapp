@@ -69,7 +69,7 @@ export default function ForgotForm() {
                 >{emailError}</div>
 
                 <div>
-                    <button className="sign-btn1"
+                    <button className="sign-btn"
                         onClick={() => {
                             validateEmail();
 
