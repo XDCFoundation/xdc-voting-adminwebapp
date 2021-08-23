@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3763dd",
     color: "white",
     border: "none",
+    fontFamily: "Inter,sans-serif",
   },
 
   cnlbtn: {
@@ -95,8 +96,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#9fa9ba",
     color: "white",
     border: "none",
-
-
+    fontFamily: "Inter,sans-serif",
     margin: "14px 8px 15px 2px",
     padding: "3px 19px 3px 20px",
 
@@ -122,12 +122,15 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0px",
     letterSpacing: "0.54px",
     marginLeft: "3px",
+    fontFamily: "Inter,sans-serif",
   },
   deleteheading: {
     letterSpacing: "0.69px",
     color: "#2A2A2A",
     opacity: "1",
     fontSize: "18px",
+    fontFamily: "Inter,sans-serif",
+    fontWeight: "600",
   },
   deletesubheading: {
     marginBottom: "0px",
@@ -136,6 +139,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "14px",
     color: "#2A2A2A",
     fontWeight: "500",
+    fontFamily: "Inter,sans-serif",
   },
   deleteaddress: {
     color: "#3763DD",

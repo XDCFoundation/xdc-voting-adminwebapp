@@ -69,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3763dd",
     color: "white",
     border: "none",
+    fontFamily: "Inter,sans-serif",
   },
 
   cnlbtn: {
@@ -80,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#9fa9ba",
     color: "white",
     border: "none",
+    fontFamily: "Inter,sans-serif",
 
 
     margin: "14px 8px 15px 2px",
@@ -100,13 +102,19 @@ const useStyles = makeStyles((theme) => ({
     letterSpacing: "0.69px",
     color: " #2A2A2A",
     opacity: "1",
-    fontSize: "18px"
+    fontSize: "18px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
   },
   subheading: {
     letterSpacing: "0.54px",
     color: "#2A2A2A",
     opacity: "1",
     marginLeft: "3px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+    fontSize: "14px",
+
   },
 
   heading: {

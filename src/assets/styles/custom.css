@@ -209,13 +209,14 @@ font-family: unset;
     opacity: 1;
     font-size: 12px;
     font-weight: 600;
-    font-family: Inter,sans-serif;
+    font-family: "Inter",sans-serif;
 }
 .checkbox-heading{
     letter-spacing: 0.54px;
 color: #2A2A2A;
 opacity: 1;
 font-size: 14px;
+font-family: "Inter","sans-serif";
 }
 .added-on{
     color: #9FA9BA;
@@ -253,6 +254,8 @@ color: #2A2A2A;
 opacity: 1;
 font-size: 18px;
 margin-left: 3px;
+font-family: "Inter",sans-serif;
+font-weight: 600;
 }
 .editinput{
     width: 400px;
@@ -268,6 +271,7 @@ margin-left: 3px;
     font-size: 14px;
     letter-spacing: 0.54px;
     margin-left: 2px;
+    font-family: "Inter",sans-serif;
 }
 
 .heading-change p input{
