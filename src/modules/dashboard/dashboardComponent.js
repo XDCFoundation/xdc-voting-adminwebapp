@@ -394,9 +394,9 @@ export default function DashboardComponent(props) {
 
               >
 
-                <MenuItem onClick={handleChangePassword} style={{ backgroundColor: "white" }} >Change Password </MenuItem>
+                <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
                 <hr className="menu-line" />
-                <MenuItem onClick={handleLogout} style={{ backgroundColor: "white" }} >Logout</MenuItem>
+                <MenuItem onClick={handleLogout} className="menu-heading" style={{ backgroundColor: "white" }} >Logout</MenuItem>
               </Menu>
             </div>
           </span>

@@ -254,6 +254,7 @@ export default function CustomizedSnackbars(props) {
             type="checkbox"
             className="checked-btn"
             checked={proposal}
+            // className={checked == true ? "checked-btn" : ""}
           />
           <span className="checkbox-heading">
             Allow Proposal Creation

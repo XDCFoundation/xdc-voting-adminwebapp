@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
     '& > *': {
       marginTop: theme.spacing(1),
     },
+    
   }
 }));
 
@@ -14,9 +15,9 @@ export default function PaginationRounded() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <div style={{ float: "right" }}>
-        <Pagination count={20} shape="rounded" siblingCount={0} color="primary" size="small" />
+    <div className={classes.root} >
+      <div  style={{ float: "right" }}>
+        <Pagination count={20}  shape="rounded" siblingCount={0} color="primary" size="small" />
       </div>
     </div>
   );
