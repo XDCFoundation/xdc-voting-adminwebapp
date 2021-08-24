@@ -88,7 +88,6 @@ letter-spacing: 1.23px;
 align-items: center;
 color: #2A2A2A;
 /* opacity: 1; */
-font-family: unset;
   font-size: 32px/39px;
   font-weight: 600;
   font-stretch: normal;
@@ -419,6 +418,7 @@ opacity: 1;
 .pagination-div{
     width: 60vw;
     margin-left: 20vw;
+    margin-bottom: 40px;
 }
 
 .whitelist{
