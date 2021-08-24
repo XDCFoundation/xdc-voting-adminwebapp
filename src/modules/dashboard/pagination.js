@@ -8,6 +8,9 @@ const useStyles = makeStyles((theme) => ({
       marginTop: theme.spacing(1),
     },
     
+  },
+  MuiPaginationItemRoot	: {
+backgroundColor:"black"
   }
 }));
 
