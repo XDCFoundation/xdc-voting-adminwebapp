@@ -19,7 +19,7 @@ export default function PaginationRounded() {
 
   return (
     <div className={classes.root} >
-      <div  style={{ float: "right" }}>
+      <div  style={{ float: "right",marginTop:"15px" }}>
         <Pagination count={20}  shape="rounded" siblingCount={0} color="primary" size="small" />
       </div>
     </div>
