@@ -141,7 +141,9 @@ export default function CustomizedSnackbars(props) {
   }
 
 
-
+  const checking = () => {
+    let istrue = "false"
+  }
 
 
 
@@ -181,6 +183,9 @@ export default function CustomizedSnackbars(props) {
   };
   const handleCancelClose = () => {
     setDialogOpen(false);
+    setallowVoting(false);
+    setProposal(false);
+    setAddAddress("");
   }
 
   const handleClose = (event, reason) => {
@@ -227,35 +232,36 @@ export default function CustomizedSnackbars(props) {
               setAddAddress(e.target.value)}
           ></input>
         </DialogContent>
-        <div style={{ display: "inline", marginTop: "10px" }}>
-          <input
+        <div style={{ display: "flex", marginTop: "10px" }}>
+          {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)
-
-
-
             }}
-
             type="checkbox"
             className="checked-btn"
             checked={allowVoting}
 
-          />
+          /> */}
+          <div className="custom-check1"
+            onClick={() => {
+              setallowVoting(!allowVoting);
+            }}
+
+            className={!allowVoting ? "custom-check1" : "custom-check1-active"}
+          ></div>
           <span className="checkbox-heading">
             Allow Voting
           </span>
         </div>
-        <div style={{ display: "inline" }}>
-          <input
-            onChange={(e) => {
-              setProposal(!proposal)
-
+        <div style={{ display: "flex" }}>
+          <div className="custom-check1"
+            onClick={() => {
+              setProposal(!proposal);
             }}
-            type="checkbox"
-            className="checked-btn"
-            checked={proposal}
-            // className={checked == true ? "checked-btn" : ""}
-          />
+
+            className={!proposal ? "custom-check1" : "custom-check1-active"}
+          ></div>
+
           <span className="checkbox-heading">
             Allow Proposal Creation
           </span>
@@ -270,7 +276,6 @@ export default function CustomizedSnackbars(props) {
               <button className={classes.addbtn}
                 variant="contained"
                 color="primary"
-                // onClick={redirect}
                 onClick={() => {
                   addWhitelistAddress()
                   setallowVoting(false);

@@ -216,6 +216,7 @@ color: #2A2A2A;
 opacity: 1;
 font-size: 14px;
 font-family: "Inter","sans-serif";
+margin-left: 10px;
 }
 .added-on{
     color: #9FA9BA;
@@ -566,6 +567,57 @@ font-weight: 300;
 letter-spacing: 0px;
 color: #FFFFFF;
 }
+/* .custom-check{
+    height: 16px;
+    margin-left: 15px;
+    width: 16px;
+     background-color: #FFFFFF;
+     border: 1px solid #9FA9BA;
+    
+} */
+.custom-check1{
+    height: 16px;
+    margin-left: 30px;
+    width: 16px;
+     background-color: #FFFFFF;
+     border: 1px solid #9FA9BA;
+     border-radius: 1px;
+     opacity: 1;
+    /* background: url("../styles/images/checkbox selected.svg"); */
+}
+.custom-check1edit{
+    height: 16px;
+    margin-left: 30px;
+    width: 16px;
+     background-color: #FFFFFF;
+     border: 1px solid #9FA9BA;
+     border-radius: 1px;
+     opacity: 1;
+    background: url("../styles/images/CHECKBOXEDIT.svg");
+}
+.custom-check1-active{
+    height: 16px;
+    margin-left: 30px;
+    width: 16px;
+    background-color: #FFFFFF;
+    border-radius: 1px;
+    background: url("../styles/images/checkbox selected.svg");
+    
+}
+.custom-check1-edit-active{
+    height: 16px;
+    margin-left: 30px;
+    width: 16px;
+    background: url("../styles/images/CHECKBOX SELECTED EDIT.svg");
+    
+}
+.custom-check2{
+    height: 16px;
+    margin-left: 15px;
+    width: 16px;
+    background: url("../styles/images/checkbox.svg");
+    
+}
 .checked-btn{
     margin-left: 28px;
                 background-color: none;
@@ -573,12 +625,15 @@ color: #FFFFFF;
                 margin-right: 10px;
                 background-image: url("../styles/images/checkbox selected.svg");
 }
+.checked-btn:checked{
+    background: url("../styles/images/checkbox selected.svg");
+}
 .checked-upper{
-    display: inline;
+    display: flex;
      margin-top: 5px;
 }
 .checked-down{
-    display: inline;
+    display: flex;
 }
 .has-data-css{
     background-color: red;

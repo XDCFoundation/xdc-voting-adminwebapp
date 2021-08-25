@@ -621,7 +621,7 @@ export default function DashboardComponent(props) {
           </DialogContent>
 
           <div className="checked-upper">
-            <input
+            {/* <input
               onChange={(e) => {
                 setallowVoting(!allowVoting)
 
@@ -637,7 +637,17 @@ export default function DashboardComponent(props) {
 
 
 
-            />
+            /> */}
+             <div className="custom-check1"
+            onClick={() => {
+              setallowVoting(!allowVoting);
+            }}
+            value={allowVoting}
+              disabled={!editClick}
+
+            className={!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"}
+          ></div>
+
             <span className="checkbox-heading">
               Allow Voting
             </span>
@@ -648,7 +658,7 @@ export default function DashboardComponent(props) {
 
 
           <div className="checked-down">
-            <input
+            {/* <input
               onChange={(event) => {
                 setProposal(!proposal)
 
@@ -659,7 +669,16 @@ export default function DashboardComponent(props) {
               disabled={!editClick}
               className="checked-btn"
 
-            />
+            /> */}
+             <div className="custom-check1"
+            onClick={() => {
+              setProposal(!proposal);
+            }}
+            value={proposal}
+              disabled={!editClick}
+
+            className={!proposal ? "custom-check1edit" : "custom-check1-edit-active"}
+          ></div>
             <span className="checkbox-heading">
               Allow Proposal Creation
             </span>
@@ -669,6 +688,9 @@ export default function DashboardComponent(props) {
             {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
             <Fragment>
               <button onClick={() => (setCount(1), setButtonText("Cancel"), handleEditClick())}
+
+              // className={count===1?  "custom-check1" : "custom-check1-active"}
+            
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
