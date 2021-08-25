@@ -590,7 +590,7 @@ color: #FFFFFF;
     margin-left: 30px;
     width: 16px;
      background-color: #FFFFFF;
-     border: 1px solid #9FA9BA;
+     /* border: 1px solid #9FA9BA; */
      border-radius: 1px;
      opacity: 1;
     background: url("../styles/images/CHECKBOXEDIT.svg");

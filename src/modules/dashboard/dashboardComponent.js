@@ -620,7 +620,7 @@ export default function DashboardComponent(props) {
             </DialogContentText>
           </DialogContent>
 
-          <div className="checked-upper">
+          <div className="checked-upper" >
             {/* <input
               onChange={(e) => {
                 setallowVoting(!allowVoting)
@@ -643,9 +643,9 @@ export default function DashboardComponent(props) {
               setallowVoting(!allowVoting);
             }}
             value={allowVoting}
-              disabled={!editClick}
+            disabled={!editClick}
 
-            className={!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"}
+           className={!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"}
           ></div>
 
             <span className="checkbox-heading">
@@ -657,7 +657,7 @@ export default function DashboardComponent(props) {
 
 
 
-          <div className="checked-down">
+          <div className="checked-down" >
             {/* <input
               onChange={(event) => {
                 setProposal(!proposal)
@@ -689,7 +689,7 @@ export default function DashboardComponent(props) {
             <Fragment>
               <button onClick={() => (setCount(1), setButtonText("Cancel"), handleEditClick())}
 
-              // className={count===1?  "custom-check1" : "custom-check1-active"}
+              // className={count===1? !allowVoting & !proposal? "custom-check1" : "custom-check1-active":"custom-check1"}
             
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}

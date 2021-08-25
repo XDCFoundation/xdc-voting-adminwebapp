@@ -233,6 +233,7 @@ export default function CustomizedSnackbars(props) {
           ></input>
         </DialogContent>
         <div style={{ display: "flex", marginTop: "10px" }}>
+          
           {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)
