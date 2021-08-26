@@ -166,9 +166,9 @@ export default function CustomizedSnackbars(props) {
       "allowProposalCreation": proposal
     }
     setMessage(reqObj.address)
-    // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!",reqObj)
+
     let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
-    // console.log(totalAccounts,"total-accounts");
+
     if (error || !totalAccounts)
       return
 
@@ -233,7 +233,7 @@ export default function CustomizedSnackbars(props) {
           ></input>
         </DialogContent>
         <div style={{ display: "flex", marginTop: "10px" }}>
-          
+
           {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)

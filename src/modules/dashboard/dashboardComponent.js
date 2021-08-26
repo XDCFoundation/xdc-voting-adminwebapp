@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
 
     fontWeight: "600", fontSize: "13px",
     fontFamily: "unset"
-    
+
   },
   addedon: {
     color: "#9FA9BA",
@@ -416,7 +416,7 @@ export default function DashboardComponent(props) {
               <TableHead>
                 <TableRow>
                   <TableCell style={{
-                    border: "none", paddingLeft: "4%", fontWeight: "500", 
+                    border: "none", paddingLeft: "4%", fontWeight: "500",
                   }} align="left">
 
                     <span className="tableheading">Address</span>
@@ -424,7 +424,7 @@ export default function DashboardComponent(props) {
 
                   <TableCell
                     style={{
-                      border: "none", paddingLeft: "0%", fontWeight: "500", 
+                      border: "none", paddingLeft: "0%", fontWeight: "500",
                     }}
                     align="left"
                   >
@@ -520,7 +520,7 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle  id="form-dialog-title"><div className={classes.deleteheading}>Delete Address</div></DialogTitle>
+            <DialogTitle id="form-dialog-title"><div className={classes.deleteheading}>Delete Address</div></DialogTitle>
 
           </Row>
           <DialogContent>
@@ -539,8 +539,7 @@ export default function DashboardComponent(props) {
                   deleteaddress(deleteMessage)
 
                 }}
-              // onClick={handleCloseDailog}
-              // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
+
               >  Delete </button></span>
           </DialogActions>
 
@@ -599,7 +598,7 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle  id="form-dialog-title"><div className="editheading">Address</div></DialogTitle>
+            <DialogTitle id="form-dialog-title"><div className="editheading">Address</div></DialogTitle>
 
           </Row>
           <DialogContent>
@@ -621,32 +620,18 @@ export default function DashboardComponent(props) {
           </DialogContent>
 
           <div className="checked-upper" >
-            {/* <input
-              onChange={(e) => {
-                setallowVoting(!allowVoting)
 
+            <div className="custom-check1"
+              onClick={() => {
+                if (editClick)
+                  setallowVoting(!allowVoting);
               }}
-              type="checkbox"
-
-              checked={allowVoting}
               value={allowVoting}
-              disabled={!editClick}
 
-
-              className="checked-btn"
-
-
-
-            /> */}
-             <div className="custom-check1"
-            onClick={() => {
-              setallowVoting(!allowVoting);
-            }}
-            value={allowVoting}
-            disabled={!editClick}
-
-           className={!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"}
-          ></div>
+              className={!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"}
+            //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+            // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
+            ></div>
 
             <span className="checkbox-heading">
               Allow Voting
@@ -658,47 +643,41 @@ export default function DashboardComponent(props) {
 
 
           <div className="checked-down" >
-            {/* <input
-              onChange={(event) => {
-                setProposal(!proposal)
 
+            <div className="custom-check1"
+              onClick={() => {
+                if (editClick)
+                  setProposal(!proposal);
               }}
-              type="checkbox"
-              checked={proposal}
               value={proposal}
-              disabled={!editClick}
-              className="checked-btn"
+              className={!proposal ? "custom-check1edit" : "custom-check1-edit-active"}
 
-            /> */}
-             <div className="custom-check1"
-            onClick={() => {
-              setProposal(!proposal);
-            }}
-            value={proposal}
-              disabled={!editClick}
+            // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+            // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
+            ></div>
 
-            className={!proposal ? "custom-check1edit" : "custom-check1-edit-active"}
-          ></div>
             <span className="checkbox-heading">
               Allow Proposal Creation
             </span>
           </div>
 
           <DialogActions className={classes.buttons1}>
-            {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
-            <Fragment>
-              <button onClick={() => (setCount(1), setButtonText("Cancel"), handleEditClick())}
 
-              // className={count===1? !allowVoting & !proposal? "custom-check1" : "custom-check1-active":"custom-check1"}
-            
+            <Fragment>
+              <button onClick={() => {
+                if (count === 1) { handleCancelClose1() }
+                else { setCount(1); setButtonText("Cancel"); handleEditClick() }
+              }}
+
+
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
               {[...Array(count)].map((_, i) => <AddedElement key={i} />)}
-              {/* {count==1?<button className={classes.cnlbtn} onClick={handleCancelClose1}>Cancel</button>:""} */}
+
             </Fragment>
 
-            {/* <span><button className={classes.addbtn} onClick={handleClickDelete}  >  Edit  </button></span> */}
+
           </DialogActions>
         </Dialog>
       </div>
