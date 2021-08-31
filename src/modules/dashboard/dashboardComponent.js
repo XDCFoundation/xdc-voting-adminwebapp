@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Column, Row } from "simple-flexbox";
 import { Button } from "@material-ui/core";
 import CustomInput from "../../common/components/CustomInput";
@@ -14,7 +14,6 @@ import TableRow from '@material-ui/core/TableRow';
 import FormDialog from '../Dialog/addDialog';
 import Pagination from '@material-ui/lab/Pagination';
 import PaginationRounded from './pagination';
-// import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import color from '@material-ui/core/colors/amber';
@@ -29,9 +28,16 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles, mergeClasses } from "@material-ui/styles";
-
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { EditService } from '../../services';
+import { DeleteService } from '../../services';
+import { AccountService } from '../../services';
+import Utils from '../../utility';
+import { number } from 'prop-types';
+import moment from 'moment';
+const cors = require('cors');
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -74,27 +80,23 @@ const useStyles = makeStyles((theme) => ({
   addbtn: {
     width: "110px",
     height: "34px",
-    // margin: "33px 0 0 21px",
-    // padding: "8px 30px 7px 32px",
     margin: "14px -8px 15px 2px",
     padding: "3px 19px 3px 20px",
     borderRadius: "4px",
     backgroundColor: "#3763dd",
     color: "white",
     border: "none",
+    fontFamily: "Inter,sans-serif",
   },
 
   cnlbtn: {
     width: "94px",
     height: "34px",
-    // margin: "33px 21px 0 87px",
-    // padding: "8px 19px 7px 21px",
     borderRadius: "4px",
     backgroundColor: "#9fa9ba",
     color: "white",
     border: "none",
-
-
+    fontFamily: "Inter,sans-serif",
     margin: "14px 8px 15px 2px",
     padding: "3px 19px 3px 20px",
 
@@ -102,19 +104,48 @@ const useStyles = makeStyles((theme) => ({
   subCategory: {
     marginTop: "5px",
     marginBottom: "0px",
-    // fontWeight: "50px",
-    // fontfamily: "Inter",
-    // fontsize: "12px",
-    // fontweight: "bold",
     border: "none !important",
     color: "#9FA9BA",
     letterSpacing: "0.54px",
 
     fontWeight: "600", fontSize: "13px",
     fontFamily: "unset"
+
+  },
+  addedon: {
+    color: "#9FA9BA",
+    /* border: none !important; */
+    fontSize: "14px",
+    marginTop: "10px",
+    /* font-family: unset; */
+    /* font-weight: 500; */
+    marginBottom: "0px",
+    letterSpacing: "0.54px",
+    marginLeft: "3px",
+    fontFamily: "Inter,sans-serif",
+  },
+  deleteheading: {
+    letterSpacing: "0.69px",
+    color: "#2A2A2A",
+    opacity: "1",
+    fontSize: "18px",
+    fontFamily: "Inter,sans-serif",
+    fontWeight: "600",
+  },
+  deletesubheading: {
+    marginBottom: "0px",
+    letterSpacing: "0.54px",
+    opacity: "1",
+    fontSize: "14px",
+    color: "#2A2A2A",
+    fontWeight: "500",
+    fontFamily: "Inter,sans-serif",
   },
   deleteaddress: {
     color: "#3763DD",
+    letterSpacing: "0.54px",
+    fontSize: "14px",
+    fontWeight: "500",
   },
   forgotpass: {
     color: "#2149b9",
@@ -143,6 +174,74 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function DashboardComponent(props) {
 
+  const [getListOfAddress, setgetListOfAddress] = React.useState([])
+
+  const getListOffAddress = async () => {
+
+    let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
+    if (error || !totalAccounts)
+      return
+    setgetListOfAddress(totalAccounts);
+  }
+  useEffect(() => {
+    getListOffAddress()
+  }, []);
+
+
+  const deleteaddress = async () => {
+    const id = {
+      "address": deleteMessage,
+      "permission": {
+        "allowVoting": allowVoting,
+        "allowProposalCreation": proposal
+      }
+    }
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id)
+    let [error, totalAccounts] = await Utils.parseResponse(DeleteService.deleteWhitelistedAddress(id))
+    console.log(totalAccounts, "total-accounts");
+    if (error || !totalAccounts)
+      return
+
+    getListOffAddress();
+    handleCloseDailog()
+
+  }
+
+  const editWhitelistAddress = async () => {
+
+    const id = {
+
+      "address": deleteMessage,
+      "updateAddress": addressInput,
+      "allowVoting": allowVoting,
+      "allowProposalCreation": proposal,
+      // "totalVotes" : null
+    }
+
+    let [error, totalAccounts] = await Utils.parseResponse(EditService.editWhitelistedAddress(id))
+
+    if (error || !totalAccounts)
+      return
+
+    getListOffAddress();
+    handleCloseDailog1();
+
+  }
+
+
+
+
+  // function shortenBalance(b, amountL = 12, amountR = 3, stars = 3) {
+  //   return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
+  //     b.length - 3,
+
+  //   )}`;
+  // }
+
+
+
+
 
 
   const classes = useStyles();
@@ -160,52 +259,18 @@ export default function DashboardComponent(props) {
     history.push('/change-password');
   }
 
-  // function shorten(b, amountL = 10, amountR = 3, stars = 3) {
-  //   return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
-  //     b.length - 3,
-  //     b.length
-  //   )}`;
-  // }
+  function shorten(b, amountL = 10, amountR = 3, stars = 3) {
+    return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
+      b.length - 3,
+      b.length
+    )}`;
+  }
 
 
+  const handleEditClick = () => {
+    setEditClick(!editClick)
+  }
 
-
-  React.useEffect(() => {
-    let address = [
-      {
-        Adress: "0x9b20bd863e1cf226b98…5a30",
-        AddedOn: "30 June 2021",
-        Votes: "100",
-        id: 1,
-      },
-      {
-        Adress: "xdcc4e699581116412965b…5e7c",
-        AddedOn: "21 June 2021",
-        Votes: "200",
-        id: 2,
-      },
-      {
-        Adress: "5e7c71b8e2dd50ac8d30x…5b9c",
-        AddedOn: "1 June 2021",
-        Votes: "170",
-        id: 3,
-      },
-    ]
-
-      ;
-    setAddress(
-      address.map((d) => {
-        return {
-          select: false,
-          Adress: d.Adress,
-          AddedOn: d.AddedOn,
-          Votes: d.Votes,
-
-          id: d.id,
-        };
-      })
-    );
-  }, []);
 
   const { state } = props;
 
@@ -217,20 +282,23 @@ export default function DashboardComponent(props) {
   // The added element component
   const AddedElement = () => <button
     onClick={() => {
+      editWhitelistAddress()
       setallowVoting(false);
       setAddressInput("");
       setProposal(false);
-      handleCloseDailog1();
+
 
     }}
     disabled={(!allowVoting && !proposal) || !addressInput}
+
     style={{ marginLeft: "12px" }}
     className={classes.addbtn} type="button">Done</button>
 
   // The parent component
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [address, setAddress] = React.useState([]);
-
+  const [Date, setDate] = React.useState();
+  const [deleteMessage, setDeleteMessage] = useState("")
+  const [editClick, setEditClick] = useState(false)
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
@@ -250,6 +318,13 @@ export default function DashboardComponent(props) {
     setDialogOpen1(true);
     setCount(0)
     setButtonText("Edit")
+    setEditClick(false)
+
+
+
+
+
+
   };
   const handleCancelClose1 = () => {
     setDialogOpen1(false);
@@ -288,7 +363,7 @@ export default function DashboardComponent(props) {
 
     <div>
 
-      {/* <div><CustomizedSnackbars/></div> */}
+
       <div className="header">
         <div className="div1">
           <span>
@@ -319,9 +394,9 @@ export default function DashboardComponent(props) {
 
               >
 
-                <MenuItem onClick={handleChangePassword} style={{ backgroundColor: "white" }} >Change Password </MenuItem>
+                <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
                 <hr className="menu-line" />
-                <MenuItem onClick={handleLogout} style={{ backgroundColor: "white" }} >Logout</MenuItem>
+                <MenuItem onClick={handleLogout} className="menu-heading" style={{ backgroundColor: "white" }} >Logout</MenuItem>
               </Menu>
             </div>
           </span>
@@ -330,42 +405,38 @@ export default function DashboardComponent(props) {
 
       </div>
 
-      <CustomizedSnackbars />
+      <CustomizedSnackbars getListOffAddress={() => getListOffAddress()} />
       <div className="griddiv">
 
 
         <Grid lg={13} className="tablegrid_address">
-          {/* <Grid class="tabletop-header">Whitelisted Addresses</Grid> */}
           <Grid component={Paper} style={{ boxShadow: "0px 0px 0px 0px" }}>
 
             <Table className="table" aria-label="Whitelisted Addresses" style={{ boxShadow: "0px 0px 0px 0px" }}>
               <TableHead>
                 <TableRow>
                   <TableCell style={{
-                    border: "none", paddingLeft: "4%", fontWeight: "500", fontSize: "15px",
-                    fontFamily: "unset"
+                    border: "none", paddingLeft: "4%", fontWeight: "500",
                   }} align="left">
 
-                    <span className={"tableheaders"}>Address</span>
+                    <span className="tableheading">Address</span>
                   </TableCell>
 
                   <TableCell
                     style={{
-                      border: "none", paddingLeft: "0%", fontWeight: "500", fontSize: "15px",
-                      fontFamily: "unset"
+                      border: "none", paddingLeft: "0%", fontWeight: "500",
                     }}
                     align="left"
                   >
-                    <span className={"tableheaders"}>Added On</span>
+                    <span className="tableheading">Added On</span>
                   </TableCell>
                   <TableCell
                     style={{
-                      border: "none", fontWeight: "500", fontSize: "15px",
-                      fontFamily: "unset"
+                      border: "none", fontWeight: "500",
                     }}
                     align="left"
                   >
-                    <span className={"tableheaders"}>Votes</span>
+                    <span className="tableheading">Votes</span>
                   </TableCell>
 
                 </TableRow>
@@ -375,7 +446,7 @@ export default function DashboardComponent(props) {
 
 
 
-                {address.map((row, index) => {
+                {getListOfAddress.map((row, index) => {
 
 
                   return (
@@ -390,32 +461,41 @@ export default function DashboardComponent(props) {
                       }
                     >
 
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={handleDialog1}>
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={() => {
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
+                      }}>
 
                         <a className="linkTable" >
-                          <Tooltip placement="top" title={row.Adress}>
+                          <Tooltip placement="top" title={row.address}>
 
                             <span className="tabledata"  >
-                              {(row.Adress)}{" "}
+                              {shorten(row.address)}{" "}
 
                             </span>
                           </Tooltip>
                         </a>
                       </TableCell>
 
-                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={handleDialog1}>
-                        {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata"> {row.AddedOn}</span>
-                        {/* </a> */}
+                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={() => {
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation); setDate(row.createdOn)
+                      }}>
+
+                        <span className="tablemiddata" > {moment(row.createdOn).format('DD MMMM YYYY')}</span>
+
                       </TableCell>
-                      <TableCell style={{ border: "none" }} align="left" onClick={handleDialog1}>
-                        {/* <a className="linkTable" href="/"> */}
-                        <span className="tabledata">{row.Votes}</span>
-                        {/* </a> */}
+                      <TableCell style={{ border: "none" }} align="left" onClick={() => {
+                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
+                      }}>
+
+                        <span className="tablemiddata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
+
+
                       </TableCell>
-                      <TableCell style={{ border: "none", paddingLeft: "3%" }} align="left">
+                      <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
                         <a className="linkTable" >
-                          <span className="tabledata" onClick={handleDialog} >  Delete</span>
+                          <span className="tabledata" onClick={() => {
+                            handleDialog(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
+                          }} >  Delete</span>
                         </a>
                       </TableCell>
 
@@ -429,8 +509,10 @@ export default function DashboardComponent(props) {
         </Grid>
       </div>
 
+      {/* ---------Delete Dialog Box----------- */}
 
       <div>
+
         <Dialog
           className={classes.dialog}
           open={dialogOpen}
@@ -438,14 +520,13 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle className={classes.heading} id="form-dialog-title">Delete Address</DialogTitle>
+            <DialogTitle id="form-dialog-title"><div className={classes.deleteheading}>Delete Address</div></DialogTitle>
 
           </Row>
           <DialogContent>
-            <DialogContentText className={classes.subCategory}>
-              Do you want to delete this address <span className={classes.deleteaddress}>0x9b20bd863e1cf226b98…5a30</span>
+            <DialogContentText className={classes.deletesubheading}>
+              Do you want to delete this address <span className={classes.deleteaddress}>{shorten(deleteMessage)}</span>
             </DialogContentText>
-
           </DialogContent>
 
           <DialogActions className={classes.buttons}>
@@ -453,48 +534,61 @@ export default function DashboardComponent(props) {
 
             <span>
               <button className={classes.addbtn}
-                onClick={handleCloseDailog}
-              // onClick={() => { utility.apiSuccessToast("You have succesfully deleted addres"); handleClose1() }}
+                onClick={() => {
+
+                  deleteaddress(deleteMessage)
+
+                }}
+
               >  Delete </button></span>
           </DialogActions>
 
         </Dialog>
-        <Snackbar
-          open={open3}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          onClose={handleClose3}
-        >
-          <Alert severity="" className={classes.Alert}>
-            <div style={{ display: "flex" }}>
-              <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
-              <span>
-                <div className="toast-message">You have successfully deleted address</div>
-                <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
-              </span>
-            </div>
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          open={open4}
-          autoHideDuration={3000}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          onClose={handleClose4}
-        >
-          <Alert severity="" className={classes.Alert}>
-            <div style={{ display: "flex" }}>
-              <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
-              <span>
-                <div className="toast-message">You have successfully edited address</div>
-                <div className="toast-address">0x9b20bd863e1cf226b98…5a30</div>
-              </span>
-            </div>
-          </Alert>
-        </Snackbar>
       </div>
 
+      {/* ------Delete Toast Message----- */}
+
+      <Snackbar
+        open={open3}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose3}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span>
+              <div className="toast-message">You have successfully deleted address</div>
+              <div className="toast-address">{deleteMessage}</div>
+            </span>
+          </div>
+        </Alert>
+      </Snackbar>
 
 
+      {/* --------Edit Toast Message--------- */}
+
+      <Snackbar
+        open={open4}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose4}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span>
+              <div className="toast-message">You have successfully edited address</div>
+              <div className="toast-address">{deleteMessage}</div>
+            </span>
+          </div>
+        </Alert>
+      </Snackbar>
+
+
+
+
+      {/* -----------Edit Dialog Box------------ */}
       <div>
         <Dialog
           className={classes.dialog}
@@ -504,37 +598,42 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle className={classes.heading} id="form-dialog-title">Address</DialogTitle>
+            <DialogTitle id="form-dialog-title"><div className="editheading">Address</div></DialogTitle>
 
           </Row>
           <DialogContent>
 
-            <input className={classes.input}
+            <input className="editinput"
               value={addressInput}
               onChange={(e) =>
-                setAddressInput(e.target.value)}
+                setAddressInput(e.target.value)
+
+              }
+
+              disabled={!editClick}
+
 
             ></input>
-            <DialogContentText className={classes.subCategory}>
-              <span >Added on: 30 June 2021</span>
+            <DialogContentText className={classes.addedon}>
+              <span >Added on: <span>{moment(Date).format('DD MMMM YYYY')}</span></span>
             </DialogContentText>
           </DialogContent>
 
-          <div className="checked-upper">
-            <input
-              onChange={(e) => {
-                setallowVoting(!allowVoting)
+          <div className="checked-upper" >
 
+            <div className="custom-check1"
+              onClick={() => {
+                if (editClick)
+                  setallowVoting(!allowVoting);
               }}
-              type="checkbox"
+              value={allowVoting}
 
-              checked={allowVoting}
+              className={!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"}
+            //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+            // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
+            ></div>
 
-              className="checked-btn"
-
-
-            />
-            <span className="tabledata">
+            <span className="checkbox-heading">
               Allow Voting
             </span>
           </div>
@@ -543,38 +642,50 @@ export default function DashboardComponent(props) {
 
 
 
-          <div className="checked-down">
-            <input
-              onChange={(event) => {
-                setProposal(!proposal)
+          <div className="checked-down" >
 
+            <div className="custom-check1"
+              onClick={() => {
+                if (editClick)
+                  setProposal(!proposal);
               }}
-              type="checkbox"
-              checked={proposal}
-              className="checked-btn"
+              value={proposal}
+              className={!proposal ? "custom-check1edit" : "custom-check1-edit-active"}
 
-            />
-            <span className="tabledata">
+            // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+            // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
+            ></div>
+
+            <span className="checkbox-heading">
               Allow Proposal Creation
             </span>
           </div>
 
           <DialogActions className={classes.buttons1}>
-            {/* <span><button className={classes.cnlbtn} onClick={handleClose2} >Cancel</button></span> */}
+
             <Fragment>
-              <button onClick={() => (setCount(1), setButtonText("Cancel"))}
+              <button onClick={() => {
+                if (count === 1) { handleCancelClose1() }
+                else { setCount(1); setButtonText("Cancel"); handleEditClick() }
+              }}
+
 
 
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
               >{buttonText}</button>
               {[...Array(count)].map((_, i) => <AddedElement key={i} />)}
+
             </Fragment>
 
-            {/* <span><button className={classes.addbtn} onClick={handleClickDelete}  >  Edit <EditDialog/> </button></span> */}
+
           </DialogActions>
         </Dialog>
       </div>
+
+      {/* ---------Pagination--------- */}
+
       <div className="pagination-div"><PaginationRounded /></div>
+
       <div style={{ height: "50px" }}></div>
     </div>
   )

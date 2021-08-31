@@ -25,8 +25,7 @@ export default function EmailSent() {
                     Forgot Password
                 </div>
                 <div className="para1">
-                    {/* <p>Email</p>
-                <input className="input" type="text"/> */}
+                   
                     <p>An email has been sent. Please click on the link when you get it</p>
 
                 </div>

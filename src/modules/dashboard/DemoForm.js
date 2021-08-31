@@ -1,11 +1,14 @@
-
-import React from "react";
+import React, { useState } from 'react';
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import "../../assets/styles/custom.css";
+import { AddService } from '../../services';
+import Utils from '../../utility';
+import { useEffect } from "react";
+
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -47,11 +50,12 @@ const useStyles = makeStyles((theme) => ({
   input: {
     width: "400px",
     height: "5vh",
-    border: "solid 1px #c6c8ce",
+    border: "solid 1px #9FA9BA",
     backgroundColor: "#ffffff",
-    borderRadius: "7px",
-    outline: "none"
-    // padding: "15px",
+    borderRadius: "8px",
+    outline: "none",
+    paddingLeft: "10px",
+    marginLeft: "4px",
   },
 
   addbtn: {
@@ -65,6 +69,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3763dd",
     color: "white",
     border: "none",
+    fontFamily: "Inter,sans-serif",
   },
 
   cnlbtn: {
@@ -76,6 +81,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#9fa9ba",
     color: "white",
     border: "none",
+    fontFamily: "Inter,sans-serif",
 
 
     margin: "14px 8px 15px 2px",
@@ -83,35 +89,103 @@ const useStyles = makeStyles((theme) => ({
 
   },
   subCategory: {
-    marginTop: "3px",
+    marginTop: "-8px",
     marginBottom: "-2px",
     // fontWeight: "50px",
-    fontfamily: "Inter",
-    fontsize: "12px",
-    fontweight: "500",
-    border: "none !important"
+    fontfamily: "Inter-Medium",
+    fontSize: "15px",
+    fontWeight: "500",
+    border: "none !important",
+
   },
+  mainheading: {
+    letterSpacing: "0.69px",
+    color: " #2A2A2A",
+    opacity: "1",
+    fontSize: "18px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+  },
+  subheading: {
+    letterSpacing: "0.54px",
+    color: "#2A2A2A",
+    opacity: "1",
+    marginLeft: "3px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+    fontSize: "14px",
+
+  },
+
   heading: {
-    marginLeft: "5px",
-    fontfamily: "Inter",
+    marginLeft: "3px",
+    letterSpacing: "0.69px",
+    color: "#2A2A2A",
+    opacity: "1",
+    fontFamily: "Inter",
     fontweight: "600"
   }
 }));
 
-export default function CustomizedSnackbars() {
+export default function CustomizedSnackbars(props) {
+
+  console.log("0000000000000000000", props)
+
+
+  const [addAddress, setAddAddress] = React.useState("")
+
+
+  const redirect = () => {
+    console.log(addAddress, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+  }
+
+
+  const checking = () => {
+    let istrue = "false"
+  }
+
+
+
   const classes = useStyles();
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
-
+  const [message, setMessage] = useState("")
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
+
+
+  const addWhitelistAddress = async () => {
+
+    const reqObj = {
+
+      "address": addAddress,
+      "allowVoting": allowVoting,
+      "allowProposalCreation": proposal
+    }
+    setMessage(reqObj.address)
+
+    let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
+
+    if (error || !totalAccounts)
+      return
+
+    props.getListOffAddress();
+    handleCloseDailog();
+    // setAddAddress(totalAccounts);
+  }
+
+
   const handleClick = () => {
     setOpen(true);
   };
   const handleCancelClose = () => {
     setDialogOpen(false);
+    setallowVoting(false);
+    setProposal(false);
+    setAddAddress("");
   }
 
   const handleClose = (event, reason) => {
@@ -145,46 +219,51 @@ export default function CustomizedSnackbars() {
         </button>
       </div>
       <Dialog className={classes.dialog} open={dialogOpen} divide>
-        <DialogTitle className={classes.heading} id="form-dialog-title">Add a new Address</DialogTitle>
+        <DialogTitle
+
+          className={classes.heading} id="form-dialog-title"><div className={classes.mainheading}>Add a New Address</div>  </DialogTitle>
         <DialogContent>
           <DialogContentText className={classes.subCategory}>
-            <b>Address</b>
+            <div className={classes.subheading}>Address</div>
           </DialogContentText>
           <input className={classes.input} type="text" required="true"
-            value={addressInput}
+            // value={addAddress}
             onChange={(e) =>
-              setAddressInput(e.target.value)}
+              setAddAddress(e.target.value)}
           ></input>
         </DialogContent>
-        <div style={{ display: "inline", marginTop: "10px" }}>
-          <input
+        <div style={{ display: "flex", marginTop: "10px" }}>
+
+          {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)
-
-
-
             }}
-
             type="checkbox"
             className="checked-btn"
             checked={allowVoting}
 
-          />
-          <span className="tabledata">
+          /> */}
+          <div className="custom-check1"
+            onClick={() => {
+              setallowVoting(!allowVoting);
+            }}
+
+            className={!allowVoting ? "custom-check1" : "custom-check1-active"}
+          ></div>
+          <span className="checkbox-heading">
             Allow Voting
           </span>
         </div>
-        <div style={{ display: "inline" }}>
-          <input
-            onChange={(e) => {
-              setProposal(!proposal)
-
+        <div style={{ display: "flex" }}>
+          <div className="custom-check1"
+            onClick={() => {
+              setProposal(!proposal);
             }}
-            type="checkbox"
-            className="checked-btn"
-            checked={proposal}
-          />
-          <span className="tabledata">
+
+            className={!proposal ? "custom-check1" : "custom-check1-active"}
+          ></div>
+
+          <span className="checkbox-heading">
             Allow Proposal Creation
           </span>
         </div>
@@ -199,13 +278,13 @@ export default function CustomizedSnackbars() {
                 variant="contained"
                 color="primary"
                 onClick={() => {
+                  addWhitelistAddress()
                   setallowVoting(false);
-                  setAddressInput("");
+                  setAddAddress("");
                   setProposal(false);
-                  handleCloseDailog();
 
                 }}
-                disabled={(!allowVoting && !proposal) || !addressInput}
+                disabled={(!allowVoting && !proposal) || !addAddress}
 
               >
                 Add
@@ -226,7 +305,8 @@ export default function CustomizedSnackbars() {
             <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
             <span>
               <div className="toast-message">You have successfully added address</div>
-              <div className="toast-address">0x9b20bd863e1cf226b98…6b10</div>
+              <div className="toast-address">{message}</div>
+              {/* 0x9b20bd863e1cf226b98…6b10 */}
             </span>
           </div>
         </Alert>
