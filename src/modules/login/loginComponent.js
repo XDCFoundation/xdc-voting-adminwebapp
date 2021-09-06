@@ -7,6 +7,8 @@ import "../../assets/styles/custom.css";
 // import "../../assets/styles/images";
 import utility from '../../utility';
 import validator from 'validator';
+import { LoginAPI } from '../../services';
+import Utils from '../../utility';
 
 export default function LoginForm() {
 
@@ -37,6 +39,34 @@ export default function LoginForm() {
 
         }
     }
+
+
+    const login = async () => {
+        const reqObj = {
+          "email": emailValid,
+          "password":passwordValid
+        }
+    
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj)
+        const [error, totalAccounts] = await Utils.parseResponse(LoginAPI.loginapi(reqObj))
+        console.log(totalAccounts, "total-accounts");
+        console.log(error,"errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+        if (error || !totalAccounts)
+        {
+
+            utility.apiSuccessToast("Sign in successfull");
+       
+       
+        return
+        }
+          
+          else
+
+          utility.apiFailureToast("Wrong Email or password");
+        
+       
+    
+      }
 
 
 
@@ -95,6 +125,7 @@ export default function LoginForm() {
 
                             setPasswordValid("");
                             validateEmail();
+                            login()
 
 
                         }}

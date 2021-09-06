@@ -30,7 +30,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import { makeStyles, mergeClasses } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { EditService } from '../../services';
+import { EditService, Logout } from '../../services';
 import { DeleteService } from '../../services';
 import { AccountService } from '../../services';
 import Utils from '../../utility';
@@ -229,6 +229,23 @@ export default function DashboardComponent(props) {
 
   }
 
+  const logout = async () => {
+    const reqObj = {
+      "address": addressInput,
+    "allowVoting": allowVoting,
+    "allowProposalCreation": proposal
+    }
+
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj)
+    let [error, totalAccounts] = await Utils.parseResponse(Logout.logoutapi(reqObj))
+    console.log(totalAccounts, "total-accounts");
+    if (error || !totalAccounts)
+      return
+
+    
+
+  }
+
 
 
 
@@ -396,7 +413,7 @@ export default function DashboardComponent(props) {
 
                 <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
                 <hr className="menu-line" />
-                <MenuItem onClick={handleLogout} className="menu-heading" style={{ backgroundColor: "white" }} >Logout</MenuItem>
+                <MenuItem onClick={()=>{handleLogout();logout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Logout</MenuItem>
               </Menu>
             </div>
           </span>
