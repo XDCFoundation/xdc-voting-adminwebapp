@@ -5,6 +5,9 @@ import CustomInput from "../../common/components/CustomInput";
 import { history } from "../../managers/history";
 import Divider from "@material-ui/core/Divider/Divider";
 import validator from 'validator';
+import { ResetPassword } from '../../services';
+import Utils from '../../utility';
+
 
 export default function ForgotForm() {
 
@@ -32,6 +35,25 @@ export default function ForgotForm() {
 
         }
     }
+
+    const forgotpassword = async () => {
+
+        const reqObj = {
+    
+          "email": emailValid
+          
+        }
+       
+    
+        let [error, totalAccounts] = await Utils.parseResponse(ResetPassword.resetpassword(reqObj))
+    
+        if (error || !totalAccounts)
+          return
+    
+      
+       
+        
+      }
 
     return (
         <div className="main-div">
@@ -72,6 +94,7 @@ export default function ForgotForm() {
                     <button className="sign-btn"
                         onClick={() => {
                             validateEmail();
+                            forgotpassword()
 
                         }}
                         disabled={!emailValid}
