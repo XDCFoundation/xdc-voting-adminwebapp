@@ -1,7 +1,7 @@
 import { httpService } from "../managers/httpService";
 import { httpConstants } from "../constants";
 
-export default { getListOfWhitelistedAddress, addWhitelistedAddress, deleteWhitelistedAddress, editWhitelistedAddress, loginapi, logoutapi, resetpassword }
+export default { getListOfWhitelistedAddress, addWhitelistedAddress, deleteWhitelistedAddress, editWhitelistedAddress, loginapi, logoutapi, resetpassword, changepassword }
 async function getListOfWhitelistedAddress() {
     let url = process.env.REACT_APP_GET_LIST_OF_WHITELISTED_ADDRESS;
     return httpService(httpConstants.METHOD_TYPE.GET, { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON }, {}, url)
@@ -106,6 +106,23 @@ async function logoutapi(reqObj) {
 
 async function resetpassword(reqObj) {
     let url = process.env.REACT_APP_AUTH0_RESET_PASSWORD_API;
+    return httpService(httpConstants.METHOD_TYPE.POST, { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON }, reqObj, url)
+        .then(
+            response => {
+                if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
+                    return Promise.reject();
+                return Promise.resolve(response.responseData);
+
+            }
+           
+        ).catch(function (err) {
+            return Promise.reject(err);
+        },
+        // console.log("respposne",response);
+        );
+}
+async function changepassword(reqObj) {
+    let url = process.env.REACT_APP_AUTH0_CHANGE_PASSWORD_API;
     return httpService(httpConstants.METHOD_TYPE.POST, { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON }, reqObj, url)
         .then(
             response => {

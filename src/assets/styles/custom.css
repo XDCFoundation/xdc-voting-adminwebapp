@@ -632,6 +632,10 @@ color: #FFFFFF;
     display: flex;
      margin-top: 5px;
 }
+.paging{
+    float: right;
+    margin-top: 15px;
+}
 .checked-down{
     display: flex;
 }
