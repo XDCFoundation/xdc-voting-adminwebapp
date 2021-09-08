@@ -413,7 +413,7 @@ export default function DashboardComponent(props) {
 
                 <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
                 <hr className="menu-line" />
-                <MenuItem onClick={()=>{handleLogout();logout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Logout</MenuItem>
+                <MenuItem onClick={()=>{handleLogout();logout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Log out</MenuItem>
               </Menu>
             </div>
           </span>
@@ -445,7 +445,7 @@ export default function DashboardComponent(props) {
                     }}
                     align="left"
                   >
-                    <span className="tableheading">Added On</span>
+                    <span className="tableheading">Added on</span>
                   </TableCell>
                   <TableCell
                     style={{

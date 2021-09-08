@@ -28,15 +28,15 @@ export default function PaginationRounded() {
  setSkip(skip+10);
  return skip
   }
+  
 
-
-  const pagination=async()=>{
+  const pagination=async(skip,limit)=>{
     
    setSkip(skip+10);
     console.log(skip,"skipppppppppppppppppppppppppppppp");
    let limits = limit ? limit : 10;
     let urlPath = `?skip=${skip}&limit=${limits}`
-    let [error, listOfAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
+    let [error, listOfAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(urlPath,{}))
     if (error || !listOfAccounts)
         return
       
