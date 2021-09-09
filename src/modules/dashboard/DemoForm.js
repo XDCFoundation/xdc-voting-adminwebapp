@@ -155,7 +155,7 @@ export default function CustomizedSnackbars(props) {
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
-
+  const [emailError, setEmailError] = useState('')
 
   const addWhitelistAddress = async () => {
 
@@ -175,6 +175,17 @@ export default function CustomizedSnackbars(props) {
     props.getListOffAddress();
     handleCloseDailog();
     // setAddAddress(totalAccounts);
+  }
+
+  const validateAddress=()=>{
+    // console.log(addAddress.slice(0,3),"slice")
+    if(addAddress && addAddress.length>40 || addAddress.slice(0,2)=="xdc")
+    {
+      addWhitelistAddress()
+    }
+    else{
+      setEmailError('Address should start with xdc & min 40 characters')
+    }
   }
 
 
@@ -228,9 +239,14 @@ export default function CustomizedSnackbars(props) {
           </DialogContentText>
           <input className={classes.input} type="text" required="true"
             // value={addAddress}
-            onChange={(e) =>
-              setAddAddress(e.target.value)}
+            onChange={(e) =>{
+              setAddAddress(e.target.value);
+              setEmailError("");
+            }
+          }
+              value={addAddress}
           ></input>
+            <div style={{ marginLeft: "5px", color: "red"}}>{emailError}</div>
         </DialogContent>
         <div style={{ display: "flex", marginTop: "10px" }}>
 
@@ -278,10 +294,11 @@ export default function CustomizedSnackbars(props) {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  addWhitelistAddress()
+                 
                   setallowVoting(false);
                   setAddAddress("");
                   setProposal(false);
+                  validateAddress()
 
                 }}
                 disabled={(!allowVoting && !proposal) || !addAddress}

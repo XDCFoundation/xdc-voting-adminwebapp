@@ -175,15 +175,19 @@ const useStyles = makeStyles((theme) => ({
 export default function DashboardComponent(props) {
 
   const [getListOfAddress, setgetListOfAddress] = React.useState([])
+  const [pageNumber, setPageNumber] = React.useState()
+  const [pagecount, setPagecount] = React.useState()
 
-  const getListOffAddress = async () => {
+  const getListOffAddress = async (data) => {
 
-    let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress())
+    let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(data))
+  //  setPagecount(totalAccounts.length)
     if (error || !totalAccounts)
       return
     setgetListOfAddress(totalAccounts);
   }
   useEffect(() => {
+    // setPageNumber((pagecount)/10);
     getListOffAddress()
   }, []);
 
@@ -291,7 +295,16 @@ export default function DashboardComponent(props) {
 
   const { state } = props;
 
-
+  const validateAddress=()=>{
+    // console.log(addressInput.slice(0,3),"slice")
+    if(addressInput && addressInput.length>40 || addressInput.slice(0,2)=="xdc")
+    {
+      editWhitelistAddress()
+    }
+    else{
+      setEmailError('Address should start with xdc & min 40 characters')
+    }
+  }
 
 
   const { useState, Fragment } = React
@@ -299,10 +312,11 @@ export default function DashboardComponent(props) {
   // The added element component
   const AddedElement = () => <button
     onClick={() => {
-      editWhitelistAddress()
+     
       setallowVoting(false);
       setAddressInput("");
       setProposal(false);
+      validateAddress();
 
 
     }}
@@ -312,6 +326,7 @@ export default function DashboardComponent(props) {
     className={classes.addbtn} type="button">Done</button>
 
   // The parent component
+  const [emailError, setEmailError] = useState('')
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Date, setDate] = React.useState();
   const [deleteMessage, setDeleteMessage] = useState("")
@@ -413,7 +428,7 @@ export default function DashboardComponent(props) {
 
                 <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
                 <hr className="menu-line" />
-                <MenuItem onClick={()=>{handleLogout();logout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Logout</MenuItem>
+                <MenuItem onClick={()=>{handleLogout();logout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Log out</MenuItem>
               </Menu>
             </div>
           </span>
@@ -445,7 +460,7 @@ export default function DashboardComponent(props) {
                     }}
                     align="left"
                   >
-                    <span className="tableheading">Added On</span>
+                    <span className="tableheading">Added on</span>
                   </TableCell>
                   <TableCell
                     style={{
@@ -622,15 +637,17 @@ export default function DashboardComponent(props) {
 
             <input className="editinput"
               value={addressInput}
-              onChange={(e) =>
+              onChange={(e) =>{
                 setAddressInput(e.target.value)
-
+                setEmailError("");
               }
+            }
 
               disabled={!editClick}
 
 
             ></input>
+               <div style={{ marginLeft: "5px", color: "red",marginBottom:"-2px"}}>{emailError}</div>
             <DialogContentText className={classes.addedon}>
               <span >Added on: <span>{moment(Date).format('DD MMMM YYYY')}</span></span>
             </DialogContentText>
