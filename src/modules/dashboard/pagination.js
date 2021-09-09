@@ -17,12 +17,14 @@ backgroundColor:"black"
   }
 }));
 
-export default function PaginationRounded() {
+export default function PaginationRounded(props) {
   const classes = useStyles();
 
   const [getListOfAddress, setgetListOfAddress] = React.useState([])
   const [skip, setSkip] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
+  const [pageNumber, setPageNumber] = React.useState()
+  const [pagecount, setPagecount] = React.useState()
 
   const setSkips =()=>{
  setSkip(skip+10);
@@ -30,13 +32,16 @@ export default function PaginationRounded() {
   }
   
 
-  const pagination=async(skip,limit)=>{
+  const pagination=async()=>{
     
    setSkip(skip+10);
     console.log(skip,"skipppppppppppppppppppppppppppppp");
-   let limits = limit ? limit : 10;
-    let urlPath = `?skip=${skip}&limit=${limits}`
-    let [error, listOfAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(urlPath,{}))
+  
+   
+    let [error, listOfAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(skip,10))
+    // console.log((listOfAccounts.length)/10,"paginggggggggggggggggggggg");
+    // setPagecount(listOfAccounts.length/10)
+    // setPageNumber((listOfAccounts.length)/10);
     if (error || !listOfAccounts)
         return
       
@@ -46,7 +51,7 @@ export default function PaginationRounded() {
   return (
     <div className={classes.root} >
       <div className="paging">
-        <Pagination onChange={pagination} count={20}  shape="rounded" siblingCount={0} color="primary" size="small" />
+        <Pagination onChange={pagination} count={pagecount}  shape="rounded" siblingCount={0} color="primary" size="small" />
       </div>
     </div>
   );
