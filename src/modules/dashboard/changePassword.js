@@ -6,6 +6,8 @@ import { history } from "../../managers/history";
 import "../../assets/styles/custom.css";
 import DemoForm from './DemoForm';
 import utility from '../../utility';
+import Utils from '../../utility';
+import { ChangePassword } from '../../services';
 // import "../../assets/styles/images";
 
 
@@ -30,6 +32,29 @@ export default function LoginForm() {
         }
 
     }
+
+    const updatepassword = async () => {
+
+        const reqObj = {
+    
+            "email": "",
+            "oldPassword": addressInput,
+            "password": allowVoting,
+            "userId": "auth0|611c92b7f01e430069bd2c15"
+           
+          
+        }
+       
+    
+        let [error, totalAccounts] = await Utils.parseResponse(ChangePassword.changepassword(reqObj))
+    
+        if (error || !totalAccounts)
+          return
+    
+      
+       
+        
+      }
 
     return (
 
@@ -145,6 +170,7 @@ export default function LoginForm() {
                             setAddressInput("");
                             setProposal("");
                             checkValidationPassword();
+                            updatepassword()
 
 
                         }}

@@ -12,3 +12,6 @@ export { default as EditService } from "./getListOfAddress"
 export { default as LoginAPI } from "./getListOfAddress"
 export { default as Logout } from "./getListOfAddress"
 export { default as ResetPassword } from "./getListOfAddress"
+export { default as ChangePassword } from "./getListOfAddress"
+// export { default as Auth0} from "./auth0"
+
