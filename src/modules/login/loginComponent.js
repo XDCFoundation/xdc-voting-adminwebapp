@@ -9,9 +9,10 @@ import utility from '../../utility';
 import validator from 'validator';
 import { LoginAPI } from '../../services';
 import Utils from '../../utility';
+import Auth0Service from "../../services/auth0";
+import { AuthService } from '../../services';
 
-
-export default function LoginForm() {
+export default function LoginForm(props) {
 
 
     const handlePassword = () => {
@@ -24,50 +25,72 @@ export default function LoginForm() {
     const [emailError, setEmailError] = useState('')
 
 
-    const validateEmail = (e) => {
+    // const validateEmail = (e) => {
 
 
 
-        if (validator.isEmail(emailValid)) {
+    //     if (validator.isEmail(emailValid)) {
 
-            history.push('/dashboard')
+    //         history.push('/dashboard')
 
-        }
+    //     }
 
-        else {
+    //     else {
 
-            setEmailError('Please enter a valid email address')
+    //         setEmailError('Please enter a valid email address')
 
-        }
-    }
+    //     }
+    // }
 
 
     const login = async () => {
         const reqObj = {
-          "email": emailValid,
-          "password":passwordValid
+            "email": emailValid,
+            "password": passwordValid
         }
-    
+
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj)
-        const [error, totalAccounts] = await Utils.parseResponse(LoginAPI.loginapi(reqObj))
-        console.log(totalAccounts, "total-accounts");
-        console.log(error,"errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
-        if (error || !totalAccounts)
-        {
-
-            utility.apiSuccessToast("Sign in successfull");
-       
-       
-        return
+        const [error, authResponse] = await Utils.parseResponse(new AuthService().signin(emailValid, passwordValid))
+        console.log(authResponse, "auth0-response");
+        console.log(error, "errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+        // const validateEmail = (e) => {
+        if (error || !authResponse) {
+            setEmailError('Please enter a valid email address')
         }
-          
-          else
 
-          utility.apiFailureToast("Wrong Email or password");
-        
-       
-    
-      }
+
+        else if (validator.isEmail(emailValid)) {
+            utility.apiSuccessToast("Sign in successfull");
+            history.push('/dashboard')
+
+        }
+    }
+
+    // else {
+
+    //     setEmailError('Please enter a valid email address')
+
+    // }
+    // }
+    // if (error || !totalAccounts)
+    // {
+    //     utility.apiFailureToast("Wrong Email or password");
+    //     // utility.apiSuccessToast("Sign in successfull");
+
+
+    // return
+    // console.log("return------------------>")
+
+    // }
+
+    //   else
+
+    // //   utility.apiFailureToast("Wrong Email or password");
+    //   utility.apiSuccessToast("Sign in successfull");
+    //   history.push('/dashboard')
+
+
+
 
 
 
@@ -125,8 +148,9 @@ export default function LoginForm() {
 
 
                             setPasswordValid("");
-                            validateEmail();
-                            login()
+                            // validateEmail();
+                            login();
+                            // Auth0Service.signin();
 
 
                         }}
