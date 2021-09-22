@@ -10,6 +10,7 @@ import Utils from '../../utility';
 import { useEffect } from "react";
 
 
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -170,7 +171,12 @@ export default function CustomizedSnackbars(props) {
     let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
 
     if (error || !totalAccounts)
+    {
+      // alert(error.message)
+      setEmailError(error.message)
+    
       return
+    }
 
     props.getListOffAddress();
     handleCloseDailog();
@@ -241,6 +247,7 @@ export default function CustomizedSnackbars(props) {
             // value={addAddress}
             onChange={(e) =>{
               setAddAddress(e.target.value);
+              setEmailError("");
               setEmailError("");
             }
           }

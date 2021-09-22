@@ -21,20 +21,20 @@ export default function ForgotForm() {
     }
 
 
-    const validateEmail = (e) => {
+    // const validateEmail = (e) => {
 
 
-        if (validator.isEmail(emailValid)) {
+    //     if (validator.isEmail(emailValid)) {
 
-            history.push('/email-sent')
+    //         history.push('/email-sent')
 
-        }
-        else {
-            setEmailError('Please enter a valid email address');
+    //     }
+    //     else {
+    //         setEmailError('Please enter a valid email address');
 
 
-        }
-    }
+    //     }
+    // }
 
     const forgotpassword = async () => {
 
@@ -45,11 +45,22 @@ export default function ForgotForm() {
         }
        
     
-        let [error, totalAccounts] = await Utils.parseResponse(ResetPassword.resetpassword(reqObj))
+        let [error, forgotPass] = await Utils.parseResponse(ResetPassword.resetpassword(reqObj))
+
+
+        if (error || !forgotPass)
+        {
+            setEmailError('Please enter a valid email address'); 
+        }
+
+       else if (validator.isEmail(emailValid)) {
+
+            history.push('/email-sent')
+
+        }
+        
     
-        if (error || !totalAccounts)
-          return
-    
+        
       
        
         
@@ -93,7 +104,7 @@ export default function ForgotForm() {
                 <div>
                     <button className="sign-btn"
                         onClick={() => {
-                            validateEmail();
+                            // validateEmail();
                             forgotpassword()
 
                         }}
