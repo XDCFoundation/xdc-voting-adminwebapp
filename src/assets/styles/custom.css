@@ -73,6 +73,9 @@ html, body {
     opacity: 1;
     cursor: pointer;
 }
+.MuiDialogContent-root{
+    margin-top: -15px !important;
+}
 .voting p{
     margin-top: 5%;
 /* margin-left: 555px; */

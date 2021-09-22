@@ -699,8 +699,8 @@ export default function DashboardComponent(props) {
 
             <Fragment>
               <button onClick={() => {
-                if (count === 1) { handleCancelClose1() }
-                else { setCount(1); setButtonText("Cancel"); handleEditClick() }
+                if (count === 1) { handleCancelClose1(); setEmailError("") }
+                else { setCount(1); setButtonText("Cancel"); handleEditClick(); setEmailError("") }
               }}
 
 
