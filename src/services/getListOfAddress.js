@@ -105,7 +105,7 @@ async function logoutapi(reqObj) {
 }
 
 async function resetpassword(reqObj) {
-    let url = process.env.REACT_APP_AUTH0_RESET_PASSWORD_API;
+    let url = process.env.REACT_APP_AUTH_SERVICE_BASE_URL + "reset-password";
     return httpService(httpConstants.METHOD_TYPE.POST, { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON }, reqObj, url)
         .then(
             response => {

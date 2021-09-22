@@ -8,11 +8,11 @@ import DemoForm from './DemoForm';
 import utility from '../../utility';
 import Utils from '../../utility';
 import { ChangePassword } from '../../services';
+import LoginForm from '../login/loginComponent';
 // import "../../assets/styles/images";
 
 
-export default function LoginForm() {
-
+export default function LoginChange(props) {
 
     const [allowVoting, setallowVoting] = React.useState("");
     const [proposal, setProposal] = React.useState("");
@@ -26,31 +26,39 @@ export default function LoginForm() {
         if ((allowVoting != proposal) | ((allowVoting.length <= 8) | (addressInput.length <= 8))) {
             setIsError("Password should match and have minimum 8 characters");
         } else {
-            history.push('/')
+            history.push('/dashboard')
 
 
         }
 
     }
 
+    let userInfo = localStorage.getItem("userInfo")
+userInfo = JSON.parse(userInfo);
+    // "userId": "auth0|611c92b7f01e430069bd2c15"
     const updatepassword = async () => {
-
+        let userInfo = localStorage.getItem("userInfo")
+        userInfo = JSON.parse(userInfo);
+        console.log(userInfo,"localdata")
         const reqObj = {
-    
-            "email": "",
+            "email":userInfo.email,
+            "userId":userInfo.sub,
             "oldPassword": addressInput,
             "password": allowVoting,
-            "userId": "auth0|611c92b7f01e430069bd2c15"
-           
-          
+            "password":proposal
         }
        
     
         let [error, totalAccounts] = await Utils.parseResponse(ChangePassword.changepassword(reqObj))
     
         if (error || !totalAccounts)
-          return
+        {
+
+        }
     
+        else{
+            utility.apiSuccessToast("password changed successfully");
+        }
       
        
         

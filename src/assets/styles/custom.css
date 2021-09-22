@@ -94,6 +94,11 @@ color: #2A2A2A;
   font-style: normal;
   line-height: normal;
 }
+@media (min-width:1500px){
+.voting p{
+    margin-left: 36vw !important;
+} 
+}
 .change-password{
     margin-top: -75px;
     margin-bottom: 55px;
@@ -146,7 +151,7 @@ color: #2A2A2A;
     font-family: "Inter",sans-serif;
 }
 .heading p{
-    margin-top: 13px;
+    margin-top: 16px;
     margin-left: 20px;
     width: 38px;
     height: 14px;
@@ -160,6 +165,9 @@ color: #2A2A2A;
     /* opacity: 1; */
     font-family: "Inter",sans-serif;
     font-size: 14px;
+}
+.MuiMenu-paper{
+    margin-top: -10px !important;
 }
 .heading-change p{
     margin-top: 7px;

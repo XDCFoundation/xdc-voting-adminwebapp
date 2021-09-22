@@ -1,13 +1,11 @@
 let initialState = {
-    isLoggedIn: false,
-    loginFailure: null,
-    deviceId: null,
-    sessionToken: null,
-    loading: false,
-    isForgotPasswordSuccess: false
+    userInfo:{}
 };
 export default function user(state = initialState, action) {
     switch (action.type) {
+        case 'LOGIN_SUCCESS':{
+
+        }
         default:
             return state;
     }
