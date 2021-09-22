@@ -26,28 +26,39 @@ export default function LoginChange(props) {
         if ((allowVoting != proposal) | ((allowVoting.length <= 8) | (addressInput.length <= 8))) {
             setIsError("Password should match and have minimum 8 characters");
         } else {
-            history.push('/')
+            history.push('/dashboard')
 
 
         }
 
     }
+
+    let userInfo = localStorage.getItem("userInfo")
+userInfo = JSON.parse(userInfo);
     // "userId": "auth0|611c92b7f01e430069bd2c15"
     const updatepassword = async () => {
-
+        let userInfo = localStorage.getItem("userInfo")
+        userInfo = JSON.parse(userInfo);
+        console.log(userInfo,"localdata")
         const reqObj = {
-            "email":"nadeem@leewayhertz.com",
-            "userId":"auth0|6149d7a38681e0006941b38a",
+            "email":userInfo.email,
+            "userId":userInfo.sub,
             "oldPassword": addressInput,
             "password": allowVoting,
+            "password":proposal
         }
        
     
         let [error, totalAccounts] = await Utils.parseResponse(ChangePassword.changepassword(reqObj))
     
         if (error || !totalAccounts)
-          return
+        {
+
+        }
     
+        else{
+            utility.apiSuccessToast("password changed successfully");
+        }
       
        
         
