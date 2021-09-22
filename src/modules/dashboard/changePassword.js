@@ -14,9 +14,6 @@ import LoginForm from '../login/loginComponent';
 
 export default function LoginChange(props) {
 
-    
-
-
     const [allowVoting, setallowVoting] = React.useState("");
     const [proposal, setProposal] = React.useState("");
     const [addressInput, setAddressInput] = React.useState("");
@@ -39,15 +36,10 @@ export default function LoginChange(props) {
     const updatepassword = async () => {
 
         const reqObj = {
-    
             "email":"nadeem@leewayhertz.com",
             "userId":"auth0|6149d7a38681e0006941b38a",
             "oldPassword": addressInput,
             "password": allowVoting,
-            // "password":proposal
-           
-           
-          
         }
        
     

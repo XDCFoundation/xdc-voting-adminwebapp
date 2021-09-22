@@ -1,19 +1,18 @@
-import React, { useState } from 'react'
-import { Column, Row } from "simple-flexbox";
-import { Button } from "@material-ui/core";
+import React, {useState} from 'react'
+import {Column, Row} from "simple-flexbox";
+import {Button} from "@material-ui/core";
 import CustomInput from "../../common/components/CustomInput";
-import { history } from "../../managers/history";
+import {history} from "../../managers/history";
 import "../../assets/styles/custom.css";
 // import "../../assets/styles/images";
 import utility from '../../utility';
 import validator from 'validator';
-import { LoginAPI } from '../../services';
+import {LoginAPI} from '../../services';
 import Utils from '../../utility';
 import Auth0Service from "../../services/auth0";
-import { AuthService } from '../../services';
+import {AuthService} from '../../services';
 
 export default function LoginForm(props) {
-
 
 
     const handlePassword = () => {
@@ -27,7 +26,6 @@ export default function LoginForm(props) {
 
 
     // const validateEmail = (e) => {
-
 
 
     //     if (validator.isEmail(emailValid)) {
@@ -49,21 +47,13 @@ export default function LoginForm(props) {
             "email": emailValid,
             "password": passwordValid
         }
-
-        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj)
         const [error, authResponse] = await Utils.parseResponse(new AuthService().signin(emailValid, passwordValid))
-        console.log(authResponse, "auth0-response");
-        console.log(error, "errrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
-        // const validateEmail = (e) => {
         if (error || !authResponse) {
-            setEmailError('Please enter a valid email address')
-        }
-
-
-        else if (validator.isEmail(emailValid)) {
+            utility.apiFailureToast("Wrong email or password");
+        } else {
+            localStorage.setItem("userInfo", JSON.stringify(authResponse))
             utility.apiSuccessToast("Sign in successfull");
             history.push('/dashboard')
-
         }
     }
 
@@ -91,17 +81,13 @@ export default function LoginForm(props) {
     //   history.push('/dashboard')
 
 
-
-
-
-
     return (
         <div className="main-div">
             <div className="voting">
                 <p>Voting Address Manager</p>
             </div>
             <div className="login-div">
-                <img className="logo" src={require("../../assets/styles/images/xdc_logo.svg")} ></img>
+                <img className="logo" src={require("../../assets/styles/images/xdc_logo.svg")}></img>
                 <div className="sign-in">
 
                     Sign in
@@ -109,60 +95,61 @@ export default function LoginForm(props) {
                 <div className="heading">
                     <p>Email</p>
                     <input className="input" type="text" id="userEmail" required="true"
-                        value={emailValid}
-                        onChange={(e) => {
-                            setEmailValid(e.target.value)
-                            setEmailError("")
-                        }
+                           value={emailValid}
+                           onChange={(e) => {
+                               setEmailValid(e.target.value)
+                               setEmailError("")
+                           }
 
 
-                        }
+                           }
 
                     />
 
                 </div>
-                <div style={{ marginLeft: "20px", color: "red", marginTop: "-7px" }}>{emailError}</div>
+                <div style={{marginLeft: "20px", color: "red", marginTop: "-7px"}}>{emailError}</div>
                 <div className="heading">
                     <p>Password</p>
                     <input className="input" type="password" required="true"
-                        value={passwordValid}
-                        onChange={(e) =>
+                           value={passwordValid}
+                           onChange={(e) =>
 
-                            setPasswordValid(e.target.value)
+                               setPasswordValid(e.target.value)
 
-                        }
+                           }
 
-                        style={{
-                            fontSize: "38px",
-                            fontWeight: "bolder",
-                            paddingBottom: "10px"
-                        }}
+                           style={{
+                               fontSize: "38px",
+                               fontWeight: "bolder",
+                               paddingBottom: "10px"
+                           }}
                     />
 
 
                 </div>
 
-                <p className="forgot" onClick={handlePassword} >Forgot Password?</p>
+                <p className="forgot" onClick={handlePassword}>Forgot Password?</p>
                 <div>
                     <button className="sign-btn"
-                        onClick={() => {
+                            onClick={() => {
 
 
-                            setPasswordValid("");
-                            // validateEmail();
-                            login();
-                            // Auth0Service.signin();
+                                setPasswordValid("");
+                                // validateEmail();
+                                login();
+                                // Auth0Service.signin();
 
 
-                        }}
-                        disabled={(!passwordValid) || !emailValid}
+                            }}
+                            disabled={(!passwordValid) || !emailValid}
 
-                        type="button"> Sign in</button>
+                            type="button"> Sign in
+                    </button>
                 </div>
 
 
             </div>
-            <div style={{ height: "50px" }}></div>
+            <div style={{height: "50px"}}></div>
 
         </div>
 
