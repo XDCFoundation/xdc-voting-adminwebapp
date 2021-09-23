@@ -51,7 +51,10 @@ export default function PaginationRounded(props) {
   return (
     <div className={classes.root} >
       <div className="paging">
-        <Pagination onChange={pagination} count={pagecount}  shape="rounded" siblingCount={0} color="primary" size="small" />
+        <Pagination 
+        // onChange={pagination} count={pagecount}  
+        count={20}
+        shape="rounded" siblingCount={0} color="primary" size="small" />
       </div>
     </div>
   );

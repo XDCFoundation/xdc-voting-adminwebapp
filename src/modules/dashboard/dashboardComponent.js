@@ -633,7 +633,7 @@ export default function DashboardComponent(props) {
             <DialogTitle id="form-dialog-title"><div className="editheading">Address</div></DialogTitle>
 
           </Row>
-          <DialogContent>
+          <DialogContent className="editdialogdiv">
 
             <input className="editinput"
               value={addressInput}
