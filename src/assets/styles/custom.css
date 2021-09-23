@@ -73,7 +73,10 @@ html, body {
     opacity: 1;
     cursor: pointer;
 }
-.MuiDialogContent-root{
+/* .MuiDialogContent-root{
+    margin-top: -15px !important;
+} */
+.editdialogdiv{
     margin-top: -15px !important;
 }
 .voting p{

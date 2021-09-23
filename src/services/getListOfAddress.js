@@ -3,7 +3,8 @@ import { httpConstants } from "../constants";
 
 export default { getListOfWhitelistedAddress, addWhitelistedAddress, deleteWhitelistedAddress, editWhitelistedAddress, loginapi, logoutapi, resetpassword, changepassword }
 async function getListOfWhitelistedAddress(skip=0,limit=10) {
-    let url = process.env.REACT_APP_GET_LIST_OF_WHITELISTED_ADDRESS+`?skip=${skip}&limit=${limit}`;
+    let url = process.env.REACT_APP_GET_LIST_OF_WHITELISTED_ADDRESS;
+    // +`?skip=${skip}&limit=${limit}`;
     return httpService(httpConstants.METHOD_TYPE.GET, { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON }, {}, url)
         .then(
             response => {
