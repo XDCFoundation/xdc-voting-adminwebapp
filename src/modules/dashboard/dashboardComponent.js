@@ -399,7 +399,7 @@ export default function DashboardComponent(props) {
       <div className="header">
         <div className="div1">
           <span>
-            <img className="header-logo" src={require("../../assets/styles/images/xdc_logo.svg")} ></img>
+            <img className="header-logo" src={require("../../assets/styles/images/XDC-Icon-Logo.svg")} ></img>
 
 
           </span>
@@ -414,7 +414,7 @@ export default function DashboardComponent(props) {
 
             <div>
               <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                <img className="profile-logo" src={require("../../assets/styles/images/Profile.png")} ></img>
+                <img className="profile-logo" src={require("../../assets/styles/images/Profile-Logo.svg")} ></img>
 
               </Button>
               <Menu
