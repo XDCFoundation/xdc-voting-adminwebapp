@@ -134,7 +134,7 @@ export default function LoginForm(props) {
                             onClick={() => {
 
 
-                                setPasswordValid("");
+                                // setPasswordValid("");
                                 // validateEmail();
                                 login();
                                 // Auth0Service.signin();
