@@ -40,13 +40,30 @@ html, body {
     margin-left: 34vw;
     width: 460px;
     justify-content: center;
-    height: 350px;
+    height: 390px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 2px 15px #0000001A;
     border: 1px solid #E3E7EB;
     border-radius: 12px;
     opacity: 1;
 }
+.cnlbtn {
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 410px;
+    height: 38px;
+    background: #9fa9ba 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    opacity: 1;
+    border: none;
+    color: white;
+    letter-spacing: 0.54px;
+    color: #FFFFFF;
+    opacity: 1;
+    font-size: 14px;
+    font-family: "Inter",sans-serif;
+
+  }
 
 .forgot-div {
     margin-top: 15vh;
@@ -380,6 +397,7 @@ opacity: 1;
     height: 50px;
     background: transparent 0% 0% no-repeat padding-box;
     opacity: 1;
+    cursor: pointer;
 
 
 }

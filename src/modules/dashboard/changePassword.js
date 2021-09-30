@@ -9,6 +9,8 @@ import utility from '../../utility';
 import Utils from '../../utility';
 import { ChangePassword } from '../../services';
 import LoginForm from '../login/loginComponent';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 // import "../../assets/styles/images";
 
 
@@ -17,9 +19,29 @@ export default function LoginChange(props) {
     const [allowVoting, setallowVoting] = React.useState("");
     const [proposal, setProposal] = React.useState("");
     const [addressInput, setAddressInput] = React.useState("");
-
+    const [anchorEl, setAnchorEl] = React.useState(null);
 
     const [isError, setIsError] = React.useState("");
+
+    const handleCancel=()=>{
+        history.push('/dashboard');
+    }
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+      };
+      const handleClose = () => {
+        setAnchorEl(null);
+      };
+      const handleLogout = () => {
+        history.push('/');
+      }
+      const handleChangePassword = () => {
+        history.push('/change-password');
+      }
+
+      const dashboardRedirect=()=>{
+        history.push('/dashboard');
+      }
 
     const checkValidationPassword = (e) => {
 
@@ -73,7 +95,7 @@ userInfo = JSON.parse(userInfo);
             <div className="header">
                 <div className="div1">
                     <span>
-                        <img className="header-logo" src={require("../../assets/styles/images/xdc_logo.svg")} ></img>
+                        <img className="header-logo" onClick={dashboardRedirect} src={require("../../assets/styles/images/XDC-Icon-Logo.svg")} ></img>
 
 
                     </span>
@@ -84,8 +106,26 @@ userInfo = JSON.parse(userInfo);
                     </span>
                     <span className="profile-icon">
 
-                        <img className="profile-logo" src={require("../../assets/styles/images/Profile.png")} ></img>
+                        {/* <img className="profile-logo" src={require("../../assets/styles/images/Profile-Logo.svg")} ></img> */}
+                        <div>
+              <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+                <img className="profile-logo" src={require("../../assets/styles/images/Profile-Logo.svg")} ></img>
 
+              </Button>
+              <Menu
+                id="simple-menu-item"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+
+              >
+
+                <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
+                <hr className="menu-line" />
+                <MenuItem onClick={()=>{handleLogout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Log out</MenuItem>
+              </Menu>
+            </div>
 
                     </span>
 
@@ -171,6 +211,7 @@ userInfo = JSON.parse(userInfo);
 
                 <div style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
                 <div>
+               
                     <button className="sign-btn"
                         //  onClick={utility.isPasswordValid}
                         onClick={() => {
@@ -185,6 +226,8 @@ userInfo = JSON.parse(userInfo);
                         disabled={!allowVoting || !proposal || !addressInput}
 
                         type="button"> Update Password</button>
+                         <button className="cnlbtn" onClick={handleCancel}>Cancel</button>
+                        
                 </div>
 
 
