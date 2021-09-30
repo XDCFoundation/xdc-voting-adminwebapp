@@ -24,7 +24,7 @@ html, body {
 
 .login-div {
     margin-top: 15vh;
-    margin-left: 34vw;
+    /* margin-left: 34vw; */
     width: 460px;
     justify-content: center;
     height: 380px;
@@ -416,6 +416,10 @@ opacity: 1;
 font-size: 22px;
 font-family: "Inter",sans-serif;
 font-weight: 600;
+}
+.login-center{
+    display: flex;
+    justify-content: center;
 }
 
 .profile-icon{

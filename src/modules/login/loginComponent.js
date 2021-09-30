@@ -86,6 +86,7 @@ export default function LoginForm(props) {
             <div className="voting">
                 <p>Voting Address Manager</p>
             </div>
+            <div className="login-center">
             <div className="login-div">
                 <img className="logo" src={require("../../assets/styles/images/xdc_logo.svg")}></img>
                 <div className="sign-in">
@@ -130,6 +131,8 @@ export default function LoginForm(props) {
 
                 <p className="forgot" onClick={handlePassword}>Forgot Password?</p>
                 <div>
+
+                   {/* { !passwordValid && !emailValid ? "hi": */}
                     <button className="sign-btn"
                             onClick={() => {
 
@@ -142,12 +145,14 @@ export default function LoginForm(props) {
 
                             }}
                             disabled={(!passwordValid) || !emailValid}
-
+                            // {!passwordValid || !emailValid?"errror":""}
                             type="button"> Sign in
                     </button>
+{/* } */}
                 </div>
 
 
+            </div>
             </div>
             <div style={{height: "50px"}}></div>
 
