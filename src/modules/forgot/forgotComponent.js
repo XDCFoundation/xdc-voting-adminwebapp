@@ -71,6 +71,7 @@ export default function ForgotForm() {
             <div className="voting">
                 <p>Voting Address Manager</p>
             </div>
+            <div className="login-center">
             <div className="forgot-div">
                 <img className="logo" src={require("../../assets/styles/images/xdc_logo.svg")} ></img>
                 <div className="forgot-in">
@@ -115,6 +116,7 @@ export default function ForgotForm() {
                 <p className="login-account" onClick={handleRedirectLogin} >Log in to your account</p>
 
 
+            </div>
             </div>
 
             <div style={{ height: "50px" }}></div>

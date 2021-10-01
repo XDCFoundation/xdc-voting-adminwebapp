@@ -67,7 +67,7 @@ html, body {
 
 .forgot-div {
     margin-top: 15vh;
-    margin-left: 34vw;
+    /* margin-left: 34vw; */
     width: 460px;
     justify-content: center;
     height: 360px;
@@ -79,7 +79,7 @@ html, body {
 }
 .email-div{
     margin-top: 15vh;
-    margin-left: 34vw;
+    /* margin-left: 34vw; */
     width: 440px;
     justify-content: center;
     height: 160px;
@@ -98,30 +98,34 @@ html, body {
 }
 .voting p{
     margin-top: 5%;
-/* margin-left: 555px; */
-margin-left: 38vw;
-width: 480px;
-height: 35px;
-/* display: flex; */
-/* text-align: center; */
-float: unset;
-font: normal normal bold 28px/39px Inter;
-letter-spacing: 1.23px;
-/* text-align: center; */
-align-items: center;
-color: #2A2A2A;
-/* opacity: 1; */
-  font-size: 32px/39px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
+    /* margin-left: 555px; */
+    /* margin-left: 38vw; */
+    width: 480px;
+    height: 35px;
+    display: flex;
+    /* text-align: center; */
+    /* float: unset; */
+    font: normal normal bold 28px/39px Inter;
+    letter-spacing: 1.23px;
+    /* text-align: center; */
+    /* align-items: center; */
+    color: #2A2A2A;
+    /* opacity: 1; */
+    font-size: 32px/39px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-right: 100px;
 }
-@media (min-width:1500px){
+/* @media (min-width:1500px){
 .voting p{
     margin-left: 36vw !important;
 } 
-}
+} */
 .change-password{
     margin-top: -75px;
     margin-bottom: 55px;
