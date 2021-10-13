@@ -1,16 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
-import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from "@material-ui/core";
 import "../../assets/styles/custom.css";
-import { AddService } from '../../services';
-import Utils from '../../utility';
+import { AddService } from "../../services";
+import Utils from "../../utility";
 import { useEffect } from "react";
-
-
-
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -20,16 +23,14 @@ const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     "& > * + *": {
-      marginTop: theme.spacing(2)
-    }
+      marginTop: theme.spacing(2),
+    },
   },
 
   Alert: {
-    backgroundColor: "#00144D"
+    backgroundColor: "#00144D",
   },
-  btn: {
-
-  },
+  btn: {},
   value: {
     width: "400px !important",
   },
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "38px",
     width: "55% !important",
     height: "60% !important",
-    borderRadius: "80px !important"
+    borderRadius: "80px !important",
   },
   buttons: {
     padding: "1px 35px 10px 0px",
@@ -85,10 +86,8 @@ const useStyles = makeStyles((theme) => ({
     border: "none",
     fontFamily: "Inter,sans-serif",
 
-
     margin: "14px 8px 15px 2px",
     padding: "3px 19px 3px 20px",
-
   },
   subCategory: {
     marginTop: "-8px",
@@ -98,7 +97,6 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "15px",
     fontWeight: "500",
     border: "none !important",
-
   },
   mainheading: {
     letterSpacing: "0.69px",
@@ -116,7 +114,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Inter,sans-sarif",
     fontWeight: "600",
     fontSize: "14px",
-
   },
 
   heading: {
@@ -125,76 +122,49 @@ const useStyles = makeStyles((theme) => ({
     color: "#2A2A2A",
     opacity: "1",
     fontFamily: "Inter",
-    fontweight: "600"
-  }
+    fontweight: "600",
+  },
 }));
 
 export default function CustomizedSnackbars(props) {
-
-  console.log("0000000000000000000", props)
-
-
-  const [addAddress, setAddAddress] = React.useState("")
-
-
-  const redirect = () => {
-    console.log(addAddress, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-  }
-
-
-  const checking = () => {
-    let istrue = "false"
-  }
-
-
+  const [addAddress, setAddAddress] = React.useState("");
 
   const classes = useStyles();
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
-  const [message, setMessage] = useState("")
+  const [message, setMessage] = useState("");
   const [open, setOpen] = React.useState(false);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
-  const [emailError, setEmailError] = useState('')
+  const [emailError, setEmailError] = useState("");
 
   const addWhitelistAddress = async () => {
-
     const reqObj = {
-
-      "address": addAddress,
-      "allowVoting": allowVoting,
-      "allowProposalCreation": proposal
+      address: addAddress,
+      allowVoting: allowVoting,
+      allowProposalCreation: proposal,
+    };
+    setMessage(reqObj.address);
+    const totalAccounts = await props.addWhiteListAddress(reqObj);
+    if (!totalAccounts) {
+      setEmailError("Unable to add address");
+      return;
     }
-    setMessage(reqObj.address)
-
-    let [error, totalAccounts] = await Utils.parseResponse(AddService.addWhitelistedAddress(reqObj))
-
-    if (error || !totalAccounts)
-    {
-      // alert(error.message)
-      setEmailError(error.message)
-    
-      return
-    }
-
     props.getListOffAddress();
     handleCloseDailog();
-    // setAddAddress(totalAccounts);
-  }
+  };
 
-  const validateAddress=()=>{
-    // console.log(addAddress.slice(0,3),"slice")
-    if(addAddress && addAddress.length>40 || addAddress.slice(0,2)=="xdc")
-    {
-      addWhitelistAddress()
+  const validateAddress = () => {
+    if (
+      (addAddress && addAddress.length > 40) ||
+      addAddress.slice(0, 2) == "xdc"
+    ) {
+      addWhitelistAddress();
+    } else {
+      setEmailError("Address should start with xdc & min 40 characters");
     }
-    else{
-      setEmailError('Address should start with xdc & min 40 characters')
-    }
-  }
-
+  };
 
 
   const handleClick = () => {
@@ -205,7 +175,7 @@ export default function CustomizedSnackbars(props) {
     setallowVoting(false);
     setProposal(false);
     setAddAddress("");
-  }
+  };
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -220,45 +190,50 @@ export default function CustomizedSnackbars(props) {
     // setOpen(true)
   };
   const handleCloseDailog = () => {
-
     setDialogOpen(false);
     setOpen(true);
     // setDialogOpen(true);
   };
 
-
-
-
   return (
     <div className={classes.root}>
-      <div style={{ display: "flex", justifyContent: "space-between", marginTop: "40px", width: "60vw", marginLeft: "20vw" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "40px",
+          width: "60vw",
+          marginLeft: "20vw",
+        }}
+      >
         <div className="whitelisted-heading">Whitelisted Addresses</div>
-        <button variant="outlined" onClick={handleDialog} className="add-btn1" >
+        <button variant="outlined" onClick={handleDialog} className="add-btn1">
           Add
         </button>
       </div>
       <Dialog className={classes.dialog} open={dialogOpen} divide>
-        <DialogTitle
-
-          className={classes.heading} id="form-dialog-title"><div className={classes.mainheading}>Add a New Address</div>  </DialogTitle>
+        <DialogTitle className={classes.heading} id="form-dialog-title">
+          <div className={classes.mainheading}>Add a New Address</div>{" "}
+        </DialogTitle>
         <DialogContent>
           <DialogContentText className={classes.subCategory}>
             <div className={classes.subheading}>Address</div>
           </DialogContentText>
-          <input className={classes.input} type="text" required="true"
+          <input
+            className={classes.input}
+            type="text"
+            required="true"
             // value={addAddress}
-            onChange={(e) =>{
+            onChange={(e) => {
               setAddAddress(e.target.value);
               setEmailError("");
               setEmailError("");
-            }
-          }
-              value={addAddress}
+            }}
+            value={addAddress}
           ></input>
-            <div style={{ marginLeft: "5px", color: "red"}}>{emailError}</div>
+          <div style={{ marginLeft: "5px", color: "red" }}>{emailError}</div>
         </DialogContent>
         <div style={{ display: "flex", marginTop: "10px" }}>
-
           {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)
@@ -268,50 +243,46 @@ export default function CustomizedSnackbars(props) {
             checked={allowVoting}
 
           /> */}
-          <div className="custom-check1"
+          <div
+            className="custom-check1"
             onClick={() => {
               setallowVoting(!allowVoting);
             }}
-
             className={!allowVoting ? "custom-check1" : "custom-check1-active"}
           ></div>
-          <span className="checkbox-heading">
-            Allow Voting
-          </span>
+          <span className="checkbox-heading">Allow Voting</span>
         </div>
         <div style={{ display: "flex" }}>
-          <div className="custom-check1"
+          <div
+            className="custom-check1"
             onClick={() => {
               setProposal(!proposal);
             }}
-
             className={!proposal ? "custom-check1" : "custom-check1-active"}
           ></div>
 
-          <span className="checkbox-heading">
-            Allow Proposal Creation
-          </span>
+          <span className="checkbox-heading">Allow Proposal Creation</span>
         </div>
 
         <DialogActions className={classes.buttons}>
-          <span><button className={classes.cnlbtn}
-            onClick={handleCancelClose}
-          >Cancel</button></span>
+          <span>
+            <button className={classes.cnlbtn} onClick={handleCancelClose}>
+              Cancel
+            </button>
+          </span>
           <span>
             <div>
-              <button className={classes.addbtn}
+              <button
+                className={classes.addbtn}
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                 
                   setallowVoting(false);
                   setAddAddress("");
                   setProposal(false);
-                  validateAddress()
-
+                  validateAddress();
                 }}
                 disabled={(!allowVoting && !proposal) || !addAddress}
-
               >
                 Add
               </button>
@@ -328,9 +299,23 @@ export default function CustomizedSnackbars(props) {
       >
         <Alert severity="" className={classes.Alert}>
           <div style={{ display: "flex" }}>
-            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span
+              style={{
+                marginRight: "10px",
+                marginTop: "-5px",
+                marginLeft: "-8px",
+              }}
+            >
+              <img
+                className="done-logo"
+                style={{ height: "30px", width: "30px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/DONE.svg")}
+              ></img>
+            </span>
             <span>
-              <div className="toast-message">You have successfully added address</div>
+              <div className="toast-message">
+                You have successfully added address
+              </div>
               <div className="toast-address">{message}</div>
               {/* 0x9b20bd863e1cf226b98…6b10 */}
             </span>
@@ -339,4 +324,4 @@ export default function CustomizedSnackbars(props) {
       </Snackbar>
     </div>
   );
-}                                                                                                                                        
+}
