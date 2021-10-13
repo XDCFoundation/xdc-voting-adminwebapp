@@ -11,6 +11,7 @@ import { useEffect } from "react";
 
 
 
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -193,6 +194,7 @@ export default function CustomizedSnackbars(props) {
       setEmailError('Address should start with xdc & min 40 characters')
     }
   }
+
 
 
   const handleClick = () => {

@@ -163,6 +163,8 @@ html, body {
     opacity: 1;
     font-size: 18px;
 }
+
+
 .forgot-in{
     margin-top: 27px;
     margin-left: 152px;
@@ -325,16 +327,38 @@ opacity: 1;
     margin-left: 20px;
     width: 410px;
     height: 38px;
-    background: #2149B9 0% 0% no-repeat padding-box;
+    background: #2149B9  0% 0% no-repeat padding-box;
     border-radius: 8px;
     opacity: 1;
     border: none;
-    color: white;
+    /* color: #eeeeee; */
     letter-spacing: 0.54px;
-    color: #FFFFFF;
+    color: #eeeeee;
     opacity: 1;
     font-size: 14px;
     font-family: "Inter",sans-serif;
+   
+}
+.sign-btn-login{
+    margin-top: 20px;
+    margin-left: 20px;
+    width: 410px;
+    height: 38px;
+    background: #2149B9  0% 0% no-repeat padding-box;
+    border-radius: 8px;
+    opacity: 1;
+    border: none;
+    /* color: #eeeeee; */
+    letter-spacing: 0.54px;
+    color: #eeeeee;
+    opacity: 1;
+    font-size: 14px;
+    font-family: "Inter",sans-serif;
+    cursor: pointer;
+}
+.sign-btn-login:hover{
+    background-color: #eeeeee !important;
+    color: #2149B9;
 }
 .sign-btn1{
     margin-top: 20px;

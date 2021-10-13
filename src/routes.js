@@ -26,9 +26,11 @@ class Routes extends BaseComponent {
                     <Switch>
                         <Route exact path={'/'} component={Login}/>
                         <Route exact path={'/forgot-password'} component={Forgot}/>
-                        <Route exact path={'/email-sent'} component={Email}/>
+                      {/* {false&&<>   */}
+                      <Route exact path={'/email-sent'} component={Email}/>
                         <Route exact path={'/dashboard'} component={Dashboard}/>
                         <Route exact path={'/change-password'} component={Change}/>
+                        {/* </>} */}
 
 
                         <Redirect exact from='*' to="/"/>

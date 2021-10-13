@@ -36,6 +36,7 @@ import { AccountService } from '../../services';
 import Utils from '../../utility';
 import { number } from 'prop-types';
 import moment from 'moment';
+import {sessionManager} from '../../managers/sessionManager';
 const cors = require('cors');
 
 
@@ -233,21 +234,29 @@ export default function DashboardComponent(props) {
 
   }
 
-  const logout = async () => {
-    const reqObj = {
-      "address": addressInput,
-    "allowVoting": allowVoting,
-    "allowProposalCreation": proposal
-    }
+  // const logout = async () => {
+  //   const reqObj = {
+  //     "address": addressInput,
+  //   "allowVoting": allowVoting,
+  //   "allowProposalCreation": proposal
+  //   }
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj)
-    let [error, totalAccounts] = await Utils.parseResponse(Logout.logoutapi(reqObj))
-    console.log(totalAccounts, "total-accounts");
-    if (error || !totalAccounts)
-      return
+  //   console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj)
+  //   let [error, totalAccounts] = await Utils.parseResponse(Logout.logoutapi(reqObj))
+  //   console.log(totalAccounts, "total-accounts");
+  //   if (error || !totalAccounts)
+  //     return
 
     
 
+  // }
+
+  const logOut = async () => {
+  //   sessionManager.removeDataFromCookies("accessToken");
+  //   sessionManager.removeDataFromCookies("userDetails");
+  localStorage.removeItem("userInfo");
+  localStorage.setItem("isLoggedIn",JSON.stringify(false));
+    history.push('/')
   }
 
 
@@ -428,7 +437,7 @@ export default function DashboardComponent(props) {
 
                 <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
                 <hr className="menu-line" />
-                <MenuItem onClick={()=>{handleLogout();logout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Log out</MenuItem>
+                <MenuItem onClick={()=>{logOut()}} className="menu-heading" style={{ backgroundColor: "white" }} >Log out</MenuItem>
               </Menu>
             </div>
           </span>

@@ -45,7 +45,9 @@ export default function ForgotForm() {
         }
        
     
-        let [error, forgotPass] = await Utils.parseResponse(ResetPassword.resetpassword(reqObj))
+        let [error, forgotPass] = await Utils.parseResponse(ResetPassword.resetpassword(reqObj)).catch(err=>{
+            console.log(err,"777777777777777777777777777")
+        })
 
 
         if (error || !forgotPass)
