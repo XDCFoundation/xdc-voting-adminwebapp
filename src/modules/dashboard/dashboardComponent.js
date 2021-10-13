@@ -1,70 +1,58 @@
-import React, { useEffect } from 'react'
-import { Column, Row } from "simple-flexbox";
+import React, { useEffect } from "react";
+import { Row } from "simple-flexbox";
 import { Button } from "@material-ui/core";
-import CustomInput from "../../common/components/CustomInput";
 import { history } from "../../managers/history";
-import Divider from "@material-ui/core/Divider/Divider";
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import FormDialog from '../Dialog/addDialog';
-import Pagination from '@material-ui/lab/Pagination';
-import PaginationRounded from './pagination';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import color from '@material-ui/core/colors/amber';
-import { Tooltip } from '@material-ui/core';
-import EditDialog from '../Dialog/confirmDialog';
-import utility from '../../utility';
-import CustomizedSnackbars from './DemoForm'
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import PaginationRounded from "./pagination";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import { Tooltip } from "@material-ui/core";
+import CustomizedSnackbars from "./DemoForm";
 import "../../assets/styles/custom.css";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles, mergeClasses } from "@material-ui/styles";
+import { makeStyles } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { EditService, Logout } from '../../services';
-import { DeleteService } from '../../services';
-import { AccountService } from '../../services';
-import Utils from '../../utility';
-import { number } from 'prop-types';
-import moment from 'moment';
-const cors = require('cors');
-
+import { EditService, Logout } from "../../services";
+import { DeleteService } from "../../services";
+import { AccountService } from "../../services";
+import Utils from "../../utility";
+import moment from "moment";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-
-
 const useStyles = makeStyles((theme) => ({
   Alert: {
-    backgroundColor: "#00144D"
+    backgroundColor: "#00144D",
   },
   dialog: {
     marginLeft: "26%",
     marginTop: "38px",
     width: "55% !important",
     height: "50% !important",
-    borderRadius: "80px !important"
+    borderRadius: "80px !important",
   },
   buttons: {
     padding: "0px 35px 0px 0px",
     marginTop: "1px",
-    marginBottom: "6px"
+    marginBottom: "6px",
   },
   buttons1: {
     padding: "0px 35px 0px 0px",
     marginTop: "-10px",
-    marginBottom: "6px"
+    marginBottom: "6px",
   },
   input: {
     width: "400px",
@@ -73,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#ffffff",
     borderRadius: "7px",
     outline: "none",
-    marginTop: "-15px"
+    marginTop: "-15px",
     // padding: "15px",
   },
 
@@ -99,7 +87,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Inter,sans-serif",
     margin: "14px 8px 15px 2px",
     padding: "3px 19px 3px 20px",
-
   },
   subCategory: {
     marginTop: "5px",
@@ -108,9 +95,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#9FA9BA",
     letterSpacing: "0.54px",
 
-    fontWeight: "600", fontSize: "13px",
-    fontFamily: "unset"
-
+    fontWeight: "600",
+    fontSize: "13px",
+    fontFamily: "unset",
   },
   addedon: {
     color: "#9FA9BA",
@@ -149,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
   },
   forgotpass: {
     color: "#2149b9",
-    marginLeft: "123px"
+    marginLeft: "123px",
   },
   createaccount: {
     color: "#2149b9",
@@ -158,7 +145,7 @@ const useStyles = makeStyles((theme) => ({
     fontsize: "14px",
   },
   icon: {
-    marginLeft: "-30px"
+    marginLeft: "-30px",
   },
   xdc: {
     color: "#2a2a2a",
@@ -169,104 +156,82 @@ const useStyles = makeStyles((theme) => ({
   heading: {
     marginLeft: "2px",
     fontfamily: "Inter",
-    fontweight: "600"
-  }
+    fontweight: "600",
+  },
 }));
 export default function DashboardComponent(props) {
-
-  const [getListOfAddress, setgetListOfAddress] = React.useState([])
-  const [pageNumber, setPageNumber] = React.useState()
-  const [pagecount, setPagecount] = React.useState()
+  const [getListOfAddress, setgetListOfAddress] = React.useState([]);
+  const [pageNumber, setPageNumber] = React.useState();
+  const [pagecount, setPagecount] = React.useState();
 
   const getListOffAddress = async (data) => {
-
-    let [error, totalAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(data))
-  //  setPagecount(totalAccounts.length)
-    if (error || !totalAccounts)
-      return
+    let [error, totalAccounts] = await Utils.parseResponse(
+      AccountService.getListOfWhitelistedAddress(data)
+    );
+    //  setPagecount(totalAccounts.length)
+    if (error || !totalAccounts) return;
     setgetListOfAddress(totalAccounts);
-  }
+  };
   useEffect(() => {
     // setPageNumber((pagecount)/10);
-    getListOffAddress()
+    getListOffAddress();
   }, []);
-
 
   const deleteaddress = async () => {
     const id = {
-      "address": deleteMessage,
-      "permission": {
-        "allowVoting": allowVoting,
-        "allowProposalCreation": proposal
-      }
-    }
+      address: deleteMessage,
+      permission: {
+        allowVoting: allowVoting,
+        allowProposalCreation: proposal,
+      },
+    };
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id)
-    let [error, totalAccounts] = await Utils.parseResponse(DeleteService.deleteWhitelistedAddress(id))
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id);
+    let [error, totalAccounts] = await Utils.parseResponse(
+      DeleteService.deleteWhitelistedAddress(id)
+    );
     console.log(totalAccounts, "total-accounts");
-    if (error || !totalAccounts)
-      return
+    if (error || !totalAccounts) return;
 
     getListOffAddress();
-    handleCloseDailog()
-
-  }
+    handleCloseDailog();
+  };
 
   const editWhitelistAddress = async () => {
-
     const id = {
-
-      "address": deleteMessage,
-      "updateAddress": addressInput,
-      "allowVoting": allowVoting,
-      "allowProposalCreation": proposal,
+      address: deleteMessage,
+      updateAddress: addressInput,
+      allowVoting: allowVoting,
+      allowProposalCreation: proposal,
       // "totalVotes" : null
-    }
+    };
 
-    let [error, totalAccounts] = await Utils.parseResponse(EditService.editWhitelistedAddress(id))
+    let [error, totalAccounts] = await Utils.parseResponse(
+      EditService.editWhitelistedAddress(id)
+    );
 
-    if (error || !totalAccounts)
-      return
+    if (error || !totalAccounts) return;
 
     getListOffAddress();
     handleCloseDailog1();
-
-  }
+  };
 
   const logout = async () => {
     const reqObj = {
-      "address": addressInput,
-    "allowVoting": allowVoting,
-    "allowProposalCreation": proposal
-    }
+      address: addressInput,
+      allowVoting: allowVoting,
+      allowProposalCreation: proposal,
+    };
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj)
-    let [error, totalAccounts] = await Utils.parseResponse(Logout.logoutapi(reqObj))
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj);
+    let [error, totalAccounts] = await Utils.parseResponse(
+      Logout.logoutapi(reqObj)
+    );
     console.log(totalAccounts, "total-accounts");
-    if (error || !totalAccounts)
-      return
-
-    
-
-  }
-
-
-
-
-  // function shortenBalance(b, amountL = 12, amountR = 3, stars = 3) {
-  //   return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
-  //     b.length - 3,
-
-  //   )}`;
-  // }
-
-
-
-
-
+    if (error || !totalAccounts) return;
+  };
 
   const classes = useStyles();
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -274,11 +239,11 @@ export default function DashboardComponent(props) {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    history.push('/');
-  }
+    history.push("/");
+  };
   const handleChangePassword = () => {
-    history.push('/change-password');
-  }
+    history.push("/change-password");
+  };
 
   function shorten(b, amountL = 10, amountR = 3, stars = 3) {
     return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
@@ -287,50 +252,45 @@ export default function DashboardComponent(props) {
     )}`;
   }
 
-
   const handleEditClick = () => {
-    setEditClick(!editClick)
-  }
-
-
+    setEditClick(!editClick);
+  };
   const { state } = props;
-
-  const validateAddress=()=>{
-    // console.log(addressInput.slice(0,3),"slice")
-    if(addressInput && addressInput.length>40 || addressInput.slice(0,2)=="xdc")
-    {
-      editWhitelistAddress()
+  const validateAddress = () => {
+    if (
+      (addressInput && addressInput.length > 40) ||
+      addressInput.slice(0, 2) == "xdc"
+    ) {
+      editWhitelistAddress();
+    } else {
+      setEmailError("Address should start with xdc & min 40 characters");
     }
-    else{
-      setEmailError('Address should start with xdc & min 40 characters')
-    }
-  }
-
-
-  const { useState, Fragment } = React
-
+  };
+  const { useState, Fragment } = React;
   // The added element component
-  const AddedElement = () => <button
-    onClick={() => {
-     
-      setallowVoting(false);
-      setAddressInput("");
-      setProposal(false);
-      validateAddress();
-
-
-    }}
-    disabled={(!allowVoting && !proposal) || !addressInput}
-
-    style={{ marginLeft: "12px" }}
-    className={classes.addbtn} type="button">Done</button>
+  const AddedElement = () => (
+    <button
+      onClick={() => {
+        setallowVoting(false);
+        setAddressInput("");
+        setProposal(false);
+        validateAddress();
+      }}
+      disabled={(!allowVoting && !proposal) || !addressInput}
+      style={{ marginLeft: "12px" }}
+      className={classes.addbtn}
+      type="button"
+    >
+      Done
+    </button>
+  );
 
   // The parent component
-  const [emailError, setEmailError] = useState('')
+  const [emailError, setEmailError] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Date, setDate] = React.useState();
-  const [deleteMessage, setDeleteMessage] = useState("")
-  const [editClick, setEditClick] = useState(false)
+  const [deleteMessage, setDeleteMessage] = useState("");
+  const [editClick, setEditClick] = useState(false);
   const [allowVoting, setallowVoting] = React.useState(false);
   const [proposal, setProposal] = React.useState(false);
   const [addressInput, setAddressInput] = React.useState("");
@@ -345,35 +305,24 @@ export default function DashboardComponent(props) {
   };
   const handleCancelClose = () => {
     setDialogOpen(false);
-  }
+  };
   const handleDialog1 = () => {
     setDialogOpen1(true);
-    setCount(0)
-    setButtonText("Edit")
-    setEditClick(false)
-
-
-
-
-
-
+    setCount(0);
+    setButtonText("Edit");
+    setEditClick(false);
   };
   const handleCancelClose1 = () => {
     setDialogOpen1(false);
-  }
+  };
   const handleCloseDailog = () => {
-
     setDialogOpen(false);
     setOpen3(true);
-
   };
   const handleCloseDailog1 = () => {
-
     setDialogOpen1(false);
     setOpen4(true);
-
   };
-
 
   const handleClose3 = (event, reason) => {
     if (reason === "clickaway") {
@@ -390,32 +339,30 @@ export default function DashboardComponent(props) {
     setOpen4(false);
   };
 
-
   return (
-
     <div>
-
-
       <div className="header">
         <div className="div1">
           <span>
-            <img className="header-logo" src={require("../../assets/styles/images/XDC-Icon-Logo.svg")} ></img>
-
-
+            <img
+              className="header-logo"
+              src={require("../../assets/styles/images/XDC-Icon-Logo.svg")}
+            ></img>
           </span>
-
           <span className="voting-para">
-
-            <p >Voting Address Manager</p>
+            <p>Voting Address Manager</p>
           </span>
           <span className="profile-icon">
-
-
-
             <div>
-              <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
-                <img className="profile-logo" src={require("../../assets/styles/images/Profile-Logo.svg")} ></img>
-
+              <Button
+                aria-controls="simple-menu"
+                aria-haspopup="true"
+                onClick={handleClick}
+              >
+                <img
+                  className="profile-logo"
+                  src={require("../../assets/styles/images/Profile-Logo.svg")}
+                ></img>
               </Button>
               <Menu
                 id="simple-menu-item"
@@ -423,40 +370,59 @@ export default function DashboardComponent(props) {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
-
               >
-
-                <MenuItem onClick={handleChangePassword} className="menu-heading" style={{ backgroundColor: "white" }} >Change Password </MenuItem>
+                <MenuItem
+                  onClick={handleChangePassword}
+                  className="menu-heading"
+                  style={{ backgroundColor: "white" }}
+                >
+                  Change Password{" "}
+                </MenuItem>
                 <hr className="menu-line" />
-                <MenuItem onClick={()=>{handleLogout();logout()}} className="menu-heading" style={{ backgroundColor: "white" }} >Log out</MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleLogout();
+                    logout();
+                  }}
+                  className="menu-heading"
+                  style={{ backgroundColor: "white" }}
+                >
+                  Log out
+                </MenuItem>
               </Menu>
             </div>
           </span>
-
         </div>
-
       </div>
-
-      <CustomizedSnackbars getListOffAddress={() => getListOffAddress()} />
+      <CustomizedSnackbars
+        getListOffAddress={() => getListOffAddress()}
+        addWhiteListAddress={props.addWhiteListAddress}
+      />
       <div className="griddiv">
-
-
         <Grid lg={13} className="tablegrid_address">
           <Grid component={Paper} style={{ boxShadow: "0px 0px 0px 0px" }}>
-
-            <Table className="table" aria-label="Whitelisted Addresses" style={{ boxShadow: "0px 0px 0px 0px" }}>
+            <Table
+              className="table"
+              aria-label="Whitelisted Addresses"
+              style={{ boxShadow: "0px 0px 0px 0px" }}
+            >
               <TableHead>
                 <TableRow>
-                  <TableCell style={{
-                    border: "none", paddingLeft: "4%", fontWeight: "500",
-                  }} align="left">
-
-                    <span className="tableheading">Address</span>
-                  </TableCell>
-
                   <TableCell
                     style={{
-                      border: "none", paddingLeft: "0%", fontWeight: "500",
+                      border: "none",
+                      paddingLeft: "4%",
+                      fontWeight: "500",
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Address</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      paddingLeft: "0%",
+                      fontWeight: "500",
                     }}
                     align="left"
                   >
@@ -464,77 +430,105 @@ export default function DashboardComponent(props) {
                   </TableCell>
                   <TableCell
                     style={{
-                      border: "none", fontWeight: "500",
+                      border: "none",
+                      fontWeight: "500",
                     }}
                     align="left"
                   >
                     <span className="tableheading">Votes</span>
                   </TableCell>
-
                 </TableRow>
               </TableHead>
               <TableBody>
                 {/* {filteredProducts.map((product)=>{ */}
-
-
-
                 {getListOfAddress.map((row, index) => {
-
-
                   return (
-
                     // address={filteredData && filteredData.length ? filteredData : address}
                     <TableRow
-
                       style={
                         index % 2 !== 1
                           ? { background: "#f9f9f9" }
                           : { background: "white" }
                       }
                     >
-
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} margin-left="5px" onClick={() => {
-                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
-                      }}>
-
-                        <a className="linkTable" >
+                      <TableCell
+                        style={{ border: "none", paddingLeft: "4%" }}
+                        margin-left="5px"
+                        onClick={() => {
+                          handleDialog1();
+                          setDeleteMessage(row.address);
+                          setAddressInput(row.address);
+                          setDate(row.createdOn);
+                          setallowVoting(row.permission.allowVoting);
+                          setProposal(row.permission.allowProposalCreation);
+                        }}
+                      >
+                        <a className="linkTable">
                           <Tooltip placement="top" title={row.address}>
-
-                            <span className="tabledata"  >
+                            <span className="tabledata">
                               {shorten(row.address)}{" "}
-
                             </span>
                           </Tooltip>
                         </a>
                       </TableCell>
 
-                      <TableCell style={{ border: "none", paddingLeft: "0%" }} align="left" onClick={() => {
-                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation); setDate(row.createdOn)
-                      }}>
-
-                        <span className="tablemiddata" > {moment(row.createdOn).format('DD MMMM YYYY')}</span>
-
+                      <TableCell
+                        style={{ border: "none", paddingLeft: "0%" }}
+                        align="left"
+                        onClick={() => {
+                          handleDialog1();
+                          setDeleteMessage(row.address);
+                          setAddressInput(row.address);
+                          setallowVoting(row.permission.allowVoting);
+                          setProposal(row.permission.allowProposalCreation);
+                          setDate(row.createdOn);
+                        }}
+                      >
+                        <span className="tablemiddata">
+                          {" "}
+                          {moment(row.createdOn).format("DD MMMM YYYY")}
+                        </span>
                       </TableCell>
-                      <TableCell style={{ border: "none" }} align="left" onClick={() => {
-                        handleDialog1(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
-                      }}>
-
-                        <span className="tablemiddata">{row.totalVotes = "null" ? 100 : row.totalVotes}</span>
-
-
+                      <TableCell
+                        style={{ border: "none" }}
+                        align="left"
+                        onClick={() => {
+                          handleDialog1();
+                          setDeleteMessage(row.address);
+                          setAddressInput(row.address);
+                          setDate(row.createdOn);
+                          setallowVoting(row.permission.allowVoting);
+                          setProposal(row.permission.allowProposalCreation);
+                        }}
+                      >
+                        <span className="tablemiddata">
+                          {(row.totalVotes = "null" ? 100 : row.totalVotes)}
+                        </span>
                       </TableCell>
-                      <TableCell style={{ border: "none", paddingLeft: "4%" }} align="left">
-                        <a className="linkTable" >
-                          <span className="tabledata" onClick={() => {
-                            handleDialog(); setDeleteMessage(row.address); setAddressInput(row.address); setDate(row.createdOn); setallowVoting(row.permission.allowVoting); setProposal(row.permission.allowProposalCreation);
-                          }} >  Delete</span>
+                      <TableCell
+                        style={{ border: "none", paddingLeft: "4%" }}
+                        align="left"
+                      >
+                        <a className="linkTable">
+                          <span
+                            className="tabledata"
+                            onClick={() => {
+                              handleDialog();
+                              setDeleteMessage(row.address);
+                              setAddressInput(row.address);
+                              setDate(row.createdOn);
+                              setallowVoting(row.permission.allowVoting);
+                              setProposal(row.permission.allowProposalCreation);
+                            }}
+                          >
+                            {" "}
+                            Delete
+                          </span>
                         </a>
                       </TableCell>
-
                     </TableRow>
                   );
                 })}
-
               </TableBody>
             </Table>
           </Grid>
@@ -544,7 +538,6 @@ export default function DashboardComponent(props) {
       {/* ---------Delete Dialog Box----------- */}
 
       <div>
-
         <Dialog
           className={classes.dialog}
           open={dialogOpen}
@@ -552,29 +545,38 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle id="form-dialog-title"><div className={classes.deleteheading}>Delete Address</div></DialogTitle>
-
+            <DialogTitle id="form-dialog-title">
+              <div className={classes.deleteheading}>Delete Address</div>
+            </DialogTitle>
           </Row>
           <DialogContent>
             <DialogContentText className={classes.deletesubheading}>
-              Do you want to delete this address <span className={classes.deleteaddress}>{shorten(deleteMessage)}</span>
+              Do you want to delete this address{" "}
+              <span className={classes.deleteaddress}>
+                {shorten(deleteMessage)}
+              </span>
             </DialogContentText>
           </DialogContent>
 
           <DialogActions className={classes.buttons}>
-            <span><button className={classes.cnlbtn} onClick={handleCancelClose} >Cancel</button></span>
+            <span>
+              <button className={classes.cnlbtn} onClick={handleCancelClose}>
+                Cancel
+              </button>
+            </span>
 
             <span>
-              <button className={classes.addbtn}
+              <button
+                className={classes.addbtn}
                 onClick={() => {
-
-                  deleteaddress(deleteMessage)
-
+                  deleteaddress(deleteMessage);
                 }}
-
-              >  Delete </button></span>
+              >
+                {" "}
+                Delete{" "}
+              </button>
+            </span>
           </DialogActions>
-
         </Dialog>
       </div>
 
@@ -588,15 +590,28 @@ export default function DashboardComponent(props) {
       >
         <Alert severity="" className={classes.Alert}>
           <div style={{ display: "flex" }}>
-            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span
+              style={{
+                marginRight: "10px",
+                marginTop: "-5px",
+                marginLeft: "-8px",
+              }}
+            >
+              <img
+                className="done-logo"
+                style={{ height: "30px", width: "30px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/DONE.svg")}
+              ></img>
+            </span>
             <span>
-              <div className="toast-message">You have successfully deleted address</div>
+              <div className="toast-message">
+                You have successfully deleted address
+              </div>
               <div className="toast-address">{deleteMessage}</div>
             </span>
           </div>
         </Alert>
       </Snackbar>
-
 
       {/* --------Edit Toast Message--------- */}
 
@@ -608,17 +623,28 @@ export default function DashboardComponent(props) {
       >
         <Alert severity="" className={classes.Alert}>
           <div style={{ display: "flex" }}>
-            <span style={{ marginRight: "10px", marginTop: "-5px", marginLeft: "-8px" }}><img className="done-logo" style={{ height: "30px", width: "30px", marginTop: "10px" }} src={require("../../assets/styles/images/DONE.svg")} ></img></span>
+            <span
+              style={{
+                marginRight: "10px",
+                marginTop: "-5px",
+                marginLeft: "-8px",
+              }}
+            >
+              <img
+                className="done-logo"
+                style={{ height: "30px", width: "30px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/DONE.svg")}
+              ></img>
+            </span>
             <span>
-              <div className="toast-message">You have successfully edited address</div>
+              <div className="toast-message">
+                You have successfully edited address
+              </div>
               <div className="toast-address">{deleteMessage}</div>
             </span>
           </div>
         </Alert>
       </Snackbar>
-
-
-
 
       {/* -----------Edit Dialog Box------------ */}
       <div>
@@ -630,108 +656,100 @@ export default function DashboardComponent(props) {
           aria-labelledby="form-dialog-title"
         >
           <Row>
-            <DialogTitle id="form-dialog-title"><div className="editheading">Address</div></DialogTitle>
-
+            <DialogTitle id="form-dialog-title">
+              <div className="editheading">Address</div>
+            </DialogTitle>
           </Row>
           <DialogContent className="editdialogdiv">
-
-            <input className="editinput"
+            <input
+              className="editinput"
               value={addressInput}
-              onChange={(e) =>{
-                setAddressInput(e.target.value)
+              onChange={(e) => {
+                setAddressInput(e.target.value);
                 setEmailError("");
-              }
-            }
-
+              }}
               disabled={!editClick}
-
-
             ></input>
-               <div style={{ marginLeft: "5px", color: "red",marginBottom:"-2px"}}>{emailError}</div>
+            <div
+              style={{ marginLeft: "5px", color: "red", marginBottom: "-2px" }}
+            >
+              {emailError}
+            </div>
             <DialogContentText className={classes.addedon}>
-              <span >Added on: <span>{moment(Date).format('DD MMMM YYYY')}</span></span>
+              <span>
+                Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
+              </span>
             </DialogContentText>
           </DialogContent>
 
-          <div className="checked-upper" >
-
-            <div className="custom-check1"
+          <div className="checked-upper">
+            <div
+              className="custom-check1"
               onClick={() => {
-                if (editClick)
-                  setallowVoting(!allowVoting);
+                if (editClick) setallowVoting(!allowVoting);
               }}
               value={allowVoting}
-
-              className={!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"}
-            //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-            // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
+              className={
+                !allowVoting ? "custom-check1edit" : "custom-check1-edit-active"
+              }
+              //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+              // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
             ></div>
 
-            <span className="checkbox-heading">
-              Allow Voting
-            </span>
+            <span className="checkbox-heading">Allow Voting</span>
           </div>
 
-
-
-
-
-          <div className="checked-down" >
-
-            <div className="custom-check1"
+          <div className="checked-down">
+            <div
+              className="custom-check1"
               onClick={() => {
-                if (editClick)
-                  setProposal(!proposal);
+                if (editClick) setProposal(!proposal);
               }}
               value={proposal}
-              className={!proposal ? "custom-check1edit" : "custom-check1-edit-active"}
+              className={
+                !proposal ? "custom-check1edit" : "custom-check1-edit-active"
+              }
 
-            // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-            // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
+              // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+              // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
             ></div>
 
-            <span className="checkbox-heading">
-              Allow Proposal Creation
-            </span>
+            <span className="checkbox-heading">Allow Proposal Creation</span>
           </div>
 
           <DialogActions className={classes.buttons1}>
-
             <Fragment>
-              <button onClick={() => {
-                if (count === 1) { handleCancelClose1(); setEmailError("") }
-                else { setCount(1); setButtonText("Cancel"); handleEditClick(); setEmailError("") }
-              }}
-
-
-
+              <button
+                onClick={() => {
+                  if (count === 1) {
+                    handleCancelClose1();
+                    setEmailError("");
+                  } else {
+                    setCount(1);
+                    setButtonText("Cancel");
+                    handleEditClick();
+                    setEmailError("");
+                  }
+                }}
                 className={count === 1 ? classes.cnlbtn : classes.addbtn}
-              >{buttonText}</button>
-              {[...Array(count)].map((_, i) => <AddedElement key={i} />)}
-
+              >
+                {buttonText}
+              </button>
+              {[...Array(count)].map((_, i) => (
+                <AddedElement key={i} />
+              ))}
             </Fragment>
-
-
           </DialogActions>
         </Dialog>
       </div>
 
       {/* ---------Pagination--------- */}
 
-      <div className="pagination-div"><PaginationRounded /></div>
+      <div className="pagination-div">
+        <PaginationRounded />
+      </div>
 
       <div style={{ height: "50px" }}></div>
     </div>
-  )
+  );
 }
-
-
-
-
-
-
-
-
-
-
-
