@@ -18,6 +18,7 @@ export default function EmailSent() {
             <div className="voting">
                 <p>Voting Address Manager</p>
             </div>
+            <div className="login-center">
             <div className="email-div" onClick={handleRedirect} >
                 <img className="logo" src={require("../../assets/styles/images/xdc_logo.svg")} ></img>
                 <div className="forgot-in">
@@ -32,6 +33,7 @@ export default function EmailSent() {
 
 
 
+            </div>
             </div>
             <div style={{ height: "50px" }}></div>
 

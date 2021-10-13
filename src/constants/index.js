@@ -21,3 +21,8 @@ export const httpConstants = {
     },
     API_END_POINT: {}
 };
+
+export const reduxEvent = {
+    LOGGED_IN: 'LOGGED_IN',
+    LOGGED_OUT: 'LOGGED_OUT'
+}

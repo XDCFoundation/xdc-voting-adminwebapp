@@ -28,6 +28,10 @@ import { DeleteService } from "../../services";
 import { AccountService } from "../../services";
 import Utils from "../../utility";
 import moment from "moment";
+import Web3 from "web3";
+import { connect } from "react-redux";
+import { sessionManager } from "../../managers/sessionManager";
+import { reduxEvent } from '../../constants';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -159,7 +163,7 @@ const useStyles = makeStyles((theme) => ({
     fontweight: "600",
   },
 }));
-export default function DashboardComponent(props) {
+function DashboardComponent(props) {
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
   const [pageNumber, setPageNumber] = React.useState();
   const [pagecount, setPagecount] = React.useState();
@@ -216,20 +220,15 @@ export default function DashboardComponent(props) {
     handleCloseDailog1();
   };
 
-  const logout = async () => {
-    const reqObj = {
-      address: addressInput,
-      allowVoting: allowVoting,
-      allowProposalCreation: proposal,
-    };
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", reqObj);
-    let [error, totalAccounts] = await Utils.parseResponse(
-      Logout.logoutapi(reqObj)
-    );
-    console.log(totalAccounts, "total-accounts");
-    if (error || !totalAccounts) return;
-  };
+
+  const logOut = () => {
+    props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
+    sessionManager.removeDataFromLocalStorage("userInfo");
+    sessionManager.removeDataFromLocalStorage("isLoggedIn");
+
+    history.push('/');
+  }
 
   const classes = useStyles();
   const handleClick = (event) => {
@@ -381,8 +380,7 @@ export default function DashboardComponent(props) {
                 <hr className="menu-line" />
                 <MenuItem
                   onClick={() => {
-                    handleLogout();
-                    logout();
+                    logOut();
                   }}
                   className="menu-heading"
                   style={{ backgroundColor: "white" }}
@@ -692,8 +690,8 @@ export default function DashboardComponent(props) {
               className={
                 !allowVoting ? "custom-check1edit" : "custom-check1-edit-active"
               }
-              //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-              // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
+            //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+            // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
             ></div>
 
             <span className="checkbox-heading">Allow Voting</span>
@@ -710,8 +708,8 @@ export default function DashboardComponent(props) {
                 !proposal ? "custom-check1edit" : "custom-check1-edit-active"
               }
 
-              // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-              // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
+            // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+            // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
             ></div>
 
             <span className="checkbox-heading">Allow Proposal Creation</span>
@@ -753,3 +751,5 @@ export default function DashboardComponent(props) {
     </div>
   );
 }
+
+export default connect(null)(DashboardComponent);
