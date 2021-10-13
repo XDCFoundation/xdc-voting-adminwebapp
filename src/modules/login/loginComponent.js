@@ -12,9 +12,12 @@ import Utils from '../../utility';
 import Auth0Service from "../../services/auth0";
 import { AuthService } from '../../services';
 import { sessionManager } from '../../managers/sessionManager';
-import Cookies from 'universal-cookie';
 
-export default function LoginForm(props) {
+import Cookies from 'universal-cookie';
+import { connect } from 'react-redux';
+import dispatchAction from '../../utility/index';
+import { reduxEvent } from '../../constants';
+function LoginForm(props) {
 
 
     const handlePassword = () => {
@@ -52,19 +55,20 @@ export default function LoginForm(props) {
         const reqObj = {
             "email": emailValid,
             "password": passwordValid,
-            "isLoggedIn":true
+            "isLoggedIn": true
         }
         const [error, authResponse] = await Utils.parseResponse(new AuthService().signin(emailValid, passwordValid))
         if (error || !authResponse) {
             utility.apiFailureToast("Wrong email or password");
             // setislogged(true)
         } else {
-            localStorage.setItem("userInfo", JSON.stringify(authResponse))
-            localStorage.setItem("isLoggedIn",JSON.stringify(true))
 
-            // sessionManager.setDataInCookies("userInfo",authResponse)
-            // Cookies.set("user",authResponse)
-            
+            sessionManager.setDataInLocalStorage("userInfo", authResponse);
+            sessionManager.setDataInLocalStorage("isLoggedIn", true);
+            props.dispatch({ type: reduxEvent.LOGGED_IN, data: authResponse })
+
+
+
 
             utility.apiSuccessToast("Sign in successfull");
             history.push('/dashboard')
@@ -179,4 +183,13 @@ export default function LoginForm(props) {
 
     )
 }
+// const mapStateToProps=({user})=>({
+
+//     userInfo:user.userInfo
+
+// })
+
+
+export default connect(null)(LoginForm)
+
 

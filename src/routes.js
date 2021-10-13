@@ -11,30 +11,37 @@ import Dashboard from "./modules/dashboard";
 import Change from "./modules/dashboard/changePassword";
 import { history } from "./managers/history";
 import BaseComponent from "./modules/baseComponent";
+import { sessionManager } from './managers/sessionManager';
+
 
 class Routes extends BaseComponent {
-  componentDidMount() {}
+    componentDidMount() { }
 
-  render() {
-    return (
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Router history={history}>
-          <Switch>
-            <Route exact path={"/"} component={Login} />
-            <Route exact path={"/forgot-password"} component={Forgot} />
-            <Route exact path={"/email-sent"} component={Email} />
-            <Route exact path={"/dashboard"} component={Dashboard} />
-            <Route exact path={"/change-password"} component={Change} />
+    render() {
+        console.log(this.props.isLoggedIn, "userdetailsssss")
+        return (
+            <MuiThemeProvider muiTheme={getMuiTheme()}>
+                <Router history={history}>
+                    <Switch>
+                        <Route exact path={"/"} component={Login} />
+                        <Route exact path={"/forgot-password"} component={Forgot} />
+                        {this.props.isLoggedIn==true && <>
+                            <Route exact path={"/email-sent"} component={Email} />
+                            <Route exact path={"/dashboard"} component={Dashboard} />
+                            <Route exact path={"/change-password"} component={Change} />
+                        </>}
 
-            <Redirect exact from="*" to="/" />
-          </Switch>
-        </Router>
-      </MuiThemeProvider>
-    );
-  }
+                        <Redirect exact from="*" to="/" />
+                    </Switch>
+                </Router>
+            </MuiThemeProvider>
+        );
+    }
 }
 
-const mapStateToProps = (state) => {
-  return { user: state.user };
-};
+const mapStateToProps = ({ user: { isLoggedIn } }) => ({
+
+    isLoggedIn
+
+})
 export default connect(mapStateToProps)(Routes);

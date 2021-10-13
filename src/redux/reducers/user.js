@@ -2,8 +2,8 @@ import { reduxEvent } from "../../constants";
 import { sessionManager } from '../../managers/sessionManager';
 
 const initialState = {
-    isLoggedIn: localStorage.getItem(isLoggedIn),
-    userInfo: localStorage.getItem(userInfo)
+    isLoggedIn: sessionManager.getDataFromLocalStorage("isLoggedIn") || false,
+    userInfo: sessionManager.getDataFromLocalStorage("userInfo") || "",
 }
 export default function user(state = initialState, action) {
     switch (action.type) {
