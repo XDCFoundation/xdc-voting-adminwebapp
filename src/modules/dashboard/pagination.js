@@ -35,25 +35,27 @@ export default function PaginationRounded(props) {
   const pagination=async()=>{
     
    setSkip(skip+10);
-    console.log(skip,"skipppppppppppppppppppppppppppppp");
-  
-   
-    let [error, listOfAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(skip,10))
-    // console.log((listOfAccounts.length)/10,"paginggggggggggggggggggggg");
-    // setPagecount(listOfAccounts.length/10)
-    // setPageNumber((listOfAccounts.length)/10);
+   setLimit(limit);
+   const reqObj={
+     "skip":skip,
+     "limit":limit
+   }
+    let [error, listOfAccounts] = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(reqObj))
     if (error || !listOfAccounts)
         return
       
     setgetListOfAddress(listOfAccounts)
+    setPagecount(listOfAccounts.count)
+    console.log(listOfAccounts.count,"pagecount")
+    // props.getListOffAddress(reqObj)
 }
 
   return (
     <div className={classes.root} >
       <div className="paging">
         <Pagination 
-        // onChange={pagination} count={pagecount}  
-        count={20}
+        onChange={pagination} count={Math.ceil(pagecount/10)}  
+        // count={20}
         shape="rounded" siblingCount={0} color="primary" size="small" />
       </div>
     </div>
