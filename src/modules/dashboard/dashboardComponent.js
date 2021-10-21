@@ -31,8 +31,8 @@ import moment from "moment";
 import Web3 from "web3";
 import { connect } from "react-redux";
 import { sessionManager } from "../../managers/sessionManager";
-import { reduxEvent } from '../../constants';
-import Pagination from '@material-ui/lab/Pagination';
+import { reduxEvent } from "../../constants";
+import Pagination from "@material-ui/lab/Pagination";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -172,23 +172,19 @@ function DashboardComponent(props) {
   const [skip, setSkip] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
 
-  const pagination=async(event,value)=>{
-   
-   setSkip((value-1)*10);
-   
-    
+  const pagination = async (event, value) => {
+    setSkip((value - 1) * 10);
+
     // console.log(reqObj,"skiplimit");
-    console.log((value-1)*10,"value")
-    const reqObj=await{
-      "skip":skip,
-      "limit":limit
-    }
-       getListOffAddress(reqObj)
-    
-   
+    console.log((value - 1) * 10, "value");
+    const reqObj = await {
+      skip: skip,
+      limit: limit,
+    };
+    getListOffAddress(reqObj);
+
     //  setPagecount(listOfAccounts.count)
-  
- }
+  };
 
   const getListOffAddress = async (data) => {
     let [error, totalAccounts] = await Utils.parseResponse(
@@ -197,12 +193,12 @@ function DashboardComponent(props) {
     //  setPagecount(totalAccounts.length)
     if (error || !totalAccounts) return;
     setgetListOfAddress(totalAccounts.dataList);
-    setPagecount(totalAccounts.count)
+    setPagecount(totalAccounts.count);
   };
   useEffect(() => {
     // setPageNumber((pagecount)/10);
-    getListOffAddress({skip:skip,limit:limit});
-  });
+    getListOffAddress({ skip: skip, limit: limit });
+  }, []);
 
   const deleteaddress = async () => {
     const id = {
@@ -243,15 +239,13 @@ function DashboardComponent(props) {
     handleCloseDailog1();
   };
 
-
-
   const logOut = () => {
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
     sessionManager.removeDataFromLocalStorage("userInfo");
     sessionManager.removeDataFromLocalStorage("isLoggedIn");
 
-    history.push('/');
-  }
+    history.push("/");
+  };
 
   const classes = useStyles();
   const handleClick = (event) => {
@@ -713,8 +707,8 @@ function DashboardComponent(props) {
               className={
                 !allowVoting ? "custom-check1edit" : "custom-check1-edit-active"
               }
-            //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-            // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
+              //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+              // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
             ></div>
 
             <span className="checkbox-heading">Allow Voting</span>
@@ -731,8 +725,8 @@ function DashboardComponent(props) {
                 !proposal ? "custom-check1edit" : "custom-check1-edit-active"
               }
 
-            // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-            // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
+              // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+              // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
             ></div>
 
             <span className="checkbox-heading">Allow Proposal Creation</span>
@@ -768,14 +762,19 @@ function DashboardComponent(props) {
 
       <div className="pagination-div">
         {/* <PaginationRounded /> */}
-        <div className={classes.root} >
-      <div className="paging">
-        <Pagination 
-        onChange={pagination} count={Math.ceil(pagecount/10)}  
-        // count={20}
-        shape="rounded" siblingCount={0} color="primary" size="small" />
-      </div>
-    </div>
+        <div className={classes.root}>
+          <div className="paging">
+            <Pagination
+              onChange={pagination}
+              count={Math.ceil(pagecount / 10)}
+              // count={20}
+              shape="rounded"
+              siblingCount={0}
+              color="primary"
+              size="small"
+            />
+          </div>
+        </div>
       </div>
 
       <div style={{ height: "50px" }}></div>
