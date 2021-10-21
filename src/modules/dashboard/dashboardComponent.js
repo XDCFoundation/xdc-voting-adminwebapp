@@ -32,6 +32,7 @@ import Web3 from "web3";
 import { connect } from "react-redux";
 import { sessionManager } from "../../managers/sessionManager";
 import { reduxEvent } from '../../constants';
+import Pagination from '@material-ui/lab/Pagination';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -168,18 +169,40 @@ function DashboardComponent(props) {
   const [pageNumber, setPageNumber] = React.useState();
   const [pagecount, setPagecount] = React.useState();
 
+  const [skip, setSkip] = React.useState(0);
+  const [limit, setLimit] = React.useState(10);
+
+  const pagination=async(event,value)=>{
+   
+   setSkip((value-1)*10);
+   
+    
+    // console.log(reqObj,"skiplimit");
+    console.log((value-1)*10,"value")
+    const reqObj=await{
+      "skip":skip,
+      "limit":limit
+    }
+       getListOffAddress(reqObj)
+    
+   
+    //  setPagecount(listOfAccounts.count)
+  
+ }
+
   const getListOffAddress = async (data) => {
     let [error, totalAccounts] = await Utils.parseResponse(
       AccountService.getListOfWhitelistedAddress(data)
     );
     //  setPagecount(totalAccounts.length)
     if (error || !totalAccounts) return;
-    setgetListOfAddress(totalAccounts);
+    setgetListOfAddress(totalAccounts.dataList);
+    setPagecount(totalAccounts.count)
   };
   useEffect(() => {
     // setPageNumber((pagecount)/10);
-    getListOffAddress();
-  }, []);
+    getListOffAddress({skip:skip,limit:limit});
+  });
 
   const deleteaddress = async () => {
     const id = {
@@ -744,7 +767,15 @@ function DashboardComponent(props) {
       {/* ---------Pagination--------- */}
 
       <div className="pagination-div">
-        <PaginationRounded />
+        {/* <PaginationRounded /> */}
+        <div className={classes.root} >
+      <div className="paging">
+        <Pagination 
+        onChange={pagination} count={Math.ceil(pagecount/10)}  
+        // count={20}
+        shape="rounded" siblingCount={0} color="primary" size="small" />
+      </div>
+    </div>
       </div>
 
       <div style={{ height: "50px" }}></div>

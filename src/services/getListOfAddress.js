@@ -2,14 +2,15 @@ import { httpService } from "../managers/httpService";
 import { httpConstants } from "../constants";
 
 export default { getListOfWhitelistedAddress, addWhitelistedAddress, deleteWhitelistedAddress, editWhitelistedAddress, loginapi, logoutapi, resetpassword, changepassword }
-async function getListOfWhitelistedAddress(skip=0,limit=10) {
+async function getListOfWhitelistedAddress(data) {
     let url = process.env.REACT_APP_GET_LIST_OF_WHITELISTED_ADDRESS;
     // +`?skip=${skip}&limit=${limit}`;
-    return httpService(httpConstants.METHOD_TYPE.GET, { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON }, {}, url)
+    return httpService(httpConstants.METHOD_TYPE.POST, { 'Content-Type': httpConstants.CONTENT_TYPE.APPLICATION_JSON },data, url)
         .then(
             response => {
                 if (!response.success || response.responseCode !== 200 || !response.responseData || response.responseData.length === 0)
                     return Promise.reject();
+                console.log("lisofdata",response.responseData) 
                 return Promise.resolve(response.responseData);
 
             }
