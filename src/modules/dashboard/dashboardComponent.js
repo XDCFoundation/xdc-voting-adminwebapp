@@ -242,8 +242,9 @@ function DashboardComponent(props) {
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
     sessionManager.removeDataFromLocalStorage("userInfo");
     sessionManager.removeDataFromLocalStorage("isLoggedIn");
+    window.location.href="/";
 
-    history.push("/");
+    // history.push("/");
   };
 
   const classes = useStyles();
@@ -257,7 +258,8 @@ function DashboardComponent(props) {
     history.push("/");
   };
   const handleChangePassword = () => {
-    history.push("/change-password");
+    // history.push("/change-password");
+    window.location.href="/change-password";
   };
 
   // function shorten(b, amountL = 10, amountR = 3, stars = 3) {

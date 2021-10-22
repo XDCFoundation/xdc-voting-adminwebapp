@@ -35,6 +35,14 @@ export default function LoginChange(props) {
       const handleLogout = () => {
         history.push('/');
       }
+    //   const handleLogout = () => {
+    //     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
+    //     sessionManager.removeDataFromLocalStorage("userInfo");
+    //     sessionManager.removeDataFromLocalStorage("isLoggedIn");
+    //     window.location.href="/";
+    
+    //     // history.push("/");
+    //   };
       const handleChangePassword = () => {
         history.push('/change-password');
       }
