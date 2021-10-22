@@ -142,8 +142,10 @@ export default function CustomizedSnackbars(props) {
   const addWhitelistAddress = async () => {
     const reqObj = {
       address: addAddress,
-      allowVoting: allowVoting,
-      allowProposalCreation: proposal,
+      permission: {
+        allowVoting,
+        allowProposalCreation: proposal,
+      },
     };
     setMessage(reqObj.address);
     const totalAccounts = await props.addWhiteListAddress(reqObj);
@@ -165,7 +167,6 @@ export default function CustomizedSnackbars(props) {
       setEmailError("Address should start with xdc & min 40 characters");
     }
   };
-
 
   const handleClick = () => {
     setOpen(true);
