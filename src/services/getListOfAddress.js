@@ -61,7 +61,7 @@ async function addWhitelistedAddress(reqObj) {
     );
 }
 async function deleteWhitelistedAddress(id) {
-  let url = process.env.REACT_APP_DELETE_WHITELISTED_ADDRESS;
+  let url = process.env.REACT_APP_PROPOSAL_SERVICE + "delete-address";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
