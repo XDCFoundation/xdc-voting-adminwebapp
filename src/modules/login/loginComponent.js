@@ -62,7 +62,7 @@ function LoginForm(props) {
             utility.apiFailureToast("Wrong email or password");
             // setislogged(true)
         } else {
-
+sessionManager.setDataInLocalStorage("requestBody",reqObj);
             sessionManager.setDataInLocalStorage("userInfo", authResponse);
             sessionManager.setDataInLocalStorage("isLoggedIn", true);
             props.dispatch({ type: reduxEvent.LOGGED_IN, data: authResponse })

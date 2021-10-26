@@ -11,6 +11,7 @@ import { ChangePassword } from '../../services';
 import LoginForm from '../login/loginComponent';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import { sessionManager } from '../../managers/sessionManager';
 // import "../../assets/styles/images";
 
 
@@ -67,7 +68,7 @@ export default function LoginChange(props) {
 userInfo = JSON.parse(userInfo);
     // "userId": "auth0|611c92b7f01e430069bd2c15"
     const updatepassword = async () => {
-        let userInfo = localStorage.getItem("userInfo")
+        let userInfo = sessionManager.getDataFromLocalStorage("userInfo")
         userInfo = JSON.parse(userInfo);
         console.log(userInfo,"localdata")
         const reqObj = {
@@ -80,15 +81,30 @@ userInfo = JSON.parse(userInfo);
        
     
         let [error, totalAccounts] = await Utils.parseResponse(ChangePassword.changepassword(reqObj))
-    
-        if (error || !totalAccounts)
-        {
+   let pass= sessionManager.getDataFromLocalStorage("requestBody")
+   pass=JSON.parse(pass);
+
+console.log(pass,"password saved");
+        if ((allowVoting != proposal) | (pass.password!=addressInput) | ((allowVoting.length <= 8) | (addressInput.length <= 8))) {
+            setIsError("Password should match and have minimum 8 characters");
+        } 
+        else{
+            history.push('/dashboard')
+            utility.apiSuccessToast("password changed successfully");
 
         }
+
+//         if (error || !totalAccounts)
+//         {
+//             setIsError("wrong email");
+// console.log(error,"changepassword------------------?")
+//         }
+
+
     
-        else{
-            utility.apiSuccessToast("password changed successfully");
-        }
+//         else{
+//             utility.apiSuccessToast("password changed successfully");
+//         }
       
        
         
@@ -226,7 +242,7 @@ userInfo = JSON.parse(userInfo);
                             setallowVoting("");
                             setAddressInput("");
                             setProposal("");
-                            checkValidationPassword();
+                            // checkValidationPassword();
                             updatepassword()
 
 
