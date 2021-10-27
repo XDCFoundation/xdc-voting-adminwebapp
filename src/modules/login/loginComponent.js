@@ -70,7 +70,7 @@ sessionManager.setDataInLocalStorage("requestBody",reqObj);
 
 
 
-            utility.apiSuccessToast("Sign in successfull");
+            utility.apiSuccessToast("Sign in successful");
             history.push('/dashboard')
         }
     }
@@ -141,9 +141,9 @@ sessionManager.setDataInLocalStorage("requestBody",reqObj);
                             }
 
                             style={{
-                                fontSize: "38px",
+                                // fontSize: "38px",
                                 fontWeight: "bolder",
-                                paddingBottom: "10px"
+                                // paddingBottom: "10px"
                             }}
                         />
 

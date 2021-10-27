@@ -373,12 +373,15 @@ color: white;
 }
 
 .logo {
-    margin-top: -50px;
+    margin-top: -40px;
 margin-left: 180px;
 width: 90px;
 height: 90px;
 /* background: transparent url('img/Group 1.png') 0% 0% no-repeat padding-box; */
 opacity: 1;
+}
+.MuiMenu-paper{
+    border-radius: 6px !important;
 }
 .forgot {
     
@@ -460,8 +463,11 @@ background: transparent 0 0% 0% no-repeat padding-box;
 opacity: 1;
 }
 .profile-logo{
-    width: 23px;
-    height: 23px;
+    width: 24px;
+    height: 24px;
+}
+.MuiDialog-paperWidthSm{
+    border-radius: 12px !important;
 }
 
 .griddiv {
