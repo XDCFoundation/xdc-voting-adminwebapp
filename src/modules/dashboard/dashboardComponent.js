@@ -177,9 +177,9 @@ function DashboardComponent(props) {
 
     // console.log(reqObj,"skiplimit");
     // console.log((value - 1) * 10, "value");
-   
+
     // console.log(reqObj,"objects")
-  await  getListOffAddress({skip:(value-1)*10,limit:limit});
+    await getListOffAddress({ skip: (value - 1) * 10, limit: limit });
   };
 
   const getListOffAddress = async (data) => {
@@ -188,15 +188,14 @@ function DashboardComponent(props) {
     );
     //  setPagecount(totalAccounts.length)
     if (error || !totalAccounts) return;
-   await setgetListOfAddress(totalAccounts.dataList);
-    console.log(totalAccounts.dataList,"totaladdress")
-   await setPagecount(totalAccounts.count);
+    await setgetListOfAddress(totalAccounts.dataList);
+    console.log(totalAccounts.dataList, "totaladdress");
+    await setPagecount(totalAccounts.count);
   };
-  useEffect(async() => {
+  useEffect(async () => {
     // setPageNumber((pagecount)/10);
-   await getListOffAddress({ skip: skip, limit: limit });
-   
-  },[]);
+    await getListOffAddress({ skip: skip, limit: limit });
+  }, []);
 
   const deleteaddress = async () => {
     const id = {
@@ -242,7 +241,7 @@ function DashboardComponent(props) {
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
     sessionManager.removeDataFromLocalStorage("userInfo");
     sessionManager.removeDataFromLocalStorage("isLoggedIn");
-    window.location.href="/";
+    window.location.href = "/";
 
     // history.push("/");
   };
@@ -259,7 +258,7 @@ function DashboardComponent(props) {
   };
   const handleChangePassword = () => {
     // history.push("/change-password");
-    window.location.href="/change-password";
+    window.location.href = "/change-password";
   };
 
   // function shorten(b, amountL = 10, amountR = 3, stars = 3) {
@@ -288,9 +287,9 @@ function DashboardComponent(props) {
   const AddedElement = () => (
     <button
       onClick={() => {
-        setallowVoting(false);
-        setAddressInput("");
-        setProposal(false);
+        // setallowVoting(false);
+        // setAddressInput("");
+        // setProposal(false);
         validateAddress();
       }}
       disabled={(!allowVoting && !proposal) || !addressInput}
@@ -482,7 +481,10 @@ function DashboardComponent(props) {
                         <a className="linkTable">
                           <Tooltip placement="top" title={row.address}>
                             <span className="tabledata">
-                            { row.address?row.address.substr(0, 13):" "}...{row.address?row.address.substr(row.address.length - 5, 5):""}
+                              {row.address ? row.address.substr(0, 13) : " "}...
+                              {row.address
+                                ? row.address.substr(row.address.length - 5, 5)
+                                : ""}
                               {/* (row.address)}{" "} */}
                             </span>
                           </Tooltip>
@@ -571,7 +573,10 @@ function DashboardComponent(props) {
             <DialogContentText className={classes.deletesubheading}>
               Do you want to delete this address{" "}
               <span className={classes.deleteaddress}>
-              { deleteMessage?deleteMessage.substr(0, 13):" "}...{deleteMessage?deleteMessage.substr(deleteMessage.length - 5, 5):""}
+                {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
+                {deleteMessage
+                  ? deleteMessage.substr(deleteMessage.length - 5, 5)
+                  : ""}
                 {/* {(deleteMessage)} */}
               </span>
             </DialogContentText>

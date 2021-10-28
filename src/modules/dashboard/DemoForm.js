@@ -212,7 +212,7 @@ export default function CustomizedSnackbars(props) {
           Add
         </button>
       </div>
-      <Dialog  className={classes.dialog} open={dialogOpen} divide>
+      <Dialog className={classes.dialog} open={dialogOpen} divide>
         <DialogTitle className={classes.heading} id="form-dialog-title">
           <div className={classes.mainheading}>Add a New Address</div>{" "}
         </DialogTitle>
