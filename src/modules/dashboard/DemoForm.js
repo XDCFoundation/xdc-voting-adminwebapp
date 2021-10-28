@@ -73,8 +73,12 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     border: "none",
     fontFamily: "Inter,sans-serif",
+    "&:hover":{
+      backgroundColor: "#eeeeee !important",
+      color: "#2149B9",
+    }
+    
   },
-
   cnlbtn: {
     width: "94px",
     height: "34px",
@@ -163,9 +167,14 @@ export default function CustomizedSnackbars(props) {
       addAddress.slice(0, 2) == "xdc"
     ) {
       addWhitelistAddress();
-    } else {
+    } 
+    else if(!addAddress){
+      setEmailError("enter a valid Address")
+    }
+    else {
       setEmailError("Address should start with xdc & min 40 characters");
     }
+
   };
 
   const handleClick = () => {
@@ -283,7 +292,7 @@ export default function CustomizedSnackbars(props) {
                   setProposal(false);
                   validateAddress();
                 }}
-                disabled={(!allowVoting && !proposal) || !addAddress}
+                // disabled={(!allowVoting && !proposal) || !addAddress}
               >
                 Add
               </button>
