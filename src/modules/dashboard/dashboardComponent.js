@@ -213,7 +213,7 @@ function DashboardComponent(props) {
     console.log(totalAccounts, "total-accounts");
     if (error || !totalAccounts) return;
 
-    getListOffAddress();
+    await getListOffAddress({ skip: skip, limit: limit });
     handleCloseDailog();
   };
 
@@ -233,7 +233,7 @@ function DashboardComponent(props) {
 
     if (error || !totalAccounts) return;
 
-    getListOffAddress();
+    await getListOffAddress({ skip: skip, limit: limit });
     handleCloseDailog1();
   };
 
@@ -410,7 +410,9 @@ function DashboardComponent(props) {
         </div>
       </div>
       <CustomizedSnackbars
-        getListOffAddress={() => getListOffAddress()}
+        getListOffAddress={() =>
+          getListOffAddress({ skip: skip, limit: limit })
+        }
         addWhiteListAddress={props.addWhiteListAddress}
       />
       <div className="griddiv">

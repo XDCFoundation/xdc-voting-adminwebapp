@@ -12,9 +12,11 @@ import LoginForm from "../login/loginComponent";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { sessionManager } from "../../managers/sessionManager";
+import { reduxEvent } from "../../constants";
 // import "../../assets/styles/images";
+import { connect } from "react-redux";
 
-export default function LoginChange(props) {
+ function LoginChange(props) {
   const [allowVoting, setallowVoting] = React.useState("");
   const [proposal, setProposal] = React.useState("");
   const [addressInput, setAddressInput] = React.useState("");
@@ -32,7 +34,10 @@ export default function LoginChange(props) {
     setAnchorEl(null);
   };
   const handleLogout = () => {
-    history.push("/");
+    props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
+    sessionManager.removeDataFromLocalStorage("userInfo");
+    sessionManager.removeDataFromLocalStorage("isLoggedIn");
+    window.location.href="/";
   };
   //   const handleLogout = () => {
   //     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
@@ -264,3 +269,5 @@ export default function LoginChange(props) {
     </div>
   );
 }
+
+export default connect(null)(LoginChange);
