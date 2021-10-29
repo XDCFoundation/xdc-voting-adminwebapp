@@ -287,9 +287,9 @@ export default function CustomizedSnackbars(props) {
                 variant="contained"
                 color="primary"
                 onClick={() => {
-                  setallowVoting(false);
-                  setAddAddress("");
-                  setProposal(false);
+                  // setallowVoting(false);
+                  // setAddAddress("");
+                  // setProposal(false);
                   validateAddress();
                 }}
                 // disabled={(!allowVoting && !proposal) || !addAddress}

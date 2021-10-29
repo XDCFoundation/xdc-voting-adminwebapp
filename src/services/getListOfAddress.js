@@ -189,7 +189,7 @@ async function resetpassword(reqObj) {
     );
 }
 async function changepassword(reqObj) {
-  let url = process.env.REACT_APP_AUTH0_CHANGE_PASSWORD_API;
+  let url = process.env.REACT_APP_AUTH_SERVICE_BASE_URL + "change-password";
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
