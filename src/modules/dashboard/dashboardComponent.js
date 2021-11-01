@@ -80,10 +80,10 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     border: "none",
     fontFamily: "Inter,sans-serif",
-    "&:hover":{
+    "&:hover": {
       backgroundColor: "#eeeeee !important",
       color: "#2149B9",
-    }
+    },
   },
 
   cnlbtn: {
@@ -209,8 +209,8 @@ function DashboardComponent(props) {
         allowProposalCreation: proposal,
       },
     };
+    await props.deleteAddress(id);
 
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!", id);
     let [error, totalAccounts] = await Utils.parseResponse(
       DeleteService.deleteWhitelistedAddress(id)
     );
@@ -222,7 +222,7 @@ function DashboardComponent(props) {
   };
 
   const editWhitelistAddress = async () => {
-    const id = {
+    const reqObj = {
       address: deleteMessage,
       updateAddress: addressInput,
       permission: {
@@ -230,13 +230,11 @@ function DashboardComponent(props) {
         allowProposalCreation: proposal,
       },
     };
-
+    await props.onEditAddress(reqObj);
     let [error, totalAccounts] = await Utils.parseResponse(
-      EditService.editWhitelistedAddress(id)
+      EditService.editWhitelistedAddress(reqObj)
     );
-
     if (error || !totalAccounts) return;
-
     await getListOffAddress({ skip: skip, limit: limit });
     handleCloseDailog1();
   };
@@ -261,18 +259,11 @@ function DashboardComponent(props) {
     history.push("/");
   };
   const handleChangePassword = () => {
-    // history.push("/change-password");
     window.location.href = "/change-password";
   };
 
-  // function shorten(b, amountL = 10, amountR = 3, stars = 3) {
-  //   return `${b.slice(0, amountL)}${".".repeat(stars)}${b.slice(
-  //     b.length - 3,
-  //     b.length
-  //   )}`;
-  // }
-
   const handleEditClick = () => {
+    // editWhitelistAddress();
     setEditClick(!editClick);
   };
   const { state } = props;
@@ -282,11 +273,9 @@ function DashboardComponent(props) {
       addressInput.slice(0, 2) == "xdc"
     ) {
       editWhitelistAddress();
-    }
-    else if(!addressInput){
-      setEmailError("enter a valid Address")
-    }
-    else {
+    } else if (!addressInput) {
+      setEmailError("enter a valid Address");
+    } else {
       setEmailError("Address should start with xdc & min 40 characters");
     }
   };

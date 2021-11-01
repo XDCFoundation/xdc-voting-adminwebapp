@@ -15,6 +15,15 @@
       "type": "function"
     },
     {
+      "constant": false,
+      "inputs": [],
+      "name": "pauseContract",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "constant": true,
       "inputs": [],
       "name": "get_total_passed_proposals",
@@ -26,6 +35,28 @@
       ],
       "payable": false,
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        },
+        {
+          "name": "canCreateProposal",
+          "type": "bool"
+        },
+        {
+          "name": "canVote",
+          "type": "bool"
+        }
+      ],
+      "name": "add_whitelist_address",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -88,7 +119,7 @@
       "constant": true,
       "inputs": [
         {
-          "name": "_address",
+          "name": "addr",
           "type": "address"
         }
       ],
@@ -121,10 +152,63 @@
         {
           "name": "",
           "type": "bool"
+        },
+        {
+          "name": "",
+          "type": "address"
         }
       ],
       "payable": false,
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "delete_whitelist_address",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_oldAddress",
+          "type": "address"
+        },
+        {
+          "name": "_newAddress",
+          "type": "address"
+        },
+        {
+          "name": "canCreateProposal",
+          "type": "bool"
+        },
+        {
+          "name": "canVote",
+          "type": "bool"
+        }
+      ],
+      "name": "edit_whitelist_address",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "resumeContract",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -142,18 +226,10 @@
       "type": "function"
     },
     {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_address",
-          "type": "address"
-        }
-      ],
-      "name": "add_whitelist_address",
-      "outputs": [],
+      "inputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
+      "type": "constructor"
     }
   ]
 }
