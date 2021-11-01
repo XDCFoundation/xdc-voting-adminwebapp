@@ -139,7 +139,7 @@ function LoginForm(props) {
           </div>
 
           <p className="forgot" onClick={handlePassword}>
-            Forgot Password?
+            Forgot password?
           </p>
           <div style={{ marginLeft: "20px", color: "red", marginTop: "0px" }}>
             {inputError}
