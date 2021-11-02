@@ -167,7 +167,7 @@ import { connect } from "react-redux";
           </span>
         </div>
       </div>
-
+<div className="changepass-maindiv">
       <div className="change-div">
         <div className="change-password">
           <p>Change Password</p>
@@ -233,7 +233,7 @@ import { connect } from "react-redux";
           />
         </div>
 
-        <div style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
+        <div className="errormessage" style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
         <div>
           <button
             className="sign-btn-update"
@@ -264,6 +264,7 @@ import { connect } from "react-redux";
             Cancel
           </button>
         </div>
+      </div>
       </div>
       <div style={{ height: "50px" }}></div>
     </div>
