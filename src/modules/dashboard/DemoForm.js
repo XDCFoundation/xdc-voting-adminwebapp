@@ -208,14 +208,14 @@ export default function CustomizedSnackbars(props) {
 
   return (
     <div className={classes.root}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: "40px",
-          width: "60vw",
-          marginLeft: "20vw",
-        }}
+      <div className="dashboard-upper-div"
+        // style={{
+        //   display: "flex",
+        //   justifyContent: "space-between",
+        //   marginTop: "40px",
+        //   width: "60vw",
+        //   marginLeft: "20vw",
+        // }}
       >
         <div className="whitelisted-heading">Whitelisted Addresses</div>
         <button variant="outlined" onClick={handleDialog} className="add-btn1">
