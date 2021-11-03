@@ -681,6 +681,12 @@ padding-left: 20px;
     display: flex;
     justify-content: center;
     }
+    .makeStyles-input-25{
+        width: 40vw !important;
+    }
+    .editinput{
+        width: 70vw !important;
+    }
 }
 @media (max-width:767px){
     .voting p{
@@ -737,6 +743,9 @@ height: 38px;
     height: 190px;
     
     }
+    /* .editinput{
+        width: 40vw !important;
+    } */
     .input{
         width: 303px;
         margin-left: 15px;
