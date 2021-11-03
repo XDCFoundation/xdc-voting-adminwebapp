@@ -640,6 +640,14 @@ padding-left: 20px;
     margin-left: 17px;
     color: red;
 }
+/* .MuiDialog-paperWidthSm{
+    max-width: 553px !important;
+    height: 304px !important;
+}
+.MuiDialogContent-root {
+    flex: 0 0 auto !important;
+    padding: 15px 24px !important;
+} */
 
 @media (max-width:1023px){
     .voting p{
@@ -758,6 +766,18 @@ height: 38px;
     }
     .sign-in{
         display: none;
+    }
+    .MuiDialog-paper{
+        margin: 115px -45px 0px -70px !important;
+    }
+    .MuiDialogTitle-root{
+        padding: 16px 24px !important;
+    }
+    .MuiDialogContent-root{
+        padding: 8px 24px !important;
+    }
+    .makeStyles-input-25{
+        width: 255px !important;
     }
 
 }
