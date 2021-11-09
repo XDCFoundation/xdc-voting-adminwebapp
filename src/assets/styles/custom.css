@@ -23,7 +23,7 @@ html, body {
 } */
 
 .login-div {
-    margin-top: 15vh;
+    margin-top: 8%;
     /* margin-left: 34vw; */
     width: 549px;
 height: 461px;
@@ -71,7 +71,7 @@ height: 461px;
   }
 
 .forgot-div {
-    margin-top: 15vh;
+    margin-top: 8%;
     /* margin-left: 34vw; */
     width: 549px;
     justify-content: center;
@@ -105,7 +105,7 @@ height: 461px;
     margin-top: -15px !important;
 }
 .voting p{
-    margin-top: 5%;
+    margin-top: 8%;
     /* margin-left: 555px; */
     /* margin-left: 38vw; */
     width: 480px;
@@ -330,7 +330,7 @@ opacity: 1;
     font: bold 100% "Lucida Sans Unicode",sans-serif;
 }
 .sign-btn{
-    margin-top: 30px;
+    margin-top: 20px;
     margin-left: 20px;
     width: 506px;
     height: 38px;
@@ -345,6 +345,10 @@ opacity: 1;
     font-size: 14px;
     font-family: "Inter",sans-serif;
    
+}
+.sign-btn:hover{
+    background-color: #eeeeee !important;
+    color: #2149B9;
 }
 .sign-btn-update{
     margin-top: 20px;
@@ -655,10 +659,10 @@ padding-left: 20px;
         font: normal normal 600 32px/39px Inter;
     }
     .login-div{
-        margin-top: 10vh;
+        margin-top: 10%;
     }
     .forgot-div{
-        margin-top: 10vh;
+        margin-top: 10%;
     }
     .logo{
         width: 111px;
@@ -728,12 +732,12 @@ height: 38px;
     height: 34px;
     }
     .login-div{
-        margin-top: 7vh;
+        margin-top: 7%;
         width: 335px;
     height: 343px;
     }
     .forgot-div{
-        margin-top: 7vh;
+        margin-top: 7%;
         width: 335px;
     height: 343px;
     }

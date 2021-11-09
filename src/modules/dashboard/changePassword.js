@@ -186,9 +186,9 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "38px",
-              fontWeight: "bolder",
-              paddingBottom: "10px",
+              fontSize: "18px",
+               fontWeight: "800",
+              // paddingBottom: "10px",
             }}
           />
         </div>
@@ -206,9 +206,9 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "38px",
-              fontWeight: "bolder",
-              paddingBottom: "10px",
+              fontSize: "18px",
+               fontWeight: "800",
+              // paddingBottom: "10px",
             }}
           />
         </div>
@@ -226,9 +226,9 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "38px",
-              fontWeight: "bolder",
-              paddingBottom: "10px",
+              fontSize: "18px",
+               fontWeight: "800",
+              // paddingBottom: "10px",
             }}
           />
         </div>

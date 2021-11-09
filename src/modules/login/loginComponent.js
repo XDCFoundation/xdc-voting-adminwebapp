@@ -131,8 +131,8 @@ function LoginForm(props) {
                 setInputError(" ");
               }}
               style={{
-                // fontSize: "38px",
-                fontWeight: "bolder",
+                fontSize: "18px",
+                fontWeight: "800",
                 // paddingBottom: "10px"
               }}
             />
