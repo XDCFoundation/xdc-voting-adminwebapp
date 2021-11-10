@@ -99,15 +99,7 @@ import { connect } from "react-redux";
       utility.apiSuccessToast("password changed successfully");
     }
 
-    //         if (error || !totalAccounts)
-    //         {
-    //             setIsError("wrong email");
-    // console.log(error,"changepassword------------------?")
-    //         }
-
-    //         else{
-    //             utility.apiSuccessToast("password changed successfully");
-    //         }
+    
   };
 
   return (
@@ -188,7 +180,7 @@ import { connect } from "react-redux";
             style={{
               fontSize: "18px",
                fontWeight: "800",
-              // paddingBottom: "10px",
+              paddingBottom: "5px",
             }}
           />
         </div>
@@ -208,7 +200,7 @@ import { connect } from "react-redux";
             style={{
               fontSize: "18px",
                fontWeight: "800",
-              // paddingBottom: "10px",
+              paddingBottom: "5px",
             }}
           />
         </div>
@@ -228,7 +220,7 @@ import { connect } from "react-redux";
             style={{
               fontSize: "18px",
                fontWeight: "800",
-              // paddingBottom: "10px",
+              paddingBottom: "5px",
             }}
           />
         </div>
@@ -243,7 +235,7 @@ import { connect } from "react-redux";
               setAddressInput("");
               setProposal("");
               // checkValidationPassword();
-              updatepassword();
+              // updatepassword();
 
               {
                 !allowVoting || !proposal || !addressInput
