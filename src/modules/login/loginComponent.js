@@ -133,7 +133,7 @@ function LoginForm(props) {
               style={{
                 fontSize: "18px",
                 fontWeight: "800",
-                // paddingBottom: "10px"
+                paddingBottom: "5px"
               }}
             />
           </div>
