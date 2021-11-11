@@ -151,7 +151,12 @@ export default function CustomizedSnackbars(props) {
       },
     };
     setMessage(reqObj.address);
-    const totalAccounts = await props.addWhiteListAddress(reqObj);
+    const totalAccounts = await props
+      .addWhiteListAddress(reqObj)
+      .catch((err) => {
+        setEmailError("Unable to add address");
+        return;
+      });
     if (!totalAccounts) {
       setEmailError("Unable to add address");
       return;

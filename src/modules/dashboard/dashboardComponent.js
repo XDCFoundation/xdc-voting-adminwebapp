@@ -177,12 +177,6 @@ function DashboardComponent(props) {
   const [limit, setLimit] = React.useState(10);
 
   const pagination = async (event, value) => {
-    // setSkip((value - 1) * 10);
-
-    // console.log(reqObj,"skiplimit");
-    // console.log((value - 1) * 10, "value");
-
-    // console.log(reqObj,"objects")
     await getListOffAddress({ skip: (value - 1) * 10, limit: limit });
   };
 
@@ -190,14 +184,11 @@ function DashboardComponent(props) {
     let [error, totalAccounts] = await Utils.parseResponse(
       AccountService.getListOfWhitelistedAddress(data)
     );
-    //  setPagecount(totalAccounts.length)
     if (error || !totalAccounts) return;
     await setgetListOfAddress(totalAccounts.dataList);
-    console.log(totalAccounts.dataList, "totaladdress");
     await setPagecount(totalAccounts.count);
   };
   useEffect(async () => {
-    // setPageNumber((pagecount)/10);
     await getListOffAddress({ skip: skip, limit: limit });
   }, []);
 
