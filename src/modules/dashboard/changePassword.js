@@ -16,7 +16,7 @@ import { reduxEvent } from "../../constants";
 // import "../../assets/styles/images";
 import { connect } from "react-redux";
 
- function LoginChange(props) {
+function LoginChange(props) {
   const [allowVoting, setallowVoting] = React.useState("");
   const [proposal, setProposal] = React.useState("");
   const [addressInput, setAddressInput] = React.useState("");
@@ -37,7 +37,7 @@ import { connect } from "react-redux";
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
     sessionManager.removeDataFromLocalStorage("userInfo");
     sessionManager.removeDataFromLocalStorage("isLoggedIn");
-    window.location.href="/";
+    window.location.href = "/";
   };
   //   const handleLogout = () => {
   //     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
@@ -77,7 +77,7 @@ import { connect } from "react-redux";
       email: userInfo.email,
       userId: userInfo.sub,
       oldPassword: addressInput,
-      password: allowVoting,
+      // password: allowVoting,
       password: proposal,
     };
 
@@ -98,8 +98,6 @@ import { connect } from "react-redux";
       history.push("/dashboard");
       utility.apiSuccessToast("password changed successfully");
     }
-
-    
   };
 
   return (
@@ -159,7 +157,7 @@ import { connect } from "react-redux";
           </span>
         </div>
       </div>
-<div className="changepass-maindiv">
+      {/*<div className="changepass-maindiv">*/}
       <div className="change-div">
         <div className="change-password">
           <p>Change Password</p>
@@ -178,9 +176,9 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "18px",
-               fontWeight: "800",
-              paddingBottom: "5px",
+              fontSize: "38px",
+              fontWeight: "bolder",
+              paddingBottom: "10px",
             }}
           />
         </div>
@@ -198,9 +196,9 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "18px",
-               fontWeight: "800",
-              paddingBottom: "5px",
+              fontSize: "38px",
+              fontWeight: "bolder",
+              paddingBottom: "10px",
             }}
           />
         </div>
@@ -218,14 +216,14 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "18px",
-               fontWeight: "800",
-              paddingBottom: "5px",
+              fontSize: "38px",
+              fontWeight: "bolder",
+              paddingBottom: "10px",
             }}
           />
         </div>
 
-        <div className="errormessage" style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
+        <div style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
         <div>
           <button
             className="sign-btn-update"
@@ -235,7 +233,7 @@ import { connect } from "react-redux";
               setAddressInput("");
               setProposal("");
               // checkValidationPassword();
-              // updatepassword();
+              updatepassword();
 
               {
                 !allowVoting || !proposal || !addressInput
@@ -256,7 +254,6 @@ import { connect } from "react-redux";
             Cancel
           </button>
         </div>
-      </div>
       </div>
       <div style={{ height: "50px" }}></div>
     </div>
