@@ -99,15 +99,7 @@ import { connect } from "react-redux";
       utility.apiSuccessToast("password changed successfully");
     }
 
-    //         if (error || !totalAccounts)
-    //         {
-    //             setIsError("wrong email");
-    // console.log(error,"changepassword------------------?")
-    //         }
-
-    //         else{
-    //             utility.apiSuccessToast("password changed successfully");
-    //         }
+    
   };
 
   return (
@@ -167,7 +159,7 @@ import { connect } from "react-redux";
           </span>
         </div>
       </div>
-
+<div className="changepass-maindiv">
       <div className="change-div">
         <div className="change-password">
           <p>Change Password</p>
@@ -186,9 +178,9 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "38px",
-              fontWeight: "bolder",
-              paddingBottom: "10px",
+              fontSize: "18px",
+               fontWeight: "800",
+              paddingBottom: "5px",
             }}
           />
         </div>
@@ -206,9 +198,9 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "38px",
-              fontWeight: "bolder",
-              paddingBottom: "10px",
+              fontSize: "18px",
+               fontWeight: "800",
+              paddingBottom: "5px",
             }}
           />
         </div>
@@ -226,14 +218,14 @@ import { connect } from "react-redux";
               }
             }}
             style={{
-              fontSize: "38px",
-              fontWeight: "bolder",
-              paddingBottom: "10px",
+              fontSize: "18px",
+               fontWeight: "800",
+              paddingBottom: "5px",
             }}
           />
         </div>
 
-        <div style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
+        <div className="errormessage" style={{ marginLeft: "17px", color: "red" }}> {isError}</div>
         <div>
           <button
             className="sign-btn-update"
@@ -243,7 +235,7 @@ import { connect } from "react-redux";
               setAddressInput("");
               setProposal("");
               // checkValidationPassword();
-              updatepassword();
+              // updatepassword();
 
               {
                 !allowVoting || !proposal || !addressInput
@@ -264,6 +256,7 @@ import { connect } from "react-redux";
             Cancel
           </button>
         </div>
+      </div>
       </div>
       <div style={{ height: "50px" }}></div>
     </div>

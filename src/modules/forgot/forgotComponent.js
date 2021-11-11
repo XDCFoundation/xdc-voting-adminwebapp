@@ -84,9 +84,14 @@ export default function ForgotForm() {
               className="sign-btn"
               onClick={() => {
                 // validateEmail();
-                forgotpassword();
+                {
+                  !emailValid
+                    ? setEmailError("Please Enter Input Fields")
+                    : forgotpassword();
+                }
+                
               }}
-              disabled={!emailValid}
+              // disabled={!emailValid}
               type="button"
             >
               {" "}

@@ -107,7 +107,7 @@ export default class Dashboard extends BaseComponent {
             return;
           }
           const res = await this.getTransactionReceipt(transactionHash);
-          if (res) Utils.apiSuccessToast("Updating address is in progress");
+          if (res) Utils.apiSuccessToast("Address updated successfully");
           resolve(true);
         });
     });
