@@ -29,22 +29,53 @@ export default class Dashboard extends BaseComponent {
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0xA97c297Ab7dfFcDed29e37b307f289Eff277ABF7"
+      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
     );
-    const res = await contract.methods
-      .add_whitelist_address(
-        reqObj.address,
-        reqObj.permission.allowProposalCreation,
-        reqObj.permission.allowVoting
-      )
-      .send({ from: acc });
-    console.log(res);
-    Utils.apiSuccessToast("Proposal Created Successfully");
+    return new Promise((resolve, reject) => {
+      contract.methods
+        .add_whitelist_address(
+          reqObj.address,
+          reqObj.permission.allowProposalCreation,
+          reqObj.permission.allowVoting
+        )
+        .send({ from: acc }, async (err, transactionHash) => {
+          if (err || !transactionHash) {
+            reject(false);
+            return;
+          }
+          const res = await this.getTransactionReceipt(transactionHash, reqObj);
+          if (res) {
+            let [error, totalAccounts] = await Utils.parseResponse(
+              AddService.addWhitelistedAddress(reqObj)
+            );
+            Utils.apiSuccessToast("Proposal Created Successfully");
+          }
+          resolve(true);
+        });
+    });
+  };
 
+  addWhiteListToDatabase = async (reqObj) => {
     let [error, totalAccounts] = await Utils.parseResponse(
       AddService.addWhitelistedAddress(reqObj)
     );
-    return totalAccounts;
+    Utils.apiSuccessToast("Proposal Created Successfully");
+  };
+
+  delay = (ms) => new Promise((res) => setTimeout(res, ms));
+
+  getTransactionReceipt = async (hash) => {
+    let web3;
+    web3 = new Web3(window.web3.currentProvider);
+    let count = 0;
+    while (true) {
+      count++;
+      const receipt = await web3.eth.getTransactionReceipt(hash);
+      if (receipt !== null || count > 10) {
+        return true;
+      }
+      await this.delay(3000);
+    }
   };
 
   onEditAddress = async (reqObj) => {
@@ -59,20 +90,27 @@ export default class Dashboard extends BaseComponent {
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0xA97c297Ab7dfFcDed29e37b307f289Eff277ABF7"
+      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
     );
-    const res = await contract.methods
-      .edit_whitelist_address(
-        reqObj.address,
-        reqObj.updateAddress,
-        reqObj.permission.allowProposalCreation,
-        reqObj.permission.allowVoting
-      )
-      .send({ from: acc });
-    console.log(res);
-    Utils.apiSuccessToast("Address Modified Successfully");
-
-    return true;
+    console.log("req", reqObj);
+    return new Promise((resolve, reject) => {
+      contract.methods
+        .edit_whitelist_address(
+          reqObj.address,
+          reqObj.updateAddress,
+          reqObj.permission.allowProposalCreation,
+          reqObj.permission.allowVoting
+        )
+        .send({ from: acc }, async (err, transactionHash) => {
+          if (err || !transactionHash) {
+            reject(false);
+            return;
+          }
+          const res = await this.getTransactionReceipt(transactionHash);
+          if (res) Utils.apiSuccessToast("Address updated successfully");
+          resolve(true);
+        });
+    });
   };
 
   deleteAddress = async (reqObj) => {
@@ -87,14 +125,22 @@ export default class Dashboard extends BaseComponent {
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0xA97c297Ab7dfFcDed29e37b307f289Eff277ABF7"
+      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
     );
-    const res = await contract.methods
-      .delete_whitelist_address(reqObj.address)
-      .send({ from: acc });
-    console.log(res);
-    Utils.apiSuccessToast("Address Deleted Successfully");
-    return true;
+
+    return new Promise((resolve, reject) => {
+      contract.methods
+        .delete_whitelist_address(reqObj.address)
+        .send({ from: acc }, async (err, transactionHash) => {
+          if (err || !transactionHash) {
+            reject(false);
+            return;
+          }
+          const res = await this.getTransactionReceipt(transactionHash);
+          if (res) Utils.apiSuccessToast("Address Deleted Successfully");
+          resolve(true);
+        });
+    });
   };
 
   render() {

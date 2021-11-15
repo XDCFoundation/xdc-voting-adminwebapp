@@ -50,16 +50,16 @@ const useStyles = makeStyles((theme) => ({
     padding: "1px 35px 10px 0px",
     marginTop: "20px",
   },
-  // input: {
-  //   width: "400px",
-  //   height: "5vh",
-  //   border: "solid 1px #9FA9BA",
-  //   backgroundColor: "#ffffff",
-  //   borderRadius: "8px",
-  //   outline: "none",
-  //   paddingLeft: "10px",
-  //   marginLeft: "4px",
-  // },
+  input: {
+    width: "400px",
+    height: "5vh",
+    border: "solid 1px #9FA9BA",
+    backgroundColor: "#ffffff",
+    borderRadius: "8px",
+    outline: "none",
+    paddingLeft: "10px",
+    marginLeft: "4px",
+  },
 
   addbtn: {
     width: "110px",
@@ -151,7 +151,12 @@ export default function CustomizedSnackbars(props) {
       },
     };
     setMessage(reqObj.address);
-    const totalAccounts = await props.addWhiteListAddress(reqObj);
+    const totalAccounts = await props
+      .addWhiteListAddress(reqObj)
+      .catch((err) => {
+        setEmailError("Unable to add address");
+        return;
+      });
     if (!totalAccounts) {
       setEmailError("Unable to add address");
       return;
@@ -208,14 +213,15 @@ export default function CustomizedSnackbars(props) {
 
   return (
     <div className={classes.root}>
-      <div className="dashboard-upper-div"
-        // style={{
-        //   display: "flex",
-        //   justifyContent: "space-between",
-        //   marginTop: "40px",
-        //   width: "60vw",
-        //   marginLeft: "20vw",
-        // }}
+      <div
+        className="dashboard-upper-div"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginTop: "40px",
+          width: "60vw",
+          marginLeft: "20vw",
+        }}
       >
         <div className="whitelisted-heading">Whitelisted Addresses</div>
         <button variant="outlined" onClick={handleDialog} className="add-btn1">
@@ -231,7 +237,7 @@ export default function CustomizedSnackbars(props) {
             <div className={classes.subheading}>Address</div>
           </DialogContentText>
           <input
-            className="addinput"
+            className={classes.input}
             type="text"
             required="true"
             // value={addAddress}
