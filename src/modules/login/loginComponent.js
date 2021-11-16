@@ -131,15 +131,15 @@ function LoginForm(props) {
                 setInputError(" ");
               }}
               style={{
-                fontSize: "38px",
-                fontWeight: "bolder",
-                paddingBottom: "10px",
+                fontSize: "18px",
+                fontWeight: "800",
+                paddingBottom: "5px"
               }}
             />
           </div>
 
           <p className="forgot" onClick={handlePassword}>
-            Forgot Password?
+            Forgot password?
           </p>
           <div style={{ marginLeft: "20px", color: "red", marginTop: "0px" }}>
             {inputError}

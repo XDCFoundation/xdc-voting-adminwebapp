@@ -409,7 +409,7 @@ function DashboardComponent(props) {
             <Table
               className="table"
               aria-label="Whitelisted Addresses"
-              style={{ boxShadow: "0px 0px 0px 0px" }}
+              // style={{ boxShadow: "0px 0px 0px 0px" }}
             >
               <TableHead>
                 <TableRow>
