@@ -172,7 +172,35 @@ height: 461px;
     opacity: 1;
     font-size: 18px;
 }
-
+.inputsearch{
+   
+        width: 431px;
+        height: 42px;
+        background: #4264C4 0% 0% no-repeat padding-box;
+        border-radius: 6px;
+        opacity: 1;
+        border: none;
+        outline: none;
+        color: #E0E0E0;
+        font-size: 14px;
+        padding: 10px;
+        font-weight: 500;
+        padding-left: 15px;
+    padding-right: 37px;
+    padding-bottom: 10px;
+        /* background-image: url(/xinfin-voting-adminwebapp/src/assets/styles/images/Search.png); */
+        /* background-image: url(/images/Search.png); */
+}
+.inputsearch::placeholder{
+    
+    font: normal normal normal 14px/17px Inter;
+letter-spacing: 0px;
+color: #E0E0E0;
+}
+.searchicon{
+    margin-left: -30px;
+    width: 14px;
+}
 
 .forgot-in{
         margin-top: 40px;
@@ -206,7 +234,7 @@ height: 461px;
 .MuiMenu-paper{
     margin-top: -10px !important;
 }
-@media (min-width:1441px) and (max-width:2560px){
+@media (min-width:1700px) and (max-width:2560px){
     .MuiMenu-paper{
         margin-top: -50px !important;
     }
@@ -476,7 +504,8 @@ opacity: 1;
     display: flex;
 } */
 .voting-para p{
-    margin-top: -42px;
+    margin-top: 3px;
+    margin-right: 25px;
 margin-left: 65px;
 /* width: 264px;
 height: 26px; */
@@ -488,13 +517,31 @@ font-size: 22px;
 font-family: "Inter",sans-serif;
 font-weight: 600;
 }
+.voting-para1 p{
+    margin-top: -42px;
+    margin-right: 25px;
+margin-left: 65px;
+/* width: 264px;
+height: 26px; */
+text-align: left;
+letter-spacing: 0px;
+color: #FFFFFF;
+opacity: 1;
+font-size: 22px;
+font-family: "Inter",sans-serif;
+font-weight: 600;
+}
+.common-span-header{
+    display: flex;
+    margin-top: -44px;
+}
 .login-center{
     display: flex;
     justify-content: center;
 }
 
 .profile-icon{
-    margin-top: -46px;
+    margin-top: -50px;
 margin-right: 18px;
 float: right;
 /* width: 24px;
@@ -687,6 +734,9 @@ padding-left: 20px;
         margin-left: 220px;
       
     }
+    .inputsearch{
+        width: 323px;
+    }
     .griddiv{
         width: 90vw;
         margin-left: 5vw;
@@ -716,6 +766,11 @@ padding-left: 20px;
         font: normal normal 600 18px/21px Inter;
     }
     .voting-para p{
+        margin-top: 8px;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .voting-para1 p{
         margin-top: -35px;
         font-size: 14px;
         font-weight: 500;
@@ -723,6 +778,23 @@ padding-left: 20px;
     .whitelisted-heading{
         font-size: 16px;
     }
+    .header{
+        height: 120px;
+    }
+    .common-span-header{
+        display: block;
+
+    }
+    .inputsearch{
+        width: 90% !important;
+        height: 34px;
+        margin-left: 20px !important;
+    }
+    .profile-icon{
+        margin-top: -80px;
+        margin-right: 5px;
+    }
+
     .griddiv{
         overflow: scroll;
         height: 343px;

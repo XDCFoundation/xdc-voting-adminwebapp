@@ -10,6 +10,7 @@ export default {
   logoutapi,
   resetpassword,
   changepassword,
+  searchaddress
 };
 async function getListOfWhitelistedAddress(data) {
   let url =
@@ -190,6 +191,31 @@ async function resetpassword(reqObj) {
 }
 async function changepassword(reqObj) {
   let url = process.env.REACT_APP_AUTH_SERVICE_BASE_URL + "change-password";
+  return httpService(
+    httpConstants.METHOD_TYPE.POST,
+    { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
+    reqObj,
+    url
+  )
+    .then((response) => {
+      if (
+        !response.success ||
+        response.responseCode !== 200 ||
+        !response.responseData ||
+        response.responseData.length === 0
+      )
+        return Promise.reject();
+      return Promise.resolve(response.responseData);
+    })
+    .catch(
+      function (err) {
+        return Promise.reject(err);
+      }
+      // console.log("respposne",response);
+    );
+}
+ async function searchaddress(reqObj) {
+  let url = process.env.REACT_APP_SEARCH_ADDRESS;
   return httpService(
     httpConstants.METHOD_TYPE.POST,
     { "Content-Type": httpConstants.CONTENT_TYPE.APPLICATION_JSON },
