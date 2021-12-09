@@ -26,6 +26,8 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { EditService, Logout } from "../../services";
 import { DeleteService } from "../../services";
 import { AccountService } from "../../services";
+import { SearchService } from "../../services";
+// import { searchaddress } from "../../services/getListOfAddress";
 import Utils from "../../utility";
 import moment from "moment";
 import Web3 from "web3";
@@ -69,7 +71,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-15px",
     // padding: "15px",
   },
-
+// searchbox: {
+//   width: "431px",
+//   height: "42px",
+//   background: "#4264C4 0% 0% no-repeat padding-box",
+//   borderRadius: "6px",
+//   opacity: "1",
+//   border: "none",
+//   outline: "none",
+//   color: "#E0E0E0",
+//   fontSize: "14px",
+//   padding: "10px",
+//   fontWeight: "500",
+//   background: "url(/images/Search.svg) no-repeat 1px",
+//   backgroundSize: "14px",
+//   backgroundPositionX: "9.5px",
+// },
   addbtn: {
     width: "110px",
     height: "34px",
@@ -167,6 +184,7 @@ const useStyles = makeStyles((theme) => ({
     fontfamily: "Inter",
     fontweight: "600",
   },
+
 }));
 function DashboardComponent(props) {
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
@@ -230,6 +248,27 @@ function DashboardComponent(props) {
     handleCloseDailog1();
   };
 
+  const search=async(e)=>{
+    setAddressSearch(e.target.value);
+    console.log(e.target.value,"adddddddddddddddddddddddddddd")
+    const reqObj={
+      address:addressSearch
+    }
+    // await props.searchaddress(reqObj);
+    let [error, totalAccounts] = await Utils.parseResponse(
+      SearchService.searchaddress(reqObj)
+    );
+    console.log(totalAccounts,"responseaddress")
+    if (error || !totalAccounts){
+      // setgetListOfAddress(totalAccounts.responseData.message)
+    }
+    // await getListOffAddress({ skip: skip, limit: limit });
+    setgetListOfAddress(totalAccounts)
+   
+
+  
+  }
+
   const logOut = () => {
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
     sessionManager.removeDataFromLocalStorage("userInfo");
@@ -290,6 +329,7 @@ function DashboardComponent(props) {
   );
 
   // The parent component
+  const [addressSearch, setAddressSearch] = useState("");
   const [emailError, setEmailError] = useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Date, setDate] = React.useState();
@@ -353,9 +393,23 @@ function DashboardComponent(props) {
               src={require("../../assets/styles/images/XDC-Icon-Logo.svg")}
             ></img>
           </span>
+          <span className="common-span-header">
           <span className="voting-para">
             <p>Voting Address Manager</p>
+            
+            
           </span>
+          <span>
+          <input type="text" className="inputsearch" placeholder="Search Address" 
+          // value={addressSearch}
+          // onChange={(e)=>{search(e)}}
+          >
+            
+          </input>
+          <img className="searchicon" src={require("../../assets/styles/images/Search.png")}></img>
+          </span>
+          </span>
+          
           <span className="profile-icon">
             <div>
               <Button

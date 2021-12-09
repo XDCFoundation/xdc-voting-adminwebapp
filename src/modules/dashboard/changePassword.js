@@ -114,7 +114,7 @@ import { connect } from "react-redux";
             ></img>
           </span>
 
-          <span className="voting-para">
+          <span className="voting-para1">
             <p>Voting Address Manager</p>
           </span>
           <span className="profile-icon">
