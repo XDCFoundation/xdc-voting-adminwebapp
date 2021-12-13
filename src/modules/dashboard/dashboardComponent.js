@@ -249,25 +249,45 @@ function DashboardComponent(props) {
   };
 
   const search=async(e)=>{
-    setAddressSearch(e.target.value);
+    // setAddressSearch(e.target.value);
     console.log(e.target.value,"adddddddddddddddddddddddddddd")
+    console.log(addressSearch,"address of input")
     const reqObj={
-      address:addressSearch
+      address:e.target.value
     }
     // await props.searchaddress(reqObj);
     let [error, totalAccounts] = await Utils.parseResponse(
       SearchService.searchaddress(reqObj)
     );
+    await setgetListOfAddress(totalAccounts?.searchData)
+   await setIsError("No record Found")
     console.log(totalAccounts,"responseaddress")
-    if (error || !totalAccounts){
-      // setgetListOfAddress(totalAccounts.responseData.message)
-    }
+    console.log(error,"errorrrrrrrrrrrrrrrrrrrrrrr")
+    if (error || !totalAccounts)
+   
+    // {
+    // //  Utils.apiFailureToast("error")
+    //  await setIsError("No record found")
+    // }
     // await getListOffAddress({ skip: skip, limit: limit });
-    setgetListOfAddress(totalAccounts)
+    // else{
+      
+   
+  // else{
+  //   await setgetListOfAddress(totalAccounts?.message)
+    
+  // }
+   return;
+
+  //  setAddressSearch("")
+     
+      
+    // }
    
 
   
   }
+  console.log(getListOfAddress,"jhbbbbbbbbbbbbbbbbbb")
 
   const logOut = () => {
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
@@ -331,6 +351,7 @@ function DashboardComponent(props) {
   // The parent component
   const [addressSearch, setAddressSearch] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [isError, setIsError] = React.useState("");
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [Date, setDate] = React.useState();
   const [deleteMessage, setDeleteMessage] = useState("");
@@ -402,7 +423,7 @@ function DashboardComponent(props) {
           <span>
           <input type="text" className="inputsearch" placeholder="Search Address" 
           // value={addressSearch}
-          // onChange={(e)=>{search(e)}}
+          onChange={(e)=>{search(e)}}
           >
             
           </input>
@@ -496,12 +517,14 @@ function DashboardComponent(props) {
                   >
                     <span className="tableheading">Votes</span>
                   </TableCell>
+                
                 </TableRow>
               </TableHead>
               <TableBody>
                 {/* {filteredProducts.map((product)=>{ */}
-                {getListOfAddress.map((row, index) => {
+                {getListOfAddress?.map((row, index) => {
                   return (
+                    
                     // address={filteredData && filteredData.length ? filteredData : address}
                     <TableRow
                       style={
@@ -510,6 +533,7 @@ function DashboardComponent(props) {
                           : { background: "white" }
                       }
                     >
+                     
                       <TableCell
                         style={{ border: "none", paddingLeft: "4%" }}
                         margin-left="5px"
@@ -565,7 +589,8 @@ function DashboardComponent(props) {
                         }}
                       >
                         <span className="tablemiddata">
-                          {row.votes.length}
+                          1
+                          {/* {row.votes.length} */}
                           {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
                         </span>
                       </TableCell>
@@ -592,7 +617,15 @@ function DashboardComponent(props) {
                       </TableCell>
                     </TableRow>
                   );
-                })}
+                })
+
+                // ) : (
+                //   <div className="display-flex justify-content-center p-t-50">
+                //     {" "}
+                //    {"No record found"}
+                //   </div>
+
+                }
               </TableBody>
             </Table>
           </Grid>
