@@ -142,9 +142,16 @@ export default function CustomizedSnackbars(props) {
   // const [error, setError] = React.useState(false);
   const [emailError, setEmailError] = useState("");
 
+  String.prototype.replaceAt = function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
+
   const addWhitelistAddress = async () => {
+   
+    console.log(addAddress.replace("xdc","0x"),"replaceeeeeeeeeeeeeeeeeeeee")
+    console.log(addAddress.replaceAt(0,"0x"),"replace value");
     const reqObj = {
-      address: addAddress,
+      address:  addAddress.replace("xdc","0x"),
       permission: {
         allowVoting,
         allowProposalCreation: proposal,
@@ -166,6 +173,7 @@ export default function CustomizedSnackbars(props) {
   };
 
   const validateAddress = () => {
+   
     if (
       (addAddress && addAddress.length > 40) ||
       addAddress.slice(0, 2) == "xdc"

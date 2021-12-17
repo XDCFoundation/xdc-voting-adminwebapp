@@ -253,14 +253,17 @@ function DashboardComponent(props) {
     console.log(e.target.value,"adddddddddddddddddddddddddddd")
     console.log(addressSearch,"address of input")
     const reqObj={
-      address:e.target.value
+      address:e.target.value,
+      skip:skip,
+      limit:limit
     }
     // await props.searchaddress(reqObj);
     let [error, totalAccounts] = await Utils.parseResponse(
       SearchService.searchaddress(reqObj)
     );
     await setgetListOfAddress(totalAccounts?.searchData)
-   await setIsError("No record Found")
+    // await getListOffAddress({ skip: skip, limit: limit });
+  //  await setIsError("No record Found")
     console.log(totalAccounts,"responseaddress")
     console.log(error,"errorrrrrrrrrrrrrrrrrrrrrrr")
     if (error || !totalAccounts)
@@ -589,8 +592,8 @@ function DashboardComponent(props) {
                         }}
                       >
                         <span className="tablemiddata">
-                          1
-                          {/* {row.votes.length} */}
+                         
+                          {row.votes.length}
                           {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
                         </span>
                       </TableCell>
