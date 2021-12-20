@@ -193,6 +193,7 @@ function DashboardComponent(props) {
 
   const [skip, setSkip] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
+  // const { state }=props;
 
   const pagination = async (event, value) => {
     await getListOffAddress({ skip: (value - 1) * 10, limit: limit });
@@ -319,7 +320,7 @@ function DashboardComponent(props) {
     // editWhitelistAddress();
     setEditClick(!editClick);
   };
-  const { state } = props;
+  const { state,setDeleteDialogValue } = props;
   const validateAddress = () => {
     if (
       (addressInput && addressInput.length > 40) ||
@@ -333,6 +334,10 @@ function DashboardComponent(props) {
     }
   };
   const { useState, Fragment } = React;
+
+  const handleToastClose=()=>{
+    setOpen3(false)
+  }
   // The added element component
   const AddedElement = () => (
     <button
@@ -370,6 +375,8 @@ function DashboardComponent(props) {
   const [open4, setOpen4] = React.useState(false);
   const handleDialog = () => {
     setDialogOpen(true);
+    // setStateValues({deleteDialog:false})
+    setDeleteDialogValue(false)
   };
   const handleCancelClose = () => {
     setDialogOpen(false);
@@ -640,6 +647,8 @@ function DashboardComponent(props) {
       {/* ---------Delete Dialog Box----------- */}
 
       <div>
+        {!state.deleteDialog?
+        <>
         <Dialog
           className={classes.dialog}
           open={dialogOpen}
@@ -684,13 +693,52 @@ function DashboardComponent(props) {
             </span>
           </DialogActions>
         </Dialog>
+        </>
+        :
+        <>
+       <Dialog className={classes.dialog} open={dialogOpen} divide>
+       {/* <Row> */}
+            {/* <DialogTitle id="form-dialog-title">
+              <div className={classes.deleteheading}>Deleting Address</div>
+            </DialogTitle> */}
+          {/* </Row> */}
+          <DialogContent>
+            <DialogContentText className={classes.deleteheading}>
+            Deleting Address {" "}
+              <span className={classes.deleteaddress}>
+                {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
+                {deleteMessage
+                  ? deleteMessage.substr(deleteMessage.length - 5, 5)
+                  : ""}
+                {/* {(deleteMessage)} */}
+              </span>
+            </DialogContentText>
+          </DialogContent>
+        <DialogContent>
+           <img
+           style={{width:"100px",height:"100px",display:"flex",justifyContent:"center",marginLeft:"120px",marginRight:"50px"}}
+              // className="header-logo"
+              src={require("../../assets/styles/images/loader-small.gif")}
+            ></img>
+            <DialogContentText className={classes.subCategory}>
+              <div style={{fontSize:"15px",display:"flex",justifyContent:"center",color: "#2A2A2A",
+    opacity: "1",
+    fontFamily: "Inter",
+    fontweight: "400",}}>Transaction is in Progress</div>
+    
+              
+            </DialogContentText>
+        </DialogContent>
+      </Dialog>
+      </>
+}
       </div>
 
       {/* ------Delete Toast Message----- */}
 
       <Snackbar
         open={open3}
-        autoHideDuration={3000}
+        // autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose3}
       >
@@ -711,7 +759,12 @@ function DashboardComponent(props) {
             </span>
             <span>
               <div className="toast-message">
+              <span>
                 You have successfully deleted address
+                </span>
+                <span onClick={handleToastClose} style={{float:"right",cursor:"pointer"}}>
+                  X
+                </span>
               </div>
               <div className="toast-address">{deleteMessage}</div>
             </span>

@@ -13,7 +13,9 @@ export default class Dashboard extends BaseComponent {
   constructor(props) {
     super(props);
     this.state = {
-      addDialog: false
+      addDialog: false,
+      deleteDialog: false,
+      editDialog: false
     };
   }
 
@@ -63,6 +65,9 @@ export default class Dashboard extends BaseComponent {
    setStateValues=(value)=>{
      console.log("call")
   this.setState({addDialog:value})
+  }
+  setDeleteDialogValue=(value)=>{
+    this.setState({deleteDialog:value})
   }
 
   addWhiteListToDatabase = async (reqObj) => {
@@ -116,6 +121,7 @@ export default class Dashboard extends BaseComponent {
             reject(false);
             return;
           }
+          this.setState({editDialog:true})
           const res = await this.getTransactionReceipt(transactionHash);
           if (res) Utils.apiSuccessToast("Address updated successfully");
           resolve(true);
@@ -146,8 +152,10 @@ export default class Dashboard extends BaseComponent {
             reject(false);
             return;
           }
+          this.setState({deleteDialog:true})
           const res = await this.getTransactionReceipt(transactionHash);
-          if (res) Utils.apiSuccessToast("Address Deleted Successfully");
+          if (res) 
+          // Utils.apiSuccessToast("Address Deleted Successfully");
           resolve(true);
         });
     });
@@ -161,6 +169,7 @@ export default class Dashboard extends BaseComponent {
         deleteAddress={this.deleteAddress}
         state={this.state}
         setStateValues={this.setStateValues}
+        setDeleteDialogValue={this.setDeleteDialogValue}
       />
     );
   }
