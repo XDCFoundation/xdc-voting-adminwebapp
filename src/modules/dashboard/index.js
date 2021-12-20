@@ -12,7 +12,9 @@ let masterContractAbi = require("../../common/abis/masterContractAbi.json").abi;
 export default class Dashboard extends BaseComponent {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      addDialog: false
+    };
   }
 
   async componentDidMount() {}
@@ -43,17 +45,25 @@ export default class Dashboard extends BaseComponent {
             reject(false);
             return;
           }
+          this.setState({addDialog:true})
           const res = await this.getTransactionReceipt(transactionHash, reqObj);
           if (res) {
+           
+            // this.props.setAddPopup(true)
             let [error, totalAccounts] = await Utils.parseResponse(
               AddService.addWhitelistedAddress(reqObj)
             );
-            Utils.apiSuccessToast("Proposal Created Successfully");
+            // Utils.apiSuccessToast("Proposal Created Successfully");
           }
           resolve(true);
         });
     });
   };
+
+   setStateValues=(value)=>{
+     console.log("call")
+  this.setState({addDialog:value})
+  }
 
   addWhiteListToDatabase = async (reqObj) => {
     let [error, totalAccounts] = await Utils.parseResponse(
@@ -149,6 +159,8 @@ export default class Dashboard extends BaseComponent {
         addWhiteListAddress={this.addWhiteListAddress}
         onEditAddress={this.onEditAddress}
         deleteAddress={this.deleteAddress}
+        state={this.state}
+        setStateValues={this.setStateValues}
       />
     );
   }

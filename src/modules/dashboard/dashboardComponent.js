@@ -480,6 +480,8 @@ function DashboardComponent(props) {
           getListOffAddress({ skip: skip, limit: limit })
         }
         addWhiteListAddress={props.addWhiteListAddress}
+        state={props.state}
+        setStateValues={props.setStateValues}
       />
       <div className="griddiv">
         <Grid lg={13} className="tablegrid_address">
