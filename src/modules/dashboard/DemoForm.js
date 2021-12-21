@@ -351,7 +351,7 @@ export default function CustomizedSnackbars(props) {
               <div style={{fontSize:"15px",display:"flex",justifyContent:"center",color: "#2A2A2A",
     opacity: "1",
     fontFamily: "Inter",
-    fontweight: "600",}}>Transaction is in Progress</div>
+    fontweight: "600",}}>Please wait transaction is in Progress</div>
     
               
             </DialogContentText>
