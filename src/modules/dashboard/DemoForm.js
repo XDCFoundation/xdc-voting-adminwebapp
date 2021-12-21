@@ -386,7 +386,7 @@ export default function CustomizedSnackbars(props) {
                 <span>
                 You have successfully added address
                 </span>
-                <span onClick={handleToastClose} style={{float:"right",cursor:"pointer"}}>
+                <span onClick={handleToastClose} style={{float:"right",cursor:"pointer",marginTop:"-8px"}}>
                   X
                 </span>
               </div>

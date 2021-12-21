@@ -69,6 +69,9 @@ export default class Dashboard extends BaseComponent {
   setDeleteDialogValue=(value)=>{
     this.setState({deleteDialog:value})
   }
+  setEditDialogValue=(value)=>{
+    this.setState({editDialog:value})
+  }
 
   addWhiteListToDatabase = async (reqObj) => {
     let [error, totalAccounts] = await Utils.parseResponse(
@@ -123,7 +126,8 @@ export default class Dashboard extends BaseComponent {
           }
           this.setState({editDialog:true})
           const res = await this.getTransactionReceipt(transactionHash);
-          if (res) Utils.apiSuccessToast("Address updated successfully");
+          if (res)
+          //  Utils.apiSuccessToast("Address updated successfully");
           resolve(true);
         });
     });
@@ -170,6 +174,7 @@ export default class Dashboard extends BaseComponent {
         state={this.state}
         setStateValues={this.setStateValues}
         setDeleteDialogValue={this.setDeleteDialogValue}
+        setEditDialogValue={this.setEditDialogValue}
       />
     );
   }

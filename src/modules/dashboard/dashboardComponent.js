@@ -320,7 +320,7 @@ function DashboardComponent(props) {
     // editWhitelistAddress();
     setEditClick(!editClick);
   };
-  const { state,setDeleteDialogValue } = props;
+  const { state,setDeleteDialogValue,setEditDialogValue } = props;
   const validateAddress = () => {
     if (
       (addressInput && addressInput.length > 40) ||
@@ -338,6 +338,10 @@ function DashboardComponent(props) {
   const handleToastClose=()=>{
     setOpen3(false)
   }
+  const handleToastCloseEdit=()=>{
+    setOpen4(false)
+  }
+
   // The added element component
   const AddedElement = () => (
     <button
@@ -386,6 +390,7 @@ function DashboardComponent(props) {
     setCount(0);
     setButtonText("Edit");
     setEditClick(false);
+    setEditDialogValue(false)
   };
   const handleCancelClose1 = () => {
     setDialogOpen1(false);
@@ -762,7 +767,7 @@ function DashboardComponent(props) {
               <span>
                 You have successfully deleted address
                 </span>
-                <span onClick={handleToastClose} style={{float:"right",cursor:"pointer"}}>
+                <span onClick={handleToastClose} style={{float:"right",cursor:"pointer",marginTop:"-8px"}}>
                   X
                 </span>
               </div>
@@ -776,7 +781,7 @@ function DashboardComponent(props) {
 
       <Snackbar
         open={open4}
-        autoHideDuration={3000}
+        // autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose4}
       >
@@ -797,7 +802,12 @@ function DashboardComponent(props) {
             </span>
             <span>
               <div className="toast-message">
+              <span>
                 You have successfully edited address
+                </span>
+                <span onClick={handleToastCloseEdit} style={{float:"right",cursor:"pointer",marginTop:"-8px"}}>
+                  X
+                </span>
               </div>
               <div className="toast-address">{deleteMessage}</div>
             </span>
@@ -807,6 +817,8 @@ function DashboardComponent(props) {
 
       {/* -----------Edit Dialog Box------------ */}
       <div>
+      {!state.editDialog?
+        <>
         <Dialog
           className={classes.dialog}
           open={dialogOpen1}
@@ -900,6 +912,45 @@ function DashboardComponent(props) {
             </Fragment>
           </DialogActions>
         </Dialog>
+        </>
+        :
+        <>
+       <Dialog className={classes.dialog} open={dialogOpen1} divide>
+       {/* <Row> */}
+            {/* <DialogTitle id="form-dialog-title">
+              <div className={classes.deleteheading}>Deleting Address</div>
+            </DialogTitle> */}
+          {/* </Row> */}
+          <DialogContent>
+          <DialogContentText className={classes.deleteheading}>
+            Editing Address {" "}
+              <span className={classes.deleteaddress}>
+                {addressInput ? addressInput.substr(0, 13) : " "}...
+                {addressInput
+                  ? addressInput.substr(addressInput.length - 5, 5)
+                  : ""}
+                {/* {(deleteMessage)} */}
+              </span>
+            </DialogContentText>
+          </DialogContent>
+        <DialogContent>
+           <img
+           style={{width:"100px",height:"100px",display:"flex",justifyContent:"center",marginLeft:"120px",marginRight:"50px"}}
+              // className="header-logo"
+              src={require("../../assets/styles/images/loader-small.gif")}
+            ></img>
+            <DialogContentText className={classes.subCategory}>
+              <div style={{fontSize:"15px",display:"flex",justifyContent:"center",color: "#2A2A2A",
+    opacity: "1",
+    fontFamily: "Inter",
+    fontweight: "400",}}>Transaction is in Progress</div>
+    
+              
+            </DialogContentText>
+        </DialogContent>
+      </Dialog>
+        </>
+}
       </div>
 
       {/* ---------Pagination--------- */}
