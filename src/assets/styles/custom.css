@@ -350,6 +350,22 @@ font-weight: 600;
     margin-left: 2px;
     font-family: "Inter",sans-serif;
 }
+.btnclick{
+    width: 400px;
+    border: solid 1px #c6c8ce;
+    height: 5vh;
+    outline: none;
+    margin-top: -15px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #2149B9;
+    padding-left: 10px;
+    border-color: #ECF1FF;
+    font-size: 14px;
+    letter-spacing: 0.54px;
+    margin-left: 2px;
+    font-family: "Inter",sans-serif;
+}
 .menu-heading{
     letter-spacing: 0.54px !important;
 color: #2A2A2A !important;

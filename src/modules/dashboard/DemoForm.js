@@ -130,6 +130,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CustomizedSnackbars(props) {
+  console.log("demoform state",props.state);
+  console.log("demoform addpopup",props.state.addDialog);
+  const {state,setStateValues}=props;
+
   const [addAddress, setAddAddress] = React.useState("");
 
   const classes = useStyles();
@@ -141,10 +145,18 @@ export default function CustomizedSnackbars(props) {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
   const [emailError, setEmailError] = useState("");
+  const [addPopup, setAddPopup] = useState(false)
+
+  String.prototype.replaceAt = function(index, replacement) {
+    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
+}
 
   const addWhitelistAddress = async () => {
+    // setAddPopup(true);
+    console.log(addAddress.replace("xdc","0x"),"replaceeeeeeeeeeeeeeeeeeeee")
+    // console.log(addAddress.replaceAt(0,"0x"),"replace value");
     const reqObj = {
-      address: addAddress,
+      address:  addAddress.replace("xdc","0x"),
       permission: {
         allowVoting,
         allowProposalCreation: proposal,
@@ -157,15 +169,19 @@ export default function CustomizedSnackbars(props) {
         setEmailError("Unable to add address");
         return;
       });
+      
     if (!totalAccounts) {
       setEmailError("Unable to add address");
       return;
     }
+   
     props.getListOffAddress();
     handleCloseDailog();
+    
   };
 
   const validateAddress = () => {
+   
     if (
       (addAddress && addAddress.length > 40) ||
       addAddress.slice(0, 2) == "xdc"
@@ -186,6 +202,7 @@ export default function CustomizedSnackbars(props) {
     setallowVoting(false);
     setProposal(false);
     setAddAddress("");
+    setStateValues(false)
   };
 
   const handleClose = (event, reason) => {
@@ -195,9 +212,14 @@ export default function CustomizedSnackbars(props) {
 
     setOpen(false);
   };
+  const handleToastClose=()=>{
+    setOpen(false)
+  }
 
-  const handleDialog = () => {
+  const handleDialog = async() => {
+
     setDialogOpen(true);
+   await setStateValues(false)
 
     // setOpen(true)
   };
@@ -207,12 +229,16 @@ export default function CustomizedSnackbars(props) {
     setallowVoting(false);
     setAddAddress("");
     setProposal(false);
+    // setStateValues(false)
+
+    // setAddPopup(false)
 
     // setDialogOpen(true);
   };
 
   return (
     <div className={classes.root}>
+     
       <div className="dashboard-upper-div"
         // style={{
         //   display: "flex",
@@ -227,6 +253,8 @@ export default function CustomizedSnackbars(props) {
           Add
         </button>
       </div>
+      {!state.addDialog?
+      <>
       <Dialog className={classes.dialog} open={dialogOpen} divide>
         <DialogTitle className={classes.heading} id="form-dialog-title">
           <div className={classes.mainheading}>Add a New Address</div>{" "}
@@ -296,6 +324,7 @@ export default function CustomizedSnackbars(props) {
                   // setAddAddress("");
                   // setProposal(false);
                   validateAddress();
+                  // setAddPopup(true)
                 }}
                 // disabled={(!allowVoting && !proposal) || !addAddress}
               >
@@ -305,10 +334,35 @@ export default function CustomizedSnackbars(props) {
           </span>
         </DialogActions>
       </Dialog>
+      </>
+      :
+      <>
+      <Dialog className={classes.dialog} open={dialogOpen} divide>
+      <DialogTitle className={classes.heading} id="form-dialog-title">
+          <div className={classes.mainheading}>Adding a New Address</div>{" "}
+        </DialogTitle>
+        <DialogContent>
+           <img
+           style={{width:"200px",height:"200px",display:"flex",justifyContent:"center",marginLeft:"30px",marginRight:"30px"}}
+              // className="header-logo"
+              src={require("../../assets/styles/images/loader-small.gif")}
+            ></img>
+            <DialogContentText className={classes.subCategory}>
+              <div style={{fontSize:"15px",display:"flex",justifyContent:"center",color: "#2A2A2A",
+    opacity: "1",
+    fontFamily: "Inter",
+    fontweight: "600",}}>Please wait transaction is in Progress</div>
+    
+              
+            </DialogContentText>
+        </DialogContent>
+      </Dialog>
+      </>
+              }
 
       <Snackbar
         open={open}
-        autoHideDuration={3000}
+        // autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose}
       >
@@ -329,7 +383,12 @@ export default function CustomizedSnackbars(props) {
             </span>
             <span>
               <div className="toast-message">
+                <span>
                 You have successfully added address
+                </span>
+                <span onClick={handleToastClose} style={{float:"right",cursor:"pointer",marginTop:"-8px"}}>
+                  X
+                </span>
               </div>
               <div className="toast-address">{message}</div>
               {/* 0x9b20bd863e1cf226b98…6b10 */}

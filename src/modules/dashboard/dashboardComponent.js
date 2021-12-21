@@ -71,22 +71,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-15px",
     // padding: "15px",
   },
-// searchbox: {
-//   width: "431px",
-//   height: "42px",
-//   background: "#4264C4 0% 0% no-repeat padding-box",
-//   borderRadius: "6px",
-//   opacity: "1",
-//   border: "none",
-//   outline: "none",
-//   color: "#E0E0E0",
-//   fontSize: "14px",
-//   padding: "10px",
-//   fontWeight: "500",
-//   background: "url(/images/Search.svg) no-repeat 1px",
-//   backgroundSize: "14px",
-//   backgroundPositionX: "9.5px",
-// },
+  // searchbox: {
+  //   width: "431px",
+  //   height: "42px",
+  //   background: "#4264C4 0% 0% no-repeat padding-box",
+  //   borderRadius: "6px",
+  //   opacity: "1",
+  //   border: "none",
+  //   outline: "none",
+  //   color: "#E0E0E0",
+  //   fontSize: "14px",
+  //   padding: "10px",
+  //   fontWeight: "500",
+  //   background: "url(/images/Search.svg) no-repeat 1px",
+  //   backgroundSize: "14px",
+  //   backgroundPositionX: "9.5px",
+  // },
   addbtn: {
     width: "110px",
     height: "34px",
@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#9FA9BA",
     letterSpacing: "0.54px",
 
-    fontWeight: "600",
+    fontWeight: "500",
     fontSize: "13px",
     fontFamily: "unset",
   },
@@ -184,7 +184,6 @@ const useStyles = makeStyles((theme) => ({
     fontfamily: "Inter",
     fontweight: "600",
   },
-
 }));
 function DashboardComponent(props) {
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
@@ -193,6 +192,7 @@ function DashboardComponent(props) {
 
   const [skip, setSkip] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
+  // const { state }=props;
 
   const pagination = async (event, value) => {
     await getListOffAddress({ skip: (value - 1) * 10, limit: limit });
@@ -248,46 +248,43 @@ function DashboardComponent(props) {
     handleCloseDailog1();
   };
 
-  const search=async(e)=>{
+  const search = async (e) => {
     // setAddressSearch(e.target.value);
-    console.log(e.target.value,"adddddddddddddddddddddddddddd")
-    console.log(addressSearch,"address of input")
-    const reqObj={
-      address:e.target.value
-    }
+    console.log(e.target.value, "adddddddddddddddddddddddddddd");
+    console.log(addressSearch, "address of input");
+    const reqObj = {
+      address: e.target.value,
+      skip: skip,
+      limit: limit,
+    };
     // await props.searchaddress(reqObj);
     let [error, totalAccounts] = await Utils.parseResponse(
       SearchService.searchaddress(reqObj)
     );
-    await setgetListOfAddress(totalAccounts?.searchData)
-   await setIsError("No record Found")
-    console.log(totalAccounts,"responseaddress")
-    console.log(error,"errorrrrrrrrrrrrrrrrrrrrrrr")
-    if (error || !totalAccounts)
-   
-    // {
-    // //  Utils.apiFailureToast("error")
-    //  await setIsError("No record found")
-    // }
+    await setgetListOfAddress(totalAccounts?.searchData);
     // await getListOffAddress({ skip: skip, limit: limit });
-    // else{
-      
-   
-  // else{
-  //   await setgetListOfAddress(totalAccounts?.message)
-    
-  // }
-   return;
+    //  await setIsError("No record Found")
+    console.log(totalAccounts, "responseaddress");
+    console.log(error, "errorrrrrrrrrrrrrrrrrrrrrrr");
+    if (error || !totalAccounts)
+      // {
+      // //  Utils.apiFailureToast("error")
+      //  await setIsError("No record found")
+      // }
+      // await getListOffAddress({ skip: skip, limit: limit });
+      // else{
 
-  //  setAddressSearch("")
-     
-      
+      // else{
+      //   await setgetListOfAddress(totalAccounts?.message)
+
+      // }
+      return;
+
+    //  setAddressSearch("")
+
     // }
-   
-
-  
-  }
-  console.log(getListOfAddress,"jhbbbbbbbbbbbbbbbbbb")
+  };
+  console.log(getListOfAddress, "jhbbbbbbbbbbbbbbbbbb");
 
   const logOut = () => {
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
@@ -316,7 +313,7 @@ function DashboardComponent(props) {
     // editWhitelistAddress();
     setEditClick(!editClick);
   };
-  const { state } = props;
+  const { state, setDeleteDialogValue, setEditDialogValue } = props;
   const validateAddress = () => {
     if (
       (addressInput && addressInput.length > 40) ||
@@ -330,6 +327,14 @@ function DashboardComponent(props) {
     }
   };
   const { useState, Fragment } = React;
+
+  const handleToastClose = () => {
+    setOpen3(false);
+  };
+  const handleToastCloseEdit = () => {
+    setOpen4(false);
+  };
+
   // The added element component
   const AddedElement = () => (
     <button
@@ -348,6 +353,7 @@ function DashboardComponent(props) {
     </button>
   );
 
+  const [inputColor, setInputColor]=useState(0);
   // The parent component
   const [addressSearch, setAddressSearch] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -367,6 +373,8 @@ function DashboardComponent(props) {
   const [open4, setOpen4] = React.useState(false);
   const handleDialog = () => {
     setDialogOpen(true);
+    // setStateValues({deleteDialog:false})
+    setDeleteDialogValue(false);
   };
   const handleCancelClose = () => {
     setDialogOpen(false);
@@ -376,6 +384,8 @@ function DashboardComponent(props) {
     setCount(0);
     setButtonText("Edit");
     setEditClick(false);
+    setEditDialogValue(false);
+    setInputColor(0);
   };
   const handleCancelClose1 = () => {
     setDialogOpen1(false);
@@ -415,22 +425,26 @@ function DashboardComponent(props) {
             ></img>
           </span>
           <span className="common-span-header">
-          <span className="voting-para">
-            <p>Voting Address Manager</p>
-            
-            
+            <span className="voting-para">
+              <p>Voting Address Manager</p>
+            </span>
+            <span>
+              <input
+                type="text"
+                className="inputsearch"
+                placeholder="Search Address"
+                // value={addressSearch}
+                onChange={(e) => {
+                  search(e);
+                }}
+              ></input>
+              <img
+                className="searchicon"
+                src={require("../../assets/styles/images/Search.png")}
+              ></img>
+            </span>
           </span>
-          <span>
-          <input type="text" className="inputsearch" placeholder="Search Address" 
-          // value={addressSearch}
-          onChange={(e)=>{search(e)}}
-          >
-            
-          </input>
-          <img className="searchicon" src={require("../../assets/styles/images/Search.png")}></img>
-          </span>
-          </span>
-          
+
           <span className="profile-icon">
             <div>
               <Button
@@ -477,6 +491,8 @@ function DashboardComponent(props) {
           getListOffAddress({ skip: skip, limit: limit })
         }
         addWhiteListAddress={props.addWhiteListAddress}
+        state={props.state}
+        setStateValues={props.setStateValues}
       />
       <div className="griddiv">
         <Grid lg={13} className="tablegrid_address">
@@ -517,114 +533,116 @@ function DashboardComponent(props) {
                   >
                     <span className="tableheading">Votes</span>
                   </TableCell>
-                
                 </TableRow>
               </TableHead>
               <TableBody>
                 {/* {filteredProducts.map((product)=>{ */}
-                {getListOfAddress?.map((row, index) => {
-                  return (
-                    
-                    // address={filteredData && filteredData.length ? filteredData : address}
-                    <TableRow
-                      style={
-                        index % 2 !== 1
-                          ? { background: "#f9f9f9" }
-                          : { background: "white" }
-                      }
-                    >
-                     
-                      <TableCell
-                        style={{ border: "none", paddingLeft: "4%" }}
-                        margin-left="5px"
-                        onClick={() => {
-                          handleDialog1();
-                          setDeleteMessage(row.address);
-                          setAddressInput(row.address);
-                          setDate(row.createdOn);
-                          setallowVoting(row.permission.allowVoting);
-                          setProposal(row.permission.allowProposalCreation);
-                        }}
+                {
+                  getListOfAddress?.map((row, index) => {
+                    return (
+                      // address={filteredData && filteredData.length ? filteredData : address}
+                      <TableRow
+                        style={
+                          index % 2 !== 1
+                            ? { background: "#f9f9f9" }
+                            : { background: "white" }
+                        }
                       >
-                        <a className="linkTable">
-                          <Tooltip placement="top" title={row.address}>
-                            <span className="tabledata">
-                              {row.address ? row.address.substr(0, 13) : " "}...
-                              {row.address
-                                ? row.address.substr(row.address.length - 5, 5)
-                                : ""}
-                              {/* (row.address)}{" "} */}
-                            </span>
-                          </Tooltip>
-                        </a>
-                      </TableCell>
+                        <TableCell
+                          style={{ border: "none", paddingLeft: "4%" }}
+                          margin-left="5px"
+                          onClick={() => {
+                            handleDialog1();
+                            setDeleteMessage(row.address);
+                            setAddressInput(row.address);
+                            setDate(row.createdOn);
+                            setallowVoting(row.permission.allowVoting);
+                            setProposal(row.permission.allowProposalCreation);
+                          }}
+                        >
+                          <a className="linkTable">
+                            <Tooltip placement="top" title={row.address}>
+                              <span className="tabledata">
+                                {row.address ? row.address.substr(0, 13) : " "}
+                                ...
+                                {row.address
+                                  ? row.address.substr(
+                                      row.address.length - 5,
+                                      5
+                                    )
+                                  : ""}
+                                {/* (row.address)}{" "} */}
+                              </span>
+                            </Tooltip>
+                          </a>
+                        </TableCell>
 
-                      <TableCell
-                        style={{ border: "none", paddingLeft: "0%" }}
-                        align="left"
-                        onClick={() => {
-                          handleDialog1();
-                          setDeleteMessage(row.address);
-                          setAddressInput(row.address);
-                          setallowVoting(row.permission.allowVoting);
-                          setProposal(row.permission.allowProposalCreation);
-                          setDate(row.createdOn);
-                        }}
-                      >
-                        <span className="tablemiddata">
-                          {" "}
-                          {moment(row.createdOn).format("DD MMMM YYYY")}
-                        </span>
-                      </TableCell>
-                      <TableCell
-                        style={{ border: "none" }}
-                        align="left"
-                        onClick={() => {
-                          handleDialog1();
-                          setDeleteMessage(row.address);
-                          setAddressInput(row.address);
-                          setDate(row.createdOn);
-                          setallowVoting(row.permission.allowVoting);
-                          setProposal(row.permission.allowProposalCreation);
-                        }}
-                      >
-                        <span className="tablemiddata">
-                          1
-                          {/* {row.votes.length} */}
-                          {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
-                        </span>
-                      </TableCell>
-                      <TableCell
-                        style={{ border: "none", paddingLeft: "4%" }}
-                        align="left"
-                      >
-                        <a className="linkTable">
-                          <span
-                            className="tabledata"
-                            onClick={() => {
-                              handleDialog();
-                              setDeleteMessage(row.address);
-                              setAddressInput(row.address);
-                              setDate(row.createdOn);
-                              setallowVoting(row.permission.allowVoting);
-                              setProposal(row.permission.allowProposalCreation);
-                            }}
-                          >
+                        <TableCell
+                          style={{ border: "none", paddingLeft: "0%" }}
+                          align="left"
+                          onClick={() => {
+                            handleDialog1();
+                            setDeleteMessage(row.address);
+                            setAddressInput(row.address);
+                            setallowVoting(row.permission.allowVoting);
+                            setProposal(row.permission.allowProposalCreation);
+                            setDate(row.createdOn);
+                          }}
+                        >
+                          <span className="tablemiddata">
                             {" "}
-                            Delete
+                            {moment(row.createdOn).format("DD MMMM YYYY")}
                           </span>
-                        </a>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })
+                        </TableCell>
+                        <TableCell
+                          style={{ border: "none" }}
+                          align="left"
+                          onClick={() => {
+                            handleDialog1();
+                            setDeleteMessage(row.address);
+                            setAddressInput(row.address);
+                            setDate(row.createdOn);
+                            setallowVoting(row.permission.allowVoting);
+                            setProposal(row.permission.allowProposalCreation);
+                          }}
+                        >
+                          <span className="tablemiddata">
+                            {row.votes.length}
+                            {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
+                          </span>
+                        </TableCell>
+                        <TableCell
+                          style={{ border: "none", paddingLeft: "4%" }}
+                          align="left"
+                        >
+                          <a className="linkTable">
+                            <span
+                              className="tabledata"
+                              onClick={() => {
+                                handleDialog();
+                                setDeleteMessage(row.address);
+                                setAddressInput(row.address);
+                                setDate(row.createdOn);
+                                setallowVoting(row.permission.allowVoting);
+                                setProposal(
+                                  row.permission.allowProposalCreation
+                                );
+                              }}
+                            >
+                              {" "}
+                              Delete
+                            </span>
+                          </a>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
 
-                // ) : (
-                //   <div className="display-flex justify-content-center p-t-50">
-                //     {" "}
-                //    {"No record found"}
-                //   </div>
-
+                  // ) : (
+                  //   <div className="display-flex justify-content-center p-t-50">
+                  //     {" "}
+                  //    {"No record found"}
+                  //   </div>
                 }
               </TableBody>
             </Table>
@@ -635,57 +653,115 @@ function DashboardComponent(props) {
       {/* ---------Delete Dialog Box----------- */}
 
       <div>
-        <Dialog
-          className={classes.dialog}
-          open={dialogOpen}
-          divide
-          aria-labelledby="form-dialog-title"
-        >
-          <Row>
-            <DialogTitle id="form-dialog-title">
-              <div className={classes.deleteheading}>Delete Address</div>
-            </DialogTitle>
-          </Row>
-          <DialogContent>
-            <DialogContentText className={classes.deletesubheading}>
-              Do you want to delete this address{" "}
-              <span className={classes.deleteaddress}>
-                {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
-                {deleteMessage
-                  ? deleteMessage.substr(deleteMessage.length - 5, 5)
-                  : ""}
-                {/* {(deleteMessage)} */}
-              </span>
-            </DialogContentText>
-          </DialogContent>
+        {!state.deleteDialog ? (
+          <>
+            <Dialog
+              className={classes.dialog}
+              open={dialogOpen}
+              divide
+              aria-labelledby="form-dialog-title"
+            >
+              <Row>
+                <DialogTitle id="form-dialog-title">
+                  <div className={classes.deleteheading}>Delete Address</div>
+                </DialogTitle>
+              </Row>
+              <DialogContent>
+                <DialogContentText className={classes.deletesubheading}>
+                  Do you want to delete this address{" "}
+                  <span className={classes.deleteaddress}>
+                    {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
+                    {deleteMessage
+                      ? deleteMessage.substr(deleteMessage.length - 5, 5)
+                      : ""}
+                    {/* {(deleteMessage)} */}
+                  </span>
+                </DialogContentText>
+              </DialogContent>
 
-          <DialogActions className={classes.buttons}>
-            <span>
-              <button className={classes.cnlbtn} onClick={handleCancelClose}>
-                Cancel
-              </button>
-            </span>
+              <DialogActions className={classes.buttons}>
+                <span>
+                  <button
+                    className={classes.cnlbtn}
+                    onClick={handleCancelClose}
+                  >
+                    Cancel
+                  </button>
+                </span>
 
-            <span>
-              <button
-                className={classes.addbtn}
-                onClick={() => {
-                  deleteaddress(deleteMessage);
-                }}
-              >
-                {" "}
-                Delete{" "}
-              </button>
-            </span>
-          </DialogActions>
-        </Dialog>
+                <span>
+                  <button
+                    className={classes.addbtn}
+                    onClick={() => {
+                      deleteaddress(deleteMessage);
+                    }}
+                  >
+                    {" "}
+                    Delete{" "}
+                  </button>
+                </span>
+              </DialogActions>
+            </Dialog>
+          </>
+        ) : (
+          <>
+            <Dialog className={classes.dialog} open={dialogOpen} divide>
+              {/* <Row> */}
+              {/* <DialogTitle id="form-dialog-title">
+              <div className={classes.deleteheading}>Deleting Address</div>
+            </DialogTitle> */}
+              {/* </Row> */}
+              <DialogContent>
+                <DialogContentText className={classes.deleteheading}>
+                  Deleting Address{" "}
+                  <span className={classes.deleteaddress}>
+                    {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
+                    {deleteMessage
+                      ? deleteMessage.substr(deleteMessage.length - 5, 5)
+                      : ""}
+                    {/* {(deleteMessage)} */}
+                  </span>
+                </DialogContentText>
+              </DialogContent>
+              <DialogContent>
+                <img
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginLeft: "120px",
+                    marginRight: "50px",
+                  }}
+                  // className="header-logo"
+                  src={require("../../assets/styles/images/loader-small.gif")}
+                ></img>
+                <DialogContentText className={classes.subCategory}>
+                  <div
+                    style={{
+                      fontSize: "15px",
+                      display: "flex",
+                      justifyContent: "center",
+                      color: "#2A2A2A",
+                      opacity: "1",
+                      fontFamily: "Inter",
+                      fontweight: "400",
+                    }}
+                  >
+                    Please wait transaction is in Progress
+                  </div>
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </>
+        )}
       </div>
 
       {/* ------Delete Toast Message----- */}
 
       <Snackbar
         open={open3}
-        autoHideDuration={3000}
+        // autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose3}
       >
@@ -706,7 +782,17 @@ function DashboardComponent(props) {
             </span>
             <span>
               <div className="toast-message">
-                You have successfully deleted address
+                <span>You have successfully deleted address</span>
+                <span
+                  onClick={handleToastClose}
+                  style={{
+                    float: "right",
+                    cursor: "pointer",
+                    marginTop: "-8px",
+                  }}
+                >
+                  X
+                </span>
               </div>
               <div className="toast-address">{deleteMessage}</div>
             </span>
@@ -718,7 +804,7 @@ function DashboardComponent(props) {
 
       <Snackbar
         open={open4}
-        autoHideDuration={3000}
+        // autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose4}
       >
@@ -739,7 +825,17 @@ function DashboardComponent(props) {
             </span>
             <span>
               <div className="toast-message">
-                You have successfully edited address
+                <span>You have successfully edited address</span>
+                <span
+                  onClick={handleToastCloseEdit}
+                  style={{
+                    float: "right",
+                    cursor: "pointer",
+                    marginTop: "-8px",
+                  }}
+                >
+                  X
+                </span>
               </div>
               <div className="toast-address">{deleteMessage}</div>
             </span>
@@ -749,99 +845,171 @@ function DashboardComponent(props) {
 
       {/* -----------Edit Dialog Box------------ */}
       <div>
-        <Dialog
-          className={classes.dialog}
-          open={dialogOpen1}
-          divide
-          onClose={handleCancelClose1}
-          aria-labelledby="form-dialog-title"
-        >
-          <Row>
-            <DialogTitle id="form-dialog-title">
-              <div className="editheading">Address</div>
-            </DialogTitle>
-          </Row>
-          <DialogContent className="editdialogdiv">
-            <input
-              className="editinput"
-              value={addressInput}
-              onChange={(e) => {
-                setAddressInput(e.target.value);
-                setEmailError("");
-              }}
-              disabled={!editClick}
-            ></input>
-            <div
-              style={{ marginLeft: "5px", color: "red", marginBottom: "-2px" }}
+        {!state.editDialog ? (
+          <>
+            <Dialog
+              className={classes.dialog}
+              open={dialogOpen1}
+              divide
+              onClose={handleCancelClose1}
+              aria-labelledby="form-dialog-title"
             >
-              {emailError}
-            </div>
-            <DialogContentText className={classes.addedon}>
-              <span>
-                Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
-              </span>
-            </DialogContentText>
-          </DialogContent>
-
-          <div className="checked-upper">
-            <div
-              className="custom-check1"
-              onClick={() => {
-                if (editClick) setallowVoting(!allowVoting);
-              }}
-              value={allowVoting}
-              className={
-                !allowVoting ? "custom-check1edit" : "custom-check1-edit-active"
-              }
-              //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-              // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
-            ></div>
-
-            <span className="checkbox-heading">Allow Voting</span>
-          </div>
-
-          <div className="checked-down">
-            <div
-              className="custom-check1"
-              onClick={() => {
-                if (editClick) setProposal(!proposal);
-              }}
-              value={proposal}
-              className={
-                !proposal ? "custom-check1edit" : "custom-check1-edit-active"
-              }
-
-              // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
-              // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
-            ></div>
-
-            <span className="checkbox-heading">Allow Proposal Creation</span>
-          </div>
-
-          <DialogActions className={classes.buttons1}>
-            <Fragment>
-              <button
-                onClick={() => {
-                  if (count === 1) {
-                    handleCancelClose1();
+              <Row>
+                <DialogTitle id="form-dialog-title">
+                  <div className="editheading">Address</div>
+                </DialogTitle>
+              </Row>
+              <DialogContent className="editdialogdiv">
+                <input
+                  className={!inputColor?"editinput":"btnclick"}
+                  value={addressInput}
+                  onChange={(e) => {
+                    setAddressInput(e.target.value);
                     setEmailError("");
-                  } else {
-                    setCount(1);
-                    setButtonText("Cancel");
-                    handleEditClick();
-                    setEmailError("");
+                  }}
+                  disabled={!editClick}
+                ></input>
+                <div
+                  style={{
+                    marginLeft: "5px",
+                    color: "red",
+                    marginBottom: "-2px",
+                  }}
+                >
+                  {emailError}
+                </div>
+                <DialogContentText className={classes.addedon}>
+                  <span>
+                    Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
+                  </span>
+                </DialogContentText>
+              </DialogContent>
+
+              <div className="checked-upper">
+                <div
+                  className="custom-check1"
+                  onClick={() => {
+                    if (editClick) setallowVoting(!allowVoting);
+                  }}
+                  value={allowVoting}
+                  className={
+                    !allowVoting
+                      ? "custom-check1edit"
+                      : !inputColor?"custom-check1-edit-active":"custom-check1-active"
                   }
-                }}
-                className={count === 1 ? classes.cnlbtn : classes.addbtn}
-              >
-                {buttonText}
-              </button>
-              {[...Array(count)].map((_, i) => (
-                <AddedElement key={i} />
-              ))}
-            </Fragment>
-          </DialogActions>
-        </Dialog>
+                  //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+                  // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
+                ></div>
+
+                <span className="checkbox-heading">Allow Voting</span>
+              </div>
+
+              <div className="checked-down">
+                <div
+                  className="custom-check1"
+                  onClick={() => {
+                    if (editClick) setProposal(!proposal);
+                  }}
+                  value={proposal}
+                  className={
+                    !proposal
+                      ? "custom-check1edit"
+                      : !inputColor?"custom-check1-edit-active":"custom-check1-active"
+                  }
+
+                  // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
+                  // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
+                ></div>
+
+                <span className="checkbox-heading">
+                  Allow Proposal Creation
+                </span>
+              </div>
+
+              <DialogActions className={classes.buttons1}>
+                <Fragment>
+                  <button
+                    onClick={() => {
+                      if (count === 1) {
+                        handleCancelClose1();
+                        setEmailError("");
+                      } 
+                      else if(inputColor===1){
+                        setInputColor(0);
+                      }
+                      else {
+                        setCount(1);
+                        setInputColor(1);
+                        setButtonText("Cancel");
+                        handleEditClick();
+                        setEmailError("");
+                      }
+                    }}
+                    className={count === 1 ? classes.cnlbtn : classes.addbtn}
+                    
+                    // className={count ==0 ? "btnclick":"editinput"}
+                  >
+                    {buttonText}
+                  </button>
+                  {[...Array(count)].map((_, i) => (
+                    <AddedElement key={i} />
+                  ))}
+                </Fragment>
+              </DialogActions>
+            </Dialog>
+          </>
+        ) : (
+          <>
+            <Dialog className={classes.dialog} open={dialogOpen1} divide>
+              {/* <Row> */}
+              {/* <DialogTitle id="form-dialog-title">
+              <div className={classes.deleteheading}>Deleting Address</div>
+            </DialogTitle> */}
+              {/* </Row> */}
+              <DialogContent>
+                <DialogContentText className={classes.deleteheading}>
+                  Editing Address{" "}
+                  <span className={classes.deleteaddress}>
+                    {addressInput ? addressInput.substr(0, 13) : " "}...
+                    {addressInput
+                      ? addressInput.substr(addressInput.length - 5, 5)
+                      : ""}
+                    {/* {(deleteMessage)} */}
+                  </span>
+                </DialogContentText>
+              </DialogContent>
+              <DialogContent>
+                <img
+                  style={{
+                    width: "100px",
+                    height: "100px",
+                    display: "flex",
+                    justifyContent: "center",
+                    marginLeft: "120px",
+                    marginRight: "50px",
+                  }}
+                  // className="header-logo"
+                  src={require("../../assets/styles/images/loader-small.gif")}
+                ></img>
+                <DialogContentText className={classes.subCategory}>
+                  <div
+                    style={{
+                      fontSize: "15px",
+                      display: "flex",
+                      justifyContent: "center",
+                      color: "#2A2A2A",
+                      opacity: "1",
+                      fontFamily: "Inter",
+                      fontweight: "400",
+                    }}
+                  >
+                    Please wait transaction is in Progress
+                  </div>
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </>
+        )}
       </div>
 
       {/* ---------Pagination--------- */}
