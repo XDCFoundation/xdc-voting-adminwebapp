@@ -130,9 +130,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CustomizedSnackbars(props) {
-  console.log("demoform state",props.state);
-  console.log("demoform addpopup",props.state.addDialog);
-  const {state,setStateValues}=props;
+  console.log("demoform state", props.state);
+  console.log("demoform addpopup", props.state.addDialog);
+  const { state, setStateValues } = props;
 
   const [addAddress, setAddAddress] = React.useState("");
 
@@ -145,18 +145,22 @@ export default function CustomizedSnackbars(props) {
   const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
   const [emailError, setEmailError] = useState("");
-  const [addPopup, setAddPopup] = useState(false)
+  const [addPopup, setAddPopup] = useState(false);
 
-  String.prototype.replaceAt = function(index, replacement) {
-    return this.substr(0, index) + replacement + this.substr(index + replacement.length);
-}
+  String.prototype.replaceAt = function (index, replacement) {
+    return (
+      this.substr(0, index) +
+      replacement +
+      this.substr(index + replacement.length)
+    );
+  };
 
   const addWhitelistAddress = async () => {
     // setAddPopup(true);
-    console.log(addAddress.replace("xdc","0x"),"replaceeeeeeeeeeeeeeeeeeeee")
+    console.log(addAddress.replace("xdc", "0x"), "replaceeeeeeeeeeeeeeeeeeeee");
     // console.log(addAddress.replaceAt(0,"0x"),"replace value");
     const reqObj = {
-      address:  addAddress.replace("xdc","0x"),
+      address: addAddress.replace("xdc", "0x"),
       permission: {
         allowVoting,
         allowProposalCreation: proposal,
@@ -169,19 +173,17 @@ export default function CustomizedSnackbars(props) {
         setEmailError("Unable to add address");
         return;
       });
-      
+
     if (!totalAccounts) {
       setEmailError("Unable to add address");
       return;
     }
-   
+
     props.getListOffAddress();
     handleCloseDailog();
-    
   };
 
   const validateAddress = () => {
-   
     if (
       (addAddress && addAddress.length > 40) ||
       addAddress.slice(0, 2) == "xdc"
@@ -202,7 +204,7 @@ export default function CustomizedSnackbars(props) {
     setallowVoting(false);
     setProposal(false);
     setAddAddress("");
-    setStateValues(false)
+    setStateValues(false);
   };
 
   const handleClose = (event, reason) => {
@@ -212,14 +214,13 @@ export default function CustomizedSnackbars(props) {
 
     setOpen(false);
   };
-  const handleToastClose=()=>{
-    setOpen(false)
-  }
+  const handleToastClose = () => {
+    setOpen(false);
+  };
 
-  const handleDialog = async() => {
-
+  const handleDialog = async () => {
     setDialogOpen(true);
-   await setStateValues(false)
+    await setStateValues(false);
 
     // setOpen(true)
   };
@@ -238,8 +239,8 @@ export default function CustomizedSnackbars(props) {
 
   return (
     <div className={classes.root}>
-     
-      <div className="dashboard-upper-div"
+      <div
+        className="dashboard-upper-div"
         // style={{
         //   display: "flex",
         //   justifyContent: "space-between",
@@ -253,31 +254,33 @@ export default function CustomizedSnackbars(props) {
           Add
         </button>
       </div>
-      {!state.addDialog?
-      <>
-      <Dialog className={classes.dialog} open={dialogOpen} divide>
-        <DialogTitle className={classes.heading} id="form-dialog-title">
-          <div className={classes.mainheading}>Add a New Address</div>{" "}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText className={classes.subCategory}>
-            <div className={classes.subheading}>Address</div>
-          </DialogContentText>
-          <input
-            className="addinput"
-            type="text"
-            required="true"
-            // value={addAddress}
-            onChange={(e) => {
-              setAddAddress(e.target.value);
-              setEmailError("");
-            }}
-            value={addAddress}
-          ></input>
-          <div style={{ marginLeft: "5px", color: "red" }}>{emailError}</div>
-        </DialogContent>
-        <div style={{ display: "flex", marginTop: "10px" }}>
-          {/* <input
+      {!state.addDialog ? (
+        <>
+          <Dialog className={classes.dialog} open={dialogOpen} divide>
+            <DialogTitle className={classes.heading} id="form-dialog-title">
+              <div className={classes.mainheading}>Add a New Address</div>{" "}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText className={classes.subCategory}>
+                <div className={classes.subheading}>Address</div>
+              </DialogContentText>
+              <input
+                className="addinput"
+                type="text"
+                required="true"
+                // value={addAddress}
+                onChange={(e) => {
+                  setAddAddress(e.target.value);
+                  setEmailError("");
+                }}
+                value={addAddress}
+              ></input>
+              <div style={{ marginLeft: "5px", color: "red" }}>
+                {emailError}
+              </div>
+            </DialogContent>
+            <div style={{ display: "flex", marginTop: "10px" }}>
+              {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)
             }}
@@ -286,79 +289,95 @@ export default function CustomizedSnackbars(props) {
             checked={allowVoting}
 
           /> */}
-          <div
-            className="custom-check1"
-            onClick={() => {
-              setallowVoting(!allowVoting);
-            }}
-            className={!allowVoting ? "custom-check1" : "custom-check1-active"}
-          ></div>
-          <span className="checkbox-heading">Allow Voting</span>
-        </div>
-        <div style={{ display: "flex" }}>
-          <div
-            className="custom-check1"
-            onClick={() => {
-              setProposal(!proposal);
-            }}
-            className={!proposal ? "custom-check1" : "custom-check1-active"}
-          ></div>
-
-          <span className="checkbox-heading">Allow Proposal Creation</span>
-        </div>
-
-        <DialogActions className={classes.buttons}>
-          <span>
-            <button className={classes.cnlbtn} onClick={handleCancelClose}>
-              Cancel
-            </button>
-          </span>
-          <span>
-            <div>
-              <button
-                className={classes.addbtn}
-                variant="contained"
-                color="primary"
+              <div
+                className="custom-check1"
                 onClick={() => {
-                  // setallowVoting(false);
-                  // setAddAddress("");
-                  // setProposal(false);
-                  validateAddress();
-                  // setAddPopup(true)
+                  setallowVoting(!allowVoting);
                 }}
-                // disabled={(!allowVoting && !proposal) || !addAddress}
-              >
-                Add
-              </button>
+                className={
+                  !allowVoting ? "custom-check1" : "custom-check1-active"
+                }
+              ></div>
+              <span className="checkbox-heading">Allow Voting</span>
             </div>
-          </span>
-        </DialogActions>
-      </Dialog>
-      </>
-      :
-      <>
-      <Dialog className={classes.dialog} open={dialogOpen} divide>
-      <DialogTitle className={classes.heading} id="form-dialog-title">
-          <div className={classes.mainheading}>Adding a New Address</div>{" "}
-        </DialogTitle>
-        <DialogContent>
-           <img
-           style={{width:"200px",height:"200px",display:"flex",justifyContent:"center",marginLeft:"30px",marginRight:"30px"}}
-              // className="header-logo"
-              src={require("../../assets/styles/images/loader-small.gif")}
-            ></img>
-            <DialogContentText className={classes.subCategory}>
-              <div style={{fontSize:"15px",display:"flex",justifyContent:"center",color: "#2A2A2A",
-    opacity: "1",
-    fontFamily: "Inter",
-    fontweight: "600",}}>Please wait transaction is in Progress</div>
-    
-              
-            </DialogContentText>
-        </DialogContent>
-      </Dialog>
-      </>
-              }
+            <div style={{ display: "flex" }}>
+              <div
+                className="custom-check1"
+                onClick={() => {
+                  setProposal(!proposal);
+                }}
+                className={!proposal ? "custom-check1" : "custom-check1-active"}
+              ></div>
+
+              <span className="checkbox-heading">Allow Proposal Creation</span>
+            </div>
+
+            <DialogActions className={classes.buttons}>
+              <span>
+                <button className={classes.cnlbtn} onClick={handleCancelClose}>
+                  Cancel
+                </button>
+              </span>
+              <span>
+                <div>
+                  <button
+                    className={classes.addbtn}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                      // setallowVoting(false);
+                      // setAddAddress("");
+                      // setProposal(false);
+                      validateAddress();
+                      // setAddPopup(true)
+                    }}
+                    // disabled={(!allowVoting && !proposal) || !addAddress}
+                  >
+                    Add
+                  </button>
+                </div>
+              </span>
+            </DialogActions>
+          </Dialog>
+        </>
+      ) : (
+        <>
+          <Dialog className={classes.dialog} open={dialogOpen} divide>
+            <DialogTitle className={classes.heading} id="form-dialog-title">
+              <div className={classes.mainheading}>Adding a New Address</div>{" "}
+            </DialogTitle>
+            <DialogContent>
+              <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img>
+              <DialogContentText className={classes.subCategory}>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    display: "flex",
+                    justifyContent: "center",
+                    color: "#2A2A2A",
+                    opacity: "1",
+                    fontFamily: "Inter",
+                    fontweight: "600",
+                  }}
+                >
+                  Please wait transaction is in Progress
+                </div>
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
 
       <Snackbar
         open={open}
@@ -383,10 +402,15 @@ export default function CustomizedSnackbars(props) {
             </span>
             <span>
               <div className="toast-message">
-                <span>
-                You have successfully added address
-                </span>
-                <span onClick={handleToastClose} style={{float:"right",cursor:"pointer",marginTop:"-8px"}}>
+                <span>You have successfully added address</span>
+                <span
+                  onClick={handleToastClose}
+                  style={{
+                    float: "right",
+                    cursor: "pointer",
+                    marginTop: "-8px",
+                  }}
+                >
                   X
                 </span>
               </div>
