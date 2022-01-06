@@ -200,6 +200,7 @@ color: #E0E0E0;
 .searchicon{
     margin-left: -30px;
     width: 14px;
+    margin-top: -4px;
 }
 
 .forgot-in{
@@ -776,7 +777,15 @@ padding-left: 20px;
         width: 263px !important;
     }
 }
+@media (min-width:767px){
+    .MuiDialog-scrollPaper{
+        margin-left: -11vw !important;
+    }
+}
 @media (max-width:767px){
+    .MuiMenu-paper{
+        margin-top: 10px !important;
+    }
     .voting p{
         margin-top: 20%;
         font: normal normal 600 18px/21px Inter;

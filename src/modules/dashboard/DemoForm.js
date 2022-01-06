@@ -205,6 +205,7 @@ export default function CustomizedSnackbars(props) {
     setProposal(false);
     setAddAddress("");
     setStateValues(false);
+    setEmailError("")
   };
 
   const handleClose = (event, reason) => {
