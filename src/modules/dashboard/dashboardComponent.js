@@ -537,7 +537,7 @@ function DashboardComponent(props) {
               </TableHead>
               <TableBody>
                 {/* {filteredProducts.map((product)=>{ */}
-                {
+                {getListOfAddress?.length>1?(
                   getListOfAddress?.map((row, index) => {
                     return (
                       // address={filteredData && filteredData.length ? filteredData : address}
@@ -638,11 +638,15 @@ function DashboardComponent(props) {
                     );
                   })
 
-                  // ) : (
-                  //   <div className="display-flex justify-content-center p-t-50">
-                  //     {" "}
-                  //    {"No record found"}
-                  //   </div>
+                  ) : (
+                    <TableRow style={{textAlign:"end"}}>
+                    {/* <div className="display-flex justify-content-center p-t-50"> */}
+                  {" "}
+                  No Record found
+                {/* </div> */}
+                 </TableRow>
+                  )
+                 
                 }
               </TableBody>
             </Table>

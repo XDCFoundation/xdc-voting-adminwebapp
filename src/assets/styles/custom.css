@@ -23,7 +23,7 @@ html, body {
 } */
 
 .login-div {
-    margin-top: 8%;
+    margin-top: 88px;
     /* margin-left: 34vw; */
     width: 549px;
 height: 461px;
@@ -71,7 +71,7 @@ height: 461px;
   }
 
 .forgot-div {
-    margin-top: 8%;
+    margin-top: 88px;
     /* margin-left: 34vw; */
     width: 549px;
     justify-content: center;
@@ -232,10 +232,17 @@ color: #E0E0E0;
     font-family: "Inter",sans-serif;
     font-size: 14px;
 }
+@media (min-width:1400px) and (max-width:1699px){
 .MuiMenu-paper{
     margin-top: -10px !important;
 }
-@media (min-width:1700px) and (max-width:2560px){
+}
+@media (min-width:1700px) and (max-width:2199px){
+    .MuiMenu-paper{
+        margin-top: -30px !important;
+    }
+    }
+@media (min-width:2200px) and (max-width:2560px){
     .MuiMenu-paper{
         margin-top: -50px !important;
     }
@@ -372,7 +379,7 @@ font-weight: 600;
 color: #2A2A2A !important;
 font-size: 14px !important;
 font-family: "Inter",sans-serif !important;
-font-weight: 520 !important;
+font-weight: 400 !important;
 opacity: 1;
 }
 
