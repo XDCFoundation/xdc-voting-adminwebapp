@@ -23,7 +23,7 @@ html, body {
 } */
 
 .login-div {
-    margin-top: 8%;
+    margin-top: 88px;
     /* margin-left: 34vw; */
     width: 549px;
 height: 461px;
@@ -71,7 +71,7 @@ height: 461px;
   }
 
 .forgot-div {
-    margin-top: 8%;
+    margin-top: 88px;
     /* margin-left: 34vw; */
     width: 549px;
     justify-content: center;
