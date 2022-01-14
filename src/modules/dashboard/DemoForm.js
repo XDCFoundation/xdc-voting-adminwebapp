@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
     border: "none !important",
   },
   mainheading: {
-    letterSpacing: "0.69px",
+    letterSpacing: "0px",
     color: " #2A2A2A",
     opacity: "1",
     fontSize: "18px",
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
   },
   subheading: {
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     color: "#2A2A2A",
     opacity: "1",
     marginLeft: "3px",
@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
 
   heading: {
     marginLeft: "3px",
-    letterSpacing: "0.69px",
+    letterSpacing: "0px",
     color: "#2A2A2A",
     opacity: "1",
     fontFamily: "Inter",
@@ -190,7 +190,7 @@ export default function CustomizedSnackbars(props) {
     ) {
       addWhitelistAddress();
     } else if (!addAddress) {
-      setEmailError("enter a valid Address");
+      setEmailError("Enter a valid Address");
     } else {
       setEmailError("Address should start with xdc & min 40 characters");
     }
@@ -261,7 +261,7 @@ export default function CustomizedSnackbars(props) {
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>Add a New Address</div>{" "}
             </DialogTitle>
-            <DialogContent>
+            <DialogContent style={{marginTop:"-5px"}}>
               <DialogContentText className={classes.subCategory}>
                 <div className={classes.subheading}>Address</div>
               </DialogContentText>
@@ -269,6 +269,7 @@ export default function CustomizedSnackbars(props) {
                 className="addinput"
                 type="text"
                 required="true"
+                placeholder="Write address"
                 // value={addAddress}
                 onChange={(e) => {
                   setAddAddress(e.target.value);
@@ -276,11 +277,11 @@ export default function CustomizedSnackbars(props) {
                 }}
                 value={addAddress}
               ></input>
-              <div style={{ marginLeft: "5px", color: "red" }}>
+              <div style={{ marginLeft: "5px", color: "red", fontSize:"14px", fontFamily:"Inter" }}>
                 {emailError}
               </div>
             </DialogContent>
-            <div style={{ display: "flex", marginTop: "10px" }}>
+            <div style={{ display: "flex", marginTop: "10px", marginBottom:"5px" }}>
               {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)
@@ -299,7 +300,10 @@ export default function CustomizedSnackbars(props) {
                   !allowVoting ? "custom-check1" : "custom-check1-active"
                 }
               ></div>
-              <span className="checkbox-heading">Allow Voting</span>
+              <span className="checkbox-heading">
+              <div>Allow Voting</div>
+              <div className="checkbox-des">By selecting this you are giving permission to address to cast a vote</div>
+              </span>
             </div>
             <div style={{ display: "flex" }}>
               <div
@@ -310,7 +314,10 @@ export default function CustomizedSnackbars(props) {
                 className={!proposal ? "custom-check1" : "custom-check1-active"}
               ></div>
 
-              <span className="checkbox-heading">Allow Proposal Creation</span>
+              <span className="checkbox-heading">
+                <div>Allow Proposal Creation</div>
+                <div className="checkbox-des">By selecting this you are giving permission to address to create proposal</div>
+                </span>
             </div>
 
             <DialogActions className={classes.buttons}>

@@ -119,7 +119,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0px",
     border: "none !important",
     color: "#9FA9BA",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
 
     fontWeight: "500",
     fontSize: "13px",
@@ -133,12 +133,12 @@ const useStyles = makeStyles((theme) => ({
     /* font-family: unset; */
     /* font-weight: 500; */
     marginBottom: "0px",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     marginLeft: "3px",
     fontFamily: "Inter,sans-serif",
   },
   deleteheading: {
-    letterSpacing: "0.69px",
+    letterSpacing: "0px",
     color: "#2A2A2A",
     opacity: "1",
     fontSize: "18px",
@@ -147,7 +147,7 @@ const useStyles = makeStyles((theme) => ({
   },
   deletesubheading: {
     marginBottom: "0px",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     opacity: "1",
     fontSize: "14px",
     color: "#2A2A2A",
@@ -156,7 +156,7 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteaddress: {
     color: "#3763DD",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     fontSize: "14px",
     fontWeight: "500",
   },
@@ -445,7 +445,7 @@ function DashboardComponent(props) {
             </span>
           </span>
 
-          <span className="profile-icon">
+          {/* <span className="profile-icon">
             <div>
               <Button
                 aria-controls="simple-menu"
@@ -483,7 +483,7 @@ function DashboardComponent(props) {
                 </MenuItem>
               </Menu>
             </div>
-          </span>
+          </span> */}
         </div>
       </div>
       <CustomizedSnackbars
@@ -537,10 +537,11 @@ function DashboardComponent(props) {
               </TableHead>
               <TableBody>
                 {/* {filteredProducts.map((product)=>{ */}
-                {getListOfAddress?.length>1?(
+                {getListOfAddress?.length>0?(
                   getListOfAddress?.map((row, index) => {
                     return (
                       // address={filteredData && filteredData.length ? filteredData : address}
+                    //  getListOfAddress && getListOfAddress.length>0?(
                       <TableRow
                         style={
                           index % 2 !== 1
@@ -635,15 +636,52 @@ function DashboardComponent(props) {
                           </a>
                         </TableCell>
                       </TableRow>
+                      // ):(
+                      //   <TableRow style={
+                      //     index % 2 !== 1
+                      //       ? { background: "#f9f9f9" }
+                      //       : { background: "white" }
+                      //   }>
+                      //     <TableCell style={{justifyContent:"center",display:"flex",width:"100%",backgroundColor:"black"}}>{"message"}</TableCell>
+                      //     </TableRow>
+                      // )
+
                     );
                   })
 
                   ) : (
-                    <TableRow style={{textAlign:"end"}}>
+                    <TableRow >
+                      <TableCell  style={{
+                      border: "none",
+                      paddingLeft: "4%",
+                      fontWeight: "500",
+                    }}
+                    align="left"
+                  >
+                    <span ></span>
+                        </TableCell>
+                        <TableCell  style={{
+                      border: "none",
+                      paddingLeft: "0%",
+                      fontWeight: "500",
+                    }}
+                    align="center"
+                  >
+                    <span >No Record found</span>
                     {/* <div className="display-flex justify-content-center p-t-50"> */}
-                  {" "}
-                  No Record found
+                  
+                  
                 {/* </div> */}
+                </TableCell>
+                <TableCell style={{
+                      border: "none",
+                      fontWeight: "500",
+                    }}
+                    align="left"
+                  >
+                    <span ></span>
+
+                </TableCell>
                  </TableRow>
                   )
                  

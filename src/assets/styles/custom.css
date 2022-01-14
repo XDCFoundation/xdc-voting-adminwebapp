@@ -58,7 +58,7 @@ height: 461px;
     opacity: 1;
     border: none;
     color: white;
-    letter-spacing: 0.54px;
+    letter-spacing: 0px;
     color: #FFFFFF;
     opacity: 1;
     font-size: 14px;
@@ -295,7 +295,7 @@ color: #E0E0E0;
     font-family: "Inter",sans-serif;
 }
 .checkbox-heading{
-    letter-spacing: 0.54px;
+    letter-spacing: 0px;
 color: #2A2A2A;
 opacity: 1;
 font-size: 14px;
@@ -334,7 +334,7 @@ font-weight: 500;
   opacity: 1;
 }
 .editheading{
-    letter-spacing: 0.69px;
+    letter-spacing: 0px;
 color: #2A2A2A;
 opacity: 1;
 font-size: 18px;
@@ -354,7 +354,7 @@ font-weight: 600;
     padding-left: 10px;
     border-color: #ECF1FF;
     font-size: 14px;
-    letter-spacing: 0.54px;
+    letter-spacing: 0px;
     margin-left: 2px;
     font-family: "Inter",sans-serif;
 }
@@ -370,7 +370,7 @@ font-weight: 600;
     padding-left: 10px;
     border-color: #ECF1FF;
     font-size: 14px;
-    letter-spacing: 0.54px;
+    letter-spacing: 0px;
     margin-left: 2px;
     font-family: "Inter",sans-serif;
 }
@@ -638,7 +638,7 @@ opacity: 1;
     
 } */
 .tabledata{
-    letter-spacing: 0.54px;
+    letter-spacing: 0px;
 color: #2149B9;
 opacity: 1;
 font-size: 14px;
@@ -651,14 +651,14 @@ font-family: "Inter",sans-serif;
 
 }
 .tablemiddata{
-    letter-spacing: 0.54px;
+    letter-spacing: 0px;
 color: #2A2A2A;
 opacity: 1;
 font-size: 14px;
 font-family: "Inter",sans-serif;
 }
 .tableheading{
-    letter-spacing: 0.54px;
+    letter-spacing: 0px;
 color: #2A2A2A;
 opacity: 1;
 font-size: 14px;
@@ -669,7 +669,7 @@ font-weight: 600;
     font-size: 18px;
     font-family: "Inter",sans-serif;
     font-weight: bold;
-letter-spacing: 0.69px;
+letter-spacing: 0px;
 color: #2A2A2A;
 opacity: 1;
 }
@@ -701,7 +701,7 @@ padding-left: 20px;
     border: none;
     font-size: 15px;
     font-family: "Inter",sans-serif;
-    letter-spacing: 0.58px;
+    letter-spacing: 0px;
     color: #FFFFFF;
     font-weight: 600;
     
@@ -721,7 +721,7 @@ padding-left: 20px;
     color: red;
 }
 .addinput{
-    width: 400px;
+    width: 450px;
     height: 5vh;
     border: solid 1px #9FA9BA;
     background-color: #ffffff;
@@ -729,6 +729,17 @@ padding-left: 20px;
     outline: none;
     padding-left: 10px;
     margin-left: 4px;
+    font-size: 14px;
+    color: #9FA9BA;
+}
+.checkbox-des{
+    text-align: left;
+font: normal normal medium 12px/26px Inter;
+letter-spacing: 0px;
+color: #9FA9BA;
+font-family: 'Inter',sans-serif;
+    font-size: 12px;
+    margin-top: 3px;
 }
 .MuiDialog-paperWidthSm{
     max-width: 553px !important;
@@ -928,7 +939,7 @@ background:#3763DD 0% 0% no-repeat padding-box !important;
 border-radius: 4px !important;
 color: #FFFFFF !important;
     opacity: 1;
-    letter-spacing: 0.62px !important;
+    letter-spacing: 0px !important;
     font-size: 16px !important;
     font-family: "Inter",sans-serif !important;
     opacity: 1;
@@ -941,7 +952,7 @@ color: #FFFFFF !important;
 .MuiPaginationItem-rounded{
     color: #9FA9BA !important;
     font-size: 16px !important;
-    letter-spacing: 0.62px !important;
+    letter-spacing: 0px !important;
 }
 .MuiPaginationItem-rounded{
     margin: 2px !important;
@@ -970,6 +981,7 @@ color: #FFFFFF;
 } */
 .custom-check1{
     height: 16px;
+    margin-top: 3px;
     margin-left: 30px;
     width: 16px;
      background-color: #FFFFFF;
