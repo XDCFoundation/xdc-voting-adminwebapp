@@ -102,6 +102,21 @@ const useStyles = makeStyles((theme) => ({
       color: "#2149B9",
     },
   },
+  deleteconfirmation: {
+    width: "404px",
+    height: "62px",
+    background: "#FDE9E9 0% 0% no-repeat padding-box",
+    borderRadius: "4px",
+    opacity: "1",
+    textAlign: "center",
+    /* font: normal normal normal 14px/22px Inter; */
+    letterSpacing: "0px",
+    color: "#EB4444",
+    opacity: "1",
+    fontSize: "14px",
+    fontFamily: 'Inter',
+    padding: "12px 36px 11px 35px"
+},
 
   cnlbtn: {
     width: "94px",
@@ -145,6 +160,15 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Inter,sans-serif",
     fontWeight: "600",
   },
+  subheading: {
+    letterSpacing: "0px",
+    color: "#2A2A2A",
+    opacity: "1",
+    marginLeft: "3px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+    fontSize: "14px",
+  },
   deletesubheading: {
     marginBottom: "0px",
     letterSpacing: "0px",
@@ -183,6 +207,14 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "2px",
     fontfamily: "Inter",
     fontweight: "600",
+  },
+  mainheading: {
+    letterSpacing: "0px",
+    color: " #2A2A2A",
+    opacity: "1",
+    fontSize: "18px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
   },
 }));
 function DashboardComponent(props) {
@@ -717,9 +749,15 @@ function DashboardComponent(props) {
                       ? deleteMessage.substr(deleteMessage.length - 5, 5)
                       : ""}
                     {/* {(deleteMessage)} */}
-                  </span>
+                  </span>{" "}?
                 </DialogContentText>
               </DialogContent>
+
+              <DialogContent>
+                <DialogContentText className={classes.deleteconfirmation}>
+                Once deleted you cannot added it again in future. It will be deleted permanently
+                </DialogContentText>
+                </DialogContent>
 
               <DialogActions className={classes.buttons}>
                 <span>
@@ -897,20 +935,37 @@ function DashboardComponent(props) {
               aria-labelledby="form-dialog-title"
             >
               <Row>
-                <DialogTitle id="form-dialog-title">
-                  <div className="editheading">Address</div>
-                </DialogTitle>
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+              <div className={classes.mainheading}>Add a New Address</div>{" "}
+            </DialogTitle>
               </Row>
-              <DialogContent className="editdialogdiv">
-                <input
+              <DialogContent style={{marginTop:"-5px"}}>
+              <DialogContentText className={classes.subCategory}>
+                <div className={classes.subheading}>Address</div>
+              </DialogContentText>
+                <div
                   className={!inputColor?"editinput":"btnclick"}
-                  value={addressInput}
-                  onChange={(e) => {
-                    setAddressInput(e.target.value);
-                    setEmailError("");
-                  }}
-                  disabled={!editClick}
-                ></input>
+                  
+                  
+                  // onChange={(e) => {
+                  //   setAddressInput(e.target.value);
+                  //   setEmailError("");
+                  // }}
+                  disabled="true"
+                >
+                  <span style={{fontSize:"15px"}}>
+                  {addressInput ? addressInput.substr(0, 13) : " "}...
+                  {addressInput
+                    ? addressInput.substr(addressInput.length - 5, 5)
+                    : ""}
+                  </span>
+               
+                <span style={{color: "#92A5DD",
+    fontSize: "12px",
+    paddingTop: "3px"}}>
+                    Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
+                  </span>
+                  </div>
                 <div
                   style={{
                     marginLeft: "5px",
@@ -920,11 +975,9 @@ function DashboardComponent(props) {
                 >
                   {emailError}
                 </div>
-                <DialogContentText className={classes.addedon}>
-                  <span>
-                    Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
-                  </span>
-                </DialogContentText>
+                {/* <DialogContentText className={classes.addedon}>
+                  
+                </DialogContentText> */}
               </DialogContent>
 
               <div className="checked-upper">
@@ -943,7 +996,10 @@ function DashboardComponent(props) {
                   // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
                 ></div>
 
-                <span className="checkbox-heading">Allow Voting</span>
+<span className="checkbox-heading">
+              <div>Allow Voting</div>
+              <div className="checkbox-des">By selecting this you are giving permission to address to cast a vote</div>
+              </span>
               </div>
 
               <div className="checked-down">
@@ -963,12 +1019,40 @@ function DashboardComponent(props) {
                   // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
                 ></div>
 
-                <span className="checkbox-heading">
-                  Allow Proposal Creation
+<span className="checkbox-heading">
+                <div>Allow Proposal Creation</div>
+                <div className="checkbox-des">By selecting this you are giving permission to address to create proposal</div>
                 </span>
               </div>
 
-              <DialogActions className={classes.buttons1}>
+              <DialogActions className={classes.buttons}>
+              <span>
+                <button className={classes.cnlbtn} onClick={handleCancelClose}>
+                  Cancel
+                </button>
+              </span>
+              <span>
+                <div>
+                  <button
+                    className={classes.addbtn}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => {
+                      // setallowVoting(false);
+                      // setAddAddress("");
+                      // setProposal(false);
+                      validateAddress();
+                      // setAddPopup(true)
+                    }}
+                    // disabled={(!allowVoting && !proposal) || !addAddress}
+                  >
+                    Add
+                  </button>
+                </div>
+              </span>
+            </DialogActions>
+
+              {/* <DialogActions className={classes.buttons1}>
                 <Fragment>
                   <button
                     onClick={() => {
@@ -997,7 +1081,7 @@ function DashboardComponent(props) {
                     <AddedElement key={i} />
                   ))}
                 </Fragment>
-              </DialogActions>
+              </DialogActions> */}
             </Dialog>
           </>
         ) : (

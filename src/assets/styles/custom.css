@@ -343,20 +343,24 @@ font-family: "Inter",sans-serif;
 font-weight: 600;
 }
 .editinput{
-    width: 400px;
+    width: 450px;
     border: solid 1px #c6c8ce;
     height: 5vh;
     outline: none;
-    margin-top: -15px;
+    /* margin-top: -15px; */
     border-radius: 8px;
     background-color: #ECF1FF;
     color: #2149B9;
-    padding-left: 10px;
+    padding: 5px 25px 11px 12px;
     border-color: #ECF1FF;
-    font-size: 14px;
+    /* font-size: 14px; */
     letter-spacing: 0px;
     margin-left: 2px;
     font-family: "Inter",sans-serif;
+    display: flex;
+    justify-content: space-between;
+
+
 }
 .btnclick{
     width: 400px;
@@ -741,6 +745,7 @@ font-family: 'Inter',sans-serif;
     font-size: 12px;
     margin-top: 3px;
 }
+
 .MuiDialog-paperWidthSm{
     max-width: 553px !important;
 }
@@ -1035,7 +1040,8 @@ color: #FFFFFF;
 }
 .checked-upper{
     display: flex;
-     margin-top: 5px;
+     margin-top: 10px;
+     margin-bottom: 5px;
 }
 .paging{
     float: right;
