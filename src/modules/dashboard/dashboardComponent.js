@@ -35,6 +35,7 @@ import { connect } from "react-redux";
 import { sessionManager } from "../../managers/sessionManager";
 import { reduxEvent } from "../../constants";
 import Pagination from "@material-ui/lab/Pagination";
+import Jazzicon from "react-jazzicon";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -52,9 +53,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "80px !important",
   },
   buttons: {
-    padding: "0px 35px 0px 0px",
-    marginTop: "1px",
-    marginBottom: "6px",
+    padding: "1px 35px 10px 0px",
+    marginTop: "-4px",
   },
   buttons1: {
     padding: "0px 35px 0px 0px",
@@ -130,15 +130,16 @@ const useStyles = makeStyles((theme) => ({
     padding: "3px 19px 3px 20px",
   },
   subCategory: {
-    marginTop: "5px",
-    marginBottom: "0px",
+    marginTop: "-8px",
+    marginBottom:"-2px",
+    // marginBottom: "0px",
     border: "none !important",
     color: "#9FA9BA",
     letterSpacing: "0px",
 
     fontWeight: "500",
-    fontSize: "13px",
-    fontFamily: "unset",
+    fontSize: "15px",
+    fontFamily: "Inter",
   },
   addedon: {
     color: "#9FA9BA",
@@ -477,19 +478,22 @@ function DashboardComponent(props) {
             </span>
           </span>
 
-          {/* <span className="profile-icon">
+          <span className="profile-icon">
             <div>
-              <Button
+              {/* <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
-              >
-                <img
+              > */}
+                {/* <img
                   className="profile-logo"
                   src={require("../../assets/styles/images/Profile-Logo.svg")}
-                ></img>
-              </Button>
-              <Menu
+                ></img> */}
+                <button className="connect-wallet">
+                <div >Connect Wallet</div>
+                </button>
+              {/* </Button> */}
+              {/* <Menu
                 id="simple-menu-item"
                 anchorEl={anchorEl}
                 keepMounted
@@ -513,9 +517,9 @@ function DashboardComponent(props) {
                 >
                   Log out
                 </MenuItem>
-              </Menu>
+              </Menu> */}
             </div>
-          </span> */}
+          </span>
         </div>
       </div>
       <CustomizedSnackbars
@@ -559,6 +563,26 @@ function DashboardComponent(props) {
                   <TableCell
                     style={{
                       border: "none",
+                      paddingLeft: "0%",
+                      fontWeight: "500",
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Can Vote</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      paddingLeft: "2%",
+                      fontWeight: "500",
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Can Create Proposal</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
                       fontWeight: "500",
                     }}
                     align="left"
@@ -584,18 +608,25 @@ function DashboardComponent(props) {
                         <TableCell
                           style={{ border: "none", paddingLeft: "4%" }}
                           margin-left="5px"
-                          onClick={() => {
-                            handleDialog1();
-                            setDeleteMessage(row.address);
-                            setAddressInput(row.address);
-                            setDate(row.createdOn);
-                            setallowVoting(row.permission.allowVoting);
-                            setProposal(row.permission.allowProposalCreation);
-                          }}
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
                         >
                           <a className="linkTable">
-                            <Tooltip placement="top" title={row.address}>
+                            
+                           
+                            {/* <div><Jazzicon  diameter={20} seed={Math.round(Math.random() * 10000000)}/></div> */}
+                            <span>
+            <Jazzicon diameter={20} seed={Math.round(Math.random() * 10000000)} />
+          </span> &nbsp;
+          <Tooltip placement="top" title={row.address}>
                               <span className="tabledata">
+                             <span>
                                 {row.address ? row.address.substr(0, 13) : " "}
                                 ...
                                 {row.address
@@ -604,6 +635,7 @@ function DashboardComponent(props) {
                                       5
                                     )
                                   : ""}
+                                  </span>
                                 {/* (row.address)}{" "} */}
                               </span>
                             </Tooltip>
@@ -613,14 +645,14 @@ function DashboardComponent(props) {
                         <TableCell
                           style={{ border: "none", paddingLeft: "0%" }}
                           align="left"
-                          onClick={() => {
-                            handleDialog1();
-                            setDeleteMessage(row.address);
-                            setAddressInput(row.address);
-                            setallowVoting(row.permission.allowVoting);
-                            setProposal(row.permission.allowProposalCreation);
-                            setDate(row.createdOn);
-                          }}
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          //   setDate(row.createdOn);
+                          // }}
                         >
                           <span className="tablemiddata">
                             {" "}
@@ -628,16 +660,52 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
+                          style={{ border: "none", paddingLeft: "0%" }}
+                          align="left"
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
+                        >
+                          <span  className={row.permission.allowVoting?"permission-yes":"permission-no"}>
+                            {row.permission.allowVoting?"Yes":"No"}
+                          
+                            {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
+                          </span>
+                        </TableCell>
+                        <TableCell
+                          style={{ border: "none", paddingLeft: "2%" }}
+                          align="left"
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
+                        >
+                          <span className={row.permission.allowProposalCreation?"permission-yes":"permission-no"}>
+                          {row.permission.allowProposalCreation?"Yes":"No"}
+                           
+                            {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
+                          </span>
+                        </TableCell>
+                        <TableCell
                           style={{ border: "none" }}
                           align="left"
-                          onClick={() => {
-                            handleDialog1();
-                            setDeleteMessage(row.address);
-                            setAddressInput(row.address);
-                            setDate(row.createdOn);
-                            setallowVoting(row.permission.allowVoting);
-                            setProposal(row.permission.allowProposalCreation);
-                          }}
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
                         >
                           <span className="tablemiddata">
                             {row.votes.length}
@@ -645,7 +713,33 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "4%" }}
+                          style={{ border: "none", paddingLeft: "0%" }}
+                          align="left"
+                        >
+                          <a className="linkTable">
+                            <span
+                              className="tabledata"
+                              onClick={() => {
+                                handleDialog1();
+                                setDeleteMessage(row.address);
+                                setAddressInput(row.address);
+                                setDate(row.createdOn);
+                                setallowVoting(row.permission.allowVoting);
+                                setProposal(
+                                  row.permission.allowProposalCreation
+                                );
+                              }}
+                            >
+                              {" "}
+                              <img
+              className="edit-icon"
+              src={require("../../assets/styles/images/edit.svg")}
+            ></img>
+                            </span>
+                          </a>
+                        </TableCell>
+                        <TableCell
+                          style={{ border: "none", paddingLeft: "0%" }}
                           align="left"
                         >
                           <a className="linkTable">
@@ -663,7 +757,10 @@ function DashboardComponent(props) {
                               }}
                             >
                               {" "}
-                              Delete
+                              <img
+              className="delete-icon"
+              src={require("../../assets/styles/images/delete.svg")}
+            ></img>
                             </span>
                           </a>
                         </TableCell>
@@ -934,18 +1031,19 @@ function DashboardComponent(props) {
               onClose={handleCancelClose1}
               aria-labelledby="form-dialog-title"
             >
-              <Row>
+              <Row style={{marginBottom:"10px"}}>
               <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>Add a New Address</div>{" "}
             </DialogTitle>
               </Row>
-              <DialogContent style={{marginTop:"-5px"}}>
+              <DialogContent style={{marginTop: "-25px",
+    marginBottom: "-10px"}}>
               <DialogContentText className={classes.subCategory}>
                 <div className={classes.subheading}>Address</div>
               </DialogContentText>
                 <div
-                  className={!inputColor?"editinput":"btnclick"}
-                  
+                  // className={!inputColor?"editinput":"btnclick"}
+                  className="editinput"
                   
                   // onChange={(e) => {
                   //   setAddressInput(e.target.value);
@@ -966,15 +1064,27 @@ function DashboardComponent(props) {
                     Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
                   </span>
                   </div>
-                <div
+                   {/* <input
+                className="addinput"
+                type="text"
+                required="true"
+                placeholder="Write address"
+                // value={addAddress}
+                onChange={(e) => {
+                  // setAddAddress(e.target.value);
+                  setEmailError("");
+                }}
+                // value={addAddress}
+              ></input> */}
+                {/* <div
                   style={{
                     marginLeft: "5px",
                     color: "red",
-                    marginBottom: "-2px",
+                   
                   }}
                 >
                   {emailError}
-                </div>
+                </div> */}
                 {/* <DialogContentText className={classes.addedon}>
                   
                 </DialogContentText> */}
@@ -984,7 +1094,7 @@ function DashboardComponent(props) {
                 <div
                   className="custom-check1"
                   onClick={() => {
-                    if (editClick) setallowVoting(!allowVoting);
+                     setallowVoting(!allowVoting);
                   }}
                   value={allowVoting}
                   className={
@@ -1006,7 +1116,7 @@ function DashboardComponent(props) {
                 <div
                   className="custom-check1"
                   onClick={() => {
-                    if (editClick) setProposal(!proposal);
+                     setProposal(!proposal);
                   }}
                   value={proposal}
                   className={
@@ -1027,7 +1137,7 @@ function DashboardComponent(props) {
 
               <DialogActions className={classes.buttons}>
               <span>
-                <button className={classes.cnlbtn} onClick={handleCancelClose}>
+                <button className={classes.cnlbtn} onClick={handleCancelClose1}>
                   Cancel
                 </button>
               </span>
@@ -1046,7 +1156,7 @@ function DashboardComponent(props) {
                     }}
                     // disabled={(!allowVoting && !proposal) || !addAddress}
                   >
-                    Add
+                    Done
                   </button>
                 </div>
               </span>
@@ -1157,7 +1267,9 @@ function DashboardComponent(props) {
         </div>
       </div>
 
-      <div style={{ height: "50px" }}></div>
+      <div className="footer" >
+        <div className="footer-heading">© 2021 XinFin. All Right Reserved</div>
+      </div>
     </div>
   );
 }

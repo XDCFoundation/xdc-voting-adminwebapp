@@ -250,7 +250,10 @@ export default function CustomizedSnackbars(props) {
         //   marginLeft: "20vw",
         // }}
       >
-        <div className="whitelisted-heading">Whitelisted Addresses</div>
+        <div className="whitelisted-heading">
+          <div>Whitelisted Addresses</div>
+          <div className="address-des">Addresses added here can vote and create proposals for XDC Governance portal</div>
+          </div>
         <button variant="outlined" onClick={handleDialog} className="add-btn1">
           Add
         </button>
