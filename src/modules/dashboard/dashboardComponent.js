@@ -1011,11 +1011,43 @@ function DashboardComponent(props) {
                       }}
                       align="center"
                     >
+                      <span></span>
+                      {/* <div className="display-flex justify-content-center p-t-50"> */}
+
+                      {/* </div> */}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "10%",
+                        fontWeight: "500",
+                        font: "normal normal 600 14px/17px Inter",
+    letterSpacing: "0px",
+    color: "#D5DAEA",
+    opacity: "1",
+    paddingTop: "220px",
+    paddingBottom: "90px"
+                      }}
+                      align="center"
+                    >
                       <span>No Record found</span>
                       {/* <div className="display-flex justify-content-center p-t-50"> */}
 
                       {/* </div> */}
                     </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "0%",
+                        fontWeight: "500",
+                      }}
+                      align="center"
+                    >
+                      <span></span>
+                      {/* <div className="display-flex justify-content-center p-t-50"> */}
+
+                      {/* </div> */}
+                    </TableCell>    
                     <TableCell
                       style={{
                         border: "none",
