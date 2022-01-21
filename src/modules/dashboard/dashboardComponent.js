@@ -20,7 +20,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { EditService, Logout } from "../../services";
@@ -36,11 +36,20 @@ import { sessionManager } from "../../managers/sessionManager";
 import { reduxEvent } from "../../constants";
 import Pagination from "@material-ui/lab/Pagination";
 import Jazzicon from "react-jazzicon";
+import CloseIcon from "@material-ui/icons/Close";
+import clsx from "clsx";
+
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import IconButton from "@material-ui/core/IconButton";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
+const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   Alert: {
     backgroundColor: "#00144D",
@@ -114,9 +123,9 @@ const useStyles = makeStyles((theme) => ({
     color: "#EB4444",
     opacity: "1",
     fontSize: "14px",
-    fontFamily: 'Inter',
-    padding: "12px 36px 11px 35px"
-},
+    fontFamily: "Inter",
+    padding: "12px 36px 11px 35px",
+  },
 
   cnlbtn: {
     width: "94px",
@@ -131,7 +140,7 @@ const useStyles = makeStyles((theme) => ({
   },
   subCategory: {
     marginTop: "-8px",
-    marginBottom:"-2px",
+    marginBottom: "-2px",
     // marginBottom: "0px",
     border: "none !important",
     color: "#9FA9BA",
@@ -217,8 +226,42 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Inter,sans-sarif",
     fontWeight: "600",
   },
+  list: {
+    width: "336px",
+    backgroundColor: "#102e84",
+    height: "100%",
+  },
+  fullList: {
+    width: "auto",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    overflow: "hidden",
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    backgroundColor: "#102e84",
+    overflow: "hidden",
+  },
+  drawerHeader: {
+    overflow: "hidden",
+    display: "flex",
+    alignItems: "center",
+    // padding: theme.spacing(0, 1),
+    // ...theme.mixins.toolbar,
+    justifyContent: "flex-start",
+    marginTop: "-12px",
+  },
+  firstContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: "19px",
+  },
 }));
 function DashboardComponent(props) {
+  const theme = useTheme();
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
   const [pageNumber, setPageNumber] = React.useState();
   const [pagecount, setPagecount] = React.useState(0);
@@ -386,7 +429,7 @@ function DashboardComponent(props) {
     </button>
   );
 
-  const [inputColor, setInputColor]=useState(0);
+  const [inputColor, setInputColor] = useState(0);
   // The parent component
   const [addressSearch, setAddressSearch] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -447,6 +490,136 @@ function DashboardComponent(props) {
     setOpen4(false);
   };
 
+  // ***************************Humburger Function********************************
+
+  const [state1, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state1, [anchor]: open });
+  };
+  const list = ["Accounts", "Contract", "Tools", "XDC Apis", "Nodes", "Tokens"];
+  // const list = (anchor) => (
+  //   <div
+  //     sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+  //     role="presentation"
+  //     onClick={toggleDrawer(anchor, false)}
+  //     onKeyDown={toggleDrawer(anchor, false)}
+  //   >
+  //     <List>
+  //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+  //         <ListItem button key={text}>
+  //           <ListItemIcon>
+  //             {index % 2 === 0 ? "<InboxIcon />" : "<InboxIcon />"}
+  //           </ListItemIcon>
+  //           <ListItemText primary={text} />
+  //         </ListItem>
+  //       ))}
+  //     </List>
+
+  //     <List>
+  //       {['All mail', 'Trash', 'Spam'].map((text, index) => (
+  //         <ListItem button key={text}>
+  //           <ListItemIcon>
+  //             {index % 2 === 0 ? "<InboxIcon />" : "<InboxIcon />"}
+  //           </ListItemIcon>
+  //           <ListItemText primary={text} />
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //   </div>
+  // );
+
+  const lists = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <div className={classes.firstContainer}>
+        <p className="inside-side-box-browse">Browse</p>
+        <div className={classes.drawerHeader}>
+          <IconButton
+            style={{ color: "white" }}
+            onClick={toggleDrawer(anchor, false)}
+          >
+            <CloseIcon />
+          </IconButton>
+        </div>
+      </div>
+
+      <List className="side-box">
+        <ul className="inside-side-box">
+          <a className="account_details_button">
+            <div className="xinfin_account_button">About XDC</div>
+          </a>
+          <hr className="myhr" />
+        </ul>
+
+        <ul className="inside-side-box">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            {" "}
+            XDC Observatory{" "}
+            <span className="side-arrow-contract-tab">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </span>
+          </p>
+          <hr className="myhr" />
+        </ul>
+
+        <ul className="inside-side-box">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Network Stats{" "}
+            <span className="right-arrow-side-bar">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </span>
+          </p>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <a href="http://betagovernance.xdcroadmap.net/">
+            {" "}
+            <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+              Voting Dapp
+            </p>{" "}
+          </a>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Pay
+          </p>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Github
+          </p>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Roadmap
+          </p>
+          <hr className="myhr" />
+        </ul>
+      </List>
+    </div>
+  );
+
   return (
     <div>
       <div className="header">
@@ -479,19 +652,43 @@ function DashboardComponent(props) {
           </span>
 
           <span className="profile-icon">
-            <div>
+            <div style={{ display: "flex" }}>
               {/* <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
               > */}
-                {/* <img
+              {/* <img
                   className="profile-logo"
                   src={require("../../assets/styles/images/Profile-Logo.svg")}
                 ></img> */}
-                <button className="connect-wallet">
-                <div >Connect Wallet</div>
-                </button>
+              <button className="connect-wallet">
+                <div>Connect Wallet</div>
+              </button>
+              <div style={{ marginLeft: "16px", marginRight: "22px" }}>
+                <span>
+                  <React.Fragment className="rigt-line" key={"right"}>
+                    <IconButton
+                      className="hamburger-icon"
+                      color="inherit"
+                      aria-label="open drawer"
+                      edge="end"
+                      onClick={toggleDrawer("right", true)}
+                    >
+                      <img src={"/images/Menu.svg"}></img>
+                      {/* <MenuIcon /> */}
+                    </IconButton>
+
+                    <Drawer
+                      className={classes.drawer}
+                      anchor={"right"}
+                      open={state1["right"]}
+                    >
+                      {lists("right")}
+                    </Drawer>
+                  </React.Fragment>
+                </span>{" "}
+              </div>
               {/* </Button> */}
               {/* <Menu
                 id="simple-menu-item"
@@ -593,11 +790,11 @@ function DashboardComponent(props) {
               </TableHead>
               <TableBody>
                 {/* {filteredProducts.map((product)=>{ */}
-                {getListOfAddress?.length>0?(
+                {getListOfAddress?.length > 0 ? (
                   getListOfAddress?.map((row, index) => {
                     return (
                       // address={filteredData && filteredData.length ? filteredData : address}
-                    //  getListOfAddress && getListOfAddress.length>0?(
+                      //  getListOfAddress && getListOfAddress.length>0?(
                       <TableRow
                         style={
                           index % 2 !== 1
@@ -618,24 +815,28 @@ function DashboardComponent(props) {
                           // }}
                         >
                           <a className="linkTable">
-                            
-                           
                             {/* <div><Jazzicon  diameter={20} seed={Math.round(Math.random() * 10000000)}/></div> */}
                             <span>
-            <Jazzicon diameter={20} seed={Math.round(Math.random() * 10000000)} />
-          </span> &nbsp;
-          <Tooltip placement="top" title={row.address}>
+                              <Jazzicon
+                                diameter={20}
+                                seed={Math.round(Math.random() * 10000000)}
+                              />
+                            </span>{" "}
+                            &nbsp;
+                            <Tooltip placement="top" title={row.address}>
                               <span className="tabledata">
-                             <span>
-                                {row.address ? row.address.substr(0, 13) : " "}
-                                ...
-                                {row.address
-                                  ? row.address.substr(
-                                      row.address.length - 5,
-                                      5
-                                    )
-                                  : ""}
-                                  </span>
+                                <span>
+                                  {row.address
+                                    ? row.address.substr(0, 13)
+                                    : " "}
+                                  ...
+                                  {row.address
+                                    ? row.address.substr(
+                                        row.address.length - 5,
+                                        5
+                                      )
+                                    : ""}
+                                </span>
                                 {/* (row.address)}{" "} */}
                               </span>
                             </Tooltip>
@@ -671,9 +872,15 @@ function DashboardComponent(props) {
                           //   setProposal(row.permission.allowProposalCreation);
                           // }}
                         >
-                          <span  className={row.permission.allowVoting?"permission-yes":"permission-no"}>
-                            {row.permission.allowVoting?"Yes":"No"}
-                          
+                          <span
+                            className={
+                              row.permission.allowVoting
+                                ? "permission-yes"
+                                : "permission-no"
+                            }
+                          >
+                            {row.permission.allowVoting ? "Yes" : "No"}
+
                             {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
                           </span>
                         </TableCell>
@@ -689,9 +896,17 @@ function DashboardComponent(props) {
                           //   setProposal(row.permission.allowProposalCreation);
                           // }}
                         >
-                          <span className={row.permission.allowProposalCreation?"permission-yes":"permission-no"}>
-                          {row.permission.allowProposalCreation?"Yes":"No"}
-                           
+                          <span
+                            className={
+                              row.permission.allowProposalCreation
+                                ? "permission-yes"
+                                : "permission-no"
+                            }
+                          >
+                            {row.permission.allowProposalCreation
+                              ? "Yes"
+                              : "No"}
+
                             {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
                           </span>
                         </TableCell>
@@ -732,9 +947,9 @@ function DashboardComponent(props) {
                             >
                               {" "}
                               <img
-              className="edit-icon"
-              src={require("../../assets/styles/images/edit.svg")}
-            ></img>
+                                className="edit-icon"
+                                src={require("../../assets/styles/images/edit.svg")}
+                              ></img>
                             </span>
                           </a>
                         </TableCell>
@@ -758,9 +973,9 @@ function DashboardComponent(props) {
                             >
                               {" "}
                               <img
-              className="delete-icon"
-              src={require("../../assets/styles/images/delete.svg")}
-            ></img>
+                                className="delete-icon"
+                                src={require("../../assets/styles/images/delete.svg")}
+                              ></img>
                             </span>
                           </a>
                         </TableCell>
@@ -774,47 +989,44 @@ function DashboardComponent(props) {
                       //     <TableCell style={{justifyContent:"center",display:"flex",width:"100%",backgroundColor:"black"}}>{"message"}</TableCell>
                       //     </TableRow>
                       // )
-
                     );
                   })
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "4%",
+                        fontWeight: "500",
+                      }}
+                      align="left"
+                    >
+                      <span></span>
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "0%",
+                        fontWeight: "500",
+                      }}
+                      align="center"
+                    >
+                      <span>No Record found</span>
+                      {/* <div className="display-flex justify-content-center p-t-50"> */}
 
-                  ) : (
-                    <TableRow >
-                      <TableCell  style={{
-                      border: "none",
-                      paddingLeft: "4%",
-                      fontWeight: "500",
-                    }}
-                    align="left"
-                  >
-                    <span ></span>
-                        </TableCell>
-                        <TableCell  style={{
-                      border: "none",
-                      paddingLeft: "0%",
-                      fontWeight: "500",
-                    }}
-                    align="center"
-                  >
-                    <span >No Record found</span>
-                    {/* <div className="display-flex justify-content-center p-t-50"> */}
-                  
-                  
-                {/* </div> */}
-                </TableCell>
-                <TableCell style={{
-                      border: "none",
-                      fontWeight: "500",
-                    }}
-                    align="left"
-                  >
-                    <span ></span>
-
-                </TableCell>
-                 </TableRow>
-                  )
-                 
-                }
+                      {/* </div> */}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        fontWeight: "500",
+                      }}
+                      align="left"
+                    >
+                      <span></span>
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </Grid>
@@ -846,15 +1058,17 @@ function DashboardComponent(props) {
                       ? deleteMessage.substr(deleteMessage.length - 5, 5)
                       : ""}
                     {/* {(deleteMessage)} */}
-                  </span>{" "}?
+                  </span>{" "}
+                  ?
                 </DialogContentText>
               </DialogContent>
 
               <DialogContent>
                 <DialogContentText className={classes.deleteconfirmation}>
-                Once deleted you cannot added it again in future. It will be deleted permanently
+                  Once deleted you cannot added it again in future. It will be
+                  deleted permanently
                 </DialogContentText>
-                </DialogContent>
+              </DialogContent>
 
               <DialogActions className={classes.buttons}>
                 <span>
@@ -1031,40 +1245,44 @@ function DashboardComponent(props) {
               onClose={handleCancelClose1}
               aria-labelledby="form-dialog-title"
             >
-              <Row style={{marginBottom:"10px"}}>
-              <DialogTitle className={classes.heading} id="form-dialog-title">
-              <div className={classes.mainheading}>Add a New Address</div>{" "}
-            </DialogTitle>
+              <Row style={{ marginBottom: "10px" }}>
+                <DialogTitle className={classes.heading} id="form-dialog-title">
+                  <div className={classes.mainheading}>Add a New Address</div>{" "}
+                </DialogTitle>
               </Row>
-              <DialogContent style={{marginTop: "-25px",
-    marginBottom: "-10px"}}>
-              <DialogContentText className={classes.subCategory}>
-                <div className={classes.subheading}>Address</div>
-              </DialogContentText>
+              <DialogContent
+                style={{ marginTop: "-25px", marginBottom: "-10px" }}
+              >
+                <DialogContentText className={classes.subCategory}>
+                  <div className={classes.subheading}>Address</div>
+                </DialogContentText>
                 <div
                   // className={!inputColor?"editinput":"btnclick"}
                   className="editinput"
-                  
                   // onChange={(e) => {
                   //   setAddressInput(e.target.value);
                   //   setEmailError("");
                   // }}
                   disabled="true"
                 >
-                  <span style={{fontSize:"15px"}}>
-                  {addressInput ? addressInput.substr(0, 13) : " "}...
-                  {addressInput
-                    ? addressInput.substr(addressInput.length - 5, 5)
-                    : ""}
+                  <span style={{ fontSize: "15px" }}>
+                    {addressInput ? addressInput.substr(0, 13) : " "}...
+                    {addressInput
+                      ? addressInput.substr(addressInput.length - 5, 5)
+                      : ""}
                   </span>
-               
-                <span style={{color: "#92A5DD",
-    fontSize: "12px",
-    paddingTop: "3px"}}>
+
+                  <span
+                    style={{
+                      color: "#92A5DD",
+                      fontSize: "12px",
+                      paddingTop: "3px",
+                    }}
+                  >
                     Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
                   </span>
-                  </div>
-                   {/* <input
+                </div>
+                {/* <input
                 className="addinput"
                 type="text"
                 required="true"
@@ -1094,73 +1312,86 @@ function DashboardComponent(props) {
                 <div
                   className="custom-check1"
                   onClick={() => {
-                     setallowVoting(!allowVoting);
+                    setallowVoting(!allowVoting);
                   }}
                   value={allowVoting}
                   className={
                     !allowVoting
                       ? "custom-check1edit"
-                      : !inputColor?"custom-check1-edit-active":"custom-check1-active"
+                      : !inputColor
+                      ? "custom-check1-edit-active"
+                      : "custom-check1-active"
                   }
                   //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
                   // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
                 ></div>
 
-<span className="checkbox-heading">
-              <div>Allow Voting</div>
-              <div className="checkbox-des">By selecting this you are giving permission to address to cast a vote</div>
-              </span>
+                <span className="checkbox-heading">
+                  <div>Allow Voting</div>
+                  <div className="checkbox-des">
+                    By selecting this you are giving permission to address to
+                    cast a vote
+                  </div>
+                </span>
               </div>
 
               <div className="checked-down">
                 <div
                   className="custom-check1"
                   onClick={() => {
-                     setProposal(!proposal);
+                    setProposal(!proposal);
                   }}
                   value={proposal}
                   className={
                     !proposal
                       ? "custom-check1edit"
-                      : !inputColor?"custom-check1-edit-active":"custom-check1-active"
+                      : !inputColor
+                      ? "custom-check1-edit-active"
+                      : "custom-check1-active"
                   }
 
                   // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
                   // className={proposal ? (editClick?"custom-check1-edit-active":"custom-check1edit" ): (editClick?"custom-check1-active":"custom-check1")}
                 ></div>
 
-<span className="checkbox-heading">
-                <div>Allow Proposal Creation</div>
-                <div className="checkbox-des">By selecting this you are giving permission to address to create proposal</div>
+                <span className="checkbox-heading">
+                  <div>Allow Proposal Creation</div>
+                  <div className="checkbox-des">
+                    By selecting this you are giving permission to address to
+                    create proposal
+                  </div>
                 </span>
               </div>
 
               <DialogActions className={classes.buttons}>
-              <span>
-                <button className={classes.cnlbtn} onClick={handleCancelClose1}>
-                  Cancel
-                </button>
-              </span>
-              <span>
-                <div>
+                <span>
                   <button
-                    className={classes.addbtn}
-                    variant="contained"
-                    color="primary"
-                    onClick={() => {
-                      // setallowVoting(false);
-                      // setAddAddress("");
-                      // setProposal(false);
-                      validateAddress();
-                      // setAddPopup(true)
-                    }}
-                    // disabled={(!allowVoting && !proposal) || !addAddress}
+                    className={classes.cnlbtn}
+                    onClick={handleCancelClose1}
                   >
-                    Done
+                    Cancel
                   </button>
-                </div>
-              </span>
-            </DialogActions>
+                </span>
+                <span>
+                  <div>
+                    <button
+                      className={classes.addbtn}
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        // setallowVoting(false);
+                        // setAddAddress("");
+                        // setProposal(false);
+                        validateAddress();
+                        // setAddPopup(true)
+                      }}
+                      // disabled={(!allowVoting && !proposal) || !addAddress}
+                    >
+                      Done
+                    </button>
+                  </div>
+                </span>
+              </DialogActions>
 
               {/* <DialogActions className={classes.buttons1}>
                 <Fragment>
@@ -1267,7 +1498,7 @@ function DashboardComponent(props) {
         </div>
       </div>
 
-      <div className="footer" >
+      <div className="footer">
         <div className="footer-heading">© 2021 XinFin. All Right Reserved</div>
       </div>
     </div>

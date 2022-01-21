@@ -1165,7 +1165,88 @@ font-family: "Inter";
 .paper{
     margin-bottom: -4px !important;
 }
-
+.hamburger-icon{
+    width: 26px;
+    height: 18px;
+    margin-top: -4px;
+}
+.inside-side-box-browse {
+    color: #4666c4;
+    font-size: 16px;
+    font-family: Inter;
+    margin-left: 25px;
+    margin-top: 10px;
+  }
+  .side-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: transparent;
+    color: #ffffff;
+    background-color: #102e84;
+    padding: 0 10px 0px 10px !important;
+  }
+  .inside-side-box {
+    padding: 0 0px 0 13px !important;
+    font-size: 14.5px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    margin-top: 10px;
+  }
+  .account_details_button {
+    font-size: 15px;
+    color: #ffffff;
+    margin-bottom: 2px;
+  }
+  
+  .account_details_button:hover {
+    list-style: none;
+    text-decoration: none;
+    font-size: 15px;
+    color: #8facff;
+  }
+  .xinfin_account_button {
+    font-size: 17px;
+    font-family: "Inter";
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  
+  .xinfin_account_button:hover {
+    list-style: none;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: "Inter";
+    color: #829ce5;
+  }
+  .myhr {
+    width: 92%;
+    left: 0%;
+    /* margin-top: -9px; */
+    border: solid 0.1px #4867c1;
+    margin-left: 0%;
+  }
+  .xinfin_api_button {
+    font-size: 17px;
+    font-family: "Inter";
+    color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 25px;
+    list-style: none;
+    text-decoration: none;
+  }
+  .xinfin_api_button:hover {
+    list-style: none;
+    text-decoration: none;
+    font-size: 17px;
+    font-family: "Inter";
+    color: #829ce5;
+  }
 /* .address p{
     margin-top: 56px;
 
