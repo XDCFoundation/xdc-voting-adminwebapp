@@ -389,7 +389,13 @@ function DashboardComponent(props) {
     // editWhitelistAddress();
     setEditClick(!editClick);
   };
-  const { state, setDeleteDialogValue, setEditDialogValue } = props;
+  const {
+    state,
+    setDeleteDialogValue,
+    setEditDialogValue,
+    setDeleteConfirmDialogStateValues,
+    setEditConfirmDialogStateValues,
+  } = props;
   const validateAddress = () => {
     if (
       (addressInput && addressInput.length > 40) ||
@@ -451,6 +457,7 @@ function DashboardComponent(props) {
     setDialogOpen(true);
     // setStateValues({deleteDialog:false})
     setDeleteDialogValue(false);
+    setDeleteConfirmDialogStateValues(false);
   };
   const handleCancelClose = () => {
     setDialogOpen(false);
@@ -467,6 +474,11 @@ function DashboardComponent(props) {
     setDialogOpen1(false);
   };
   const handleCloseDailog = () => {
+    setDeleteConfirmDialogStateValues(true);
+    // setDialogOpen(false);
+    // setOpen3(true);
+  };
+  const closeDeleteDialog = () => {
     setDialogOpen(false);
     setOpen3(true);
   };
@@ -726,6 +738,7 @@ function DashboardComponent(props) {
         addWhiteListAddress={props.addWhiteListAddress}
         state={props.state}
         setStateValues={props.setStateValues}
+        setConfirmDialogStateValues={props.setConfirmDialogStateValues}
       />
       <div className="griddiv">
         <Grid lg={13} className="tablegrid_address">
@@ -1022,15 +1035,22 @@ function DashboardComponent(props) {
                         paddingLeft: "10%",
                         fontWeight: "500",
                         font: "normal normal 600 14px/17px Inter",
-    letterSpacing: "0px",
-    color: "#D5DAEA",
-    opacity: "1",
-    paddingTop: "220px",
-    paddingBottom: "90px"
+                        letterSpacing: "0px",
+                        color: "#D5DAEA",
+                        opacity: "1",
+                        paddingTop: "136px",
+                        paddingBottom: "93px",
                       }}
                       align="center"
                     >
+                      <div>
+                        <img
+                          className="noaddress-icon"
+                          src={require("../../assets/styles/images/no address found.svg")}
+                        ></img>
+                      </div>
                       <span>No Record found</span>
+
                       {/* <div className="display-flex justify-content-center p-t-50"> */}
 
                       {/* </div> */}
@@ -1047,7 +1067,7 @@ function DashboardComponent(props) {
                       {/* <div className="display-flex justify-content-center p-t-50"> */}
 
                       {/* </div> */}
-                    </TableCell>    
+                    </TableCell>
                     <TableCell
                       style={{
                         border: "none",
@@ -1126,53 +1146,105 @@ function DashboardComponent(props) {
               </DialogActions>
             </Dialog>
           </>
+        ) : !state.deleteConfirmDialog ? (
+          <>
+            <Dialog className={classes.dialog} open={dialogOpen} divide>
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Deleting address<span className="cross-loader">X</span>
+                </div>{" "}
+              </DialogTitle>
+              <DialogContent>
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div style={{ marginTop: "-25px" }}>
+                  {" "}
+                  <div className="loader-spin"></div>
+                </div>
+                <DialogContentText className={classes.subCategory}>
+                  <div
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
+                  >
+                    Deleting your address
+                  </div>
+                  <div className="loader-confirm-heading">
+                    Confirm this transaction on XDCPay
+                  </div>
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </>
         ) : (
           <>
             <Dialog className={classes.dialog} open={dialogOpen} divide>
-              {/* <Row> */}
-              {/* <DialogTitle id="form-dialog-title">
-              <div className={classes.deleteheading}>Deleting Address</div>
-            </DialogTitle> */}
-              {/* </Row> */}
-              <DialogContent>
-                <DialogContentText className={classes.deleteheading}>
-                  Deleting Address{" "}
-                  <span className={classes.deleteaddress}>
-                    {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
-                    {deleteMessage
-                      ? deleteMessage.substr(deleteMessage.length - 5, 5)
-                      : ""}
-                    {/* {(deleteMessage)} */}
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Deleting address
+                  <span onClick={closeDeleteDialog} className="cross-loader">
+                    X
                   </span>
-                </DialogContentText>
-              </DialogContent>
+                </div>{" "}
+              </DialogTitle>
               <DialogContent>
-                <img
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div
                   style={{
-                    width: "100px",
-                    height: "100px",
                     display: "flex",
                     justifyContent: "center",
-                    marginLeft: "120px",
-                    marginRight: "50px",
+                    marginTop: "-20px",
                   }}
-                  // className="header-logo"
-                  src={require("../../assets/styles/images/loader-small.gif")}
-                ></img>
+                >
+                  <img
+                    className="confirm-done"
+                    src={require("../../assets/styles/images/confirm done.svg")}
+                  ></img>
+                </div>
                 <DialogContentText className={classes.subCategory}>
                   <div
-                    style={{
-                      fontSize: "15px",
-                      display: "flex",
-                      justifyContent: "center",
-                      color: "#2A2A2A",
-                      opacity: "1",
-                      fontFamily: "Inter",
-                      fontweight: "400",
-                    }}
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
                   >
-                    Please wait transaction is in Progress
+                    Transaction Complete
                   </div>
+                  <div className="loader-confirm-heading"></div>
                 </DialogContentText>
               </DialogContent>
             </Dialog>
@@ -1184,7 +1256,7 @@ function DashboardComponent(props) {
 
       <Snackbar
         open={open3}
-        // autoHideDuration={3000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose3}
       >
@@ -1199,14 +1271,14 @@ function DashboardComponent(props) {
             >
               <img
                 className="done-logo"
-                style={{ height: "30px", width: "30px", marginTop: "10px" }}
-                src={require("../../assets/styles/images/DONE.svg")}
+                style={{ height: "24px", width: "24px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/confirm done.svg")}
               ></img>
             </span>
             <span>
               <div className="toast-message">
                 <span>You have successfully deleted address</span>
-                <span
+                {/* <span
                   onClick={handleToastClose}
                   style={{
                     float: "right",
@@ -1215,9 +1287,9 @@ function DashboardComponent(props) {
                   }}
                 >
                   X
-                </span>
+                </span> */}
               </div>
-              <div className="toast-address">{deleteMessage}</div>
+              {/* <div className="toast-address">{deleteMessage}</div> */}
             </span>
           </div>
         </Alert>
