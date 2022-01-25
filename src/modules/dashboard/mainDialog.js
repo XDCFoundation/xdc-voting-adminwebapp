@@ -314,6 +314,11 @@ const useStyles = makeStyles((theme) => ({
       padding: "0",
       justifyContent: "center",
     },
+    dialog:{
+        maxWidth: "697px !important",
+    /* width: 679px; */
+    height: "463px !important"
+    },
     createaccount: {
       color: "#3763dd",
     },
@@ -423,61 +428,60 @@ const useStyles = makeStyles((theme) => ({
 
 const InstructionCard = styled.div`
 display: -webkit-box;
-display: -webkit-flex;
-display: -ms-flexbox;
-display: flex;
--webkit-flex-flow: column;
--ms-flex-flow: column;
-flex-flow: column;
-gap: 15px;
-padding: 10px 0 0 0;
-
-width: 200px;
-height: 233px;
-background: #FFFFFF 0% 0% no-repeat padding-box;
-border: 1px solid #F0F0F0;
-border-radius: 6px;
-opacity: 1;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    -webkit-flex-flow: column;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    gap: 25px;
+    padding: 10px 0 0 0;
+    width: 200px;
+    height: 233px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    opacity: 1;
 `;
 
 const CardText = styled.div`
-  font-family: Inter;
-  font-size: 14px;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 0px;
-  text-align: center;
-  padding: 0 15px 0 15px;
-  color: #686868;
+padding: 0px 17px 0px 17px;
+/* color: #686868; */
+text-align: center;
+font: normal normal normal 16px/20px Inter;
+letter-spacing: 0px;
+opacity: 1;
+margin-top: -15px;
 `;
 
 const ImageContainer = styled.div`
-  height: 45px;
+  height: 43px;
   justify-content: center;
   display: flex;
   flex-flow: row;
 `;
 
 const CardTitle = styled.div`
-  font-size: 14px;
-  font-weight: 600;
-  font-stretch: normal;
-  font-style: normal;
-  line-height: normal;
-  letter-spacing: 0px;
-  text-align: left;
-  color: #2a2a2a;
-  text-align: center;
+text-align: center;
+font: normal normal 600 16px/20px Inter;
+letter-spacing: 0px;
+color: #1F1F1F;
+opacity: 1;
 `;
 
 const CloseIconContainer = styled.div`
   cursor: pointer;
-  position: absolute;
-  right: 42px;
-  width: 16px;
-  height: 16px;
+//   position: absolute;
+//   right: 42px;
+  width: 15px;
+  height: 15px;
+  color: #000000;
+    font-weight: 600;
 `;
 
 export default function Web3Dialog(props) {
@@ -512,18 +516,19 @@ const mainDialogOpen = () => {
             {/* <img alt="Cross" src={"/images/XDC-Cross.svg"} /> */}
           </CloseIconContainer>
         </Row>
-        <hr/>
+        <hr className="connect-line"/>
         <Row
           className="card-box"
           style={{
-            // flexFlow: "wrap",
+            display: "flex",
+            flexFlow: "row nowrap",
             paddingTop: "22px",
             marginBottom: "20px",
-            gap: "45px",
+            gap: "13px"
           }}
         >
           <InstructionCard>
-            <div className="fs-14 color-9fa9ba" style={{ textAlign: "center" }}>
+            <div className="steps" style={{ textAlign: "center" }}>
               Step 1
             </div>
             <ImageContainer>
@@ -545,7 +550,7 @@ const mainDialogOpen = () => {
             </CardText>
           </InstructionCard>
           <InstructionCard>
-            <div className="fs-14 color-9fa9ba" style={{ textAlign: "center" }}>
+            <div className="steps" style={{ textAlign: "center" }}>
               Step 2
             </div>
             <ImageContainer>
@@ -561,7 +566,7 @@ const mainDialogOpen = () => {
             </CardText>
           </InstructionCard>
           <InstructionCard>
-            <div className="fs-14 color-9fa9ba" style={{ textAlign: "center" }}>
+            <div className="steps" style={{ textAlign: "center" }}>
               Step 3
             </div>
             <ImageContainer>

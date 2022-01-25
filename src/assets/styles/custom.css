@@ -854,8 +854,14 @@ font-family: 'Inter',sans-serif;
 }
 
 .MuiDialog-paperWidthSm{
-    max-width: 553px !important;
+    max-width: 679px !important;
+    margin-bottom: auto !important;
+    margin-top: 5% !important;
 }
+/* .MuiDialog-paper{
+    max-width: 679px !important;
+    height: 463px !important;
+} */
 /* .MuiDialog-paperWidthSm{
     max-width: 553px !important;
     height: 304px !important;
@@ -908,9 +914,9 @@ font-family: 'Inter',sans-serif;
     }
 }
 @media (min-width:767px){
-    .MuiDialog-scrollPaper{
+    /* .MuiDialog-scrollPaper{
         margin-left: -11vw !important;
-    }
+    } */
 }
 @media (max-width:767px){
     .MuiMenu-paper{
@@ -1093,15 +1099,15 @@ letter-spacing: 0px;
 color: #FFFFFF;
 }
 .main-box {
-    padding: 28px 45px 15px 45px;
+    padding: 20px 30px 0px 23px;
   }
   .main-row {
     justify-content: space-between;
   }
   .last-row{
       justify-content: center;
-      margin-top: 40px;
-      margin-bottom: 30px;
+      margin-top: 41px;
+      margin-bottom: 34px;
   }
   .last-title{
     width: 264px;
@@ -1123,23 +1129,31 @@ color: #FFFFFF;
     margin-right: 20px;
   }
   .main-title {
-    /* height: 26px;
-    margin: 0 64px 1.5px 61px; */
     font-family: "Inter";
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 600;
-    /* font-stretch: normal;
-    font-style: normal;
-    line-height: normal; */
     letter-spacing: 0px;
     /* text-align: center; */
-    color: #2a2a2a;
+    color: #1F1F1F;
   }
   .card-box {
     justify-content: center;
   }
   .input-data-text {
     height: 100%;
+  }
+  .connect-line{
+    height: 0px;
+    border: 1px solid #D8D8D8;
+    opacity: 1;
+    margin-top: 15px;
+  }
+  .steps{
+    text-align: center;
+    font: normal normal normal 14px/17px Inter;
+    letter-spacing: 0px;
+    color: #7B7979;
+    opacity: 1;
   }
 /* .custom-check{
     height: 16px;

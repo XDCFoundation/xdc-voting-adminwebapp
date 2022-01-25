@@ -1663,7 +1663,7 @@ function DashboardComponent(props) {
       </div>
 
       <div className="footer">
-        <div className="footer-heading">© 2021 XinFin. All Right Reserved</div>
+        <div className="footer-heading">© 2022 XDC. All Right Reserved</div>
       </div>
     </div>
   );
