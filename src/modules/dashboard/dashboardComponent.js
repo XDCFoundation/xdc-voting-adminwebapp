@@ -46,6 +46,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
+import Web3Dialog from "./mainDialog";
+
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -463,6 +465,7 @@ function DashboardComponent(props) {
     setDialogOpen(false);
   };
   const handleDialog1 = () => {
+    setEditConfirmDialogStateValues(false);
     setDialogOpen1(true);
     setCount(0);
     setButtonText("Edit");
@@ -483,8 +486,14 @@ function DashboardComponent(props) {
     setOpen3(true);
   };
   const handleCloseDailog1 = () => {
+    // setDialogOpen1(false);
+    // setOpen4(true);
+    setEditConfirmDialogStateValues(true);
+  };
+  const closeEditDialog = () => {
     setDialogOpen1(false);
     setOpen4(true);
+   
   };
 
   const handleClose3 = (event, reason) => {
@@ -675,7 +684,7 @@ function DashboardComponent(props) {
                   src={require("../../assets/styles/images/Profile-Logo.svg")}
                 ></img> */}
               <button className="connect-wallet">
-                <div>Connect Wallet</div>
+                <div>Connect Wallet</div><Web3Dialog/>
               </button>
               <div style={{ marginLeft: "16px", marginRight: "22px" }}>
                 <span>
@@ -1299,7 +1308,7 @@ function DashboardComponent(props) {
 
       <Snackbar
         open={open4}
-        // autoHideDuration={3000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose4}
       >
@@ -1314,14 +1323,14 @@ function DashboardComponent(props) {
             >
               <img
                 className="done-logo"
-                style={{ height: "30px", width: "30px", marginTop: "10px" }}
-                src={require("../../assets/styles/images/DONE.svg")}
+                style={{ height: "24px", width: "24px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/confirm done.svg")}
               ></img>
             </span>
             <span>
               <div className="toast-message">
                 <span>You have successfully edited address</span>
-                <span
+                {/* <span
                   onClick={handleToastCloseEdit}
                   style={{
                     float: "right",
@@ -1330,9 +1339,9 @@ function DashboardComponent(props) {
                   }}
                 >
                   X
-                </span>
+                </span> */}
               </div>
-              <div className="toast-address">{deleteMessage}</div>
+              {/* <div className="toast-address">{deleteMessage}</div> */}
             </span>
           </div>
         </Alert>
@@ -1530,56 +1539,107 @@ function DashboardComponent(props) {
             </Dialog>
           </>
         ) : (
-          <>
+          !state.editConfirmDialog?(
+            <>
             <Dialog className={classes.dialog} open={dialogOpen1} divide>
-              {/* <Row> */}
-              {/* <DialogTitle id="form-dialog-title">
-              <div className={classes.deleteheading}>Deleting Address</div>
-            </DialogTitle> */}
-              {/* </Row> */}
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Editing address<span className="cross-loader">X</span>
+                </div>{" "}
+              </DialogTitle>
               <DialogContent>
-                <DialogContentText className={classes.deleteheading}>
-                  Editing Address{" "}
-                  <span className={classes.deleteaddress}>
-                    {addressInput ? addressInput.substr(0, 13) : " "}...
-                    {addressInput
-                      ? addressInput.substr(addressInput.length - 5, 5)
-                      : ""}
-                    {/* {(deleteMessage)} */}
-                  </span>
-                </DialogContentText>
-              </DialogContent>
-              <DialogContent>
-                <img
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginLeft: "120px",
-                    marginRight: "50px",
-                  }}
-                  // className="header-logo"
-                  src={require("../../assets/styles/images/loader-small.gif")}
-                ></img>
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div style={{ marginTop: "-25px" }}>
+                  {" "}
+                  <div className="loader-spin"></div>
+                </div>
                 <DialogContentText className={classes.subCategory}>
                   <div
-                    style={{
-                      fontSize: "15px",
-                      display: "flex",
-                      justifyContent: "center",
-                      color: "#2A2A2A",
-                      opacity: "1",
-                      fontFamily: "Inter",
-                      fontweight: "400",
-                    }}
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
                   >
-                    Please wait transaction is in Progress
+                    Editing your address
+                  </div>
+                  <div className="loader-confirm-heading">
+                    Confirm this transaction on XDCPay
                   </div>
                 </DialogContentText>
               </DialogContent>
             </Dialog>
-          </>
+          </>):( <>
+            <Dialog className={classes.dialog} open={dialogOpen1} divide>
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Editing address
+                  <span onClick={closeEditDialog} className="cross-loader">
+                    X
+                  </span>
+                </div>{" "}
+              </DialogTitle>
+              <DialogContent>
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "-20px",
+                  }}
+                >
+                  <img
+                    className="confirm-done"
+                    src={require("../../assets/styles/images/confirm done.svg")}
+                  ></img>
+                </div>
+                <DialogContentText className={classes.subCategory}>
+                  <div
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
+                  >
+                    Transaction Complete
+                  </div>
+                  <div className="loader-confirm-heading"></div>
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </>)
         )}
       </div>
 
