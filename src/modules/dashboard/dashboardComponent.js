@@ -1277,7 +1277,7 @@ function DashboardComponent(props) {
 
       <Snackbar
         open={open3}
-        // autoHideDuration={3000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose3}
       >

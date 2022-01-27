@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   Alert: {
-    backgroundColor: "#00144D",
+    backgroundColor: "#ffffff !important",
   },
   btn: {},
   value: {
