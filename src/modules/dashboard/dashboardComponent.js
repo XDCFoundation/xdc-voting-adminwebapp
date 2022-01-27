@@ -55,7 +55,7 @@ function Alert(props) {
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   Alert: {
-    backgroundColor: "#00144D",
+    backgroundColor: "#ffffff !important",
   },
   dialog: {
     marginLeft: "26%",
@@ -585,8 +585,9 @@ function DashboardComponent(props) {
 
       <List className="side-box">
         <ul className="inside-side-box">
-          <a className="account_details_button">
-            <div className="xinfin_account_button">About XDC</div>
+         
+          <a href="https://medium.com/xdc-foundation-communications" target="_blank" className="account_details_button">
+            <div style={{ cursor: "pointer" }} className="xinfin_account_button">About XDC</div>
           </a>
           <hr className="myhr" />
         </ul>
@@ -619,7 +620,7 @@ function DashboardComponent(props) {
           <a href="http://betagovernance.xdcroadmap.net/" target="_blank">
             {" "}
             <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-              Voting Dapp
+             XDC Governance Portal
             </p>{" "}
           </a>
           <hr className="myhr" />
@@ -627,7 +628,7 @@ function DashboardComponent(props) {
         <ul className="inside-side-box" >
           <a href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo" target="_blank">
           <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-            XDC Pay
+            XDCPay
           </p>
           </a>
           <hr className="myhr" />
