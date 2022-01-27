@@ -102,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
     border: "none !important",
   },
   mainheading: {
-    letterSpacing: "0.69px",
+    letterSpacing: "0px",
     color: " #2A2A2A",
     opacity: "1",
     fontSize: "18px",
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "600",
   },
   subheading: {
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     color: "#2A2A2A",
     opacity: "1",
     marginLeft: "3px",
@@ -121,7 +121,7 @@ const useStyles = makeStyles((theme) => ({
 
   heading: {
     marginLeft: "3px",
-    letterSpacing: "0.69px",
+    letterSpacing: "0px",
     color: "#2A2A2A",
     opacity: "1",
     fontFamily: "Inter",
@@ -132,7 +132,8 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedSnackbars(props) {
   console.log("demoform state", props.state);
   console.log("demoform addpopup", props.state.addDialog);
-  const { state, setStateValues } = props;
+  const { state, setStateValues, setConfirmDialogStateValues } = props;
+  // const { state1, setConfirmDialogStateValues } = props;
 
   const [addAddress, setAddAddress] = React.useState("");
 
@@ -188,9 +189,11 @@ export default function CustomizedSnackbars(props) {
       (addAddress && addAddress.length > 40) ||
       addAddress.slice(0, 2) == "xdc"
     ) {
+      if(addAddress && allowVoting || proposal)
       addWhitelistAddress();
+      else{ setEmailError("Atleast one checkbox must be selected"); }
     } else if (!addAddress) {
-      setEmailError("enter a valid Address");
+      setEmailError("Enter a valid Address");
     } else {
       setEmailError("Address should start with xdc & min 40 characters");
     }
@@ -205,7 +208,7 @@ export default function CustomizedSnackbars(props) {
     setProposal(false);
     setAddAddress("");
     setStateValues(false);
-    setEmailError("")
+    setEmailError("");
   };
 
   const handleClose = (event, reason) => {
@@ -222,12 +225,15 @@ export default function CustomizedSnackbars(props) {
   const handleDialog = async () => {
     setDialogOpen(true);
     await setStateValues(false);
+    // await props.state.setConfirmDialogStateValues(false);
+    await setConfirmDialogStateValues(false);
 
     // setOpen(true)
   };
-  const handleCloseDailog = () => {
-    setDialogOpen(false);
-    setOpen(true);
+  const handleCloseDailog = async () => {
+    // setDialogOpen(false);
+    // setOpen(true);
+    await setConfirmDialogStateValues(true);
     setallowVoting(false);
     setAddAddress("");
     setProposal(false);
@@ -236,6 +242,10 @@ export default function CustomizedSnackbars(props) {
     // setAddPopup(false)
 
     // setDialogOpen(true);
+  };
+  const closeDialog = async () => {
+    setDialogOpen(false);
+    setOpen(true);
   };
 
   return (
@@ -250,7 +260,13 @@ export default function CustomizedSnackbars(props) {
         //   marginLeft: "20vw",
         // }}
       >
-        <div className="whitelisted-heading">Whitelisted Addresses</div>
+        <div className="whitelisted-heading">
+          <div>Whitelisted Addresses</div>
+          <div className="address-des">
+            Addresses added here can vote and create proposals for XDC
+            Governance portal
+          </div>
+        </div>
         <button variant="outlined" onClick={handleDialog} className="add-btn1">
           Add
         </button>
@@ -261,7 +277,7 @@ export default function CustomizedSnackbars(props) {
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>Add a New Address</div>{" "}
             </DialogTitle>
-            <DialogContent>
+            <DialogContent style={{ marginTop: "-5px" }}>
               <DialogContentText className={classes.subCategory}>
                 <div className={classes.subheading}>Address</div>
               </DialogContentText>
@@ -269,6 +285,7 @@ export default function CustomizedSnackbars(props) {
                 className="addinput"
                 type="text"
                 required="true"
+                placeholder="Write address"
                 // value={addAddress}
                 onChange={(e) => {
                   setAddAddress(e.target.value);
@@ -276,11 +293,24 @@ export default function CustomizedSnackbars(props) {
                 }}
                 value={addAddress}
               ></input>
-              <div style={{ marginLeft: "5px", color: "red" }}>
+              <div
+                style={{
+                  marginLeft: "5px",
+                  color: "red",
+                  fontSize: "14px",
+                  fontFamily: "Inter",
+                }}
+              >
                 {emailError}
               </div>
             </DialogContent>
-            <div style={{ display: "flex", marginTop: "10px" }}>
+            <div
+              style={{
+                display: "flex",
+                marginTop: "10px",
+                marginBottom: "5px",
+              }}
+            >
               {/* <input
             onChange={(e) => {
               setallowVoting(!allowVoting)
@@ -294,23 +324,37 @@ export default function CustomizedSnackbars(props) {
                 className="custom-check1"
                 onClick={() => {
                   setallowVoting(!allowVoting);
+                  setEmailError("")
                 }}
                 className={
                   !allowVoting ? "custom-check1" : "custom-check1-active"
                 }
               ></div>
-              <span className="checkbox-heading">Allow Voting</span>
+              <span className="checkbox-heading">
+                <div>Allow Voting</div>
+                <div className="checkbox-des">
+                  By selecting this you are giving permission to address to cast
+                  a vote
+                </div>
+              </span>
             </div>
             <div style={{ display: "flex" }}>
               <div
                 className="custom-check1"
                 onClick={() => {
                   setProposal(!proposal);
+                  setEmailError("")
                 }}
                 className={!proposal ? "custom-check1" : "custom-check1-active"}
               ></div>
 
-              <span className="checkbox-heading">Allow Proposal Creation</span>
+              <span className="checkbox-heading">
+                <div>Allow Proposal Creation</div>
+                <div className="checkbox-des">
+                  By selecting this you are giving permission to address to
+                  create proposal
+                </div>
+              </span>
             </div>
 
             <DialogActions className={classes.buttons}>
@@ -341,14 +385,16 @@ export default function CustomizedSnackbars(props) {
             </DialogActions>
           </Dialog>
         </>
-      ) : (
+      ) : !state.addConfirmDialog ? (
         <>
           <Dialog className={classes.dialog} open={dialogOpen} divide>
             <DialogTitle className={classes.heading} id="form-dialog-title">
-              <div className={classes.mainheading}>Adding a New Address</div>{" "}
+              <div className={classes.mainheading}>
+                Adding address<span className="cross-loader">X</span>
+              </div>{" "}
             </DialogTitle>
             <DialogContent>
-              <img
+              {/* <img
                 style={{
                   width: "200px",
                   height: "200px",
@@ -359,21 +405,76 @@ export default function CustomizedSnackbars(props) {
                 }}
                 // className="header-logo"
                 src={require("../../assets/styles/images/loader-small.gif")}
-              ></img>
+              ></img> */}
+              <div className="loader-spin"></div>
               <DialogContentText className={classes.subCategory}>
                 <div
-                  style={{
-                    fontSize: "15px",
-                    display: "flex",
-                    justifyContent: "center",
-                    color: "#2A2A2A",
-                    opacity: "1",
-                    fontFamily: "Inter",
-                    fontweight: "600",
-                  }}
+                  className="loader-heading"
+                  // style={{
+                  //   fontSize: "15px",
+                  //   display: "flex",
+                  //   justifyContent: "center",
+                  //   color: "#2A2A2A",
+                  //   opacity: "1",
+                  //   fontFamily: "Inter",
+                  //   fontweight: "600",
+                  // }}
                 >
-                  Please wait transaction is in Progress
+                  Adding your address
                 </div>
+                <div className="loader-confirm-heading">
+                  Confirm this transaction on XDCPay
+                </div>
+              </DialogContentText>
+            </DialogContent>
+          </Dialog>
+        </>
+      ) : (
+        <>
+          <Dialog className={classes.dialog} open={dialogOpen} divide>
+            <DialogTitle className={classes.heading} id="form-dialog-title">
+              <div className={classes.mainheading}>
+                Adding address
+                <span onClick={closeDialog} className="cross-loader">
+                  X
+                </span>
+              </div>{" "}
+            </DialogTitle>
+            <DialogContent>
+              {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  className="confirm-done"
+                  src={require("../../assets/styles/images/confirm done.svg")}
+                ></img>
+              </div>
+              <DialogContentText className={classes.subCategory}>
+                <div
+                  className="loader-heading"
+                  // style={{
+                  //   fontSize: "15px",
+                  //   display: "flex",
+                  //   justifyContent: "center",
+                  //   color: "#2A2A2A",
+                  //   opacity: "1",
+                  //   fontFamily: "Inter",
+                  //   fontweight: "600",
+                  // }}
+                >
+                  Transaction Complete
+                </div>
+                <div className="loader-confirm-heading"></div>
               </DialogContentText>
             </DialogContent>
           </Dialog>
@@ -382,7 +483,7 @@ export default function CustomizedSnackbars(props) {
 
       <Snackbar
         open={open}
-        // autoHideDuration={3000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose}
       >
@@ -397,14 +498,14 @@ export default function CustomizedSnackbars(props) {
             >
               <img
                 className="done-logo"
-                style={{ height: "30px", width: "30px", marginTop: "10px" }}
-                src={require("../../assets/styles/images/DONE.svg")}
+                style={{ height: "24px", width: "24px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/confirm done.svg")}
               ></img>
             </span>
             <span>
               <div className="toast-message">
                 <span>You have successfully added address</span>
-                <span
+                {/* <span
                   onClick={handleToastClose}
                   style={{
                     float: "right",
@@ -413,9 +514,9 @@ export default function CustomizedSnackbars(props) {
                   }}
                 >
                   X
-                </span>
+                </span> */}
               </div>
-              <div className="toast-address">{message}</div>
+              {/* <div className="toast-address">{message}</div> */}
               {/* 0x9b20bd863e1cf226b98…6b10 */}
             </span>
           </div>

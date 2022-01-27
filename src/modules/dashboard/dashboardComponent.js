@@ -20,7 +20,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { makeStyles } from "@material-ui/styles";
+import { makeStyles, useTheme } from "@material-ui/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { EditService, Logout } from "../../services";
@@ -35,11 +35,24 @@ import { connect } from "react-redux";
 import { sessionManager } from "../../managers/sessionManager";
 import { reduxEvent } from "../../constants";
 import Pagination from "@material-ui/lab/Pagination";
+import Jazzicon from "react-jazzicon";
+import CloseIcon from "@material-ui/icons/Close";
+import clsx from "clsx";
+
+import Drawer from "@material-ui/core/Drawer";
+import List from "@material-ui/core/List";
+import IconButton from "@material-ui/core/IconButton";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+
+import Web3Dialog from "./mainDialog";
+// import Web3Dialog from "./tabDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
+const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   Alert: {
     backgroundColor: "#00144D",
@@ -52,9 +65,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "80px !important",
   },
   buttons: {
-    padding: "0px 35px 0px 0px",
-    marginTop: "1px",
-    marginBottom: "6px",
+    padding: "1px 35px 10px 0px",
+    marginTop: "-4px",
   },
   buttons1: {
     padding: "0px 35px 0px 0px",
@@ -102,6 +114,21 @@ const useStyles = makeStyles((theme) => ({
       color: "#2149B9",
     },
   },
+  deleteconfirmation: {
+    width: "404px",
+    height: "62px",
+    background: "#FDE9E9 0% 0% no-repeat padding-box",
+    borderRadius: "4px",
+    opacity: "1",
+    textAlign: "center",
+    /* font: normal normal normal 14px/22px Inter; */
+    letterSpacing: "0px",
+    color: "#EB4444",
+    opacity: "1",
+    fontSize: "14px",
+    fontFamily: "Inter",
+    padding: "12px 36px 11px 35px",
+  },
 
   cnlbtn: {
     width: "94px",
@@ -115,15 +142,16 @@ const useStyles = makeStyles((theme) => ({
     padding: "3px 19px 3px 20px",
   },
   subCategory: {
-    marginTop: "5px",
-    marginBottom: "0px",
+    marginTop: "-8px",
+    marginBottom: "-2px",
+    // marginBottom: "0px",
     border: "none !important",
     color: "#9FA9BA",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
 
     fontWeight: "500",
-    fontSize: "13px",
-    fontFamily: "unset",
+    fontSize: "15px",
+    fontFamily: "Inter",
   },
   addedon: {
     color: "#9FA9BA",
@@ -133,21 +161,30 @@ const useStyles = makeStyles((theme) => ({
     /* font-family: unset; */
     /* font-weight: 500; */
     marginBottom: "0px",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     marginLeft: "3px",
     fontFamily: "Inter,sans-serif",
   },
   deleteheading: {
-    letterSpacing: "0.69px",
+    letterSpacing: "0px",
     color: "#2A2A2A",
     opacity: "1",
     fontSize: "18px",
     fontFamily: "Inter,sans-serif",
     fontWeight: "600",
   },
+  subheading: {
+    letterSpacing: "0px",
+    color: "#2A2A2A",
+    opacity: "1",
+    marginLeft: "3px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+    fontSize: "14px",
+  },
   deletesubheading: {
     marginBottom: "0px",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     opacity: "1",
     fontSize: "14px",
     color: "#2A2A2A",
@@ -156,7 +193,7 @@ const useStyles = makeStyles((theme) => ({
   },
   deleteaddress: {
     color: "#3763DD",
-    letterSpacing: "0.54px",
+    letterSpacing: "0px",
     fontSize: "14px",
     fontWeight: "500",
   },
@@ -184,8 +221,50 @@ const useStyles = makeStyles((theme) => ({
     fontfamily: "Inter",
     fontweight: "600",
   },
+  mainheading: {
+    letterSpacing: "0px",
+    color: " #2A2A2A",
+    opacity: "1",
+    fontSize: "18px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+  },
+  list: {
+    width: "336px",
+    backgroundColor: "#102e84",
+    height: "100%",
+  },
+  fullList: {
+    width: "auto",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    overflow: "hidden",
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    backgroundColor: "#102e84",
+    overflow: "hidden",
+  },
+  drawerHeader: {
+    overflow: "hidden",
+    display: "flex",
+    alignItems: "center",
+    // padding: theme.spacing(0, 1),
+    // ...theme.mixins.toolbar,
+    justifyContent: "flex-start",
+    marginTop: "-12px",
+  },
+  firstContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: "19px",
+  },
 }));
 function DashboardComponent(props) {
+  const theme = useTheme();
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
   const [pageNumber, setPageNumber] = React.useState();
   const [pagecount, setPagecount] = React.useState(0);
@@ -313,7 +392,13 @@ function DashboardComponent(props) {
     // editWhitelistAddress();
     setEditClick(!editClick);
   };
-  const { state, setDeleteDialogValue, setEditDialogValue } = props;
+  const {
+    state,
+    setDeleteDialogValue,
+    setEditDialogValue,
+    setDeleteConfirmDialogStateValues,
+    setEditConfirmDialogStateValues,
+  } = props;
   const validateAddress = () => {
     if (
       (addressInput && addressInput.length > 40) ||
@@ -353,7 +438,7 @@ function DashboardComponent(props) {
     </button>
   );
 
-  const [inputColor, setInputColor]=useState(0);
+  const [inputColor, setInputColor] = useState(0);
   // The parent component
   const [addressSearch, setAddressSearch] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -375,11 +460,13 @@ function DashboardComponent(props) {
     setDialogOpen(true);
     // setStateValues({deleteDialog:false})
     setDeleteDialogValue(false);
+    setDeleteConfirmDialogStateValues(false);
   };
   const handleCancelClose = () => {
     setDialogOpen(false);
   };
   const handleDialog1 = () => {
+    setEditConfirmDialogStateValues(false);
     setDialogOpen1(true);
     setCount(0);
     setButtonText("Edit");
@@ -391,12 +478,23 @@ function DashboardComponent(props) {
     setDialogOpen1(false);
   };
   const handleCloseDailog = () => {
+    setDeleteConfirmDialogStateValues(true);
+    // setDialogOpen(false);
+    // setOpen3(true);
+  };
+  const closeDeleteDialog = () => {
     setDialogOpen(false);
     setOpen3(true);
   };
   const handleCloseDailog1 = () => {
+    // setDialogOpen1(false);
+    // setOpen4(true);
+    setEditConfirmDialogStateValues(true);
+  };
+  const closeEditDialog = () => {
     setDialogOpen1(false);
     setOpen4(true);
+   
   };
 
   const handleClose3 = (event, reason) => {
@@ -413,6 +511,146 @@ function DashboardComponent(props) {
 
     setOpen4(false);
   };
+
+  // ***************************Humburger Function********************************
+
+  const [state1, setState] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
+
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+
+    setState({ ...state1, [anchor]: open });
+  };
+  const list = ["Accounts", "Contract", "Tools", "XDC Apis", "Nodes", "Tokens"];
+  // const list = (anchor) => (
+  //   <div
+  //     sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+  //     role="presentation"
+  //     onClick={toggleDrawer(anchor, false)}
+  //     onKeyDown={toggleDrawer(anchor, false)}
+  //   >
+  //     <List>
+  //       {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+  //         <ListItem button key={text}>
+  //           <ListItemIcon>
+  //             {index % 2 === 0 ? "<InboxIcon />" : "<InboxIcon />"}
+  //           </ListItemIcon>
+  //           <ListItemText primary={text} />
+  //         </ListItem>
+  //       ))}
+  //     </List>
+
+  //     <List>
+  //       {['All mail', 'Trash', 'Spam'].map((text, index) => (
+  //         <ListItem button key={text}>
+  //           <ListItemIcon>
+  //             {index % 2 === 0 ? "<InboxIcon />" : "<InboxIcon />"}
+  //           </ListItemIcon>
+  //           <ListItemText primary={text} />
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //   </div>
+  // );
+
+  const lists = (anchor) => (
+    <div
+      className={clsx(classes.list, {
+        [classes.fullList]: anchor === "top" || anchor === "bottom",
+      })}
+      role="presentation"
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <div className={classes.firstContainer}>
+        <p className="inside-side-box-browse">Browse</p>
+        <div className={classes.drawerHeader}>
+          <IconButton
+            style={{ color: "white" }}
+            onClick={toggleDrawer(anchor, false)}
+          >
+            <CloseIcon />
+          </IconButton>
+        </div>
+      </div>
+
+      <List className="side-box">
+        <ul className="inside-side-box">
+          <a className="account_details_button">
+            <div className="xinfin_account_button">About XDC</div>
+          </a>
+          <hr className="myhr" />
+        </ul>
+
+        <ul className="inside-side-box">
+          <a href="https://observer.xdc.org/" target="_blank">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            {" "}
+            XDC Observatory{" "}
+            <span className="side-arrow-contract-tab">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </span>
+          </p>
+          </a>
+          <hr className="myhr" />
+        </ul>
+
+        <ul className="inside-side-box">
+          <a href="https://stats.xdc.org/" target="_blank">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Network Stats{" "}
+            <span className="right-arrow-side-bar">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </span>
+          </p>
+          </a>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <a href="http://betagovernance.xdcroadmap.net/" target="_blank">
+            {" "}
+            <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+              Voting Dapp
+            </p>{" "}
+          </a>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box" >
+          <a href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo" target="_blank">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Pay
+          </p>
+          </a>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <a href="https://github.com/xdcfoundation" target="_blank">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Github
+          </p>
+          </a>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <a href="https://xdcroadmap.org/" target="_blank">
+          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+            XDC Roadmap
+          </p>
+          </a>
+          <hr className="myhr" />
+        </ul>
+      </List>
+    </div>
+  );
 
   return (
     <div>
@@ -446,18 +684,45 @@ function DashboardComponent(props) {
           </span>
 
           <span className="profile-icon">
-            <div>
-              <Button
+            <div style={{ display: "flex" }}>
+              {/* <Button
                 aria-controls="simple-menu"
                 aria-haspopup="true"
                 onClick={handleClick}
-              >
-                <img
+              > */}
+              {/* <img
                   className="profile-logo"
                   src={require("../../assets/styles/images/Profile-Logo.svg")}
-                ></img>
-              </Button>
-              <Menu
+                ></img> */}
+              <button className="connect-wallet">
+                <div>Connect Wallet</div><Web3Dialog/>
+              </button>
+              <div style={{ marginLeft: "16px", marginRight: "22px" }}>
+                <span>
+                  <React.Fragment className="rigt-line" key={"right"}>
+                    <IconButton
+                      className="hamburger-icon"
+                      color="inherit"
+                      aria-label="open drawer"
+                      edge="end"
+                      onClick={toggleDrawer("right", true)}
+                    >
+                      <img src={"/images/Menu.svg"}></img>
+                      {/* <MenuIcon /> */}
+                    </IconButton>
+
+                    <Drawer
+                      className={classes.drawer}
+                      anchor={"right"}
+                      open={state1["right"]}
+                    >
+                      {lists("right")}
+                    </Drawer>
+                  </React.Fragment>
+                </span>{" "}
+              </div>
+              {/* </Button> */}
+              {/* <Menu
                 id="simple-menu-item"
                 anchorEl={anchorEl}
                 keepMounted
@@ -481,7 +746,7 @@ function DashboardComponent(props) {
                 >
                   Log out
                 </MenuItem>
-              </Menu>
+              </Menu> */}
             </div>
           </span>
         </div>
@@ -493,6 +758,7 @@ function DashboardComponent(props) {
         addWhiteListAddress={props.addWhiteListAddress}
         state={props.state}
         setStateValues={props.setStateValues}
+        setConfirmDialogStateValues={props.setConfirmDialogStateValues}
       />
       <div className="griddiv">
         <Grid lg={13} className="tablegrid_address">
@@ -527,6 +793,26 @@ function DashboardComponent(props) {
                   <TableCell
                     style={{
                       border: "none",
+                      paddingLeft: "0%",
+                      fontWeight: "500",
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Can Vote</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      paddingLeft: "2%",
+                      fontWeight: "500",
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Can Create Proposal</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
                       fontWeight: "500",
                     }}
                     align="left"
@@ -537,10 +823,11 @@ function DashboardComponent(props) {
               </TableHead>
               <TableBody>
                 {/* {filteredProducts.map((product)=>{ */}
-                {getListOfAddress?.length>1?(
+                {getListOfAddress?.length > 0 ? (
                   getListOfAddress?.map((row, index) => {
                     return (
                       // address={filteredData && filteredData.length ? filteredData : address}
+                      //  getListOfAddress && getListOfAddress.length>0?(
                       <TableRow
                         style={
                           index % 2 !== 1
@@ -551,26 +838,38 @@ function DashboardComponent(props) {
                         <TableCell
                           style={{ border: "none", paddingLeft: "4%" }}
                           margin-left="5px"
-                          onClick={() => {
-                            handleDialog1();
-                            setDeleteMessage(row.address);
-                            setAddressInput(row.address);
-                            setDate(row.createdOn);
-                            setallowVoting(row.permission.allowVoting);
-                            setProposal(row.permission.allowProposalCreation);
-                          }}
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
                         >
                           <a className="linkTable">
+                            {/* <div><Jazzicon  diameter={20} seed={Math.round(Math.random() * 10000000)}/></div> */}
+                            <span>
+                              <Jazzicon
+                                diameter={20}
+                                seed={Math.round(Math.random() * 10000000)}
+                              />
+                            </span>{" "}
+                            &nbsp;
                             <Tooltip placement="top" title={row.address}>
                               <span className="tabledata">
-                                {row.address ? row.address.substr(0, 13) : " "}
-                                ...
-                                {row.address
-                                  ? row.address.substr(
-                                      row.address.length - 5,
-                                      5
-                                    )
-                                  : ""}
+                                <span>
+                                  {row.address
+                                    ? row.address.substr(0, 13)
+                                    : " "}
+                                  ...
+                                  {row.address
+                                    ? row.address.substr(
+                                        row.address.length - 5,
+                                        5
+                                      )
+                                    : ""}
+                                </span>
                                 {/* (row.address)}{" "} */}
                               </span>
                             </Tooltip>
@@ -580,14 +879,14 @@ function DashboardComponent(props) {
                         <TableCell
                           style={{ border: "none", paddingLeft: "0%" }}
                           align="left"
-                          onClick={() => {
-                            handleDialog1();
-                            setDeleteMessage(row.address);
-                            setAddressInput(row.address);
-                            setallowVoting(row.permission.allowVoting);
-                            setProposal(row.permission.allowProposalCreation);
-                            setDate(row.createdOn);
-                          }}
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          //   setDate(row.createdOn);
+                          // }}
                         >
                           <span className="tablemiddata">
                             {" "}
@@ -595,16 +894,66 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
+                          style={{ border: "none", paddingLeft: "0%" }}
+                          align="left"
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
+                        >
+                          <span
+                            className={
+                              row.permission.allowVoting
+                                ? "permission-yes"
+                                : "permission-no"
+                            }
+                          >
+                            {row.permission.allowVoting ? "Yes" : "No"}
+
+                            {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
+                          </span>
+                        </TableCell>
+                        <TableCell
+                          style={{ border: "none", paddingLeft: "2%" }}
+                          align="left"
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
+                        >
+                          <span
+                            className={
+                              row.permission.allowProposalCreation
+                                ? "permission-yes"
+                                : "permission-no"
+                            }
+                          >
+                            {row.permission.allowProposalCreation
+                              ? "Yes"
+                              : "No"}
+
+                            {/* {(row.totalVotes = "null" ? 0 : row.totalVotes)} */}
+                          </span>
+                        </TableCell>
+                        <TableCell
                           style={{ border: "none" }}
                           align="left"
-                          onClick={() => {
-                            handleDialog1();
-                            setDeleteMessage(row.address);
-                            setAddressInput(row.address);
-                            setDate(row.createdOn);
-                            setallowVoting(row.permission.allowVoting);
-                            setProposal(row.permission.allowProposalCreation);
-                          }}
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
                         >
                           <span className="tablemiddata">
                             {row.votes.length}
@@ -612,7 +961,33 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "4%" }}
+                          style={{ border: "none", paddingLeft: "0%" }}
+                          align="left"
+                        >
+                          <a className="linkTable">
+                            <span
+                              className="tabledata"
+                              onClick={() => {
+                                handleDialog1();
+                                setDeleteMessage(row.address);
+                                setAddressInput(row.address);
+                                setDate(row.createdOn);
+                                setallowVoting(row.permission.allowVoting);
+                                setProposal(
+                                  row.permission.allowProposalCreation
+                                );
+                              }}
+                            >
+                              {" "}
+                              <img
+                                className="edit-icon"
+                                src={require("../../assets/styles/images/edit.svg")}
+                              ></img>
+                            </span>
+                          </a>
+                        </TableCell>
+                        <TableCell
+                          style={{ border: "none", paddingLeft: "0%" }}
                           align="left"
                         >
                           <a className="linkTable">
@@ -630,24 +1005,100 @@ function DashboardComponent(props) {
                               }}
                             >
                               {" "}
-                              Delete
+                              <img
+                                className="delete-icon"
+                                src={require("../../assets/styles/images/delete.svg")}
+                              ></img>
                             </span>
                           </a>
                         </TableCell>
                       </TableRow>
+                      // ):(
+                      //   <TableRow style={
+                      //     index % 2 !== 1
+                      //       ? { background: "#f9f9f9" }
+                      //       : { background: "white" }
+                      //   }>
+                      //     <TableCell style={{justifyContent:"center",display:"flex",width:"100%",backgroundColor:"black"}}>{"message"}</TableCell>
+                      //     </TableRow>
+                      // )
                     );
                   })
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "4%",
+                        fontWeight: "500",
+                      }}
+                      align="left"
+                    >
+                      <span></span>
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "0%",
+                        fontWeight: "500",
+                      }}
+                      align="center"
+                    >
+                      <span></span>
+                      {/* <div className="display-flex justify-content-center p-t-50"> */}
 
-                  ) : (
-                    <TableRow style={{textAlign:"end"}}>
-                    {/* <div className="display-flex justify-content-center p-t-50"> */}
-                  {" "}
-                  No Record found
-                {/* </div> */}
-                 </TableRow>
-                  )
-                 
-                }
+                      {/* </div> */}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "10%",
+                        fontWeight: "500",
+                        font: "normal normal 600 14px/17px Inter",
+                        letterSpacing: "0px",
+                        color: "#D5DAEA",
+                        opacity: "1",
+                        paddingTop: "136px",
+                        paddingBottom: "93px",
+                      }}
+                      align="center"
+                    >
+                      <div>
+                        <img
+                          className="noaddress-icon"
+                          src={require("../../assets/styles/images/no address found.svg")}
+                        ></img>
+                      </div>
+                      <span>No Record found</span>
+
+                      {/* <div className="display-flex justify-content-center p-t-50"> */}
+
+                      {/* </div> */}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        paddingLeft: "0%",
+                        fontWeight: "500",
+                      }}
+                      align="center"
+                    >
+                      <span></span>
+                      {/* <div className="display-flex justify-content-center p-t-50"> */}
+
+                      {/* </div> */}
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "none",
+                        fontWeight: "500",
+                      }}
+                      align="left"
+                    >
+                      <span></span>
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </Grid>
@@ -679,7 +1130,15 @@ function DashboardComponent(props) {
                       ? deleteMessage.substr(deleteMessage.length - 5, 5)
                       : ""}
                     {/* {(deleteMessage)} */}
-                  </span>
+                  </span>{" "}
+                  ?
+                </DialogContentText>
+              </DialogContent>
+
+              <DialogContent>
+                <DialogContentText className={classes.deleteconfirmation}>
+                  Once deleted you cannot added it again in future. It will be
+                  deleted permanently
                 </DialogContentText>
               </DialogContent>
 
@@ -707,53 +1166,105 @@ function DashboardComponent(props) {
               </DialogActions>
             </Dialog>
           </>
+        ) : !state.deleteConfirmDialog ? (
+          <>
+            <Dialog className={classes.dialog} open={dialogOpen} divide>
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Deleting address<span className="cross-loader">X</span>
+                </div>{" "}
+              </DialogTitle>
+              <DialogContent>
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div style={{ marginTop: "-25px" }}>
+                  {" "}
+                  <div className="loader-spin"></div>
+                </div>
+                <DialogContentText className={classes.subCategory}>
+                  <div
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
+                  >
+                    Deleting your address
+                  </div>
+                  <div className="loader-confirm-heading">
+                    Confirm this transaction on XDCPay
+                  </div>
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </>
         ) : (
           <>
             <Dialog className={classes.dialog} open={dialogOpen} divide>
-              {/* <Row> */}
-              {/* <DialogTitle id="form-dialog-title">
-              <div className={classes.deleteheading}>Deleting Address</div>
-            </DialogTitle> */}
-              {/* </Row> */}
-              <DialogContent>
-                <DialogContentText className={classes.deleteheading}>
-                  Deleting Address{" "}
-                  <span className={classes.deleteaddress}>
-                    {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
-                    {deleteMessage
-                      ? deleteMessage.substr(deleteMessage.length - 5, 5)
-                      : ""}
-                    {/* {(deleteMessage)} */}
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Deleting address
+                  <span onClick={closeDeleteDialog} className="cross-loader">
+                    X
                   </span>
-                </DialogContentText>
-              </DialogContent>
+                </div>{" "}
+              </DialogTitle>
               <DialogContent>
-                <img
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div
                   style={{
-                    width: "100px",
-                    height: "100px",
                     display: "flex",
                     justifyContent: "center",
-                    marginLeft: "120px",
-                    marginRight: "50px",
+                    marginTop: "-20px",
                   }}
-                  // className="header-logo"
-                  src={require("../../assets/styles/images/loader-small.gif")}
-                ></img>
+                >
+                  <img
+                    className="confirm-done"
+                    src={require("../../assets/styles/images/confirm done.svg")}
+                  ></img>
+                </div>
                 <DialogContentText className={classes.subCategory}>
                   <div
-                    style={{
-                      fontSize: "15px",
-                      display: "flex",
-                      justifyContent: "center",
-                      color: "#2A2A2A",
-                      opacity: "1",
-                      fontFamily: "Inter",
-                      fontweight: "400",
-                    }}
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
                   >
-                    Please wait transaction is in Progress
+                    Transaction Complete
                   </div>
+                  <div className="loader-confirm-heading"></div>
                 </DialogContentText>
               </DialogContent>
             </Dialog>
@@ -765,7 +1276,7 @@ function DashboardComponent(props) {
 
       <Snackbar
         open={open3}
-        // autoHideDuration={3000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose3}
       >
@@ -780,14 +1291,14 @@ function DashboardComponent(props) {
             >
               <img
                 className="done-logo"
-                style={{ height: "30px", width: "30px", marginTop: "10px" }}
-                src={require("../../assets/styles/images/DONE.svg")}
+                style={{ height: "24px", width: "24px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/confirm done.svg")}
               ></img>
             </span>
             <span>
               <div className="toast-message">
                 <span>You have successfully deleted address</span>
-                <span
+                {/* <span
                   onClick={handleToastClose}
                   style={{
                     float: "right",
@@ -796,9 +1307,9 @@ function DashboardComponent(props) {
                   }}
                 >
                   X
-                </span>
+                </span> */}
               </div>
-              <div className="toast-address">{deleteMessage}</div>
+              {/* <div className="toast-address">{deleteMessage}</div> */}
             </span>
           </div>
         </Alert>
@@ -808,7 +1319,7 @@ function DashboardComponent(props) {
 
       <Snackbar
         open={open4}
-        // autoHideDuration={3000}
+        autoHideDuration={3000}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         onClose={handleClose4}
       >
@@ -823,14 +1334,14 @@ function DashboardComponent(props) {
             >
               <img
                 className="done-logo"
-                style={{ height: "30px", width: "30px", marginTop: "10px" }}
-                src={require("../../assets/styles/images/DONE.svg")}
+                style={{ height: "24px", width: "24px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/confirm done.svg")}
               ></img>
             </span>
             <span>
               <div className="toast-message">
                 <span>You have successfully edited address</span>
-                <span
+                {/* <span
                   onClick={handleToastCloseEdit}
                   style={{
                     float: "right",
@@ -839,9 +1350,9 @@ function DashboardComponent(props) {
                   }}
                 >
                   X
-                </span>
+                </span> */}
               </div>
-              <div className="toast-address">{deleteMessage}</div>
+              {/* <div className="toast-address">{deleteMessage}</div> */}
             </span>
           </div>
         </Alert>
@@ -858,67 +1369,109 @@ function DashboardComponent(props) {
               onClose={handleCancelClose1}
               aria-labelledby="form-dialog-title"
             >
-              <Row>
-                <DialogTitle id="form-dialog-title">
-                  <div className="editheading">Address</div>
+              <Row style={{ marginBottom: "10px" }}>
+                <DialogTitle className={classes.heading} id="form-dialog-title">
+                  <div className={classes.mainheading}>Add a New Address</div>{" "}
                 </DialogTitle>
               </Row>
-              <DialogContent className="editdialogdiv">
-                <input
-                  className={!inputColor?"editinput":"btnclick"}
-                  value={addressInput}
-                  onChange={(e) => {
-                    setAddressInput(e.target.value);
-                    setEmailError("");
-                  }}
-                  disabled={!editClick}
-                ></input>
+              <DialogContent
+                style={{ marginTop: "-25px", marginBottom: "-10px" }}
+              >
+                <DialogContentText className={classes.subCategory}>
+                  <div className={classes.subheading}>Address</div>
+                </DialogContentText>
                 <div
+                  // className={!inputColor?"editinput":"btnclick"}
+                  className="editinput"
+                  // onChange={(e) => {
+                  //   setAddressInput(e.target.value);
+                  //   setEmailError("");
+                  // }}
+                  disabled="true"
+                >
+                  <span style={{ fontSize: "15px" }}>
+                    {addressInput ? addressInput.substr(0, 13) : " "}...
+                    {addressInput
+                      ? addressInput.substr(addressInput.length - 5, 5)
+                      : ""}
+                  </span>
+
+                  <span
+                    style={{
+                      color: "#92A5DD",
+                      fontSize: "12px",
+                      paddingTop: "3px",
+                    }}
+                  >
+                    Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
+                  </span>
+                </div>
+                {/* <input
+                className="addinput"
+                type="text"
+                required="true"
+                placeholder="Write address"
+                // value={addAddress}
+                onChange={(e) => {
+                  // setAddAddress(e.target.value);
+                  setEmailError("");
+                }}
+                // value={addAddress}
+              ></input> */}
+                {/* <div
                   style={{
                     marginLeft: "5px",
                     color: "red",
-                    marginBottom: "-2px",
+                   
                   }}
                 >
                   {emailError}
-                </div>
-                <DialogContentText className={classes.addedon}>
-                  <span>
-                    Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
-                  </span>
-                </DialogContentText>
+                </div> */}
+                {/* <DialogContentText className={classes.addedon}>
+                  
+                </DialogContentText> */}
               </DialogContent>
 
               <div className="checked-upper">
                 <div
                   className="custom-check1"
                   onClick={() => {
-                    if (editClick) setallowVoting(!allowVoting);
+                    setallowVoting(!allowVoting);
                   }}
                   value={allowVoting}
                   className={
                     !allowVoting
                       ? "custom-check1edit"
-                      : !inputColor?"custom-check1-edit-active":"custom-check1-active"
+                      : !inputColor
+                      ? "custom-check1-edit-active"
+                      : "custom-check1-active"
                   }
                   //  className={`${!allowVoting ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
                   // className={allowVoting ? (editClick?"custom-check1":"custom-check1-edit-active" ): (editClick?"custom-check1edit":"custom-check1-active")}
                 ></div>
 
-                <span className="checkbox-heading">Allow Voting</span>
+                <span className="checkbox-heading">
+                  <div>Allow Voting</div>
+                  <div className="checkbox-des">
+                    By selecting this you are giving permission to address to
+                    cast a vote
+                  </div>
+                </span>
               </div>
 
               <div className="checked-down">
                 <div
                   className="custom-check1"
                   onClick={() => {
-                    if (editClick) setProposal(!proposal);
+                    setProposal(!proposal);
                   }}
                   value={proposal}
                   className={
                     !proposal
                       ? "custom-check1edit"
-                      : !inputColor?"custom-check1-edit-active":"custom-check1-active"
+                      : !inputColor
+                      ? "custom-check1-edit-active"
+                      : "custom-check1-active"
                   }
 
                   // className={`${!proposal ? "custom-check1edit" : "custom-check1-edit-active"} ${editClick?"custom-check1":"custom-check1-active"}`}
@@ -926,11 +1479,45 @@ function DashboardComponent(props) {
                 ></div>
 
                 <span className="checkbox-heading">
-                  Allow Proposal Creation
+                  <div>Allow Proposal Creation</div>
+                  <div className="checkbox-des">
+                    By selecting this you are giving permission to address to
+                    create proposal
+                  </div>
                 </span>
               </div>
 
-              <DialogActions className={classes.buttons1}>
+              <DialogActions className={classes.buttons}>
+                <span>
+                  <button
+                    className={classes.cnlbtn}
+                    onClick={handleCancelClose1}
+                  >
+                    Cancel
+                  </button>
+                </span>
+                <span>
+                  <div>
+                    <button
+                      className={classes.addbtn}
+                      variant="contained"
+                      color="primary"
+                      onClick={() => {
+                        // setallowVoting(false);
+                        // setAddAddress("");
+                        // setProposal(false);
+                        validateAddress();
+                        // setAddPopup(true)
+                      }}
+                      // disabled={(!allowVoting && !proposal) || !addAddress}
+                    >
+                      Done
+                    </button>
+                  </div>
+                </span>
+              </DialogActions>
+
+              {/* <DialogActions className={classes.buttons1}>
                 <Fragment>
                   <button
                     onClick={() => {
@@ -959,60 +1546,111 @@ function DashboardComponent(props) {
                     <AddedElement key={i} />
                   ))}
                 </Fragment>
-              </DialogActions>
+              </DialogActions> */}
             </Dialog>
           </>
         ) : (
-          <>
+          !state.editConfirmDialog?(
+            <>
             <Dialog className={classes.dialog} open={dialogOpen1} divide>
-              {/* <Row> */}
-              {/* <DialogTitle id="form-dialog-title">
-              <div className={classes.deleteheading}>Deleting Address</div>
-            </DialogTitle> */}
-              {/* </Row> */}
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Editing address<span className="cross-loader">X</span>
+                </div>{" "}
+              </DialogTitle>
               <DialogContent>
-                <DialogContentText className={classes.deleteheading}>
-                  Editing Address{" "}
-                  <span className={classes.deleteaddress}>
-                    {addressInput ? addressInput.substr(0, 13) : " "}...
-                    {addressInput
-                      ? addressInput.substr(addressInput.length - 5, 5)
-                      : ""}
-                    {/* {(deleteMessage)} */}
-                  </span>
-                </DialogContentText>
-              </DialogContent>
-              <DialogContent>
-                <img
-                  style={{
-                    width: "100px",
-                    height: "100px",
-                    display: "flex",
-                    justifyContent: "center",
-                    marginLeft: "120px",
-                    marginRight: "50px",
-                  }}
-                  // className="header-logo"
-                  src={require("../../assets/styles/images/loader-small.gif")}
-                ></img>
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div style={{ marginTop: "-25px" }}>
+                  {" "}
+                  <div className="loader-spin"></div>
+                </div>
                 <DialogContentText className={classes.subCategory}>
                   <div
-                    style={{
-                      fontSize: "15px",
-                      display: "flex",
-                      justifyContent: "center",
-                      color: "#2A2A2A",
-                      opacity: "1",
-                      fontFamily: "Inter",
-                      fontweight: "400",
-                    }}
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
                   >
-                    Please wait transaction is in Progress
+                    Editing your address
+                  </div>
+                  <div className="loader-confirm-heading">
+                    Confirm this transaction on XDCPay
                   </div>
                 </DialogContentText>
               </DialogContent>
             </Dialog>
-          </>
+          </>):( <>
+            <Dialog className={classes.dialog} open={dialogOpen1} divide>
+              <DialogTitle className={classes.heading} id="form-dialog-title">
+                <div className={classes.mainheading}>
+                  Editing address
+                  <span onClick={closeEditDialog} className="cross-loader">
+                    X
+                  </span>
+                </div>{" "}
+              </DialogTitle>
+              <DialogContent>
+                {/* <img
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  display: "flex",
+                  justifyContent: "center",
+                  marginLeft: "30px",
+                  marginRight: "30px",
+                }}
+                // className="header-logo"
+                src={require("../../assets/styles/images/loader-small.gif")}
+              ></img> */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    marginTop: "-20px",
+                  }}
+                >
+                  <img
+                    className="confirm-done"
+                    src={require("../../assets/styles/images/confirm done.svg")}
+                  ></img>
+                </div>
+                <DialogContentText className={classes.subCategory}>
+                  <div
+                    className="loader-heading"
+                    // style={{
+                    //   fontSize: "15px",
+                    //   display: "flex",
+                    //   justifyContent: "center",
+                    //   color: "#2A2A2A",
+                    //   opacity: "1",
+                    //   fontFamily: "Inter",
+                    //   fontweight: "600",
+                    // }}
+                  >
+                    Transaction Complete
+                  </div>
+                  <div className="loader-confirm-heading"></div>
+                </DialogContentText>
+              </DialogContent>
+            </Dialog>
+          </>)
         )}
       </div>
 
@@ -1035,7 +1673,9 @@ function DashboardComponent(props) {
         </div>
       </div>
 
-      <div style={{ height: "50px" }}></div>
+      <div className="footer">
+        <div className="footer-heading">© 2022 XDC. All Right Reserved</div>
+      </div>
     </div>
   );
 }

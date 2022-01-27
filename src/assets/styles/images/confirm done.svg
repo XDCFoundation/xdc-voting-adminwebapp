@@ -1,0 +1,12 @@
+<svg id="DONE" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Group_20" data-name="Group 20">
+    <g id="Group_19" data-name="Group 19">
+      <g id="Group_17" data-name="Group 17">
+        <path id="Path_9" data-name="Path 9" d="M12,24A12,12,0,1,1,24,12,12.013,12.013,0,0,1,12,24Z" fill="#27b929"/>
+      </g>
+      <g id="Group_18" data-name="Group 18" transform="translate(3.748 6.151)">
+        <path id="Path_10" data-name="Path 10" d="M12.79,19.954a.787.787,0,0,1-.553-.228L7.127,14.617a.781.781,0,1,1,1.1-1.1l4.556,4.556,9.581-9.583a.781.781,0,0,1,1.1,1.1L13.341,19.724A.775.775,0,0,1,12.79,19.954Z" transform="translate(-6.899 -8.257)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>
