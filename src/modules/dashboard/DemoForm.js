@@ -189,7 +189,9 @@ export default function CustomizedSnackbars(props) {
       (addAddress && addAddress.length > 40) ||
       addAddress.slice(0, 2) == "xdc"
     ) {
+      if(addAddress && allowVoting || proposal)
       addWhitelistAddress();
+      else{ setEmailError("Atleast one checkbox must be selected"); }
     } else if (!addAddress) {
       setEmailError("Enter a valid Address");
     } else {
@@ -322,6 +324,7 @@ export default function CustomizedSnackbars(props) {
                 className="custom-check1"
                 onClick={() => {
                   setallowVoting(!allowVoting);
+                  setEmailError("")
                 }}
                 className={
                   !allowVoting ? "custom-check1" : "custom-check1-active"
@@ -340,6 +343,7 @@ export default function CustomizedSnackbars(props) {
                 className="custom-check1"
                 onClick={() => {
                   setProposal(!proposal);
+                  setEmailError("")
                 }}
                 className={!proposal ? "custom-check1" : "custom-check1-active"}
               ></div>

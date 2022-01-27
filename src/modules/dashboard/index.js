@@ -25,6 +25,7 @@ export default class Dashboard extends BaseComponent {
   async componentDidMount() {}
 
   addWhiteListAddress = async (reqObj) => {
+    this.setState({addDialog:true})
     let web3;
     web3 = new Web3(window.web3.currentProvider);
     window.ethereum.enable();
@@ -50,7 +51,7 @@ export default class Dashboard extends BaseComponent {
             reject(false);
             return;
           }
-          this.setState({addDialog:true})
+         
           const res = await this.getTransactionReceipt(transactionHash, reqObj);
           if (res) {
            
@@ -112,6 +113,7 @@ export default class Dashboard extends BaseComponent {
   };
 
   onEditAddress = async (reqObj) => {
+    this.setState({editDialog:true})
     let web3;
     web3 = new Web3(window.web3.currentProvider);
     window.ethereum.enable();
@@ -139,7 +141,7 @@ export default class Dashboard extends BaseComponent {
             reject(false);
             return;
           }
-          this.setState({editDialog:true})
+         
           const res = await this.getTransactionReceipt(transactionHash);
           if (res)
           //  Utils.apiSuccessToast("Address updated successfully");
@@ -149,7 +151,7 @@ export default class Dashboard extends BaseComponent {
   };
 
   deleteAddress = async (reqObj) => {
-  
+    this.setState({deleteDialog:true})
     let web3;
     web3 = new Web3(window.web3.currentProvider);
     window.ethereum.enable();
@@ -172,7 +174,7 @@ export default class Dashboard extends BaseComponent {
             reject(false);
             return;
           }
-          this.setState({deleteDialog:true})
+         
           const res = await this.getTransactionReceipt(transactionHash);
           if (res) 
          

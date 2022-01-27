@@ -47,6 +47,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import Web3Dialog from "./mainDialog";
+// import Web3Dialog from "./tabDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -591,6 +592,7 @@ function DashboardComponent(props) {
         </ul>
 
         <ul className="inside-side-box">
+          <a href="https://observer.xdc.org/" target="_blank">
           <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
             {" "}
             XDC Observatory{" "}
@@ -598,20 +600,23 @@ function DashboardComponent(props) {
               <i class="fa fa-angle-right" aria-hidden="true"></i>
             </span>
           </p>
+          </a>
           <hr className="myhr" />
         </ul>
 
         <ul className="inside-side-box">
+          <a href="https://stats.xdc.org/" target="_blank">
           <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
             XDC Network Stats{" "}
             <span className="right-arrow-side-bar">
               <i class="fa fa-angle-right" aria-hidden="true"></i>
             </span>
           </p>
+          </a>
           <hr className="myhr" />
         </ul>
         <ul className="inside-side-box">
-          <a href="http://betagovernance.xdcroadmap.net/">
+          <a href="http://betagovernance.xdcroadmap.net/" target="_blank">
             {" "}
             <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
               Voting Dapp
@@ -619,22 +624,28 @@ function DashboardComponent(props) {
           </a>
           <hr className="myhr" />
         </ul>
-        <ul className="inside-side-box">
+        <ul className="inside-side-box" >
+          <a href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo" target="_blank">
           <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
             XDC Pay
           </p>
+          </a>
           <hr className="myhr" />
         </ul>
         <ul className="inside-side-box">
+          <a href="https://github.com/xdcfoundation" target="_blank">
           <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
             XDC Github
           </p>
+          </a>
           <hr className="myhr" />
         </ul>
         <ul className="inside-side-box">
+          <a href="https://xdcroadmap.org/" target="_blank">
           <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
             XDC Roadmap
           </p>
+          </a>
           <hr className="myhr" />
         </ul>
       </List>

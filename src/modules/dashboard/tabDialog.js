@@ -318,6 +318,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: "697px !important",
     /* width: 679px; */
     height: "463px !important"
+    
     },
     createaccount: {
       color: "#3763dd",
@@ -423,7 +424,16 @@ const useStyles = makeStyles((theme) => ({
     subCategorySignup: {
       marginTop: "0px",
     },
+    
   },
+  "@media (min-width: 360px) and (max-height: 1040px)": {
+      dialog:{
+          display:"block !important"
+      }
+  },
+  dialog:{
+      display:"none !important"
+  }
 }));
 
 const InstructionCard = styled.div`
@@ -502,8 +512,7 @@ const mainDialogOpen = () => {
 
   return (
     <Dialog
-    //   className={classes.dialog + " maxWidth-800"}
-      className="dialog-main"
+      className={classes.dialog + " maxWidth-800"}
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
