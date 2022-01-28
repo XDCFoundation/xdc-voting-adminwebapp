@@ -12,7 +12,7 @@ export default {
   changepassword,
   searchaddress
 };
-async function getListOfWhitelistedAddress(data) {
+export async function getListOfWhitelistedAddress(data) {
   let url =
     process.env.REACT_APP_PROPOSAL_SERVICE + "getListOfWhitelistedAddress";
   return httpService(
