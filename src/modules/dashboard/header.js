@@ -7,9 +7,6 @@ import { makeStyles } from "@material-ui/core/styles/";
 import Web3 from "web3";
 import Utils from "../../utility";
 import { getListOfWhitelistedAddress } from "../../services/getListOfAddress";
-import { injected } from "../../services/web3Connector";
-import { useWeb3React } from "@web3-react/core";
-import blockies from "ethereum-blockies";
 
 import Jazzicon from "react-jazzicon";
 
@@ -99,8 +96,8 @@ function Header() {
     }
   }, []);
 
-  const { active, account, library, connector, activate, deactivate } =
-    useWeb3React();
+  // const { active, account, library, connector, activate, deactivate } =
+  //   useWeb3React();
 
   async function connectToWallet() {
     if (window.ethereum) {
