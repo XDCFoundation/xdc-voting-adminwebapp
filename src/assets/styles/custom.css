@@ -378,7 +378,8 @@ color: #2A2A2A;
 opacity: 1;
 }
 .connect-wallet{
-    width: 142px;
+    width: 161px;
+    display: flex;
 height: 36px;
 background: #2149B9 0% 0% no-repeat padding-box;
 border: 1px solid #FFFFFF;
@@ -389,6 +390,30 @@ font: normal normal medium 15px/19px Inter;
 letter-spacing: 0px;
 color: #FFFFFF;
 
+}
+.connect{
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    font-size: 15px;
+    font-family: 'Inter';
+    /* justify-content: center; */
+    /* display: flex; */
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.address-image{
+    text-align: left;
+font: normal normal medium 15px/19px Inter;
+letter-spacing: 0px;
+color: #FFFFFF;
+font-weight: 500;
+margin: auto;
+}
+.dot{
+    margin-top: 4px;
+    margin-left: -4px;
+    margin-right: -4px;
 }
 .footer{
     width: 100%;

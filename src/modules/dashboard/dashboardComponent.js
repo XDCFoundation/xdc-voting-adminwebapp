@@ -47,6 +47,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 import Web3Dialog from "./mainDialog";
+import Header from "./header";
 // import Web3Dialog from "./tabDialog";
 
 function Alert(props) {
@@ -494,7 +495,6 @@ function DashboardComponent(props) {
   const closeEditDialog = () => {
     setDialogOpen1(false);
     setOpen4(true);
-   
   };
 
   const handleClose3 = (event, reason) => {
@@ -585,34 +585,26 @@ function DashboardComponent(props) {
 
       <List className="side-box">
         <ul className="inside-side-box">
-         
-          <a href="https://medium.com/xdc-foundation-communications" target="_blank" className="account_details_button">
-            <div style={{ cursor: "pointer" }} className="xinfin_account_button">About XDC</div>
-          </a>
-          <hr className="myhr" />
-        </ul>
-
-        <ul className="inside-side-box">
           <a href="https://observer.xdc.org/" target="_blank">
-          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-            {" "}
-            XDC Observatory{" "}
-            <span className="side-arrow-contract-tab">
-              <i class="fa fa-angle-right" aria-hidden="true"></i>
-            </span>
-          </p>
+            <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+              {" "}
+              XDC Observatory{" "}
+              <span className="side-arrow-contract-tab">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </span>
+            </p>
           </a>
           <hr className="myhr" />
         </ul>
 
         <ul className="inside-side-box">
           <a href="https://stats.xdc.org/" target="_blank">
-          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-            XDC Network Stats{" "}
-            <span className="right-arrow-side-bar">
-              <i class="fa fa-angle-right" aria-hidden="true"></i>
-            </span>
-          </p>
+            <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+              XDC Network Stats{" "}
+              <span className="right-arrow-side-bar">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+              </span>
+            </p>
           </a>
           <hr className="myhr" />
         </ul>
@@ -620,32 +612,50 @@ function DashboardComponent(props) {
           <a href="http://betagovernance.xdcroadmap.net/" target="_blank">
             {" "}
             <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-             XDC Governance Portal
+              XDC Governance Portal
             </p>{" "}
           </a>
           <hr className="myhr" />
         </ul>
-        <ul className="inside-side-box" >
-          <a href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo" target="_blank">
-          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-            XDCPay
-          </p>
+        <ul className="inside-side-box">
+          <a
+            href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo"
+            target="_blank"
+          >
+            <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+              XDCPay
+            </p>
           </a>
           <hr className="myhr" />
         </ul>
         <ul className="inside-side-box">
           <a href="https://github.com/xdcfoundation" target="_blank">
-          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-            XDC Github
-          </p>
+            <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+              XDC Github
+            </p>
           </a>
           <hr className="myhr" />
         </ul>
         <ul className="inside-side-box">
           <a href="https://xdcroadmap.org/" target="_blank">
-          <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
-            XDC Roadmap
-          </p>
+            <p className="xinfin_api_button" style={{ cursor: "pointer" }}>
+              XDC Roadmap
+            </p>
+          </a>
+          <hr className="myhr" />
+        </ul>
+        <ul className="inside-side-box">
+          <a
+            href="https://medium.com/xdc-foundation-communications"
+            target="_blank"
+            className="account_details_button"
+          >
+            <div
+              style={{ cursor: "pointer" }}
+              className="xinfin_account_button"
+            >
+              About XDC
+            </div>
           </a>
           <hr className="myhr" />
         </ul>
@@ -665,7 +675,7 @@ function DashboardComponent(props) {
           </span>
           <span className="common-span-header">
             <span className="voting-para">
-              <p>Voting Address Manager</p>
+              <p>XDC Governance</p>
             </span>
             <span>
               <input
@@ -695,9 +705,12 @@ function DashboardComponent(props) {
                   className="profile-logo"
                   src={require("../../assets/styles/images/Profile-Logo.svg")}
                 ></img> */}
-              <button className="connect-wallet">
-                <div>Connect Wallet</div><Web3Dialog/>
-              </button>
+              {/* <button className="connect-wallet"> */}
+              <div>
+                <Header />
+              </div>
+              <Web3Dialog />
+              {/* </button> */}
               <div style={{ marginLeft: "16px", marginRight: "22px" }}>
                 <span>
                   <React.Fragment className="rigt-line" key={"right"}>
@@ -1550,9 +1563,8 @@ function DashboardComponent(props) {
               </DialogActions> */}
             </Dialog>
           </>
-        ) : (
-          !state.editConfirmDialog?(
-            <>
+        ) : !state.editConfirmDialog ? (
+          <>
             <Dialog className={classes.dialog} open={dialogOpen1} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
@@ -1597,7 +1609,9 @@ function DashboardComponent(props) {
                 </DialogContentText>
               </DialogContent>
             </Dialog>
-          </>):( <>
+          </>
+        ) : (
+          <>
             <Dialog className={classes.dialog} open={dialogOpen1} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
@@ -1651,7 +1665,7 @@ function DashboardComponent(props) {
                 </DialogContentText>
               </DialogContent>
             </Dialog>
-          </>)
+          </>
         )}
       </div>
 
@@ -1675,7 +1689,9 @@ function DashboardComponent(props) {
       </div>
 
       <div className="footer">
-        <div className="footer-heading">© 2022 XDC. All Right Reserved</div>
+        <div className="footer-heading">
+          © 2022 XDC Foundation. All Right Reserved
+        </div>
       </div>
     </div>
   );
