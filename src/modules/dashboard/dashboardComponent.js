@@ -399,6 +399,11 @@ function DashboardComponent(props) {
     setEditDialogValue,
     setDeleteConfirmDialogStateValues,
     setEditConfirmDialogStateValues,
+    setDialogOpen,
+    stateSetDialogOpen,
+    setDialogOpen1,
+    stateSetDialogOpen1,
+
   } = props;
   const validateAddress = () => {
     if (
@@ -453,22 +458,22 @@ function DashboardComponent(props) {
   const [addressInput, setAddressInput] = React.useState("");
   const [count, setCount] = React.useState(0);
   const [buttonText, setButtonText] = useState("Edit");
-  const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [dialogOpen1, setDialogOpen1] = React.useState(false);
+  // const [dialogOpen, setDialogOpen] = React.useState(false);
+  // const [dialogOpen1, setDialogOpen1] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
   const [open4, setOpen4] = React.useState(false);
   const handleDialog = () => {
-    setDialogOpen(true);
+    stateSetDialogOpen(true);
     // setStateValues({deleteDialog:false})
     setDeleteDialogValue(false);
     setDeleteConfirmDialogStateValues(false);
   };
   const handleCancelClose = () => {
-    setDialogOpen(false);
+    stateSetDialogOpen(false);
   };
   const handleDialog1 = () => {
     setEditConfirmDialogStateValues(false);
-    setDialogOpen1(true);
+    stateSetDialogOpen1(true);
     setCount(0);
     setButtonText("Edit");
     setEditClick(false);
@@ -476,7 +481,7 @@ function DashboardComponent(props) {
     setInputColor(0);
   };
   const handleCancelClose1 = () => {
-    setDialogOpen1(false);
+    stateSetDialogOpen1(false);
   };
   const handleCloseDailog = () => {
     setDeleteConfirmDialogStateValues(true);
@@ -484,7 +489,7 @@ function DashboardComponent(props) {
     // setOpen3(true);
   };
   const closeDeleteDialog = () => {
-    setDialogOpen(false);
+    stateSetDialogOpen(false);
     setOpen3(true);
   };
   const handleCloseDailog1 = () => {
@@ -493,7 +498,7 @@ function DashboardComponent(props) {
     setEditConfirmDialogStateValues(true);
   };
   const closeEditDialog = () => {
-    setDialogOpen1(false);
+    stateSetDialogOpen1(false);
     setOpen4(true);
   };
 
@@ -773,6 +778,8 @@ function DashboardComponent(props) {
         state={props.state}
         setStateValues={props.setStateValues}
         setConfirmDialogStateValues={props.setConfirmDialogStateValues}
+        setAddDialogOpen={props.setAddDialogOpen}
+        stateAddSetDialogOpen={props.stateAddSetDialogOpen}
       />
       <div className="griddiv">
         <Grid lg={13} className="tablegrid_address">
@@ -1126,7 +1133,7 @@ function DashboardComponent(props) {
           <>
             <Dialog
               className={classes.dialog}
-              open={dialogOpen}
+              open={state.setDialogOpen}
               divide
               aria-labelledby="form-dialog-title"
             >
@@ -1182,7 +1189,7 @@ function DashboardComponent(props) {
           </>
         ) : !state.deleteConfirmDialog ? (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Deleting address<span className="cross-loader">X</span>
@@ -1229,7 +1236,7 @@ function DashboardComponent(props) {
           </>
         ) : (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Deleting address
@@ -1378,7 +1385,7 @@ function DashboardComponent(props) {
           <>
             <Dialog
               className={classes.dialog}
-              open={dialogOpen1}
+              open={state.setDialogOpen1}
               divide
               onClose={handleCancelClose1}
               aria-labelledby="form-dialog-title"
@@ -1565,7 +1572,7 @@ function DashboardComponent(props) {
           </>
         ) : !state.editConfirmDialog ? (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen1} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen1} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Editing address<span className="cross-loader">X</span>
@@ -1612,7 +1619,7 @@ function DashboardComponent(props) {
           </>
         ) : (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen1} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen1} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Editing address

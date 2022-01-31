@@ -19,6 +19,9 @@ export default class Dashboard extends BaseComponent {
       deleteConfirmDialog: false,
       editDialog: false,
       editConfirmDialog: false,
+      setDialogOpen:false,
+      setDialogOpen1:false,
+      setAddDialogOpen:false
     };
   }
 
@@ -49,6 +52,7 @@ export default class Dashboard extends BaseComponent {
         .send({ from: acc }, async (err, transactionHash) => {
           if (err || !transactionHash) {
             reject(false);
+            this.setState({setAddDialogOpen:false})
             return;
           }
          
@@ -88,6 +92,22 @@ export default class Dashboard extends BaseComponent {
     console.log("call")
  this.setState({editConfirmDialog:value})
  }
+
+//  ***********************ADD EDIT DELETE Dialog******************************
+
+ stateSetDialogOpen=(value)=>{
+  console.log("call")
+this.setState({setDialogOpen:value})
+}
+stateSetDialogOpen1=(value)=>{
+  console.log("call")
+this.setState({setDialogOpen1:value})
+}
+stateAddSetDialogOpen=(value)=>{
+  console.log("call")
+this.setState({setAddDialogOpen:value})
+}
+// ***********************
 
   addWhiteListToDatabase = async (reqObj) => {
     let [error, totalAccounts] = await Utils.parseResponse(
@@ -139,6 +159,7 @@ export default class Dashboard extends BaseComponent {
         .send({ from: acc }, async (err, transactionHash) => {
           if (err || !transactionHash) {
             reject(false);
+            this.setState({setDialogOpen1:false})
             return;
           }
          
@@ -172,6 +193,7 @@ export default class Dashboard extends BaseComponent {
         .send({ from: acc }, async (err, transactionHash) => {
           if (err || !transactionHash) {
             reject(false);
+            this.setState({setDialogOpen:false})
             return;
           }
          
@@ -197,6 +219,12 @@ export default class Dashboard extends BaseComponent {
         setDeleteConfirmDialogStateValues={this.setDeleteConfirmDialogStateValues}
         setEditDialogValue={this.setEditDialogValue}
         setEditConfirmDialogStateValues={this.setEditConfirmDialogStateValues}
+        setDialogOpen={this.setDialogOpen}
+        stateSetDialogOpen={this.stateSetDialogOpen}
+        setDialogOpen1={this.setDialogOpen1}
+        stateSetDialogOpen1={this.stateSetDialogOpen1}
+        setAddDialogOpen={this.setAddDialogOpen}
+        stateAddSetDialogOpen={this.stateAddSetDialogOpen}
       />
     );
 
