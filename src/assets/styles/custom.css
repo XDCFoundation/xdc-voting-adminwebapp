@@ -492,7 +492,7 @@ color: #3B3B3B;
 opacity: 1;
 font-size: 15px;
     font-family: 'Inter';
-    font-weight: 600;
+    font-weight: 400;
 }
 .btnclick{
     width: 400px;
@@ -720,8 +720,8 @@ opacity: 1;
 .griddiv {
     width: 60vw;
   height: 100%;
-  margin-top: 20px;
-  margin-left: 20vw;
+  
+  
   /* border-radius: 12px;
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
   border: solid 1px #e3e7eb;
@@ -732,6 +732,10 @@ box-shadow: 0px 2px 15px #0000001A;
 border: 1px solid #E3E7EB;
 border-radius: 12px;
 opacity: 1;
+padding-bottom: 8px;
+margin:0 auto;
+margin-top: 20px;
+
 }
 .pagination-div{
     width: 60vw;
@@ -777,7 +781,7 @@ opacity: 1;
     letter-spacing: 0px;
 color: #2149B9;
 opacity: 1;
-font-size: 14px;
+font-size: 15px;
 font-family: "Inter",sans-serif;
 }
 .linkTable:hover{
@@ -788,9 +792,9 @@ font-family: "Inter",sans-serif;
 }
 .tablemiddata{
     letter-spacing: 0px;
-color: #2A2A2A;
+color: #3B3B3B;
 opacity: 1;
-font-size: 14px;
+font-size: 15px;
 font-family: "Inter",sans-serif;
 }
 .tableheading{
@@ -804,7 +808,7 @@ font-weight: 600;
 .whitelisted-heading{
     font-size: 18px;
     font-family: "Inter",sans-serif;
-    font-weight: bold;
+    font-weight: 600;
 letter-spacing: 0px;
 color: #2A2A2A;
 opacity: 1;
