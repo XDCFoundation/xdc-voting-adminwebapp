@@ -333,8 +333,8 @@ export default function CustomizedSnackbars(props) {
               <span className="checkbox-heading">
                 <div>Allow Voting</div>
                 <div className="checkbox-des">
-                  By selecting this you are giving permission to address to cast
-                  a vote
+                By selecting this, you are permitting the address to cast a vote
+
                 </div>
               </span>
             </div>
@@ -351,8 +351,7 @@ export default function CustomizedSnackbars(props) {
               <span className="checkbox-heading">
                 <div>Allow Proposal Creation</div>
                 <div className="checkbox-des">
-                  By selecting this you are giving permission to address to
-                  create proposal
+                By selecting this, you are permitting the address to create a proposal
                 </div>
               </span>
             </div>

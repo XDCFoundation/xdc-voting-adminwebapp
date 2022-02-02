@@ -1151,8 +1151,7 @@ function DashboardComponent(props) {
 
               <DialogContent>
                 <DialogContentText className={classes.deleteconfirmation}>
-                  Once deleted you cannot added it again in future. It will be
-                  deleted permanently
+                Once an address is deleted, it cannot be readded. It is a permanent removal.
                 </DialogContentText>
               </DialogContent>
 
@@ -1467,8 +1466,7 @@ function DashboardComponent(props) {
                 <span className="checkbox-heading">
                   <div>Allow Voting</div>
                   <div className="checkbox-des">
-                    By selecting this you are giving permission to address to
-                    cast a vote
+                  By selecting this, you are permitting the address to cast a vote
                   </div>
                 </span>
               </div>
@@ -1495,8 +1493,7 @@ function DashboardComponent(props) {
                 <span className="checkbox-heading">
                   <div>Allow Proposal Creation</div>
                   <div className="checkbox-des">
-                    By selecting this you are giving permission to address to
-                    create proposal
+                  By selecting this, you are permitting the address to create a proposal
                   </div>
                 </span>
               </div>
