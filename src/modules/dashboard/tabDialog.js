@@ -3,6 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { Row } from "simple-flexbox";
 import styled from "styled-components";
+import { useEffect } from "react";
 const useStyles = makeStyles((theme) => ({
   add: {
     backgroundColor: "#2149b9",
@@ -426,14 +427,14 @@ const useStyles = makeStyles((theme) => ({
     },
     
   },
-  "@media (min-width: 360px) and (max-height: 1040px)": {
-      dialog:{
-          display:"block !important"
-      }
-  },
-  dialog:{
-      display:"none !important"
-  }
+  // "@media (min-width: 360px) and (max-height: 1040px)": {
+  //     dialog:{
+  //         display:"block !important"
+  //     }
+  // },
+  // dialog:{
+  //     display:"none !important"
+  // }
 }));
 
 const InstructionCard = styled.div`
@@ -494,11 +495,14 @@ const CloseIconContainer = styled.div`
     font-weight: 600;
 `;
 
-export default function Web3Dialog(props) {
+export default function TabDialogFunction(props) {
   const [open, setOpen] = React.useState(false);
 
   React.useEffect(async() =>  {
-   await mainDialogOpen();
+  //  await mainDialogOpen();
+  setOpen(true)
+   console.log(open,"tabvalue");
+  
   }, []);
 
   const classes = useStyles();
@@ -516,11 +520,11 @@ const mainDialogOpen = () => {
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
-      id="web3Dialog"
+      id="TabDialogFunction"
     >
       <div className="main-box">
         <Row className="main-row">
-          <div className="main-title">Connect Wallet</div>
+          <div className="main-title">tAB Wallet</div>
           <CloseIconContainer onClick={handleClose}>
               X
             {/* <img alt="Cross" src={"/images/XDC-Cross.svg"} /> */}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useRef } from "react";
 import { Row } from "simple-flexbox";
 import { Button } from "@material-ui/core";
 import { history } from "../../managers/history";
@@ -48,7 +48,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import Web3Dialog from "./mainDialog";
 import Header from "./header";
-// import Web3Dialog from "./tabDialog";
+
+// import TabDialogFunction from "./tabDialog";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -265,11 +266,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function DashboardComponent(props) {
+
+ 
+  // const [iconT, setIcon] = useState("");
+ 
+
+
+  console.log(props,"prop")
   const theme = useTheme();
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
   const [pageNumber, setPageNumber] = React.useState();
   const [pagecount, setPagecount] = React.useState(0);
-
+ 
   const [skip, setSkip] = React.useState(0);
   const [limit, setLimit] = React.useState(10);
   // const { state }=props;
@@ -331,6 +339,8 @@ function DashboardComponent(props) {
   const search = async (e) => {
     // setAddressSearch(e.target.value);
     console.log(e.target.value, "adddddddddddddddddddddddddddd");
+   
+    setAddressSearch(e.target.value)
     console.log(addressSearch, "address of input");
     const reqObj = {
       address: e.target.value,
@@ -347,6 +357,7 @@ function DashboardComponent(props) {
     console.log(totalAccounts, "responseaddress");
     console.log(error, "errorrrrrrrrrrrrrrrrrrrrrrr");
     if (error || !totalAccounts)
+    // await getListOffAddress({ skip: skip, limit: limit });
       // {
       // //  Utils.apiFailureToast("error")
       //  await setIsError("No record found")
@@ -366,6 +377,19 @@ function DashboardComponent(props) {
   };
   console.log(getListOfAddress, "jhbbbbbbbbbbbbbbbbbb");
 
+  const crossSearch=()=>{
+    setAddressSearch("")
+    console.log(addressSearch,"crossvalue")
+    
+  }
+  const inputEl = useRef(null);
+  const onButtonClick = () => {
+    // @ts-ignore (us this comment if typescript raises an error)
+    search(
+      {address:
+    inputEl.current.value = ""}
+    )
+  };
   const logOut = () => {
     props.dispatch({ type: reduxEvent.LOGGED_OUT, data: null });
     sessionManager.removeDataFromLocalStorage("userInfo");
@@ -399,6 +423,11 @@ function DashboardComponent(props) {
     setEditDialogValue,
     setDeleteConfirmDialogStateValues,
     setEditConfirmDialogStateValues,
+    setDialogOpen,
+    stateSetDialogOpen,
+    setDialogOpen1,
+    stateSetDialogOpen1,
+
   } = props;
   const validateAddress = () => {
     if (
@@ -453,22 +482,22 @@ function DashboardComponent(props) {
   const [addressInput, setAddressInput] = React.useState("");
   const [count, setCount] = React.useState(0);
   const [buttonText, setButtonText] = useState("Edit");
-  const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [dialogOpen1, setDialogOpen1] = React.useState(false);
+  // const [dialogOpen, setDialogOpen] = React.useState(false);
+  // const [dialogOpen1, setDialogOpen1] = React.useState(false);
   const [open3, setOpen3] = React.useState(false);
   const [open4, setOpen4] = React.useState(false);
   const handleDialog = () => {
-    setDialogOpen(true);
+    stateSetDialogOpen(true);
     // setStateValues({deleteDialog:false})
     setDeleteDialogValue(false);
     setDeleteConfirmDialogStateValues(false);
   };
   const handleCancelClose = () => {
-    setDialogOpen(false);
+    stateSetDialogOpen(false);
   };
   const handleDialog1 = () => {
     setEditConfirmDialogStateValues(false);
-    setDialogOpen1(true);
+    stateSetDialogOpen1(true);
     setCount(0);
     setButtonText("Edit");
     setEditClick(false);
@@ -476,7 +505,7 @@ function DashboardComponent(props) {
     setInputColor(0);
   };
   const handleCancelClose1 = () => {
-    setDialogOpen1(false);
+    stateSetDialogOpen1(false);
   };
   const handleCloseDailog = () => {
     setDeleteConfirmDialogStateValues(true);
@@ -484,7 +513,7 @@ function DashboardComponent(props) {
     // setOpen3(true);
   };
   const closeDeleteDialog = () => {
-    setDialogOpen(false);
+    stateSetDialogOpen(false);
     setOpen3(true);
   };
   const handleCloseDailog1 = () => {
@@ -493,7 +522,7 @@ function DashboardComponent(props) {
     setEditConfirmDialogStateValues(true);
   };
   const closeEditDialog = () => {
-    setDialogOpen1(false);
+    stateSetDialogOpen1(false);
     setOpen4(true);
   };
 
@@ -661,7 +690,70 @@ function DashboardComponent(props) {
         </ul>
       </List>
     </div>
+
+
+
   );
+  
+  const [wallet, setwallet] = useState("");
+  console.log(wallet,"dashboard wallet value")
+  useEffect(() => {
+    // var body = document.querySelector('body')
+    // for(var i = 0; i < 60; i++) {
+    //   var el = jazzicon(100, Math.round(Math.random() * 10000000))
+    //   console.log("dsjfkksdgfkjhjldsf ",el)
+    //   body.appendChild(el)
+    // }
+   
+
+
+    if (window.ethereum) {
+      //the error line
+      window.web3 = new Web3(window.ethereum);
+
+      try {
+        window.ethereum.enable();
+
+        let web3;
+        web3 = new Web3(window.web3.currentProvider);
+        console.log("+++", web3);
+        window.ethereum.enable();
+        const accounts = web3.eth.getAccounts().then((accounts) => {
+          if (!accounts || !accounts.length) {
+            console.log("please login");
+            // Utils.apiFailureToast("Wallet is not connected");
+            return;
+          }
+          console.log(accounts[0]);
+          setwallet(accounts[0]);
+          
+          // fetchData(accounts[0]);
+        });
+      } catch (err) {
+        alert("Something went wrong.");
+      }
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
+      let web3;
+      web3 = new Web3(window.web3.currentProvider);
+      console.log("+++", web3);
+      window.ethereum.enable();
+
+      const accounts = web3.eth.getAccounts().then((accounts) => {
+        if (!accounts || !accounts.length) {
+          console.log("please login");
+          // Utils.apiFailureToast("Wallet is not connected");
+          return;
+        }
+        console.log(accounts[0],"type");
+        setwallet(accounts[0]);
+        // fetchData(accounts[0]);
+      });
+    } else {
+      Utils.apiFailureToast("Please install XDCPay extension");
+    }
+  }, []);
+
 
   return (
     <div>
@@ -680,6 +772,7 @@ function DashboardComponent(props) {
             <span>
               <input
                 type="text"
+               
                 className="inputsearch"
                 placeholder="Search Address"
                 // value={addressSearch}
@@ -687,10 +780,12 @@ function DashboardComponent(props) {
                   search(e);
                 }}
               ></input>
-              <img
+              
+              <img  
                 className="searchicon"
                 src={require("../../assets/styles/images/Search.png")}
               ></img>
+             
             </span>
           </span>
 
@@ -707,8 +802,9 @@ function DashboardComponent(props) {
                 ></img> */}
               {/* <button className="connect-wallet"> */}
               <div>
-                <Header />
+                <Header   state={props.state} wallet={props.wallet} />
               </div>
+             {/* <div className="tab-dialog"> <TabDialogFunction/> </div> */}
               <Web3Dialog />
               {/* </button> */}
               <div style={{ marginLeft: "16px", marginRight: "22px" }}>
@@ -769,10 +865,13 @@ function DashboardComponent(props) {
         getListOffAddress={() =>
           getListOffAddress({ skip: skip, limit: limit })
         }
+        wallet={wallet}
         addWhiteListAddress={props.addWhiteListAddress}
         state={props.state}
         setStateValues={props.setStateValues}
         setConfirmDialogStateValues={props.setConfirmDialogStateValues}
+        setAddDialogOpen={props.setAddDialogOpen}
+        stateAddSetDialogOpen={props.stateAddSetDialogOpen}
       />
       <div className="griddiv">
         <Grid lg={13} className="tablegrid_address">
@@ -981,6 +1080,7 @@ function DashboardComponent(props) {
                           <a className="linkTable">
                             <span
                               className="tabledata"
+                              
                               onClick={() => {
                                 handleDialog1();
                                 setDeleteMessage(row.address);
@@ -993,10 +1093,11 @@ function DashboardComponent(props) {
                               }}
                             >
                               {" "}
+                              {wallet?
                               <img
                                 className="edit-icon"
                                 src={require("../../assets/styles/images/edit.svg")}
-                              ></img>
+                              ></img>:""}
                             </span>
                           </a>
                         </TableCell>
@@ -1019,10 +1120,11 @@ function DashboardComponent(props) {
                               }}
                             >
                               {" "}
+                              {wallet?
                               <img
                                 className="delete-icon"
                                 src={require("../../assets/styles/images/delete.svg")}
-                              ></img>
+                              ></img>:""}
                             </span>
                           </a>
                         </TableCell>
@@ -1126,7 +1228,7 @@ function DashboardComponent(props) {
           <>
             <Dialog
               className={classes.dialog}
-              open={dialogOpen}
+              open={state.setDialogOpen}
               divide
               aria-labelledby="form-dialog-title"
             >
@@ -1181,7 +1283,7 @@ function DashboardComponent(props) {
           </>
         ) : !state.deleteConfirmDialog ? (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Deleting address<span className="cross-loader">X</span>
@@ -1228,7 +1330,7 @@ function DashboardComponent(props) {
           </>
         ) : (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Deleting address
@@ -1377,7 +1479,7 @@ function DashboardComponent(props) {
           <>
             <Dialog
               className={classes.dialog}
-              open={dialogOpen1}
+              open={state.setDialogOpen1}
               divide
               onClose={handleCancelClose1}
               aria-labelledby="form-dialog-title"
@@ -1562,7 +1664,7 @@ function DashboardComponent(props) {
           </>
         ) : !state.editConfirmDialog ? (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen1} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen1} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Editing address<span className="cross-loader">X</span>
@@ -1609,7 +1711,7 @@ function DashboardComponent(props) {
           </>
         ) : (
           <>
-            <Dialog className={classes.dialog} open={dialogOpen1} divide>
+            <Dialog className={classes.dialog} open={state.setDialogOpen1} divide>
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
                   Editing address
