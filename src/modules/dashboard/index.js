@@ -4,6 +4,7 @@ import Web3 from "web3";
 import DashboardComponent from "./dashboardComponent";
 import Utils from "../../utility";
 import { AddService } from "../../services";
+import Header from "./header"
 
 let proposalContractAbi =
   require("../../common/abis/proposalContractAbi.json").abi;
@@ -21,11 +22,16 @@ export default class Dashboard extends BaseComponent {
       editConfirmDialog: false,
       setDialogOpen:false,
       setDialogOpen1:false,
-      setAddDialogOpen:false
+      setAddDialogOpen:false,
+     
     };
   }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+   
+    
+    
+  }
 
   addWhiteListAddress = async (reqObj) => {
     this.setState({addDialog:true})
@@ -70,6 +76,7 @@ export default class Dashboard extends BaseComponent {
     });
   };
 
+
    setStateValues=(value)=>{
      console.log("call")
   this.setState({addDialog:value})
@@ -108,6 +115,8 @@ stateAddSetDialogOpen=(value)=>{
 this.setState({setAddDialogOpen:value})
 }
 // ***********************
+
+
 
   addWhiteListToDatabase = async (reqObj) => {
     let [error, totalAccounts] = await Utils.parseResponse(
@@ -208,6 +217,7 @@ this.setState({setAddDialogOpen:value})
 
   render() {
     return (
+      
       <DashboardComponent
         addWhiteListAddress={this.addWhiteListAddress}
         onEditAddress={this.onEditAddress}
@@ -225,7 +235,10 @@ this.setState({setAddDialogOpen:value})
         stateSetDialogOpen1={this.stateSetDialogOpen1}
         setAddDialogOpen={this.setAddDialogOpen}
         stateAddSetDialogOpen={this.stateAddSetDialogOpen}
+       
+       
       />
+     
     );
 
 

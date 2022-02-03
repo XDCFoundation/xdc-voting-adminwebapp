@@ -270,9 +270,13 @@ export default function CustomizedSnackbars(props) {
             Governance portal
           </div>
         </div>
+        {/* {props.wallet?<> */}
+        {props.wallet?
         <button variant="outlined" onClick={handleDialog} className="add-btn1">
           Add
-        </button>
+        </button>:""}
+        {/* </>
+        :""} */}
       </div>
       {!state.addDialog ? (
         <>
