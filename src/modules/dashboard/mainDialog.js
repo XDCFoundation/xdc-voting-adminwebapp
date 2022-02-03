@@ -440,7 +440,7 @@ display: -webkit-box;
     -ms-flex-flow: column;
     flex-flow: column;
     gap: 25px;
-    padding: 10px 0 0 0;
+    padding: 12px 0 0 0;
     width: 200px;
     height: 233px;
     background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -542,7 +542,7 @@ const mainDialogOpen = () => {
             <CardTitle>Install XDCPay</CardTitle>
             <CardText>
               Install XDCPay Chrome extension from
-              <a
+              <a style={{textDecoration:"none",color:"#3163F0"}}
                 href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
                 target="_blank"
               >

@@ -132,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedSnackbars(props) {
   console.log("demoform state", props.state);
   console.log("demoform addpopup", props.state.addDialog);
-  const { state, setStateValues, setConfirmDialogStateValues } = props;
+  const { state, setStateValues, setConfirmDialogStateValues,setAddDialogOpen,stateAddSetDialogOpen } = props;
   // const { state1, setConfirmDialogStateValues } = props;
 
   const [addAddress, setAddAddress] = React.useState("");
@@ -143,7 +143,7 @@ export default function CustomizedSnackbars(props) {
   const [addressInput, setAddressInput] = React.useState("");
   const [message, setMessage] = useState("");
   const [open, setOpen] = React.useState(false);
-  const [dialogOpen, setDialogOpen] = React.useState(false);
+  // const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
   const [emailError, setEmailError] = useState("");
   const [addPopup, setAddPopup] = useState(false);
@@ -203,7 +203,7 @@ export default function CustomizedSnackbars(props) {
     setOpen(true);
   };
   const handleCancelClose = () => {
-    setDialogOpen(false);
+    stateAddSetDialogOpen(false);
     setallowVoting(false);
     setProposal(false);
     setAddAddress("");
@@ -223,11 +223,14 @@ export default function CustomizedSnackbars(props) {
   };
 
   const handleDialog = async () => {
-    setDialogOpen(true);
+    stateAddSetDialogOpen(true);
     await setStateValues(false);
     // await props.state.setConfirmDialogStateValues(false);
     await setConfirmDialogStateValues(false);
-
+    setallowVoting(false);
+    setAddAddress("");
+    setProposal(false);
+    setEmailError("");
     // setOpen(true)
   };
   const handleCloseDailog = async () => {
@@ -244,7 +247,7 @@ export default function CustomizedSnackbars(props) {
     // setDialogOpen(true);
   };
   const closeDialog = async () => {
-    setDialogOpen(false);
+    stateAddSetDialogOpen(false);
     setOpen(true);
   };
 
@@ -267,13 +270,17 @@ export default function CustomizedSnackbars(props) {
             Governance portal
           </div>
         </div>
+        {/* {props.wallet?<> */}
+        {props.wallet?
         <button variant="outlined" onClick={handleDialog} className="add-btn1">
           Add
-        </button>
+        </button>:""}
+        {/* </>
+        :""} */}
       </div>
       {!state.addDialog ? (
         <>
-          <Dialog className={classes.dialog} open={dialogOpen} divide>
+          <Dialog className={classes.dialog} open={state.setAddDialogOpen} divide>
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>Add a New Address</div>{" "}
             </DialogTitle>
@@ -387,7 +394,7 @@ export default function CustomizedSnackbars(props) {
         </>
       ) : !state.addConfirmDialog ? (
         <>
-          <Dialog className={classes.dialog} open={dialogOpen} divide>
+          <Dialog className={classes.dialog} open={state.setAddDialogOpen} divide>
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>
                 Adding address<span className="cross-loader">X</span>
@@ -431,7 +438,7 @@ export default function CustomizedSnackbars(props) {
         </>
       ) : (
         <>
-          <Dialog className={classes.dialog} open={dialogOpen} divide>
+          <Dialog className={classes.dialog} open={state.setAddDialogOpen} divide>
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>
                 Adding address

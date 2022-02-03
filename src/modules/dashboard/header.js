@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles/";
 import Web3 from "web3";
 import Utils from "../../utility";
 import { getListOfWhitelistedAddress } from "../../services/getListOfAddress";
+import CustomizedSnackbars from "./DemoForm";
 
 import Jazzicon from "react-jazzicon";
 
@@ -38,7 +39,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Header() {
+function Header(props) {
+  // const {state,wallet,setwallet}=props;
+  console.log(props,"props value")
   const classes = useStyles();
   const [wallet, setwallet] = useState("");
   const [iconT, setIcon] = useState("");
@@ -49,6 +52,7 @@ function Header() {
     //   console.log("dsjfkksdgfkjhjldsf ",el)
     //   body.appendChild(el)
     // }
+   
 
     if (window.ethereum) {
       //the error line
@@ -68,7 +72,10 @@ function Header() {
             return;
           }
           console.log(accounts[0]);
+          
           setwallet(accounts[0]);
+          
+          
           fetchData(accounts[0]);
         });
       } catch (err) {
@@ -87,7 +94,7 @@ function Header() {
           // Utils.apiFailureToast("Wallet is not connected");
           return;
         }
-        console.log(accounts[0]);
+        console.log(accounts[0],"type");
         setwallet(accounts[0]);
         fetchData(accounts[0]);
       });
@@ -119,6 +126,7 @@ function Header() {
             return;
           }
           console.log("accounts[0] ", accounts[0]);
+         
         });
       } catch (err) {
         alert("Something went wrong.");
@@ -147,8 +155,11 @@ function Header() {
   };
   return (
     <div>
+      
       <button className="connect-wallet" onClick={connectToWallet}>
+      { console.log(wallet,"walletaddress")}
         {wallet ? (
+          
           <>
             {wallet ? (
               <>
