@@ -399,7 +399,7 @@ color: #FFFFFF;
     font-family: 'Inter';
     /* justify-content: center; */
     /* display: flex; */
-    margin-left: 15px;
+    margin:0px auto;
     margin-top: 5px;
 }
 .address-image{
