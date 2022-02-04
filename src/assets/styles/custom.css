@@ -758,8 +758,9 @@ margin:20px auto 0 auto;
 
 }
 .pagination-div{
+    /* margin-left: 21vw;*/
     width: 60vw;
-    margin-left: 21vw;
+   margin-left:31vw ;
     margin-bottom: 260px;
 }
 
