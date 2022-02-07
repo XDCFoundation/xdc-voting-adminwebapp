@@ -719,13 +719,22 @@ function DashboardComponent(props) {
         console.log("+++", web3);
         window.ethereum.enable();
         const accounts = web3.eth.getAccounts().then((accounts) => {
+          let superadmin="xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
           if (!accounts || !accounts.length) {
             console.log("please login");
-            // Utils.apiFailureToast("Wallet is not connected");
+            // Utils.apiFailureToast("error");
             return;
           }
-          console.log(accounts[0]);
+
+          if(superadmin.replace("xdc","0x").toLocaleLowerCase()==  accounts[0].toLowerCase())
+        {
           setwallet(accounts[0]);
+        
+        
+          
+        }
+          console.log(accounts[0]);
+          // setwallet(accounts[0]);
           
           // fetchData(accounts[0]);
         });
@@ -750,7 +759,7 @@ function DashboardComponent(props) {
         // fetchData(accounts[0]);
       });
     } else {
-      Utils.apiFailureToast("Please install XDCPay extension");
+      // Utils.apiFailureToast("Please install XDCPay extension");
     }
   }, []);
 
@@ -805,7 +814,7 @@ function DashboardComponent(props) {
                 <Header   state={props.state} wallet={props.wallet} />
               </div>
              {/* <div className="tab-dialog"> <TabDialogFunction/> </div> */}
-              <Web3Dialog />
+              <Web3Dialog wallet={wallet} />
               {/* </button> */}
               <div style={{ marginLeft: "16px", marginRight: "22px" }}>
                 <span>

@@ -211,6 +211,19 @@ opacity: 1;
 margin-left: -30px;
 margin-top: -4px;
 }
+.unauthorized{
+    font: normal normal 600 16px/20px Inter;
+letter-spacing: 0.62px;
+color: #2A2A2A;
+opacity: 1;
+}
+.unauthorized-message{
+    margin-top: 5px;
+    font: normal normal normal 15px/20px Inter;
+    letter-spacing: 0.58px;
+    color: #2A2A2A;
+    opacity: 1;
+}
 
 .forgot-in{
         margin-top: 40px;
@@ -256,7 +269,15 @@ margin-top: -4px;
         margin-top: -50px !important;
     }
 }
-
+/* @media (min-width:1024px) and (max-width:1370px){
+    .griddiv{
+        width: 82vw !important;
+    }
+    .dashboard-upper-div{
+        width: 82vw !important;
+        margin: 40px auto !important;
+    }
+} */
 /* @media (min-width:360px) and (max-width:1023px){
     .tab-dialog{
       display: flex;
