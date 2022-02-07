@@ -502,7 +502,8 @@ const mainDialogOpen = () => {
 
 
   return (
-    
+    !props.wallet?
+      <>
     <Dialog
     //   className={classes.dialog + " maxWidth-800"}
       className="dialog-main"
@@ -605,6 +606,7 @@ const mainDialogOpen = () => {
         </Row>
       </div>
     </Dialog>
+    </>:""
   );
 }
 
