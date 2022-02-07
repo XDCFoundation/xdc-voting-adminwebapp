@@ -234,6 +234,94 @@
 //     fontWeight: "500",
 //   },
 
+<<<<<<< HEAD
+  forgotText: {
+    width: "404px",
+    textAlign: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    letterSpacing: "0px",
+    color: "#4c4c4c",
+    marginTop: "20px",
+    marginBottom: "39px",
+    fontSize: "15px",
+  },
+  robotContainerForgotPass: {
+    width: "299px",
+    height: "69px",
+    backgroundColor: "#F8F6F6",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "24px",
+  },
+  "@media (max-width: 1920px)": {
+    forgotText: {
+      maxWidth: "404px",
+      width: "95%",
+    },
+    createAccountbtn: {
+      maxWidth: "433px",
+      width: "90%",
+    },
+    resetPasswordbtn: {
+      maxWidth: "433px",
+      width: "90%",
+    },
+    robotContainer: {
+      maxWidth: "299px",
+      width: "95%",
+    },
+    loading: {
+      zIndex: -1,
+    },
+  },
+  "@media (max-width: 767px)": {
+    paperWidthSm: {
+      position: "absolute",
+      // top: "102px",
+      height: "100%",
+      width: "100%",
+      maxWidth: "767px",
+      borderRadius: "0px",
+      backgroundImage: "none",
+      opacity: "0px",
+    },
+    closeContainer: {
+      display: "none",
+    },
+    heading: {
+      fontWeight: "600",
+      marginRight: "auto",
+      marginLeft: "auto",
+      marginTop: "23px",
+      fontSize: "14px",
+      color: "#2a2a2a",
+      marginBottom: "8px",
+    },
+    subCategory: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+    subCategorySignup: {
+      display: "flex",
+      justifyContent: "space-between",
+    },
+    forgotPassword: {
+      position: "relative",
+      right: "0px",
+      color: "#3763dd",
+      fontSize: "13px",
+    },
+    dialogButton: {
+      padding: "0",
+      justifyContent: "center",
+    },
+    dialog:{
+        maxWidth: "697px !important",
+    /* width: 679px; */
+    height: "463px !important",
+    
+=======
 //   forgotText: {
 //     width: "404px",
 //     textAlign: "center",
@@ -319,6 +407,7 @@
 //         maxWidth: "697px !important",
 //     /* width: 679px; */
 //     height: "463px !important"
+>>>>>>> cfe4e511ae84dfbc3d29223235d3940851b68feb
     
 //     },
 //     createaccount: {
@@ -514,6 +603,100 @@
 //   };
 
 
+<<<<<<< HEAD
+  return (
+    <Dialog
+      className={classes.dialog + " maxWidth-800"}
+      open={open}
+      
+
+      
+      onClose={handleClose}
+      aria-labelledby="form-dialog-title"
+      id="TabDialogFunction"
+    >
+      <div className="main-box">
+        <Row className="main-row">
+          <div className="main-title">tAB Wallet</div>
+          <CloseIconContainer onClick={handleClose}>
+              X
+            {/* <img alt="Cross" src={"/images/XDC-Cross.svg"} /> */}
+          </CloseIconContainer>
+        </Row>
+        <hr className="connect-line"/>
+        <Row
+          className="card-box"
+          style={{
+            display: "flex",
+            flexFlow: "row nowrap",
+            paddingTop: "22px",
+            marginBottom: "20px",
+            gap: "13px"
+          }}
+        >
+          <InstructionCard>
+            <div className="steps" style={{ textAlign: "center" }}>
+              Step 1
+            </div>
+            <ImageContainer>
+              <img
+                className="input-data-text"
+                alt="new-feature"
+                src={"/images/connect icon1.svg"}
+              />
+            </ImageContainer>
+            <CardTitle>Install XDCPay</CardTitle>
+            <CardText>
+              Install XDCPay Chrome extension from
+              <a
+                href="https://chrome.google.com/webstore/detail/xdcpay/bocpokimicclpaiekenaeelehdjllofo?hl=en-GB"
+                target="_blank"
+              >
+                &nbsp;here.
+              </a>
+            </CardText>
+          </InstructionCard>
+          <InstructionCard>
+            <div className="steps" style={{ textAlign: "center" }}>
+              Step 2
+            </div>
+            <ImageContainer>
+              <img
+                className="input-data-text"
+                alt="new-feature"
+                src={"/images/connect icon2.svg"}
+              />
+            </ImageContainer>
+            <CardTitle>Login to XDCPay</CardTitle>
+            <CardText>
+              Login to you account on XDCPay Chrome extension.
+            </CardText>
+          </InstructionCard>
+          <InstructionCard>
+            <div className="steps" style={{ textAlign: "center" }}>
+              Step 3
+            </div>
+            <ImageContainer>
+              <img
+                className="input-data-text"
+                alt="new-feature"
+                src={"/images/connect icon3.svg"}
+              />
+            </ImageContainer>
+            <CardTitle>Connect Wallet</CardTitle>
+            <CardText>
+            Add your whitelisted addresses
+              {/* {props.connectToWalletMessage
+                ? props.connectToWalletMessage
+                : "Click on ‘Search My Wallet’ to see your wallet transactions."} */}
+            </CardText>
+          </InstructionCard>
+        </Row>
+        {/*<Row className="m-b-20" style={{paddingTop: '22px'}}>*/}
+        {/*    <button className="connect-wallet-btn w-100" onClick={connectWallet}>Connect Wallet</button>*/}
+        {/*</Row>*/}
+        <Row className="last-row">
+=======
 //   return (
 //     <Dialog
 //       className={classes.dialog + " maxWidth-800"}
@@ -603,6 +786,7 @@
 //         {/*    <button className="connect-wallet-btn w-100" onClick={connectWallet}>Connect Wallet</button>*/}
 //         {/*</Row>*/}
 //         <Row className="last-row">
+>>>>>>> cfe4e511ae84dfbc3d29223235d3940851b68feb
 
 //          <button className="last-title"> <div > <span><img
 //                 className="connect-text"
