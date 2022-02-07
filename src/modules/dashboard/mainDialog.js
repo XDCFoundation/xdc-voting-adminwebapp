@@ -457,6 +457,7 @@ font: normal normal normal 16px/20px Inter;
 letter-spacing: 0px;
 opacity: 1;
 margin-top: -15px;
+color: #4B4B4B
 `;
 
 const ImageContainer = styled.div`
@@ -501,23 +502,27 @@ const mainDialogOpen = () => {
 
 
   return (
+    
     <Dialog
     //   className={classes.dialog + " maxWidth-800"}
       className="dialog-main"
       open={open}
+      style={{background:"rgba(31,31,31,0.1)" }}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       id="web3Dialog"
     >
-      <div className="main-box">
-        <Row className="main-row">
+      <div className="main-box" >
+        <Row className="main-row" >
           <div className="main-title">Connect Wallet</div>
           <CloseIconContainer onClick={handleClose}>
               X
             {/* <img alt="Cross" src={"/images/XDC-Cross.svg"} /> */}
           </CloseIconContainer>
         </Row>
-        <hr className="connect-line"/>
+        </div>
+        <div><hr className="connect-line"/></div>
+        <div style={{padding:" 20px 30px 0px 23px"}}>
         <Row
           className="card-box"
           style={{

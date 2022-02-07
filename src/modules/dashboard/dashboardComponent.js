@@ -817,7 +817,7 @@ function DashboardComponent(props) {
                       edge="end"
                       onClick={toggleDrawer("right", true)}
                     >
-                      <img src={"/images/Menu.svg"}></img>
+                      <img style={{ marginTop:'5px'}}src={"/images/Menu.svg"}></img>
                       {/* <MenuIcon /> */}
                     </IconButton>
 
@@ -944,12 +944,17 @@ function DashboardComponent(props) {
                       <TableRow
                         style={
                           index % 2 !== 1
-                            ? { background: "#f9f9f9" }
+                            // ? { background: "#f9f9f9" }
+                            ? { background: "rgba(250,250,250,1)" }
                             : { background: "white" }
                         }
                       >
                         <TableCell
-                          style={{ border: "none", paddingLeft: "4%" }}
+                          style={{ 
+                            border: "none",
+                              paddingLeft: "2.2%"
+                            //  paddingLeft: "4%"
+                           }}
                           margin-left="5px"
                           // onClick={() => {
                           //   handleDialog1();

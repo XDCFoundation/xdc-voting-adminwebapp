@@ -318,7 +318,8 @@ const useStyles = makeStyles((theme) => ({
     dialog:{
         maxWidth: "697px !important",
     /* width: 679px; */
-    height: "463px !important"
+    height: "463px !important",
+    
     
     },
     createaccount: {
@@ -518,6 +519,9 @@ const mainDialogOpen = () => {
     <Dialog
       className={classes.dialog + " maxWidth-800"}
       open={open}
+      
+
+      
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       id="TabDialogFunction"
