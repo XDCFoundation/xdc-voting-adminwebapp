@@ -8,12 +8,20 @@ import Web3 from "web3";
 import Utils from "../../utility";
 import { getListOfWhitelistedAddress } from "../../services/getListOfAddress";
 import CustomizedSnackbars from "./DemoForm";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import Jazzicon from "react-jazzicon";
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+  Alert: {
+    backgroundColor: "#ffffff !important",
   },
   buttondiv: {
     display: "flex",
@@ -45,6 +53,12 @@ function Header(props) {
   const classes = useStyles();
   const [wallet, setwallet] = useState("");
   const [iconT, setIcon] = useState("");
+  const [open4, setOpen4] = React.useState(false);
+   
+const closeAlert=()=>{
+  setOpen4(false)
+}
+
   useEffect(() => {
     // var body = document.querySelector('body')
     // for(var i = 0; i < 60; i++) {
@@ -65,18 +79,34 @@ function Header(props) {
         web3 = new Web3(window.web3.currentProvider);
         console.log("+++", web3);
         window.ethereum.enable();
+        
         const accounts = web3.eth.getAccounts().then((accounts) => {
+          let superadmin="xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
+          // console.log(  superadmin.replace("xdc","0x").toLocaleLowerCase(),  accounts[0].toLowerCase(), "matched done")
+          // if(superadmin.replace("xdc","0x").toLocaleLowerCase()==  accounts[0].toLowerCase()){
+          //   console.log("matched")
+          // }
           if (!accounts || !accounts.length) {
             console.log("please login");
-            // Utils.apiFailureToast("Wallet is not connected");
+            // Utils.apiFailureToast("error");
             return;
           }
-          console.log(accounts[0]);
+        
+         
+          if(superadmin.replace("xdc","0x").toLocaleLowerCase()==  accounts[0].toLowerCase())
+          {
+            setwallet(accounts[0]);
           
-          setwallet(accounts[0]);
           
+            fetchData(accounts[0]);
+          }
+          else{
+            // setOpen4(true)
+            // Utils.apiFailureToast("Unauthorized");
+          }
+          console.log(accounts[0],"accccccccccccccccccccccccccccccccccccccccccccc");
           
-          fetchData(accounts[0]);
+         
         });
       } catch (err) {
         alert("Something went wrong.");
@@ -89,17 +119,29 @@ function Header(props) {
       window.ethereum.enable();
 
       const accounts = web3.eth.getAccounts().then((accounts) => {
+        let superadmin="xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
         if (!accounts || !accounts.length) {
           console.log("please login");
-          // Utils.apiFailureToast("Wallet is not connected");
+          // Utils.apiFailureToast("error");
           return;
         }
+        if(superadmin.replace("xdc","0x").toLocaleLowerCase()==  accounts[0].toLowerCase())
+        {
+          setwallet(accounts[0]);
+        
+        
+          fetchData(accounts[0]);
+        }
+        else{
+          // setOpen4(true)
+          // Utils.apiFailureToast("Unauthorized");
+        }
         console.log(accounts[0],"type");
-        setwallet(accounts[0]);
-        fetchData(accounts[0]);
+        // setwallet(accounts[0]);
+        // fetchData(accounts[0]);
       });
     } else {
-      Utils.apiFailureToast("Please install XDCPay extension");
+      // Utils.apiFailureToast("Please install XDCPay extension");
     }
   }, []);
 
@@ -121,10 +163,15 @@ function Header(props) {
         // window.ethereum.enable();
 
         let accounts = web3.eth.getAccounts().then((accounts) => {
+          let superadmin="xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
           if (!accounts || !accounts.length) {
             Utils.apiFailureToast("Wallet is not connected");
             return;
           }
+          if(superadmin.replace("xdc","0x").toLocaleLowerCase()!=  accounts[0].toLowerCase())
+        {
+         setOpen4(true)
+        }
           console.log("accounts[0] ", accounts[0]);
          
         });
@@ -153,6 +200,7 @@ function Header(props) {
   const reDirect = () => {
     history.push("/");
   };
+  
   return (
     <div>
       
@@ -190,6 +238,52 @@ function Header(props) {
           </>
         )}
       </button>
+      <Snackbar
+        open={open4}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        // onClose={handleClose4}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span
+              style={{
+                marginRight: "10px",
+                marginTop: "-5px",
+                marginLeft: "-8px",
+              }}
+            >
+              <img
+                className="done-logo"
+                style={{ height: "24px", width: "24px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/Unauthorised icon.svg")}
+              ></img>
+            </span>
+            <span>
+          
+            <div className="unauthorized">Unauthorized</div>
+              <div className="unauthorized-message">
+             
+                <span>You are not authorised to connect your wallet to this site</span>
+               
+              </div>
+              
+              
+            </span>
+            <span
+                  onClick={closeAlert}
+                  style={{
+                    float: "right",
+                    cursor: "pointer",
+                    marginTop: "-8px",
+                    fontWeight:"600"
+                  }}
+                >
+                  X
+                </span>
+          </div>
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
