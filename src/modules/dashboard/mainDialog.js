@@ -3,7 +3,7 @@ import Dialog from "@material-ui/core/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { Row } from "simple-flexbox";
 import styled from "styled-components";
-import { createMuiTheme } from "@material-ui/core";
+
 const useStyles = makeStyles((theme) => ({
 
   
@@ -505,17 +505,6 @@ export default function Web3Dialog(props) {
 const mainDialogOpen = () => {
     setOpen(true);
   };
-
-  const customTheme = createMuiTheme({
-    overrides: {
-      MuiDialog: {
-        paper: {
-          borderTopLeftRadius: '4px',
-          borderTopRightRadius: '4px'
-        }
-      }
-    }
-  })
   
   return (
     !props.wallet?
