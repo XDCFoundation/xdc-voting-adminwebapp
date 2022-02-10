@@ -3,7 +3,11 @@ import Dialog from "@material-ui/core/Dialog";
 import { makeStyles } from "@material-ui/styles";
 import { Row } from "simple-flexbox";
 import styled from "styled-components";
+import { createMuiTheme } from "@material-ui/core";
 const useStyles = makeStyles((theme) => ({
+
+  
+
   add: {
     backgroundColor: "#2149b9",
     marginLeft: "90px",
@@ -405,6 +409,8 @@ const useStyles = makeStyles((theme) => ({
     xdc: {
       fontSize: "13px",
     },
+
+    
   },
   "@media (min-width: 768px) and (max-height: 800px)": {
     termsContainer: {
@@ -500,15 +506,27 @@ const mainDialogOpen = () => {
     setOpen(true);
   };
 
-
+  const customTheme = createMuiTheme({
+    overrides: {
+      MuiDialog: {
+        paper: {
+          borderTopLeftRadius: '4px',
+          borderTopRightRadius: '4px'
+        }
+      }
+    }
+  })
+  
   return (
     !props.wallet?
       <>
+      
     <Dialog
     //   className={classes.dialog + " maxWidth-800"}
       className="dialog-main"
+     
       open={open}
-      style={{background:"rgba(31,31,31,0.1)" }}
+      style={{background:"rgba(31,31,31,0.2)" }}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       id="web3Dialog"
@@ -562,7 +580,7 @@ const mainDialogOpen = () => {
             </div>
             <ImageContainer>
               <img
-                className="input-data-text"
+                className="input-data-text icon2"
                 alt="new-feature"
                 src={"/images/connect icon2.svg"}
               />
@@ -578,7 +596,7 @@ const mainDialogOpen = () => {
             </div>
             <ImageContainer>
               <img
-                className="input-data-text"
+                className="input-data-text icon3"
                 alt="new-feature"
                 src={"/images/connect icon3.svg"}
               />
