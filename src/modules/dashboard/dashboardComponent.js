@@ -874,6 +874,7 @@ function DashboardComponent(props) {
         getListOffAddress={() =>
           getListOffAddress({ skip: skip, limit: limit })
         }
+        getListOfAddress={getListOfAddress}
         wallet={wallet}
         addWhiteListAddress={props.addWhiteListAddress}
         state={props.state}
