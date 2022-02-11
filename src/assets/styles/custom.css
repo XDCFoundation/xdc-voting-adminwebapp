@@ -757,7 +757,7 @@ opacity: 1;
 }
 
 .griddiv {
-    width: 82vw;
+    width: 78vw;
     
   height: 100%;
   
@@ -773,7 +773,7 @@ opacity: 1;
 border: 1px solid #E3E7EB;
 border-radius: 12px;
 opacity: 1;
-padding-bottom: 8px;
+/* padding-bottom: 8px; */
 margin:20px auto 0 auto;
 
 
@@ -854,6 +854,7 @@ font-weight: 600;
 letter-spacing: 0px;
 color: #2A2A2A;
 opacity: 1;
+margin-top: 1px;
 }
 .add-btn{
     /* top: 139px; */
@@ -887,12 +888,13 @@ padding-left: 20px;
     color: #FFFFFF;
     font-weight: 600;
     
+    
 }
 .dashboard-upper-div{
     display: flex;
     justify-content: space-between;
     
-    width: 82vw;
+    width: 78vw;
     margin-left: 12vw;
     margin:61px auto 0 auto;
     /* 
@@ -969,11 +971,13 @@ font-family: 'Inter',sans-serif;
     }
     .logo{
         width: 111px;
+
         margin-left: 220px;
       
     }
     .inputsearch{
-        width: 323px;
+        /* width: 323px; */
+        width: 240px; 
     }
     .griddiv{
         width: 90vw;
@@ -1238,6 +1242,18 @@ color: #FFFFFF;
   .input-data-text {
     height: 100%;
   }
+  .icon2 {
+    height:64px;
+    width: 64px;
+  }
+  .icon3 {
+    height:64px;
+    width: 64px;
+    margin-top: -8px;
+
+  }
+
+  
   .connect-line{
     height: 0px;
     border: 1px solid #D8D8D8;

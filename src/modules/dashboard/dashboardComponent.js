@@ -898,6 +898,7 @@ function DashboardComponent(props) {
                       border: "none",
                       paddingLeft: "4%",
                       fontWeight: "500",
+                      paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -908,6 +909,7 @@ function DashboardComponent(props) {
                       border: "none",
                       paddingLeft: "0%",
                       fontWeight: "500",
+                      paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -918,6 +920,7 @@ function DashboardComponent(props) {
                       border: "none",
                       paddingLeft: "0%",
                       fontWeight: "500",
+                      paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -928,6 +931,7 @@ function DashboardComponent(props) {
                       border: "none",
                       paddingLeft: "2%",
                       fontWeight: "500",
+                      paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -937,6 +941,7 @@ function DashboardComponent(props) {
                     style={{
                       border: "none",
                       fontWeight: "500",
+                      paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -1089,7 +1094,7 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "0%" }}
+                          style={{ border: "none", paddingLeft: "0%",padding: "0.5rem" }}
                           align="left"
                         >
                           <a className="linkTable">
