@@ -46,7 +46,7 @@ export default class Dashboard extends BaseComponent {
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
+      "0x9b0Ce8A96d1947650d85aBd5B7736A1C8a1D243F"  //0x85fe7c9734585a494b03c1a450ab0e9b79557cc4
     );
     return new Promise((resolve, reject) => {
       contract.methods
@@ -154,7 +154,7 @@ this.setState({setAddDialogOpen:value})
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
+      "0x9b0Ce8A96d1947650d85aBd5B7736A1C8a1D243F"
     );
     console.log("req", reqObj);
     return new Promise((resolve, reject) => {
@@ -193,7 +193,7 @@ this.setState({setAddDialogOpen:value})
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
+      "0x9b0Ce8A96d1947650d85aBd5B7736A1C8a1D243F"
     );
 
     return new Promise((resolve, reject) => {
