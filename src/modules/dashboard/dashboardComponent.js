@@ -68,7 +68,8 @@ const useStyles = makeStyles((theme) => ({
   },
   buttons: {
     padding: "1px 35px 10px 0px",
-    marginTop: "-4px",
+    // marginTop: "-4px",
+    
   },
   buttons1: {
     padding: "0px 35px 0px 0px",
@@ -183,6 +184,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Inter,sans-sarif",
     fontWeight: "600",
     fontSize: "14px",
+    marginTop:"22.5px"
   },
   deletesubheading: {
     marginBottom: "0px",
@@ -895,9 +897,9 @@ function DashboardComponent(props) {
                   <TableCell
                     style={{
                       border: "none",
-                      paddingLeft: "4%",
+                      paddingLeft: "3.2%",
                       fontWeight: "500",
-                      paddingBottom:"1%"
+                      // paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -908,7 +910,7 @@ function DashboardComponent(props) {
                       border: "none",
                       paddingLeft: "0%",
                       fontWeight: "500",
-                      paddingBottom:"1%"
+                      // paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -919,7 +921,7 @@ function DashboardComponent(props) {
                       border: "none",
                       paddingLeft: "0%",
                       fontWeight: "500",
-                      paddingBottom:"1%"
+                      // paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -930,7 +932,7 @@ function DashboardComponent(props) {
                       border: "none",
                       paddingLeft: "2%",
                       fontWeight: "500",
-                      paddingBottom:"1%"
+                      // paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -940,7 +942,7 @@ function DashboardComponent(props) {
                     style={{
                       border: "none",
                       fontWeight: "500",
-                      paddingBottom:"1%"
+                      // paddingBottom:"1%"
                     }}
                     align="left"
                   >
@@ -966,7 +968,9 @@ function DashboardComponent(props) {
                         <TableCell
                           style={{ 
                             border: "none",
-                              paddingLeft: "2.2%"
+                            paddingLeft: "3.2%",
+                            
+                              
                             //  paddingLeft: "4%"
                            }}
                           margin-left="5px"
@@ -1509,7 +1513,8 @@ function DashboardComponent(props) {
                 </DialogTitle>
               </Row>
               <DialogContent
-                style={{ marginTop: "-25px", marginBottom: "-10px" }}
+                // style={{ marginTop: "-25px", marginBottom: "-10px" }}
+                style={{ marginTop: "-25px", marginBottom: "8px" }}
               >
                 <DialogContentText className={classes.subCategory}>
                   <div className={classes.subheading}>Address</div>

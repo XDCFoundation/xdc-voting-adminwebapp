@@ -505,6 +505,10 @@ export default function Web3Dialog(props) {
 const mainDialogOpen = () => {
     setOpen(true);
   };
+
+  
+  
+
   
   return (
     !props.wallet?
