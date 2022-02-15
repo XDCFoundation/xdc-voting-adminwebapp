@@ -3,6 +3,10 @@
  */
 
 
+export const envConstant = {
+    ADMIN_ADDRESS: "xdcf90b4ffaf3395e0d0bef967e7e65744c507915cf"
+}
+
 export const httpConstants = {
     METHOD_TYPE: {
         POST: 'POST',

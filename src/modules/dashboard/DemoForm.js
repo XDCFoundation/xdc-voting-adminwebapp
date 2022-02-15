@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@material-ui/core";
 import "../../assets/styles/custom.css";
-import { AddService } from "../../services";
+import { AccountService, AddService } from "../../services";
 import Utils from "../../utility";
 import { useEffect } from "react";
 
@@ -148,6 +148,7 @@ export default function CustomizedSnackbars(props) {
   // const [error, setError] = React.useState(false);
   const [emailError, setEmailError] = useState("");
   const [addPopup, setAddPopup] = useState(false);
+  const [getListOfAddress, setgetListOfAddress] = React.useState([]);
 
   String.prototype.replaceAt = function (index, replacement) {
     return (
@@ -180,18 +181,76 @@ export default function CustomizedSnackbars(props) {
       setEmailError("Unable to add address");
       return;
     }
+    // props.getListOfAddress.map((row,index) => {
+    //   console.log(row.address,"addresslistttttttttttttttttttttt")
+    //   // addAddress1=addAddress.replace("0x","xdc")
+    //   console.log(addAddress,"input address")
+    //   if ((row.address) == addAddress) {
+    //     setEmailError("Duplicate address cannot be added");
+
+      
+    //   }
+    //   else{
+    //     addWhitelistAddress();
+    //   }
+    // });
 
     props.getListOffAddress();
     handleCloseDailog();
   };
 
-  const validateAddress = () => {
+  // const getListOffWhitelistedAddress = async (data) => {
+  //   console.log(props.getListOfAddress,"getttttttttttttttttttt")
+  //   let [error, totalAccounts] = await Utils.parseResponse(
+  //     AccountService.getListOfWhitelistedAddress(data)
+  //   );
+  //   console.log(totalAccounts,"checkwhitelisted")
+  //   if (error || !totalAccounts) return;
+  //   await setgetListOfAddress(totalAccounts.dataList);
+  //   console.log(totalAccounts.dataList,"get checkwhitelisted")
+  //   if ((getListOfAddress.address) === addAddress) {
+  //         setEmailError("Duplicate address cannot be added");
+  
+        
+  //       }
+  //       else{
+  //         addWhitelistAddress();
+  //       }
+        
+  //   // await setPagecount(totalAccounts.count);
+  // };
+
+  const validateAddress = async() => {
+    
     if (
       (addAddress && addAddress.length > 40) ||
       addAddress.slice(0, 2) == "xdc"
     ) {
       if(addAddress && allowVoting || proposal)
-      addWhitelistAddress();
+      {
+        // const getListOffAddress = async (data) => {
+        //   let [error, totalAccounts] = await Utils.parseResponse(
+        //     AccountService.getListOfWhitelistedAddress(data)
+        //   );
+        //   if (error || !totalAccounts) return;
+        //   // await setgetListOfAddress(totalAccounts.dataList);
+        //   // await setPagecount(totalAccounts.count);
+        // };
+        // let [error, totalAccounts] = await Utils.parseResponse(
+        //   AccountService.getListOfWhitelistedAddress(data)
+        // );
+        // let [error, addresses] = await Utils.parseResponse(
+        //   AccountService.getListOfWhitelistedAddress(data)
+        // );
+        // // const addresses = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(data));
+        // console.log(addresses,"addresslistttttttttttttttttttttt")
+        // let isAllowedToCreateProposal = false;
+        // let showOpenProposal = false;
+       
+        addWhitelistAddress();
+        
+      }
+      
       else{ setEmailError("Atleast one checkbox must be selected"); }
     } else if (!addAddress) {
       setEmailError("Enter a valid Address");

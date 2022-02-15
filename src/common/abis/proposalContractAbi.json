@@ -119,6 +119,34 @@
     {
       "constant": true,
       "inputs": [],
+      "name": "get_count_of_no_voters",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "get_count_of_yes_voters",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
       "name": "proposalStatus",
       "outputs": [
         {
@@ -162,6 +190,10 @@
         },
         {
           "name": "_submittedBy",
+          "type": "address"
+        },
+        {
+          "name": "_contractAddr",
           "type": "address"
         }
       ],
