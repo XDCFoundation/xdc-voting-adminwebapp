@@ -117,7 +117,6 @@ const useStyles = makeStyles((theme) => ({
     height: "62px",
     background: "#FDE9E9 0% 0% no-repeat padding-box",
     borderRadius: "4px",
-    opacity: "1",
     textAlign: "center",
     /* font: normal normal normal 14px/22px Inter; */
     letterSpacing: "0px",
