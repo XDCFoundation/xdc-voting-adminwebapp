@@ -62,6 +62,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "80px !important",
   },
   buttons: {
+    "& #Add": {
+      marginTop:"20px",
+    },
     padding: "1px 35px 10px 0px",
     // marginTop: "-4px",
 
@@ -113,8 +116,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   deleteconfirmation: {
-    width: "404px",
-    height: "62px",
+    // width: "404px"  height: "62px",,
+    width: "100%",
+    height: "100%",
     background: "#FDE9E9 0% 0% no-repeat padding-box",
     borderRadius: "4px",
     textAlign: "center",
@@ -1583,8 +1587,8 @@ function DashboardComponent(props) {
                 </span>
                             </div>
 
-                            <DialogActions className={classes.buttons}>
-                <span>
+                            <DialogActions className={classes.buttons} >
+                <span id="Add">
                   <button
                       className={classes.cnlbtn}
                       onClick={handleCancelClose1}
@@ -1592,7 +1596,7 @@ function DashboardComponent(props) {
                     Cancel
                   </button>
                 </span>
-                                <span>
+                                <span id="Add">
                   <div>
                     <button
                         className={classes.addbtn}
