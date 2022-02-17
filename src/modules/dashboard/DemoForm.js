@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     fontFamily: "Inter,sans-sarif",
     fontWeight: "600",
+    marginBottom:"17px"
   },
   subheading: {
     letterSpacing: "0px",
@@ -347,6 +348,7 @@ export default function CustomizedSnackbars(props) {
               <DialogContentText className={classes.subCategory}>
                 <div className={classes.subheading}>Address</div>
               </DialogContentText>
+
               <input
                 className="addinput"
                 type="text"

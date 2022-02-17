@@ -51,81 +51,85 @@ function Alert(props) {
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
-    Alert: {
-        backgroundColor: "#ffffff !important",
+  Alert: {
+    backgroundColor: "#ffffff !important",
+  },
+  dialog: {
+    marginLeft: "26%",
+    marginTop: "38px",
+    width: "55% !important",
+    height: "50% !important",
+    borderRadius: "80px !important",
+  },
+  buttons: {
+    "& #Add": {
+      marginTop:"20px",
     },
-    dialog: {
-        marginLeft: "26%",
-        marginTop: "38px",
-        width: "55% !important",
-        height: "50% !important",
-        borderRadius: "80px !important",
+    padding: "1px 35px 10px 0px",
+    // marginTop: "-4px",
+
+  },
+  buttons1: {
+    padding: "0px 35px 0px 0px",
+    marginTop: "-10px",
+    marginBottom: "6px",
+  },
+  input: {
+    width: "400px",
+    height: "5vh",
+    border: "solid 1px #c6c8ce",
+    backgroundColor: "#ffffff",
+    borderRadius: "7px",
+    outline: "none",
+    marginTop: "-15px",
+    // padding: "15px",
+  },
+  // searchbox: {
+  //   width: "431px",
+  //   height: "42px",
+  //   background: "#4264C4 0% 0% no-repeat padding-box",
+  //   borderRadius: "6px",
+  //   opacity: "1",
+  //   border: "none",
+  //   outline: "none",
+  //   color: "#E0E0E0",
+  //   fontSize: "14px",
+  //   padding: "10px",
+  //   fontWeight: "500",
+  //   background: "url(/images/Search.svg) no-repeat 1px",
+  //   backgroundSize: "14px",
+  //   backgroundPositionX: "9.5px",
+  // },
+  addbtn: {
+    width: "110px",
+    height: "34px",
+    margin: "14px -8px 15px 2px",
+    padding: "3px 19px 3px 20px",
+    borderRadius: "4px",
+    backgroundColor: "#3763dd",
+    color: "white",
+    border: "none",
+    fontFamily: "Inter,sans-serif",
+    "&:hover": {
+      backgroundColor: "#eeeeee !important",
+      color: "#2149B9",
     },
-    buttons: {
-        padding: "1px 35px 10px 0px",
-        marginTop: "-4px",
-    },
-    buttons1: {
-        padding: "0px 35px 0px 0px",
-        marginTop: "-10px",
-        marginBottom: "6px",
-    },
-    input: {
-        width: "400px",
-        height: "5vh",
-        border: "solid 1px #c6c8ce",
-        backgroundColor: "#ffffff",
-        borderRadius: "7px",
-        outline: "none",
-        marginTop: "-15px",
-        // padding: "15px",
-    },
-    // searchbox: {
-    //   width: "431px",
-    //   height: "42px",
-    //   background: "#4264C4 0% 0% no-repeat padding-box",
-    //   borderRadius: "6px",
-    //   opacity: "1",
-    //   border: "none",
-    //   outline: "none",
-    //   color: "#E0E0E0",
-    //   fontSize: "14px",
-    //   padding: "10px",
-    //   fontWeight: "500",
-    //   background: "url(/images/Search.svg) no-repeat 1px",
-    //   backgroundSize: "14px",
-    //   backgroundPositionX: "9.5px",
-    // },
-    addbtn: {
-        width: "110px",
-        height: "34px",
-        margin: "14px -8px 15px 2px",
-        padding: "3px 19px 3px 20px",
-        borderRadius: "4px",
-        backgroundColor: "#3763dd",
-        color: "white",
-        border: "none",
-        fontFamily: "Inter,sans-serif",
-        "&:hover": {
-            backgroundColor: "#eeeeee !important",
-            color: "#2149B9",
-        },
-    },
-    deleteconfirmation: {
-        width: "404px",
-        height: "62px",
-        background: "#FDE9E9 0% 0% no-repeat padding-box",
-        borderRadius: "4px",
-        opacity: "1",
-        textAlign: "center",
-        /* font: normal normal normal 14px/22px Inter; */
-        letterSpacing: "0px",
-        color: "#EB4444",
-        opacity: "1",
-        fontSize: "14px",
-        fontFamily: "Inter",
-        padding: "12px 36px 11px 35px",
-    },
+  },
+  deleteconfirmation: {
+    // width: "404px"  height: "62px",,
+    width: "100%",
+    height: "100%",
+    background: "#FDE9E9 0% 0% no-repeat padding-box",
+    borderRadius: "4px",
+    textAlign: "center",
+    /* font: normal normal normal 14px/22px Inter; */
+    letterSpacing: "0px",
+    color: "#EB4444",
+    opacity: "1",
+    fontSize: "14px",
+    fontFamily: "Inter",
+    padding: "12px 36px 11px 35px",
+  },
 
     cnlbtn: {
         width: "94px",
@@ -146,119 +150,120 @@ const useStyles = makeStyles((theme) => ({
         color: "#9FA9BA",
         letterSpacing: "0px",
 
-        fontWeight: "500",
-        fontSize: "15px",
-        fontFamily: "Inter",
-    },
-    addedon: {
-        color: "#9FA9BA",
-        /* border: none !important; */
-        fontSize: "14px",
-        marginTop: "10px",
-        /* font-family: unset; */
-        /* font-weight: 500; */
-        marginBottom: "0px",
-        letterSpacing: "0px",
-        marginLeft: "3px",
-        fontFamily: "Inter,sans-serif",
-    },
-    deleteheading: {
-        letterSpacing: "0px",
-        color: "#2A2A2A",
-        opacity: "1",
-        fontSize: "18px",
-        fontFamily: "Inter,sans-serif",
-        fontWeight: "600",
-    },
-    subheading: {
-        letterSpacing: "0px",
-        color: "#2A2A2A",
-        opacity: "1",
-        marginLeft: "3px",
-        fontFamily: "Inter,sans-sarif",
-        fontWeight: "600",
-        fontSize: "14px",
-    },
-    deletesubheading: {
-        marginBottom: "0px",
-        letterSpacing: "0px",
-        opacity: "1",
-        fontSize: "14px",
-        color: "#2A2A2A",
-        fontWeight: "600",
-        fontFamily: "Inter,sans-serif",
-    },
-    deleteaddress: {
-        color: "#3763DD",
-        letterSpacing: "0px",
-        fontSize: "14px",
-        fontWeight: "500",
-    },
-    forgotpass: {
-        color: "#2149b9",
-        marginLeft: "123px",
-    },
-    createaccount: {
-        color: "#2149b9",
-        marginLeft: "32px",
-        fontfamily: "Inter",
-        fontsize: "14px",
-    },
-    icon: {
-        marginLeft: "-30px",
-    },
-    xdc: {
-        color: "#2a2a2a",
-        marginLeft: "30px",
-        fontfamily: "Inter",
-        fontsize: "5px",
-    },
-    heading: {
-        marginLeft: "2px",
-        fontfamily: "Inter",
-        fontweight: "600",
-    },
-    mainheading: {
-        letterSpacing: "0px",
-        color: " #2A2A2A",
-        opacity: "1",
-        fontSize: "18px",
-        fontFamily: "Inter,sans-sarif",
-        fontWeight: "600",
-    },
-    list: {
-        width: "336px",
-        backgroundColor: "#102e84",
-        height: "100%",
-    },
-    fullList: {
-        width: "auto",
-    },
-    drawer: {
-        width: drawerWidth,
-        flexShrink: 0,
-        overflow: "hidden",
-    },
-    drawerPaper: {
-        width: drawerWidth,
-        backgroundColor: "#102e84",
-        overflow: "hidden",
-    },
-    drawerHeader: {
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        // padding: theme.spacing(0, 1),
-        // ...theme.mixins.toolbar,
-        justifyContent: "flex-start",
-        marginTop: "-12px",
-    },
-    firstContainer: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginTop: "19px",
-    },
+    fontWeight: "500",
+    fontSize: "15px",
+    fontFamily: "Inter",
+  },
+  addedon: {
+    color: "#9FA9BA",
+    /* border: none !important; */
+    fontSize: "14px",
+    marginTop: "10px",
+    /* font-family: unset; */
+    /* font-weight: 500; */
+    marginBottom: "0px",
+    letterSpacing: "0px",
+    marginLeft: "3px",
+    fontFamily: "Inter,sans-serif",
+  },
+  deleteheading: {
+    letterSpacing: "0px",
+    color: "#2A2A2A",
+    opacity: "1",
+    fontSize: "18px",
+    fontFamily: "Inter,sans-serif",
+    fontWeight: "600",
+  },
+  subheading: {
+    letterSpacing: "0px",
+    color: "#2A2A2A",
+    opacity: "1",
+    marginLeft: "3px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+    fontSize: "14px",
+    marginTop:"22.5px"
+  },
+  deletesubheading: {
+    marginBottom: "0px",
+    letterSpacing: "0px",
+    opacity: "1",
+    fontSize: "14px",
+    color: "#2A2A2A",
+    fontWeight: "600",
+    fontFamily: "Inter,sans-serif",
+  },
+  deleteaddress: {
+    color: "#3763DD",
+    letterSpacing: "0px",
+    fontSize: "14px",
+    fontWeight: "500",
+  },
+  forgotpass: {
+    color: "#2149b9",
+    marginLeft: "123px",
+  },
+  createaccount: {
+    color: "#2149b9",
+    marginLeft: "32px",
+    fontfamily: "Inter",
+    fontsize: "14px",
+  },
+  icon: {
+    marginLeft: "-30px",
+  },
+  xdc: {
+    color: "#2a2a2a",
+    marginLeft: "30px",
+    fontfamily: "Inter",
+    fontsize: "5px",
+  },
+  heading: {
+    marginLeft: "2px",
+    fontfamily: "Inter",
+    fontweight: "600",
+  },
+  mainheading: {
+    letterSpacing: "0px",
+    color: " #2A2A2A",
+    opacity: "1",
+    fontSize: "18px",
+    fontFamily: "Inter,sans-sarif",
+    fontWeight: "600",
+  },
+  list: {
+    width: "336px",
+    backgroundColor: "#102e84",
+    height: "100%",
+  },
+  fullList: {
+    width: "auto",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    overflow: "hidden",
+  },
+  drawerPaper: {
+    width: drawerWidth,
+    backgroundColor: "#102e84",
+    overflow: "hidden",
+  },
+  drawerHeader: {
+    overflow: "hidden",
+    display: "flex",
+    alignItems: "center",
+    // padding: theme.spacing(0, 1),
+    // ...theme.mixins.toolbar,
+    justifyContent: "flex-start",
+    marginTop: "-12px",
+  },
+  firstContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: "19px",
+  },
 }));
 
 function DashboardComponent(props) {
@@ -828,121 +833,121 @@ function DashboardComponent(props) {
               </Menu> */}
             </div>
           </span>
-                </div>
-            </div>
-            <CustomizedSnackbars
-                getListOffAddress={() =>
-                    getListOffAddress({skip: skip, limit: limit})
-                }
-                getListOfAddress={getListOfAddress}
-                wallet={wallet}
-                addWhiteListAddress={props.addWhiteListAddress}
-                state={props.state}
-                setStateValues={props.setStateValues}
-                setConfirmDialogStateValues={props.setConfirmDialogStateValues}
-                setAddDialogOpen={props.setAddDialogOpen}
-                stateAddSetDialogOpen={props.stateAddSetDialogOpen}
-            />
-            <div className="griddiv">
-                <Grid lg={13} className="tablegrid_address">
-                    <Grid component={Paper} style={{boxShadow: "0px 0px 0px 0px"}}>
-                        <Table
-                            className="table"
-                            aria-label="Whitelisted Addresses"
-                            // style={{ boxShadow: "0px 0px 0px 0px" }}
+        </div>
+      </div>
+      <CustomizedSnackbars
+        getListOffAddress={() =>
+          getListOffAddress({ skip: skip, limit: limit })
+        }
+        getListOfAddress={getListOfAddress}
+        wallet={wallet}
+        addWhiteListAddress={props.addWhiteListAddress}
+        state={props.state}
+        setStateValues={props.setStateValues}
+        setConfirmDialogStateValues={props.setConfirmDialogStateValues}
+        setAddDialogOpen={props.setAddDialogOpen}
+        stateAddSetDialogOpen={props.stateAddSetDialogOpen}
+      />
+      <div className="griddiv">
+        <Grid lg={13} className="tablegrid_address">
+          <Grid component={Paper} style={{ boxShadow: "0px 0px 0px 0px" }}>
+            <Table
+              className="table"
+              aria-label="Whitelisted Addresses"
+              // style={{ boxShadow: "0px 0px 0px 0px" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      paddingLeft: "4%",
+                      fontWeight: "500",
+                      // paddingBottom:"1%"
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Address</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      paddingLeft: "0%",
+                      fontWeight: "500",
+                      // paddingBottom:"1%"
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Added on</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      paddingLeft: "0%",
+                      fontWeight: "500",
+                      // paddingBottom:"1%"
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Can Vote</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      paddingLeft: "2%",
+                      fontWeight: "500",
+                      // paddingBottom:"1%"
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Can Create Proposal</span>
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "none",
+                      fontWeight: "500",
+                      // paddingBottom:"1%"
+                    }}
+                    align="left"
+                  >
+                    <span className="tableheading">Votes</span>
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* {filteredProducts.map((product)=>{ */}
+                {getListOfAddress?.length > 0 ? (
+                  getListOfAddress?.map((row, index) => {
+                    return (
+                      // address={filteredData && filteredData.length ? filteredData : address}
+                      //  getListOfAddress && getListOfAddress.length>0?(
+                      <TableRow
+                        style={
+                          index % 2 !== 1
+                            // ? { background: "#f9f9f9" }
+                            ? { background: "rgba(250,250,250,1)" }
+                            : { background: "white" }
+                        }
+                      >
+                        <TableCell
+                          style={{ 
+                            border: "none",
+                              paddingLeft: "3.2%"
+                            //  paddingLeft: "4%"
+                           }}
+                          margin-left="5px"
+                          // onClick={() => {
+                          //   handleDialog1();
+                          //   setDeleteMessage(row.address);
+                          //   setAddressInput(row.address);
+                          //   setDate(row.createdOn);
+                          //   setallowVoting(row.permission.allowVoting);
+                          //   setProposal(row.permission.allowProposalCreation);
+                          // }}
                         >
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell
-                                        style={{
-                                            border: "none",
-                                            paddingLeft: "4%",
-                                            fontWeight: "500",
-                                            paddingBottom: "1%"
-                                        }}
-                                        align="left"
-                                    >
-                                        <span className="tableheading">Address</span>
-                                    </TableCell>
-                                    <TableCell
-                                        style={{
-                                            border: "none",
-                                            paddingLeft: "0%",
-                                            fontWeight: "500",
-                                            paddingBottom: "1%"
-                                        }}
-                                        align="left"
-                                    >
-                                        <span className="tableheading">Added on</span>
-                                    </TableCell>
-                                    <TableCell
-                                        style={{
-                                            border: "none",
-                                            paddingLeft: "0%",
-                                            fontWeight: "500",
-                                            paddingBottom: "1%"
-                                        }}
-                                        align="left"
-                                    >
-                                        <span className="tableheading">Can Vote</span>
-                                    </TableCell>
-                                    <TableCell
-                                        style={{
-                                            border: "none",
-                                            paddingLeft: "2%",
-                                            fontWeight: "500",
-                                            paddingBottom: "1%"
-                                        }}
-                                        align="left"
-                                    >
-                                        <span className="tableheading">Can Create Proposal</span>
-                                    </TableCell>
-                                    <TableCell
-                                        style={{
-                                            border: "none",
-                                            fontWeight: "500",
-                                            paddingBottom: "1%"
-                                        }}
-                                        align="left"
-                                    >
-                                        <span className="tableheading">Votes</span>
-                                    </TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {/* {filteredProducts.map((product)=>{ */}
-                                {getListOfAddress?.length > 0 ? (
-                                    getListOfAddress?.map((row, index) => {
-                                        return (
-                                            // address={filteredData && filteredData.length ? filteredData : address}
-                                            //  getListOfAddress && getListOfAddress.length>0?(
-                                            <TableRow
-                                                style={
-                                                    index % 2 !== 1
-                                                        // ? { background: "#f9f9f9" }
-                                                        ? {background: "rgba(250,250,250,1)"}
-                                                        : {background: "white"}
-                                                }
-                                            >
-                                                <TableCell
-                                                    style={{
-                                                        border: "none",
-                                                        paddingLeft: "2.2%"
-                                                        //  paddingLeft: "4%"
-                                                    }}
-                                                    margin-left="5px"
-                                                    // onClick={() => {
-                                                    //   handleDialog1();
-                                                    //   setDeleteMessage(row.address);
-                                                    //   setAddressInput(row.address);
-                                                    //   setDate(row.createdOn);
-                                                    //   setallowVoting(row.permission.allowVoting);
-                                                    //   setProposal(row.permission.allowProposalCreation);
-                                                    // }}
-                                                >
-                                                    <a className="linkTable">
-                                                        {/* <div><Jazzicon  diameter={20} seed={Math.round(Math.random() * 10000000)}/></div> */}
-                                                        <span>
+                          <a className="linkTable">
+                            {/* <div><Jazzicon  diameter={20} seed={Math.round(Math.random() * 10000000)}/></div> */}
+                            <span>
                               <Jazzicon
                                   diameter={20}
                                   seed={Math.round(Math.random() * 10000000)}
@@ -1455,39 +1460,38 @@ function DashboardComponent(props) {
                 </Alert>
             </Snackbar>
 
-            {/* -----------Edit Dialog Box------------ */}
-            <div>
-                {!state.editDialog ? (
-                    <>
-                        <Dialog
-                            className={classes.dialog}
-                            open={state.setDialogOpen1}
-                            divide
-                            onClose={handleCancelClose1}
-                            aria-labelledby="form-dialog-title"
-                        >
-                            <Row style={{marginBottom: "10px"}}>
-                                <DialogTitle className={classes.heading} id="form-dialog-title">
-                                    <div className={classes.mainheading}>Add a New Address</div>
-                                    {" "}
-                                </DialogTitle>
-                            </Row>
-                            <DialogContent
-                                style={{marginTop: "-25px", marginBottom: "-10px"}}
-                            >
-                                <DialogContentText className={classes.subCategory}>
-                                    <div className={classes.subheading}>Address</div>
-                                </DialogContentText>
-                                <div
-                                    // className={!inputColor?"editinput":"btnclick"}
-                                    className="editinput"
-                                    // onChange={(e) => {
-                                    //   setAddressInput(e.target.value);
-                                    //   setEmailError("");
-                                    // }}
-                                    disabled="true"
-                                >
-                  <span style={{fontSize: "15px"}}>
+      {/* -----------Edit Dialog Box------------ */}
+      <div>
+        {!state.editDialog ? (
+          <>
+            <Dialog
+              className={classes.dialog}
+              open={state.setDialogOpen1}
+              divide
+              onClose={handleCancelClose1}
+              aria-labelledby="form-dialog-title"
+            >
+              <Row style={{ marginBottom: "10px" }}>
+                <DialogTitle className={classes.heading} id="form-dialog-title">
+                  <div className={classes.mainheading}>Add a New Address</div>{" "}
+                </DialogTitle>
+              </Row>
+              <DialogContent
+                style={{ marginTop: "-25px", marginBottom: "8px" }}
+              >
+                <DialogContentText className={classes.subCategory}>
+                  <div className={classes.subheading}>Address</div>
+                </DialogContentText>
+                <div
+                  // className={!inputColor?"editinput":"btnclick"}
+                  className="editinput"
+                  // onChange={(e) => {
+                  //   setAddressInput(e.target.value);
+                  //   setEmailError("");
+                  // }}
+                  disabled="true"
+                >
+                  <span style={{ fontSize: "15px" }}>
                     {addressInput ? addressInput.substr(0, 13) : " "}...
                       {addressInput
                           ? addressInput.substr(addressInput.length - 5, 5)
@@ -1583,8 +1587,8 @@ function DashboardComponent(props) {
                 </span>
                             </div>
 
-                            <DialogActions className={classes.buttons}>
-                <span>
+                            <DialogActions className={classes.buttons} >
+                <span id="Add">
                   <button
                       className={classes.cnlbtn}
                       onClick={handleCancelClose1}
@@ -1592,7 +1596,7 @@ function DashboardComponent(props) {
                     Cancel
                   </button>
                 </span>
-                                <span>
+                                <span id="Add">
                   <div>
                     <button
                         className={classes.addbtn}
