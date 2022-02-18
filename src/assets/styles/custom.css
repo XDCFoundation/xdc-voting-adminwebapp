@@ -953,8 +953,9 @@ font-family: 'Inter',sans-serif;
     margin-bottom: auto !important;
     margin-top: 5% !important;
     max-height: 100% !important;
-    width: 553px;
+    
 }
+
 /* .MuiDialog-paper{
     max-width: 679px !important;
     height: 463px !important;
@@ -1438,6 +1439,7 @@ font-family: "Inter";
     margin-top: 10px;
   
   }
+  
   .side-box {
     display: flex;
     flex-direction: column;
@@ -1445,7 +1447,7 @@ font-family: "Inter";
     box-shadow: transparent;
     color: #ffffff;
     background-color: #102e84;
-    padding: 0 10px 0px 10px !important;
+    padding: 0 22px 0px 22px !important;
   }
   .inside-side-box {
     padding: 0 0px 0 13px !important;
@@ -1517,6 +1519,25 @@ font-family: "Inter";
     font-family: "Inter";
     color: #829ce5;
   }
+  .closeIcon{
+      width: 15px;
+      height: 15px;
+  }
+  #dialog .MuiDialog-paperWidthSm{
+      width: 553px;
+  }
+  @media (max-width:1024px) {
+    #dialog .MuiDialog-paper{
+        margin: 115px -45px 0px -70px !important;
+    }
+}
+.clearsearchicon{
+        margin-left: -30px;
+        width: 15px;
+        height: 15px;
+        margin-top: -4px;
+        cursor: pointer;
+}
 /* .address p{
     margin-top: 56px;
 

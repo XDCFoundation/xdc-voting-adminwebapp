@@ -524,8 +524,8 @@ const mainDialogOpen = () => {
         <Row className="main-row" >
           <div className="main-title">Connect Wallet</div>
           <CloseIconContainer onClick={handleClose}>
-              X
-            {/* <img alt="Cross" src={"/images/XDC-Cross.svg"} /> */}
+              {/* X */}
+           <img alt="Cross" className="closeIcon" src={require("../../assets/styles/images/close.svg")} /> 
           </CloseIconContainer>
         </Row>
         </div>
