@@ -37,6 +37,7 @@ export async function getListOfWhitelistedAddress(data) {
     });
 }
 async function addWhitelistedAddress(reqObj) {
+  // let url = "http://localhost:3001/" + "add-address";
   let url = process.env.REACT_APP_PROPOSAL_SERVICE + "add-address";
   return httpService(
     httpConstants.METHOD_TYPE.POST,

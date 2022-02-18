@@ -159,6 +159,7 @@ export default function CustomizedSnackbars(props) {
   const [emailError, setEmailError] = useState("");
   const [addPopup, setAddPopup] = useState(false);
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
+  const [errorInAddingAddress, setErrorInAddingAddress] = React.useState(false);
 
   const [disabledValue, setdisabledValue] = React.useState(true);
 
@@ -171,9 +172,8 @@ export default function CustomizedSnackbars(props) {
   };
 
   const addWhitelistAddress = async () => {
-    // setAddPopup(true);
+    setErrorInAddingAddress(false);
     console.log(addAddress.replace("xdc", "0x"), "replaceeeeeeeeeeeeeeeeeeeee");
-    // console.log(addAddress.replaceAt(0,"0x"),"replace value");
     const reqObj = {
       address: addAddress.replace("xdc", "0x"),
       permission: {
@@ -185,7 +185,9 @@ export default function CustomizedSnackbars(props) {
     const totalAccounts = await props
       .addWhiteListAddress(reqObj)
       .catch((err) => {
-        setEmailError("Unable to add address");
+        setEmailError(err ? err : "Unable to add address");
+        setErrorInAddingAddress(err ? err : "Unable to add address")
+        handleCloseDailog();
         return;
       });
 
@@ -292,31 +294,27 @@ export default function CustomizedSnackbars(props) {
   const handleDialog = async () => {
     stateAddSetDialogOpen(true);
     await setStateValues(false);
-    // await props.state.setConfirmDialogStateValues(false);
     await setConfirmDialogStateValues(false);
     setallowVoting(false);
     setAddAddress("");
     setProposal(false);
     setEmailError("");
-    // setOpen(true)
   };
   const handleCloseDailog = async () => {
-    // setDialogOpen(false);
-    // setOpen(true);
     await setConfirmDialogStateValues(true);
     setallowVoting(false);
     setAddAddress("");
     setProposal(false);
-    // setStateValues(false)
-
-    // setAddPopup(false)
-
-    // setDialogOpen(true);
   };
   const closeDialog = async () => {
     stateAddSetDialogOpen(false);
     setOpen(true);
   };
+
+  const closeErrorDialog = async () => {
+    stateAddSetDialogOpen(false);
+  };
+
 
   return (
     <div className={classes.root}>
@@ -404,15 +402,6 @@ export default function CustomizedSnackbars(props) {
                 marginBottom: "5px",
               }}
             >
-              {/* <input
-            onChange={(e) => {
-              setallowVoting(!allowVoting)
-            }}
-            type="checkbox"
-            className="checked-btn"
-            checked={allowVoting}
-
-          /> */}
               <div
                 className="custom-check1"
                 onClick={() => {
@@ -465,13 +454,8 @@ export default function CustomizedSnackbars(props) {
                     color="primary"
                     disabled={disabledValue}
                     onClick={() => {
-                      // setallowVoting(false);
-                      // setAddAddress("");
-                      // setProposal(false);
                       validateAddress();
-                      // setAddPopup(true)
                     }}
-                    // disabled={(!allowVoting && !proposal) || !addAddress}
                   >
                     Add
                   </button>
@@ -493,31 +477,10 @@ export default function CustomizedSnackbars(props) {
               </div>{" "}
             </DialogTitle>
             <DialogContent>
-              {/* <img
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  display: "flex",
-                  justifyContent: "center",
-                  marginLeft: "30px",
-                  marginRight: "30px",
-                }}
-                // className="header-logo"
-                src={require("../../assets/styles/images/loader-small.gif")}
-              ></img> */}
               <div className="loader-spin"></div>
               <DialogContentText className={classes.subCategory}>
                 <div
                   className="loader-heading"
-                  // style={{
-                  //   fontSize: "15px",
-                  //   display: "flex",
-                  //   justifyContent: "center",
-                  //   color: "#2A2A2A",
-                  //   opacity: "1",
-                  //   fontFamily: "Inter",
-                  //   fontweight: "600",
-                  // }}
                 >
                   Adding your address
                 </div>
@@ -529,6 +492,36 @@ export default function CustomizedSnackbars(props) {
           </Dialog>
         </>
       ) : (
+          errorInAddingAddress ? (
+                  <>
+                    <Dialog className={classes.dialog} open={state.setAddDialogOpen} divide>
+                      <DialogTitle className={classes.heading} id="form-dialog-title">
+                        <div className={classes.mainheading}>
+                          Adding address
+                          <span onClick={closeErrorDialog} className="cross-loader">
+                  X
+                </span>
+                        </div>{" "}
+                      </DialogTitle>
+                      <DialogContent>
+                        <div style={{ display: "flex", justifyContent: "center" }}>
+                          <img
+                              className="confirm-done"
+                              src={require("../../assets/styles/images/Error.svg")}
+                          ></img>
+                        </div>
+                        <DialogContentText className={classes.subCategory}>
+                          <div
+                              className="loader-heading"
+                          >
+                            {errorInAddingAddress ? errorInAddingAddress : " Error in adding Address"}
+                          </div>
+                          <div className="loader-confirm-heading"></div>
+                        </DialogContentText>
+                      </DialogContent>
+                    </Dialog>
+                  </>
+              ):
         <>
           <Dialog
             className={classes.dialog}
@@ -544,18 +537,6 @@ export default function CustomizedSnackbars(props) {
               </div>{" "}
             </DialogTitle>
             <DialogContent>
-              {/* <img
-                style={{
-                  width: "200px",
-                  height: "200px",
-                  display: "flex",
-                  justifyContent: "center",
-                  marginLeft: "30px",
-                  marginRight: "30px",
-                }}
-                // className="header-logo"
-                src={require("../../assets/styles/images/loader-small.gif")}
-              ></img> */}
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <img
                   className="confirm-done"
@@ -565,15 +546,6 @@ export default function CustomizedSnackbars(props) {
               <DialogContentText className={classes.subCategory}>
                 <div
                   className="loader-heading"
-                  // style={{
-                  //   fontSize: "15px",
-                  //   display: "flex",
-                  //   justifyContent: "center",
-                  //   color: "#2A2A2A",
-                  //   opacity: "1",
-                  //   fontFamily: "Inter",
-                  //   fontweight: "600",
-                  // }}
                 >
                   Transaction Complete
                 </div>
@@ -608,19 +580,7 @@ export default function CustomizedSnackbars(props) {
             <span>
               <div className="toast-message">
                 <span>You have successfully added address</span>
-                {/* <span
-                  onClick={handleToastClose}
-                  style={{
-                    float: "right",
-                    cursor: "pointer",
-                    marginTop: "-8px",
-                  }}
-                >
-                  X
-                </span> */}
               </div>
-              {/* <div className="toast-address">{message}</div> */}
-              {/* 0x9b20bd863e1cf226b98…6b10 */}
             </span>
           </div>
         </Alert>
