@@ -278,6 +278,7 @@ export default function CustomizedSnackbars(props) {
     setAddAddress("");
     setStateValues(false);
     setEmailError("");
+    setdisabledValue(true);
   };
 
   const handleClose = (event, reason) => {
@@ -314,6 +315,10 @@ export default function CustomizedSnackbars(props) {
   const closeErrorDialog = async () => {
     stateAddSetDialogOpen(false);
   };
+
+  useEffect(()=>{
+    
+  },[disabledValue])
 
 
   return (

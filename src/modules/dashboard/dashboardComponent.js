@@ -187,7 +187,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "0px",
     letterSpacing: "0px",
     opacity: "1",
-    fontSize: "14px",
+    fontSize: "15px",
     color: "#2A2A2A",
     fontWeight: "600",
     fontFamily: "Inter,sans-serif",
@@ -1254,7 +1254,7 @@ function DashboardComponent(props) {
                 <DialogContentText className={classes.deletesubheading}>
                   Do you want to delete this address{" "}
                   <span className={classes.deleteaddress}>
-                    {deleteMessage ? deleteMessage.substr(0, 13) : " "}...
+                    {deleteMessage ? deleteMessage.substr(0, 21) : " "}...
                     {deleteMessage
                       ? deleteMessage.substr(deleteMessage.length - 5, 5)
                       : ""}
