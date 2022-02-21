@@ -46,7 +46,7 @@ export default class Dashboard extends BaseComponent {
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
+      "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"  //0x85fe7c9734585a494b03c1a450ab0e9b79557cc4
     );
     return new Promise((resolve, reject) => {
       contract.methods
@@ -64,12 +64,14 @@ export default class Dashboard extends BaseComponent {
          
           const res = await this.getTransactionReceipt(transactionHash, reqObj);
           if (res) {
-           
-            // this.props.setAddPopup(true)
-            let [error, totalAccounts] = await Utils.parseResponse(
+            let [error, addAddressRes] = await Utils.parseResponse(
               AddService.addWhitelistedAddress(reqObj)
             );
-            // Utils.apiSuccessToast("Proposal Created Successfully");
+            console.log("error, addAddressRes",error, addAddressRes)
+            if(error) {
+              console.log("error.message ",error.message)
+              reject(error.message)
+            }
           }
           resolve(true);
         });
@@ -78,25 +80,21 @@ export default class Dashboard extends BaseComponent {
 
 
    setStateValues=(value)=>{
-     console.log("call")
   this.setState({addDialog:value})
   }
   setConfirmDialogStateValues=(value)=>{
-    console.log("call")
  this.setState({addConfirmDialog:value})
  }
   setDeleteDialogValue=(value)=>{
     this.setState({deleteDialog:value})
   }
   setDeleteConfirmDialogStateValues=(value)=>{
-    console.log("call")
  this.setState({deleteConfirmDialog:value})
  }
   setEditDialogValue=(value)=>{
     this.setState({editDialog:value})
   }
   setEditConfirmDialogStateValues=(value)=>{
-    console.log("call")
  this.setState({editConfirmDialog:value})
  }
 
@@ -111,8 +109,7 @@ stateSetDialogOpen1=(value)=>{
 this.setState({setDialogOpen1:value})
 }
 stateAddSetDialogOpen=(value)=>{
-  console.log("call")
-this.setState({setAddDialogOpen:value})
+    this.setState({setAddDialogOpen:value})
 }
 // ***********************
 
@@ -154,7 +151,7 @@ this.setState({setAddDialogOpen:value})
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
+      "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"
     );
     console.log("req", reqObj);
     return new Promise((resolve, reject) => {
@@ -193,7 +190,7 @@ this.setState({setAddDialogOpen:value})
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0x85fe7c9734585a494b03c1a450ab0e9b79557cc4"
+      "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"
     );
 
     return new Promise((resolve, reject) => {
@@ -217,7 +214,6 @@ this.setState({setAddDialogOpen:value})
 
   render() {
     return (
-      
       <DashboardComponent
         addWhiteListAddress={this.addWhiteListAddress}
         onEditAddress={this.onEditAddress}
@@ -235,10 +231,7 @@ this.setState({setAddDialogOpen:value})
         stateSetDialogOpen1={this.stateSetDialogOpen1}
         setAddDialogOpen={this.setAddDialogOpen}
         stateAddSetDialogOpen={this.stateAddSetDialogOpen}
-       
-       
       />
-     
     );
 
 
