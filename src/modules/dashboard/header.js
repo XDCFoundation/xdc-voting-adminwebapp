@@ -56,9 +56,14 @@ function Header(props) {
     const [wallet, setwallet] = useState("");
     const [iconT, setIcon] = useState("");
     const [open4, setOpen4] = React.useState(false);
+    const [open5, setOpen5] = React.useState(false);
+    const [open6, setOpen6] = React.useState(false);
+    const [walletLogin, setWalletLogin] = React.useState(false);
 
     const closeAlert = () => {
         setOpen4(false)
+        setOpen5(false)
+        setOpen6(false)
     }
 
     useEffect(() => {
@@ -161,18 +166,26 @@ function Header(props) {
                 let accounts = web3.eth.getAccounts().then((accounts) => {
                     let superadmin = envConstant.ADMIN_ADDRESS;//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
                     if (!accounts || !accounts.length) {
-                        Utils.apiFailureToast("Wallet is not connected");
+                      setOpen5(true)
+                        // Utils.apiFailureToast("Wallet is not connected");
                         return;
                     }
                     if (superadmin.replace("xdc", "0x").toLocaleLowerCase() != accounts[0].toLowerCase()) {
                         setOpen4(true)
                     }
+                    // else{
+                    //   // setWalletLogin(true);
+                    //   // props.state.walletLogin
+                    //   setwallet(accounts[0]);
+                    //   fetchData(accounts[0]);
+                    // }
                 });
             } catch (err) {
                 alert("Something went wrong.");
             }
         } else {
-            Utils.apiFailureToast("Please install XDCPay extension");
+          setOpen6(true)
+            // Utils.apiFailureToast("Please install XDCPay extension");
         }
     }
 
@@ -278,6 +291,112 @@ function Header(props) {
                     </div>
                 </Alert>
             </Snackbar>
+
+
+
+           {/* ************ wallet not connectet *************** */}
+           <Snackbar
+                open={open5}
+                autoHideDuration={3000}
+                anchorOrigin={{vertical: "top", horizontal: "center"}}
+                // onClose={handleClose4}
+            >
+                <Alert severity="" className={classes.Alert}>
+                    <div style={{display: "flex"}}>
+            <span
+                style={{
+                    marginRight: "10px",
+                    marginTop: "-7px",
+                    marginLeft: "-8px",
+                }}
+            >
+              <img
+                  className="done-logo"
+                  style={{height: "24px", width: "24px", marginTop: "10px"}}
+                  src={require("../../assets/styles/images/Error.svg")}
+              ></img>
+            </span>
+                        <span>
+          
+            {/* <div className="unauthorized">Unauthorized</div> */}
+              <div className="unauthorized-message">
+             
+                <span>Wallet is not connected</span>
+               
+              </div>
+              
+              
+            </span>
+                        <span
+                            onClick={closeAlert}
+                            style={{
+                                float: "right",
+                                cursor: "pointer",
+                               marginTop:"-5px",
+                               marginLeft:"15px",
+                                fontWeight: "600"
+                            }}
+                        >
+                  X
+                </span>
+                    </div>
+                </Alert>
+            </Snackbar>
+
+           {/* ////////////////////////////////// */}
+
+            {/* ************ NOT iNstalled *************** */}
+            <Snackbar
+                open={open6}
+                autoHideDuration={3000}
+                anchorOrigin={{vertical: "top", horizontal: "center"}}
+                // onClose={handleClose4}
+            >
+                <Alert severity="" className={classes.Alert}>
+                    <div style={{display: "flex"}}>
+            <span
+                style={{
+                    marginRight: "10px",
+                    marginTop: "-7px",
+                    marginLeft: "-8px",
+                }}
+            >
+              <img
+                  className="done-logo"
+                  style={{height: "24px", width: "24px", marginTop: "10px"}}
+                  src={require("../../assets/styles/images/Error.svg")}
+              ></img>
+            </span>
+                        <span>
+          
+            {/* <div className="unauthorized">Unauthorized</div> */}
+              <div className="unauthorized-message">
+             
+                <span>Please install XDCPay extension</span>
+               
+              </div>
+              
+              
+            </span>
+                        <span
+                            onClick={closeAlert}
+                            style={{
+                                float: "right",
+                                cursor: "pointer",
+                               marginTop:"-5px",
+                               marginLeft:"15px",
+                                fontWeight: "600"
+                            }}
+                        >
+                  X
+                </span>
+                    </div>
+                </Alert>
+            </Snackbar>
+
+           {/* ////////////////////////////////// */}
+          
+
         </div>
     );
 }
