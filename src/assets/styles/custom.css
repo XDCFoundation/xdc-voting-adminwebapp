@@ -761,7 +761,7 @@ opacity: 1;
     width: 78.4vw;
     
   /* height: 100%; */
-  height:518px;
+  height:485px;
   
   
   /* border-radius: 12px; width: 60vw;
@@ -1537,6 +1537,9 @@ font-family: "Inter";
         height: 15px;
         margin-top: -4px;
         cursor: pointer;
+}
+.table th, .table td{
+    padding: 0.65rem;
 }
 /* .address p{
     margin-top: 56px;
