@@ -77,6 +77,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#eeeeee !important",
       color: "#2149B9",
     },
+    "&:disabled": {
+      backgroundColor: "#9FA9BA !important",
+      color: "white",
+    },
   },
   cnlbtn: {
     width: "94px",
@@ -108,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "18px",
     fontFamily: "Inter,sans-sarif",
     fontWeight: "600",
-    marginBottom:"17px"
+    marginBottom: "17px",
   },
   subheading: {
     letterSpacing: "0px",
@@ -133,7 +137,13 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomizedSnackbars(props) {
   console.log("demoform state", props.state);
   console.log("demoform addpopup", props.state.addDialog);
-  const { state, setStateValues, setConfirmDialogStateValues,setAddDialogOpen,stateAddSetDialogOpen } = props;
+  const {
+    state,
+    setStateValues,
+    setConfirmDialogStateValues,
+    setAddDialogOpen,
+    stateAddSetDialogOpen,
+  } = props;
   // const { state1, setConfirmDialogStateValues } = props;
 
   const [addAddress, setAddAddress] = React.useState("");
@@ -150,6 +160,7 @@ export default function CustomizedSnackbars(props) {
   const [addPopup, setAddPopup] = useState(false);
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
   const [errorInAddingAddress, setErrorInAddingAddress] = React.useState(false);
+  const [disabledValue, setdisabledValue] = React.useState(true);
 
   String.prototype.replaceAt = function (index, replacement) {
     return (
@@ -198,13 +209,12 @@ export default function CustomizedSnackbars(props) {
   //   console.log(totalAccounts.dataList,"get checkwhitelisted")
   //   if ((getListOfAddress.address) === addAddress) {
   //         setEmailError("Duplicate address cannot be added");
-  
-        
+
   //       }
   //       else{
   //         addWhitelistAddress();
   //       }
-        
+
   //   // await setPagecount(totalAccounts.count);
   // };
 
@@ -217,8 +227,6 @@ export default function CustomizedSnackbars(props) {
       {
         addWhitelistAddress();
       }
-      
-      else{ setEmailError("Atleast one checkbox must be selected"); }
     } else if (!addAddress) {
       setEmailError("Enter a valid Address");
     } else {
@@ -236,6 +244,7 @@ export default function CustomizedSnackbars(props) {
     setAddAddress("");
     setStateValues(false);
     setEmailError("");
+    setdisabledValue(true);
   };
 
   const handleClose = (event, reason) => {
@@ -294,16 +303,28 @@ export default function CustomizedSnackbars(props) {
           </div>
         </div>
         {/* {props.wallet?<> */}
-        {props.wallet?
-        <button variant="outlined" onClick={handleDialog} className="add-btn1">
-          Add
-        </button>:""}
+        {props.wallet ? (
+          <button
+            variant="outlined"
+            onClick={handleDialog}
+            className="add-btn1"
+          >
+            Add
+          </button>
+        ) : (
+          ""
+        )}
         {/* </>
         :""} */}
       </div>
       {!state.addDialog ? (
         <>
-          <Dialog className={classes.dialog} open={state.setAddDialogOpen} divide>
+          <Dialog
+            className={classes.dialog}
+            open={state.setAddDialogOpen}
+            divide
+            id="dialog"
+          >
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>Add a New Address</div>{" "}
             </DialogTitle>
@@ -314,6 +335,7 @@ export default function CustomizedSnackbars(props) {
 
               <input
                 className="addinput"
+                id="writeAddress"
                 type="text"
                 required="true"
                 placeholder="Write address"
@@ -321,6 +343,11 @@ export default function CustomizedSnackbars(props) {
                 onChange={(e) => {
                   setAddAddress(e.target.value);
                   setEmailError("");
+                  if (e.target.value.length >= 1) {
+                    setdisabledValue(false);
+                  } else {
+                    setdisabledValue(true);
+                  }
                 }}
                 value={addAddress}
               ></input>
@@ -346,7 +373,7 @@ export default function CustomizedSnackbars(props) {
                 className="custom-check1"
                 onClick={() => {
                   setallowVoting(!allowVoting);
-                  setEmailError("")
+                  setEmailError("");
                 }}
                 className={
                   !allowVoting ? "custom-check1" : "custom-check1-active"
@@ -364,7 +391,7 @@ export default function CustomizedSnackbars(props) {
                 className="custom-check1"
                 onClick={() => {
                   setProposal(!proposal);
-                  setEmailError("")
+                  setEmailError("");
                 }}
                 className={!proposal ? "custom-check1" : "custom-check1-active"}
               ></div>
@@ -372,7 +399,8 @@ export default function CustomizedSnackbars(props) {
               <span className="checkbox-heading">
                 <div>Allow Proposal Creation</div>
                 <div className="checkbox-des">
-                By selecting this, you are permitting the address to create a proposal
+                  By selecting this, you are permitting the address to create a
+                  proposal
                 </div>
               </span>
             </div>
@@ -388,7 +416,9 @@ export default function CustomizedSnackbars(props) {
                   <button
                     className={classes.addbtn}
                     variant="contained"
+                    id="button"
                     color="primary"
+                    disabled={disabledValue}
                     onClick={() => {
                       validateAddress();
                     }}
@@ -402,7 +432,11 @@ export default function CustomizedSnackbars(props) {
         </>
       ) : !state.addConfirmDialog ? (
         <>
-          <Dialog className={classes.dialog} open={state.setAddDialogOpen} divide>
+          <Dialog
+            className={classes.dialog}
+            open={state.setAddDialogOpen}
+            divide
+          >
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>
                 Adding address<span className="cross-loader">X</span>
@@ -455,7 +489,11 @@ export default function CustomizedSnackbars(props) {
                   </>
               ):
         <>
-          <Dialog className={classes.dialog} open={state.setAddDialogOpen} divide>
+          <Dialog
+            className={classes.dialog}
+            open={state.setAddDialogOpen}
+            divide
+          >
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>
                 Adding address
