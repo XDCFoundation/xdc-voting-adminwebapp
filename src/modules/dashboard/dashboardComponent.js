@@ -276,6 +276,8 @@ function DashboardComponent(props) {
     const [limit, setLimit] = React.useState(10);
     // const { state }=props;
 
+    console.log(props.state.walletLogin,"wallet check");
+
     const pagination = async (event, value) => {
         await getListOffAddress({skip: (value - 1) * 10, limit: limit});
     };
@@ -776,7 +778,7 @@ function DashboardComponent(props) {
                 ></img> */}
                 {/* <button className="connect-wallet"> */}
                 <div>
-                <Header state={props.state} wallet={props.wallet}/>
+                <Header state={props.state} wallet={props.wallet} />
               </div>
                 {/* <div className="tab-dialog"> <TabDialogFunction/> </div> */}
                 <Web3Dialog wallet={wallet}/>
