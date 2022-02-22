@@ -160,7 +160,6 @@ export default function CustomizedSnackbars(props) {
   const [addPopup, setAddPopup] = useState(false);
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
   const [errorInAddingAddress, setErrorInAddingAddress] = React.useState(false);
-
   const [disabledValue, setdisabledValue] = React.useState(true);
 
   String.prototype.replaceAt = function (index, replacement) {
@@ -195,19 +194,6 @@ export default function CustomizedSnackbars(props) {
       setEmailError("Unable to add address");
       return;
     }
-    // props.getListOfAddress.map((row,index) => {
-    //   console.log(row.address,"addresslistttttttttttttttttttttt")
-    //   // addAddress1=addAddress.replace("0x","xdc")
-    //   console.log(addAddress,"input address")
-    //   if ((row.address) == addAddress) {
-    //     setEmailError("Duplicate address cannot be added");
-
-    //   }
-    //   else{
-    //     addWhitelistAddress();
-    //   }
-    // });
-
     props.getListOffAddress();
     handleCloseDailog();
   };
@@ -232,34 +218,14 @@ export default function CustomizedSnackbars(props) {
   //   // await setPagecount(totalAccounts.count);
   // };
 
-  const validateAddress = async () => {
+  const validateAddress = async() => {
     if (
       (addAddress && addAddress.length > 40) ||
       addAddress.slice(0, 2) == "xdc"
     ) {
-      if ((addAddress && allowVoting) || proposal) {
-        // const getListOffAddress = async (data) => {
-        //   let [error, totalAccounts] = await Utils.parseResponse(
-        //     AccountService.getListOfWhitelistedAddress(data)
-        //   );
-        //   if (error || !totalAccounts) return;
-        //   // await setgetListOfAddress(totalAccounts.dataList);
-        //   // await setPagecount(totalAccounts.count);
-        // };
-        // let [error, totalAccounts] = await Utils.parseResponse(
-        //   AccountService.getListOfWhitelistedAddress(data)
-        // );
-        // let [error, addresses] = await Utils.parseResponse(
-        //   AccountService.getListOfWhitelistedAddress(data)
-        // );
-        // // const addresses = await Utils.parseResponse(AccountService.getListOfWhitelistedAddress(data));
-        // console.log(addresses,"addresslistttttttttttttttttttttt")
-        // let isAllowedToCreateProposal = false;
-        // let showOpenProposal = false;
-
+      if(addAddress && allowVoting || proposal)
+      {
         addWhitelistAddress();
-      } else {
-        setEmailError("Atleast one checkbox must be selected");
       }
     } else if (!addAddress) {
       setEmailError("Enter a valid Address");
@@ -315,10 +281,6 @@ export default function CustomizedSnackbars(props) {
   const closeErrorDialog = async () => {
     stateAddSetDialogOpen(false);
   };
-
-  useEffect(()=>{
-    
-  },[disabledValue])
 
 
   return (
@@ -420,8 +382,7 @@ export default function CustomizedSnackbars(props) {
               <span className="checkbox-heading">
                 <div>Allow Voting</div>
                 <div className="checkbox-des">
-                  By selecting this, you are permitting the address to cast a
-                  vote
+                By selecting this, you are permitting the address to cast a vote
                 </div>
               </span>
             </div>

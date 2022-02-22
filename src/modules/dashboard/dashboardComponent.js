@@ -275,30 +275,30 @@ function DashboardComponent(props) {
   const [limit, setLimit] = React.useState(10);
   // const { state }=props;
 
-  const pagination = async (event, value) => {
-    await getListOffAddress({ skip: (value - 1) * 10, limit: limit });
-  };
-
-  const getListOffAddress = async (data) => {
-    let [error, totalAccounts] = await Utils.parseResponse(
+    console.log(props.state.walletLogin,"wallet check");
+    const getListOffAddress = async (data) => {
+      let [error, totalAccounts] = await Utils.parseResponse(
       AccountService.getListOfWhitelistedAddress(data)
-    );
-    if (error || !totalAccounts) return;
-    await setgetListOfAddress(totalAccounts.dataList);
-    await setPagecount(totalAccounts.count);
-  };
-  useEffect(async () => {
-    await getListOffAddress({ skip: skip, limit: limit });
-  }, []);
+      );
+      if (error || !totalAccounts) return;
+      await setgetListOfAddress(totalAccounts.dataList);
+      await setPagecount(totalAccounts.count);
+      };
+      useEffect(async () => {
+      await getListOffAddress({skip: skip, limit: limit});
+      }, []);
 
-  const deleteaddress = async () => {
-    const id = {
+    const pagination = async (event, value) => {
+        await getListOffAddress({skip: (value - 1) * 10, limit: limit});
+    };
+    const deleteaddress = async () => {
+      const id = {
       address: deleteMessage,
       permission: {
-        allowVoting: allowVoting,
-        allowProposalCreation: proposal,
+      allowVoting: allowVoting,
+      allowProposalCreation: proposal,
       },
-    };
+      };
     await props.deleteAddress(id);
 
     let [error, totalAccounts] = await Utils.parseResponse(
@@ -789,8 +789,8 @@ function DashboardComponent(props) {
                   className="profile-logo"
                   src={require("../../assets/styles/images/Profile-Logo.svg")}
                 ></img> */}
-              {/* <button className="connect-wallet"> */}
-              <div>
+                {/* <button className="connect-wallet"> */}
+                <div>
                 <Header state={props.state} wallet={props.wallet} />
               </div>
               {/* <div className="tab-dialog"> <TabDialogFunction/> </div> */}

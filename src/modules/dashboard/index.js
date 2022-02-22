@@ -23,6 +23,7 @@ export default class Dashboard extends BaseComponent {
       setDialogOpen:false,
       setDialogOpen1:false,
       setAddDialogOpen:false,
+    
      
     };
   }
@@ -214,6 +215,7 @@ stateAddSetDialogOpen=(value)=>{
 
   render() {
     return (
+     
       <DashboardComponent
         addWhiteListAddress={this.addWhiteListAddress}
         onEditAddress={this.onEditAddress}
@@ -231,7 +233,9 @@ stateAddSetDialogOpen=(value)=>{
         stateSetDialogOpen1={this.stateSetDialogOpen1}
         setAddDialogOpen={this.setAddDialogOpen}
         stateAddSetDialogOpen={this.stateAddSetDialogOpen}
+       
       />
+      
     );
 
 
