@@ -752,9 +752,12 @@ function DashboardComponent(props) {
                     setsearchvalue(false);
                     search(e);
                   }
+                  
+                  else{
+                    setsearchvalue(true);
+                  }
                   search(e);
-
-                  setsearchvalue(true);
+                  
                 }}
               ></input>
 

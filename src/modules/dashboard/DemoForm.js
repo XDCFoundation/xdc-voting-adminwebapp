@@ -69,16 +69,16 @@ const useStyles = makeStyles((theme) => ({
     margin: "14px -8px 15px 2px",
     padding: "3px 19px 3px 20px",
     borderRadius: "4px",
-    backgroundColor: "#3763dd",
+    backgroundColor: "#3763DD",
     color: "white",
     border: "none",
     fontFamily: "Inter,sans-serif",
-    "&:hover": {
-      backgroundColor: "#eeeeee !important",
-      color: "#2149B9",
-    },
+    // "&:hover": {
+    //   backgroundColor: "#eeeeee !important",
+    //   color: "#2149B9",
+    // },
     "&:disabled": {
-      backgroundColor: "#9FA9BA !important",
+      backgroundColor: "#A6BAF0 !important",
       color: "white",
     },
   },
@@ -227,6 +227,9 @@ export default function CustomizedSnackbars(props) {
       {
         addWhitelistAddress();
       }
+      else{
+        setEmailError("Atleast one checkbox must be selected")
+      }
     } else if (!addAddress) {
       setEmailError("Enter a valid Address");
     } else {
@@ -266,6 +269,7 @@ export default function CustomizedSnackbars(props) {
     setAddAddress("");
     setProposal(false);
     setEmailError("");
+    setdisabledValue(true);
   };
   const handleCloseDailog = async () => {
     await setConfirmDialogStateValues(true);
