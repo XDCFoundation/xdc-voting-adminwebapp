@@ -344,7 +344,22 @@ function DashboardComponent(props) {
       SearchService.searchaddress(reqObj)
     );
     await setgetListOfAddress(totalAccounts?.searchData);
-    // await getListOffAddress({ skip: skip, limit: limit });
+    setPagecount(totalAccounts?.searchData.length);
+    // await getListOffAddress({ skip: skip, limit:limit });
+    // if(!addressSearch)
+    // {
+    //   // let [error, totalAccounts] = await Utils.parseResponse(
+    //   //   AccountService.getListOfWhitelistedAddress({skip:skip,limit:limit})
+    //   //   );
+        
+    //   //   await setgetListOfAddress(totalAccounts.dataList);
+    //   //   await setPagecount(totalAccounts.count);
+      
+    // }
+    // else{
+    // await setPagecount(totalAccounts?.searchData.length);
+    // }
+    
     //  await setIsError("No record Found")
     if (error || !totalAccounts) return;
   };
@@ -644,7 +659,7 @@ function DashboardComponent(props) {
         </ul>
         <ul className="inside-side-box">
           <a
-            href="https://medium.com/xdc-foundation-communications"
+            href="https://www.xdc.org/who-we-are"
             target="_blank"
             className="account_details_button"
           >
@@ -751,10 +766,12 @@ function DashboardComponent(props) {
                   if (e.target.value.length == 0) {
                     setsearchvalue(false);
                     search(e);
+                    pagination()
                   }
                   
                   else{
                     setsearchvalue(true);
+                    
                   }
                   search(e);
                   
@@ -769,6 +786,7 @@ function DashboardComponent(props) {
                     x.value = "";
                     search(e);
                     setsearchvalue(false);
+                    pagination()
                   }}
                   src={require("../../assets/styles/images/searchclose.svg")}
                 ></img>
