@@ -696,7 +696,7 @@ opacity: 1;
     height: 50px;
     background: transparent 0% 0% no-repeat padding-box;
     opacity: 1;
-    cursor: pointer;
+    
 
 
 }
@@ -716,6 +716,7 @@ opacity: 1;
 font-size: 22px;
 font-family: "Inter",sans-serif;
 font-weight: 500;
+cursor: pointer;
 }
 .voting-para1 p{
     margin-top: -42px;

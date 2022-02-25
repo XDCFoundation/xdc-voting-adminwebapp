@@ -525,6 +525,11 @@ function DashboardComponent(props) {
     setOpen4(false);
   };
 
+  const redirect=()=>{
+    window.location.href="/";
+    // history.push("/");
+  }
+
   // ***************************Humburger Function********************************
 
   const [state1, setState] = React.useState({
@@ -746,14 +751,14 @@ function DashboardComponent(props) {
       <div className="header">
         <div className="div1">
           <span>
-            <img
+            <img 
               className="header-logo"
               src={require("../../assets/styles/images/XDC-Icon-Logo.svg")}
             ></img>
           </span>
           <span className="common-span-header">
-            <span className="voting-para">
-              <p>XDC Governance</p>
+            <span className="voting-para" >
+              <p onClick={redirect}>XDC Governance</p>
             </span>
             <span>
               <input
@@ -761,6 +766,7 @@ function DashboardComponent(props) {
                 id="search"
                 className="inputsearch"
                 placeholder="Search Address"
+                autoComplete="off"
                 // value={addressSearch}
                 onChange={(e) => {
                   if (e.target.value.length == 0) {
