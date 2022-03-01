@@ -342,7 +342,7 @@ export default function CustomizedSnackbars(props) {
                 id="writeAddress"
                 type="text"
                 required="true"
-                placeholder="Write address"
+                placeholder="Enter address"
                 // value={addAddress}
                 onChange={(e) => {
                   setAddAddress(e.target.value);
