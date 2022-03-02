@@ -321,7 +321,7 @@ function Header(props) {
             {/* <div className="unauthorized">Unauthorized</div> */}
               <div className="unauthorized-message">
              
-                <span>Wallet is not connected</span>
+                <span>Wallet is not logged in</span>
                
               </div>
               
