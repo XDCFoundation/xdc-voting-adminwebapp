@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
   dialog: {
     marginLeft: "26%",
-    marginTop: "38px",
-    width: "55% !important",
+    marginTop: "50px",
+    width: "50% !important",
     height: "50% !important",
     borderRadius: "80px !important",
   },
