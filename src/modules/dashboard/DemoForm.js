@@ -172,7 +172,6 @@ export default function CustomizedSnackbars(props) {
 
   const addWhitelistAddress = async () => {
     setErrorInAddingAddress(false);
-    console.log(addAddress.replace("xdc", "0x"), "replaceeeeeeeeeeeeeeeeeeeee");
     const reqObj = {
       address: addAddress.replace("xdc", "0x"),
       permission: {

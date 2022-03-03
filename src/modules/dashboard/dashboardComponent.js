@@ -703,7 +703,7 @@ function DashboardComponent(props) {
         console.log("+++", web3);
         window.ethereum.enable();
         const accounts = web3.eth.getAccounts().then((accounts) => {
-          let superadmin = envConstant.ADMIN_ADDRESS; //"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
+          let superadmin = process.env.REACT_APP_ADMIN_ADDRESS; //"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
           if (!accounts || !accounts.length) {
             console.log("please login");
             // Utils.apiFailureToast("error");

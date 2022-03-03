@@ -88,7 +88,7 @@ function Header(props) {
                 window.ethereum.enable();
 
                 const accounts = web3.eth.getAccounts().then((accounts) => {
-                    let superadmin = envConstant.ADMIN_ADDRESS;//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
+                    let superadmin = process.env.REACT_APP_ADMIN_ADDRESS;//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
                     // console.log(  superadmin.replace("xdc","0x").toLocaleLowerCase(),  accounts[0].toLowerCase(), "matched done")
                     // if(superadmin.replace("xdc","0x").toLocaleLowerCase()==  accounts[0].toLowerCase()){
                     //   console.log("matched")
@@ -124,7 +124,7 @@ function Header(props) {
             window.ethereum.enable();
 
             const accounts = web3.eth.getAccounts().then((accounts) => {
-                let superadmin = envConstant.ADMIN_ADDRESS//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
+                let superadmin = process.env.REACT_APP_ADMIN_ADDRESS//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
                 if (!accounts || !accounts.length) {
                     console.log("please login");
                     // Utils.apiFailureToast("error");
@@ -164,7 +164,7 @@ function Header(props) {
                 // window.ethereum.enable();
 
                 let accounts = web3.eth.getAccounts().then((accounts) => {
-                    let superadmin = envConstant.ADMIN_ADDRESS;//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
+                    let superadmin = process.env.REACT_APP_ADMIN_ADDRESS;//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
                     if (!accounts || !accounts.length) {
                       setOpen5(true)
                         // Utils.apiFailureToast("Wallet is not connected");

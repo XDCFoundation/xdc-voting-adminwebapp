@@ -47,7 +47,7 @@ export default class Dashboard extends BaseComponent {
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"  //0x85fe7c9734585a494b03c1a450ab0e9b79557cc4
+      process.env.REACT_APP_MASTER_CONTRACT_ADDRESS//"0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"  //0x85fe7c9734585a494b03c1a450ab0e9b79557cc4
     );
     return new Promise((resolve, reject) => {
       contract.methods
