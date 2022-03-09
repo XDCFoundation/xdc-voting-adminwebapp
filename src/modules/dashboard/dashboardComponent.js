@@ -906,7 +906,7 @@ function DashboardComponent(props) {
                   <TableCell
                     style={{
                       border: "none",
-                      paddingLeft: "4%",
+                      paddingLeft: "23px",
                       fontWeight: "500",
                       // paddingBottom:"1%"
                     }}
@@ -977,7 +977,8 @@ function DashboardComponent(props) {
                         <TableCell
                           style={{
                             border: "none",
-                            paddingLeft: "3.2%",
+                            paddingLeft: "21px",
+                            paddingTop:"21px",
                             //  paddingLeft: "4%"
                           }}
                           margin-left="5px"
@@ -1020,7 +1021,7 @@ function DashboardComponent(props) {
                         </TableCell>
 
                         <TableCell
-                          style={{ border: "none", paddingLeft: "0%" }}
+                          style={{ border: "none", paddingLeft: "0%",paddingTop: "21px" }}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1037,7 +1038,7 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "0%" }}
+                          style={{ border: "none", paddingLeft: "0%" , paddingTop: "21px"}}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1061,7 +1062,7 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "2%" }}
+                          style={{ border: "none", paddingLeft: "2%", paddingTop: "21px" }}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1087,7 +1088,7 @@ function DashboardComponent(props) {
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none" }}
+                          style={{ border: "none", paddingTop: "21px" }}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1108,6 +1109,7 @@ function DashboardComponent(props) {
                             border: "none",
                             paddingLeft: "0%",
                             padding: "0.5rem",
+                            paddingTop: "21px"
                           }}
                           align="left"
                         >
@@ -1138,7 +1140,7 @@ function DashboardComponent(props) {
                           </a>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "0%" }}
+                          style={{ border: "none", paddingLeft: "0%",paddingTop: "21px" }}
                           align="left"
                         >
                           <a className="linkTable">
