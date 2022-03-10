@@ -73,21 +73,22 @@ function Header(props) {
         //   console.log("dsjfkksdgfkjhjldsf ",el)
         //   body.appendChild(el)
         // }
+        // window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
+        window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
 
-
-        if (window.ethereum) {
+        if (window.xdc) {
             //the error line
-            window.web3 = new Web3(window.ethereum);
+            window.web3 = new Web3(window.xdc);
 
             try {
-                window.ethereum.enable();
+                // window.xdc;
 
                 let web3;
                 web3 = new Web3(window.web3.currentProvider);
                 console.log("+++", web3);
-                window.ethereum.enable();
+                // window.xdc;
 
-                const accounts = web3.eth.getAccounts().then((accounts) => {
+                const accounts = window.web3.eth.getAccounts().then((accounts) => {
                     let superadmin = process.env.REACT_APP_ADMIN_ADDRESS;//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
                     // console.log(  superadmin.replace("xdc","0x").toLocaleLowerCase(),  accounts[0].toLowerCase(), "matched done")
                     // if(superadmin.replace("xdc","0x").toLocaleLowerCase()==  accounts[0].toLowerCase()){
@@ -116,14 +117,14 @@ function Header(props) {
             } catch (err) {
                 alert("Something went wrong.");
             }
-        } else if (window.web3) {
+        } else if (window.xdc) {
             window.web3 = new Web3(window.web3.currentProvider);
             let web3;
             web3 = new Web3(window.web3.currentProvider);
             console.log("+++", web3);
-            window.ethereum.enable();
+            // window.xdc
 
-            const accounts = web3.eth.getAccounts().then((accounts) => {
+            const accounts =  window.web3.eth.getAccounts().then((accounts) => {
                 let superadmin = process.env.REACT_APP_ADMIN_ADDRESS//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
                 if (!accounts || !accounts.length) {
                     console.log("please login");
@@ -152,18 +153,18 @@ function Header(props) {
     //   useWeb3React();
 
     async function connectToWallet() {
-        if (window.ethereum) {
-            window.web3 = new Web3(window.ethereum);
+        if (window.xdc) {
+            window.web3 = new Web3(window.xdc);
 
             try {
-                window.ethereum.enable();
+                // window.ethereum.enable();
                 let web3;
                 web3 = new Web3(window.web3.currentProvider);
                 const conn = await window.web3.currentProvider._events.disconnect[0]();
                 console.log("+++++", conn);
                 // window.ethereum.enable();
 
-                let accounts = web3.eth.getAccounts().then((accounts) => {
+                let accounts =window.web3.eth.getAccounts().then((accounts) => {
                     let superadmin = process.env.REACT_APP_ADMIN_ADDRESS;//"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
                     if (!accounts || !accounts.length) {
                       setOpen5(true)

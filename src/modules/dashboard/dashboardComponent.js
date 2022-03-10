@@ -336,15 +336,17 @@ function DashboardComponent(props) {
     console.log(addressSearch, "address of input");
     const reqObj = {
       address: e.target.value,
-      skip: skip,
-      limit: limit,
+      skip:skip,
+      limit:limit
     };
     // await props.searchaddress(reqObj);
     let [error, totalAccounts] = await Utils.parseResponse(
       SearchService.searchaddress(reqObj)
     );
+console.log(totalAccounts?.searchData.length,"total search addresses");
     await setgetListOfAddress(totalAccounts?.searchData);
     setPagecount(totalAccounts?.searchData.length);
+
     // await getListOffAddress({ skip: skip, limit:limit });
     // if(!addressSearch)
     // {
@@ -691,18 +693,18 @@ function DashboardComponent(props) {
     //   body.appendChild(el)
     // }
 
-    if (window.ethereum) {
+    if (window.xdc) {
       //the error line
-      window.web3 = new Web3(window.ethereum);
+      window.web3 = new Web3(window.xdc);
 
       try {
-        window.ethereum.enable();
+        // window.ethereum.enable();
 
         let web3;
         web3 = new Web3(window.web3.currentProvider);
         console.log("+++", web3);
-        window.ethereum.enable();
-        const accounts = web3.eth.getAccounts().then((accounts) => {
+        // window.ethereum.enable();
+        const accounts =window.web3.eth.getAccounts().then((accounts) => {
           let superadmin = process.env.REACT_APP_ADMIN_ADDRESS; //"xdc2ecc3f6943e5ba3b077f5121bddaccf2a761fdba";
           if (!accounts || !accounts.length) {
             console.log("please login");
@@ -724,14 +726,14 @@ function DashboardComponent(props) {
       } catch (err) {
         alert("Something went wrong.");
       }
-    } else if (window.web3) {
+    } else if (window.xdc) {
       window.web3 = new Web3(window.web3.currentProvider);
       let web3;
       web3 = new Web3(window.web3.currentProvider);
       console.log("+++", web3);
-      window.ethereum.enable();
+      // window.ethereum.enable();
 
-      const accounts = web3.eth.getAccounts().then((accounts) => {
+      const accounts =window.web3.eth.getAccounts().then((accounts) => {
         if (!accounts || !accounts.length) {
           console.log("please login");
           // Utils.apiFailureToast("Wallet is not connected");
