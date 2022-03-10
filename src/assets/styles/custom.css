@@ -757,12 +757,18 @@ opacity: 1;
 .MuiPaper-rounded{
     border-radius: 12px !important;
 }
+/* @media (min-width:367px)and(max-width:603px){
+    .mt-27 {
+        margin-top: -27;
+    }
+    
+} */
 
 .griddiv {
     width: 78.9vw;
     
   /* height: 100%; */
-  height: 527px;
+  height: 600px;
   
   
   /* border-radius: 12px; width: 60vw;
