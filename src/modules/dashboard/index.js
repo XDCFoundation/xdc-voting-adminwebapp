@@ -59,6 +59,7 @@ export default class Dashboard extends BaseComponent {
         .send({ from: acc }, async (err, transactionHash) => {
           if (err || !transactionHash) {
             reject(false);
+            console.log("close xdcpay")
             this.setState({setAddDialogOpen:false})
             return;
           }
