@@ -987,6 +987,9 @@ font-family: 'Inter',sans-serif;
         margin-left: 220px;
       
     }
+    .paging{
+        margin-right: 0px !important;
+    }
     .inputsearch{
         /* width: 323px; */
         width: 240px; 
@@ -1018,7 +1021,7 @@ font-family: 'Inter',sans-serif;
     }
     /* ///////// ////////////*/
     .tabledata{
-        font-size: 10px;
+        font-size: 14px;
     }
     
     .tablemiddata{
@@ -1356,7 +1359,7 @@ color: #FFFFFF;
 .paging{
     float: right;
     margin-top: 15px !important;
-    margin-right: 2px;
+    margin-right: 2.5%;
 }
 .checked-down{
     display: flex;
