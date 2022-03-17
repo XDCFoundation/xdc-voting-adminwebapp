@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "26%",
     marginTop: "50px",
     width: "50% !important",
-    height: "50% !important",
+    height: "337px !important",
     borderRadius: "80px !important",
   },
   buttons: {
@@ -1540,11 +1540,11 @@ console.log(totalAccounts?.searchData.length,"total search addresses");
             >
               <Row style={{ marginBottom: "10px" }}>
                 <DialogTitle className={classes.heading} id="form-dialog-title">
-                  <div className={classes.mainheading}>Add a New Address</div>{" "}
+                  <div className={classes.mainheading}>Edit a New Address  </div>{" "}
                 </DialogTitle>
               </Row>
               <DialogContent
-                style={{ marginTop: "-25px", marginBottom: "8px" }}
+                style={{ marginTop: "-25px" , overFlow:"hidden !importan", marginBottom: "8px" }}
               >
                 <DialogContentText className={classes.subCategory}>
                   <div className={classes.subheading}>Address</div>
@@ -1558,14 +1558,14 @@ console.log(totalAccounts?.searchData.length,"total search addresses");
                   // }}
                   disabled="true"
                 >
-                  <span style={{ fontSize: "15px" }}>
+                  <span  className="font-13" style={{ fontSize: "15px",color: "#2149B9" }}>
                     {addressInput ? addressInput.substr(0, 13) : " "}...
                     {addressInput
                       ? addressInput.substr(addressInput.length - 5, 5)
                       : ""}
                   </span>
 
-                  <span
+                  <span className="font-14"
                     style={{
                       color: "#92A5DD",
                       fontSize: "12px",

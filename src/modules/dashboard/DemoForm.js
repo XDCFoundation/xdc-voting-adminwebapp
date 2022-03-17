@@ -329,7 +329,7 @@ export default function CustomizedSnackbars(props) {
             id="dialog"
           >
             <DialogTitle className={classes.heading} id="form-dialog-title">
-              <div className={classes.mainheading}>Add a New Address</div>{" "}
+              <div className={classes.mainheading}>Add a New Address </div>{" "}
             </DialogTitle>
             <DialogContent style={{ marginTop: "-5px" }}>
               <DialogContentText className={classes.subCategory}>
