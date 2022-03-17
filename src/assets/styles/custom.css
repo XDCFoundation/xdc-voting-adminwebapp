@@ -495,6 +495,11 @@ opacity: 1;
     font: normal normal normal 14px/17px Inter;
     letter-spacing: 0px;
     color: #4B4B4B;
+    width: 374px;
+    text-align: center;
+    margin-top: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .loader-spin{
    
@@ -506,7 +511,7 @@ opacity: 1;
     width: 64px;
     height: 64px;
     animation: spin 1s linear infinite;
-    margin-left: 155px;
+    margin-left: 165px;
     margin-top: 40px;
     margin-bottom: 40px;
 }
