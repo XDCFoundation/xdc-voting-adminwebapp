@@ -343,9 +343,9 @@ function DashboardComponent(props) {
     let [error, totalAccounts] = await Utils.parseResponse(
       SearchService.searchaddress(reqObj)
     );
-console.log(totalAccounts?.searchData.length,"total search addresses");
-    await setgetListOfAddress(totalAccounts?.searchData);
-    setPagecount(totalAccounts?.searchData.length);
+console.log(totalAccounts?.searchCount,"total search addresses");
+    await setgetListOfAddress(totalAccounts?.data);
+    setPagecount(totalAccounts?.searchCount);
 
     // await getListOffAddress({ skip: skip, limit:limit });
     // if(!addressSearch)
@@ -1335,7 +1335,7 @@ console.log(totalAccounts?.searchData.length,"total search addresses");
             >
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
-                  Deleting address<span className="cross-loader">X</span>
+                  Deleting address<span  className="cross-loader"></span>
                 </div>{" "}
               </DialogTitle>
               <DialogContent>
@@ -1371,7 +1371,7 @@ console.log(totalAccounts?.searchData.length,"total search addresses");
                     Deleting your address
                   </div>
                   <div className="loader-confirm-heading">
-                    Confirm this transaction on XDCPay
+                  Confirm this transaction on XDCPay. Address will not be deleted if you close or refresh the page or close the XDCPay window.
                   </div>
                 </DialogContentText>
               </DialogContent>
@@ -1727,7 +1727,7 @@ console.log(totalAccounts?.searchData.length,"total search addresses");
             >
               <DialogTitle className={classes.heading} id="form-dialog-title">
                 <div className={classes.mainheading}>
-                  Editing address<span className="cross-loader">X</span>
+                  Editing address<span className="cross-loader"></span>
                 </div>{" "}
               </DialogTitle>
               <DialogContent>
@@ -1763,7 +1763,7 @@ console.log(totalAccounts?.searchData.length,"total search addresses");
                     Editing your address
                   </div>
                   <div className="loader-confirm-heading">
-                    Confirm this transaction on XDCPay
+                  Confirm this transaction on XDCPay. Address will not be edited if you close or refresh the page or close the XDCPay window.
                   </div>
                 </DialogContentText>
               </DialogContent>

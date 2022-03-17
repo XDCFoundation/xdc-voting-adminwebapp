@@ -442,10 +442,10 @@ export default function CustomizedSnackbars(props) {
           >
             <DialogTitle className={classes.heading} id="form-dialog-title">
               <div className={classes.mainheading}>
-                Adding address<span className="cross-loader">X</span>
+                Adding address<span className="cross-loader"></span>
               </div>{" "}
             </DialogTitle>
-            <DialogContent>
+            <DialogContent style={{marginTop:"-30px"}}>
               <div className="loader-spin"></div>
               <DialogContentText className={classes.subCategory}>
                 <div
@@ -454,7 +454,8 @@ export default function CustomizedSnackbars(props) {
                   Adding your address
                 </div>
                 <div className="loader-confirm-heading">
-                  Confirm this transaction on XDCPay
+                Confirm this transaction on XDCPay. Address will not be added if you close or refresh the page or close the XDCPay window.
+                  {/* Confirm this transaction on XDCPay */}
                 </div>
               </DialogContentText>
             </DialogContent>
