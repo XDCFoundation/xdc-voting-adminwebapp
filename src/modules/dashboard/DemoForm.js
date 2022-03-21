@@ -373,7 +373,7 @@ export default function CustomizedSnackbars(props) {
               }}
             >
               <div
-                className="custom-check1"
+                // className="custom-check1"
                 onClick={() => {
                   setallowVoting(!allowVoting);
                   setEmailError("");
@@ -391,7 +391,7 @@ export default function CustomizedSnackbars(props) {
             </div>
             <div style={{ display: "flex" }}>
               <div
-                className="custom-check1"
+                // className="custom-check1"
                 onClick={() => {
                   setProposal(!proposal);
                   setEmailError("");

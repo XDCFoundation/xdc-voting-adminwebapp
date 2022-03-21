@@ -1603,7 +1603,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
 
               <div className="checked-upper">
                 <div
-                  className="custom-check1"
+                  // className="custom-check1"
                   onClick={() => {
                     setallowVoting(!allowVoting);
                   }}
@@ -1630,7 +1630,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
 
               <div className="checked-down">
                 <div
-                  className="custom-check1"
+                  // className="custom-check1"
                   onClick={() => {
                     setProposal(!proposal);
                   }}
