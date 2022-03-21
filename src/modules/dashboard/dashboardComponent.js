@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "26%",
     marginTop: "50px",
     width: "50% !important",
-    height: "50% !important",
+    height: "337px !important",
     borderRadius: "80px !important",
   },
   buttons: {
@@ -908,7 +908,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                   <TableCell
                     style={{
                       border: "none",
-                      paddingLeft: "4%",
+                      paddingLeft: "23px",
                       fontWeight: "500",
                       // paddingBottom:"1%"
                     }}
@@ -979,7 +979,8 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                         <TableCell
                           style={{
                             border: "none",
-                            paddingLeft: "3.2%",
+                            paddingLeft: "21px",
+                            paddingTop:"21px",
                             //  paddingLeft: "4%"
                           }}
                           margin-left="5px"
@@ -1022,7 +1023,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                         </TableCell>
 
                         <TableCell
-                          style={{ border: "none", paddingLeft: "0%" }}
+                          style={{ border: "none", paddingLeft: "0%",paddingTop: "21px" }}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1039,7 +1040,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "0%" }}
+                          style={{ border: "none", paddingLeft: "0%" , paddingTop: "21px"}}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1063,7 +1064,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "2%" }}
+                          style={{ border: "none", paddingLeft: "2%", paddingTop: "21px" }}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1089,7 +1090,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                           </span>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none" }}
+                          style={{ border: "none", paddingTop: "21px" }}
                           align="left"
                           // onClick={() => {
                           //   handleDialog1();
@@ -1110,6 +1111,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                             border: "none",
                             paddingLeft: "0%",
                             padding: "0.5rem",
+                            paddingTop: "21px"
                           }}
                           align="left"
                         >
@@ -1140,7 +1142,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                           </a>
                         </TableCell>
                         <TableCell
-                          style={{ border: "none", paddingLeft: "0%" }}
+                          style={{ border: "none", paddingLeft: "0%",paddingTop: "21px" }}
                           align="left"
                         >
                           <a className="linkTable">
@@ -1538,11 +1540,11 @@ console.log(totalAccounts?.searchCount,"total search addresses");
             >
               <Row style={{ marginBottom: "10px" }}>
                 <DialogTitle className={classes.heading} id="form-dialog-title">
-                  <div className={classes.mainheading}>Add a New Address</div>{" "}
+                  <div className={classes.mainheading}>Edit a New Address  </div>{" "}
                 </DialogTitle>
               </Row>
               <DialogContent
-                style={{ marginTop: "-25px", marginBottom: "8px" }}
+                style={{ marginTop: "-25px" , overFlow:"hidden !importan", marginBottom: "8px" }}
               >
                 <DialogContentText className={classes.subCategory}>
                   <div className={classes.subheading}>Address</div>
@@ -1556,14 +1558,14 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                   // }}
                   disabled="true"
                 >
-                  <span style={{ fontSize: "15px" }}>
+                  <span  className="font-13" style={{ fontSize: "15px",color: "#2149B9" }}>
                     {addressInput ? addressInput.substr(0, 13) : " "}...
                     {addressInput
                       ? addressInput.substr(addressInput.length - 5, 5)
                       : ""}
                   </span>
 
-                  <span
+                  <span className="font-14"
                     style={{
                       color: "#92A5DD",
                       fontSize: "12px",
