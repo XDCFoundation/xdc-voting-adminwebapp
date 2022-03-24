@@ -399,6 +399,7 @@ font-weight: 600;
     font-family: "Inter",sans-serif;
     display: flex;
     justify-content: space-between;
+    font-weight: 600;
 
 
 }
@@ -1020,6 +1021,7 @@ font-family: 'Inter',sans-serif;
     margin-bottom: 40px;
     display: flex;
     justify-content: center;
+    margin-left: 20vw !important;
     }
     .addinput{
         /* width: 40vw !important; */

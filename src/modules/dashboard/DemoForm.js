@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   // },
 
   addbtn: {
-    width: "110px",
+    width: "94px",
     height: "34px",
     // margin: "33px 0 0 21px",
     // padding: "8px 30px 7px 32px",
