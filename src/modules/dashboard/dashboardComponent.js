@@ -100,7 +100,7 @@ const useStyles = makeStyles((theme) => ({
   //   backgroundPositionX: "9.5px",
   // },
   addbtn: {
-    width: "110px",
+    width: "94px",
     height: "34px",
     margin: "14px -8px 15px 2px",
     padding: "3px 19px 3px 20px",
@@ -1540,7 +1540,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
             >
               <Row style={{ marginBottom: "10px" }}>
                 <DialogTitle className={classes.heading} id="form-dialog-title">
-                  <div className={classes.mainheading}>Edit a New Address  </div>{" "}
+                  <div className={classes.mainheading}>Edit Address  </div>{" "}
                 </DialogTitle>
               </Row>
               <DialogContent
@@ -1558,7 +1558,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                   // }}
                   disabled="true"
                 >
-                  <span  className="font-13" style={{ fontSize: "15px",color: "#2149B9" }}>
+                  <span  className="font-13" style={{ fontSize: "15px",color: "#2149B9",paddingTop:"2px" }}>
                     {addressInput ? addressInput.substr(0, 13) : " "}...
                     {addressInput
                       ? addressInput.substr(addressInput.length - 5, 5)
