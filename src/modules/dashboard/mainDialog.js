@@ -515,7 +515,7 @@ const mainDialogOpen = () => {
       className="dialog-main"
      
       open={open}
-      style={{background:"rgba(30,30,30,0.2)" }}
+      style={{background:"rgba(31,31,31,0.2)" }}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
       id="web3Dialog"
