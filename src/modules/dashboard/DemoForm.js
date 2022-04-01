@@ -340,6 +340,7 @@ export default function CustomizedSnackbars(props) {
                 className="addinput"
                 id="writeAddress"
                 type="text"
+                maxLength={40}
                 required="true"
                 placeholder="Enter address"
                 // value={addAddress}

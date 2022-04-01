@@ -1569,7 +1569,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
                     style={{
                       color: "#92A5DD",
                       fontSize: "12px",
-                      paddingTop: "3px",
+                      paddingTop: "4px",
                     }}
                   >
                     Added on: <span>{moment(Date).format("DD MMMM YYYY")}</span>
