@@ -894,6 +894,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
         setConfirmDialogStateValues={props.setConfirmDialogStateValues}
         setAddDialogOpen={props.setAddDialogOpen}
         stateAddSetDialogOpen={props.stateAddSetDialogOpen}
+       
       />
       <div className="griddiv">
         <Grid lg={13} className="tablegrid_address">
