@@ -23,6 +23,7 @@ export default class Dashboard extends BaseComponent {
       setDialogOpen:false,
       setDialogOpen1:false,
       setAddDialogOpen:false,
+      
     
      
     };
@@ -35,7 +36,8 @@ export default class Dashboard extends BaseComponent {
   }
 
   addWhiteListAddress = async (reqObj) => {
-    this.setState({addDialog:true})
+    
+  this.setState({addDialog:true});
     let web3;
     web3 = new Web3(window.web3.currentProvider);
     window.ethereum.enable();
@@ -57,6 +59,7 @@ export default class Dashboard extends BaseComponent {
           reqObj.permission.allowVoting
         )
         .send({ from: acc }, async (err, transactionHash) => {
+          
           if (err || !transactionHash) {
             reject(false);
             console.log("close xdcpay")
@@ -66,6 +69,7 @@ export default class Dashboard extends BaseComponent {
          
           const res = await this.getTransactionReceipt(transactionHash, reqObj);
           if (res) {
+            
             let [error, addAddressRes] = await Utils.parseResponse(
               AddService.addWhitelistedAddress(reqObj)
             );
@@ -113,6 +117,8 @@ this.setState({setDialogOpen1:value})
 stateAddSetDialogOpen=(value)=>{
     this.setState({setAddDialogOpen:value})
 }
+
+
 // ***********************
 
 
@@ -234,6 +240,7 @@ stateAddSetDialogOpen=(value)=>{
         stateSetDialogOpen1={this.stateSetDialogOpen1}
         setAddDialogOpen={this.setAddDialogOpen}
         stateAddSetDialogOpen={this.stateAddSetDialogOpen}
+       
        
       />
       

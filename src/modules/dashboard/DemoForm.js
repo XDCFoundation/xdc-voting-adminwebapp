@@ -143,6 +143,7 @@ export default function CustomizedSnackbars(props) {
     setConfirmDialogStateValues,
     setAddDialogOpen,
     stateAddSetDialogOpen,
+   
   } = props;
   // const { state1, setConfirmDialogStateValues } = props;
 
@@ -154,6 +155,8 @@ export default function CustomizedSnackbars(props) {
   const [addressInput, setAddressInput] = React.useState("");
   const [message, setMessage] = useState("");
   const [open, setOpen] = React.useState(false);
+  const [openInvalid, setOpenInvalid] = React.useState(false);
+
   // const [dialogOpen, setDialogOpen] = React.useState(false);
   // const [error, setError] = React.useState(false);
   const [emailError, setEmailError] = useState("");
@@ -161,6 +164,7 @@ export default function CustomizedSnackbars(props) {
   const [getListOfAddress, setgetListOfAddress] = React.useState([]);
   const [errorInAddingAddress, setErrorInAddingAddress] = React.useState(false);
   const [disabledValue, setdisabledValue] = React.useState(true);
+  const [invalid,setInavlid]=useState(false)
 
   String.prototype.replaceAt = function (index, replacement) {
     return (
@@ -171,6 +175,7 @@ export default function CustomizedSnackbars(props) {
   };
 
   const addWhitelistAddress = async () => {
+    setInavlid(false);
     setErrorInAddingAddress(false);
     const reqObj = {
       address: addAddress.replace("xdc", "0x"),
@@ -179,22 +184,69 @@ export default function CustomizedSnackbars(props) {
         allowProposalCreation: proposal,
       },
     };
+
+    // let [error, totalAccounts] = await props.addWhiteListAddress(reqObj).catch((error)=>{
+    //   setEmailError(error ? error : "Unable to add address");
+    //   setErrorInAddingAddress(error ? error : "Unable to add address")
+    //   // handleCloseDailog();
+    //   console.log("invalid address")
+     
+    // return;
+    // });
+
+    // if(error || !totalAccounts){
+    //   setEmailError(error ? error : "Unable to add address");
+    //     setErrorInAddingAddress(error ? error : "Unable to add address")
+    //     handleCloseDailog();
+    //     console.log("invalid address")
+    //   return;
+
+    // }
     setMessage(reqObj.address);
+
+    
+
     const totalAccounts = await props
       .addWhiteListAddress(reqObj)
       .catch((err) => {
-        setEmailError(err ? err : "Unable to add address");
-        setErrorInAddingAddress(err ? err : "Unable to add address")
-        handleCloseDailog();
-        return;
+        // alert(err)
+        
+         if(!err){
+         
+         handleCloseDailog();
+         return;
+         
+         }
+         else{
+          setInavlid(true);
+        //  Utils.apiFailureToast("Invalid Address");
+         setOpenInvalid(true);
+         return;
+         
+         }
+        // console.log(err,"invalid")
+        // setEmailError(err ? err : "Unable to add address");
+        // setErrorInAddingAddress(err ? err : "Unable to add address")
+         
+       
+        
       });
+      // if(!totalAccounts){
+        
+      //   return;
+      // }
+    
 
-    if (!totalAccounts) {
-      setEmailError("Unable to add address");
-      return;
-    }
+    // if (!totalAccounts) {
+    //   setEmailError("Unable to add address");
+    //   return;
+    // }
+    
     props.getListOffAddress();
     handleCloseDailog();
+    
+    
+    
   };
 
   // const getListOffWhitelistedAddress = async (data) => {
@@ -219,10 +271,11 @@ export default function CustomizedSnackbars(props) {
 
   const validateAddress = async() => {
     if (
-      (addAddress && addAddress.length > 40) ||
-      addAddress.slice(0, 2) == "xdc"
+      (addAddress && addAddress.length > 40) &&
+      (addAddress.slice(0,3) == "xdc")
     ) {
-      if(addAddress && allowVoting || proposal)
+      
+      if(addAddress && (allowVoting || proposal))
       {
         addWhitelistAddress();
       }
@@ -285,6 +338,10 @@ export default function CustomizedSnackbars(props) {
     stateAddSetDialogOpen(false);
   };
 
+  const closeAlert = () => {
+    setOpenInvalid(false)
+  }
+
 
   return (
     <div className={classes.root}>
@@ -343,6 +400,7 @@ export default function CustomizedSnackbars(props) {
                 maxLength={50}
                 required="true"
                 placeholder="Enter address"
+                autoComplete="off"
                 // value={addAddress}
                 onChange={(e) => {
                   setAddAddress(e.target.value);
@@ -434,7 +492,7 @@ export default function CustomizedSnackbars(props) {
             </DialogActions>
           </Dialog>
         </>
-      ) : !state.addConfirmDialog ? (
+      ) : invalid==false?( !state.addConfirmDialog ? (
         <>
           <Dialog
             className={classes.dialog}
@@ -493,6 +551,7 @@ export default function CustomizedSnackbars(props) {
                     </Dialog>
                   </>
               ):
+             
         <>
           <Dialog
             className={classes.dialog}
@@ -525,7 +584,9 @@ export default function CustomizedSnackbars(props) {
             </DialogContent>
           </Dialog>
         </>
-      )}
+      
+      )):""}
+      
 
       <Snackbar
         open={open}
@@ -552,8 +613,64 @@ export default function CustomizedSnackbars(props) {
               <div className="toast-message">
                 <span>You have successfully added address</span>
               </div>
+              
             </span>
           </div>
+        </Alert>
+      </Snackbar>
+
+
+
+
+      {/* ******************************************* */}
+
+
+
+      <Snackbar
+        open={openInvalid}
+        autoHideDuration={3000}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={handleClose}
+      >
+        <Alert severity="" className={classes.Alert}>
+          <div style={{ display: "flex" }}>
+            <span
+              style={{
+                marginRight: "10px",
+                marginTop: "-5px",
+                marginLeft: "-8px",
+              }}
+            >
+              <img
+                className="done-logo"
+                style={{ height: "24px", width: "24px", marginTop: "10px" }}
+                src={require("../../assets/styles/images/Error.svg")}
+              ></img>
+            </span>
+            <span>
+          
+          {/* <div className="unauthorized">Unauthorized</div> */}
+            <div className="unauthorized-message">
+           
+              <span>Invalid or Duplicate Address cannot be added</span>
+             
+            </div>
+            
+            
+          </span>
+                      <span
+                          onClick={closeAlert}
+                          style={{
+                              float: "right",
+                              cursor: "pointer",
+                             marginTop:"-5px",
+                             marginLeft:"15px",
+                              fontWeight: "600"
+                          }}
+                      >
+                X
+              </span>
+                  </div>
         </Alert>
       </Snackbar>
     </div>
