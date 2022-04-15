@@ -1245,6 +1245,7 @@ color: #FFFFFF;
       justify-content: center;
       margin-top: 41px;
       margin-bottom: 37px;
+      display: none !important;
   }
   .last-title{
     width: 264px;

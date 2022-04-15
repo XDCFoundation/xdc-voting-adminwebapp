@@ -530,7 +530,7 @@ const mainDialogOpen = () => {
         </Row>
         </div>
         <div><hr className="connect-line"/></div>
-        <div style={{padding:" 20px 30px 0px 23px"}}>
+        <div style={{padding:" 20px 30px 30px 23px"}}>
         <Row
           className="card-box"
           style={{
