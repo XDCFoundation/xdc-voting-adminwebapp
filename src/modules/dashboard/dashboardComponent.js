@@ -528,7 +528,7 @@ console.log(totalAccounts?.searchCount,"total search addresses");
   };
 
   const redirect=()=>{
-    window.location.href="/";
+    window.location.href="/admin";
     // history.push("/");
   }
 
