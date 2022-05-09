@@ -159,7 +159,8 @@ stateAddSetDialogOpen=(value)=>{
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
       masterContractAbi,
-      "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"
+      process.env.REACT_APP_MASTER_CONTRACT_ADDRESS
+      // "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"
     );
     console.log("req", reqObj);
     return new Promise((resolve, reject) => {
@@ -197,8 +198,9 @@ stateAddSetDialogOpen=(value)=>{
     }
     const acc = accounts[0];
     const contract = new web3.eth.Contract(
-      masterContractAbi,
-      "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"
+      masterContractAbi, 
+      process.env.REACT_APP_MASTER_CONTRACT_ADDRESS
+      // "0xc96b57A8F1A98278007B559Dc8A8B343e3559F6a"
     );
 
     return new Promise((resolve, reject) => {
