@@ -32,7 +32,7 @@ class Routes extends BaseComponent {
                         </>
                         }
 
-                        <Redirect exact from="*" to="/" />
+                        <Redirect exact from="*" to="/admin" />
                     </Switch>
                 </Router>
             </MuiThemeProvider>

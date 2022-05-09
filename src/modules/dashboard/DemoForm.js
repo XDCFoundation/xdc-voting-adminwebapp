@@ -209,6 +209,7 @@ export default function CustomizedSnackbars(props) {
     const totalAccounts = await props
       .addWhiteListAddress(reqObj)
       .catch((err) => {
+        
         // alert(err)
         
          if(!err){
